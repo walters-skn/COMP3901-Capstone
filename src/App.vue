@@ -2,9 +2,9 @@
   <div id ="app">
 
     <!-- <NavBar/> -->
-    <!-- <LoginPage/> -->
+    <LoginPage/>
     <!-- <HomePage/> -->
-    <RegisterPage/>
+    <!-- <RegisterPage/> -->
 
     <div class="auth-wrapper">
       <div class ="auth-inner">
@@ -19,16 +19,16 @@
 
 // import NavBar from './components/NavBar.vue'
 // import HomePage from './components/HomePage.vue'
-// import LoginPage from './components/LoginPage.vue'
-import RegisterPage from './components/RegisterPage.vue';
+import LoginPage from './components/LoginPage.vue'
+// import RegisterPage from './components/RegisterPage.vue';
 
 export default{
   name: 'App',
   components:{
     // NavBar
     // HomePage,
-    // LoginPage
-    RegisterPage
+    LoginPage
+    // RegisterPage
   }
 }
 </script>

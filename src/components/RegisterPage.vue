@@ -1,7 +1,7 @@
 <template> 
 <div class="page-container">
 
-    <title> Registration Page </title>
+    <!-- <title> Registration Page </title> -->
     <h2 class = "title"> SIGN UP TO GET STARTED </h2> 
 
         <form @submit.prevent="handleSubmit">
