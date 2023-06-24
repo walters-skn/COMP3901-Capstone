@@ -56,9 +56,10 @@
             }
         }
     }
+    
 </script>
 
-<style >
+<style scoped >
 
     .page-container{
         background-color:#5CA2B1;
@@ -81,12 +82,12 @@
     }
 
     .title {
-  background-color: #5CA2B1;
-  color: white;
-  font-family: 'Times New Roman', Times, serif;
-  text-align: center;
-  padding-top: 50px;
-  margin-bottom: 10px;
+        background-color: #5CA2B1;
+        color: white;
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+        padding-top: 50px;
+        margin-bottom: 10px;
     }
 
     .box{

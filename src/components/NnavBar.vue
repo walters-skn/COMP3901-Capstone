@@ -12,9 +12,6 @@
               <li class="nav-item">
                 <a href = "#" class="nav-link"> About Us || </a>
               </li>
-              <li class="nav-item">
-                <a href = "#" class="nav-link"> Log In </a>
-              </li>
 
             </ul>
           </div>

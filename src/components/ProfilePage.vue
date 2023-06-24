@@ -17,8 +17,11 @@
     </form>
     </template>
     
-    <script>
-        export default {
-            name: 'ProfilePage',
-        }
-    </script>
+<script>
+    export default {
+        name: 'ProfilePage',
+    }
+</script>
+
+<style scoped> 
+</style>

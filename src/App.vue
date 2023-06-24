@@ -1,122 +1,171 @@
+
 <template>
-  <div id ="app">
 
-    <!-- <NavBar/> -->
-    <LoginPage/>
-    <!-- <HomePage/> -->
-    <!-- <RegisterPage/> -->
+  <div id="app">
+    <nav class="navbar navbar-expand navbar-light fixed-top">
+      <div class="container">
+        <img :src="imagePath2" alt="home-logo" class="home">
 
-    <div class="auth-wrapper">
-      <div class ="auth-inner">
-        <router-view />
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="#" class="nav-link"> <strong> Home || </strong></a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link"><strong> About Us </strong></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <div class="container mt-4">
+        <div class="label">
+        <h1 class="diabot"> <strong> WELCOME TO DIABOT </strong> </h1>
+        <p class="diabot-content">
+          Diabot is an innovative solution to address the complexities of diabetes management. While Diabetes is a
+          chronic disorder affecting millions of people worldwide, characterized by high blood glucose levels and
+          insufficient insulin production, Diabot takes a personalized approach to diabetes care, considering individual
+          patient data and medical history to tailor its recommendations and advice.
+        </p>
+      </div>
+      <!-- <img :src="imagePath" alt="tools" class="tools"> -->
+    </div>
+
+  <div class="guidelines-container">
+        <h3 class="guidelines"> <b>Guidelines For Using Diabot </b></h3>
+        <p>Before getting started with Diabot, it's important to follow the guidelines. These include:</p>
+        <p> Follow the recommended guidelines and suggestions provided by Diabot</p>
+        <ul>
+          <li>Regularly update your profile and data to ensure accuracy</li>
+          <li>Utilize the various features and resources offered by Diabot</li>
+          <li>Regularly review and monitor your progress</li>
+        </ul>
+
+        <p class="end"> Ready to take control of your diabetes management? </p>
+        <p class="end"> <strong> Click the button below to get started. </strong> </p>
+
+        <button class="btn btn-primary btn-block">DIABOT</button>
+
       </div>
     </div>
 
-  </div>
+  <FooterView/>
+
 </template>
 
 <script>
 
-// import NavBar from './components/NavBar.vue'
-// import HomePage from './components/HomePage.vue'
-import LoginPage from './components/LoginPage.vue'
-// import RegisterPage from './components/RegisterPage.vue';
+  // import ImagePath from '@/assets/img/tools.png';
+  import ImagePath2 from '@/assets/img/logo.png'
+  import FooterView from '../src/components/FooterView.vue'
 
-export default{
-  name: 'App',
-  components:{
-    // NavBar
-    // HomePage,
-    LoginPage
-    // RegisterPage
-  }
-}
+
+  export default {
+    components: {
+      FooterView,
+    },
+    data(){
+      return{
+        // imagePath:ImagePath,
+        imagePath2:ImagePath2,
+        };
+      }
+  }; 
+
 </script>
 
+<style scoped>
 
-<!-- <style>
-
-  /* @import url("https://jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"); */
-  
-  *{
-    box-sizing: border-box;
+  /* logo */
+  .home{ 
+    height: 10%;
+    width: 100px;
+    margin: -1%;
   }
 
-  h1,h2,h3,h4,h5,h6, label,span{
-    font-weight: 500;
-    font-family: sans-serif;
+/* navigation bar */
+  .navbar {
+    padding: 5px;
+    background-color: #5ca2b1;
   }
 
-  body{
-    background-color: #1c8ef9;
-    min-height: 100vh;
+  /* navigation link */
+  .nav-link{
+    color: #000000;
+  }
+
+    /* position to the right */
+  .collapse{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
     display: flex;
-    font-weight: 400;
-    font-family: sans-serif;
+    justify-content: flex-end;
   }
 
-  body,html,#app, #root, .auth.wrapper{
-    width: 100%;
-    height: 100%;
+  .tools {
+    /* position: absolute;
+    top: 0;
+    bottom: 0; */
+    width: 20%;
+    /* height: 50%; */
+    margin: 20px;
   }
-  
-  #app {
-    font-family: Arial, Helvetica, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+
+  .end{
     text-align: center;
-    color:#5CA2B1;
-    margin-top: 60px;
   }
 
-  .navbar-light{
-    background-color: #ffffff;
-    box-shadow: 0px 14px 80ox rgba(34, 35, 58, 092);
+  .label{
+    text-align: center;
+    margin-top: 80px;
+    flex:1;
   }
 
-  .auth-wrapper{
+  .diabot-content{
+    text-align: justify;
+    font-size: 23px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .diabot {
+    font-family: fantasy;
+    margin-top: 80px;
+    padding: 50px;
+    font-size: 50px;
+  }
+
+  .guidelines-container{
+    flex: 1;
+    background-color: #8ec5d0;
+    padding: 50px;
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    text-align: left;
+    align-items: center;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
   }
 
-  .auth-inner{
-    width: 450px;
-    margin:auto;
-    background: #ffffff;
-    box-shadow: 0px 14px 80ox tgba(34, 35, 58, 0.2);
-    padding: 40px 55px 45px 55px;
-    border-radius:15px;
-    transition: all 0.3s;
+  .guidelines{
+    font-family: fantasy;
+    font-size: 45px;
+    margin-bottom: 0px;
   }
 
-  .auth-wrapper .form-control:focus{
-    border-color: #167bff;
-    box-shadow: none;
+  .btn {
+    display: block;
+    width: 40%;
+    max-width: 150px;
+    margin: 20px auto;
+    padding: 10px;
+    color: white;
+    background-color: #5ca2b1;
+    border: none;
+    cursor: pointer;
   }
 
-  .auth-wrapper h3{
-    text-align: center;
-    margin-top: 0;
-    line-height: 1;
-    padding-bottom: 20px;
+  .btn:hover{
+    background-color: #21616f;
   }
 
-  .custom-control-label{
-    font-weight: 400;
-  }
-
-  .forgot-password a{
-    text-align: right;
-    font-size: 13px;
-    padding-top: 10px;  
-    color: #7f7d7d;
-    margin: 0;
-  }
-
-  .forgot-password a{
-    color: #167bff;
-  }
-
-</style> -->
+</style>

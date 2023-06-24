@@ -30,7 +30,7 @@
     </div>
   </template>
   
-  <script>
+<script>
   export default {
     name: 'LoginPage',
     methods: {
@@ -40,9 +40,10 @@
       },
     },
   };
-  </script>
   
-  <style>
+</script>
+  
+<style>
   .page-container {
     display: flex;
     justify-content: center;
@@ -50,7 +51,7 @@
     min-height: 100vh;
     /* background-color: #5CA2B1; */
   }
-  
+    
   .side-menu {
     position: absolute;
     left: 0;
@@ -62,53 +63,59 @@
     color: white;
     font-family: 'Times New Roman', Times, serif;
   }
-  
+    
   .content-container {
     flex: 1;
     padding: 20px;
     background-color: white;
     margin-left: 200px;
   }
-  
+    
   .title {
     text-align: center;
     margin-bottom: 20px;
     background-color: white;
   }
-  
+    
   .form-group {
     margin-bottom: 10px;
   }
-  
+    
   .btn {
     display: block;
     margin-bottom: 10px;
   }
-  
+
+  .btn:hover{
+    background-color: #21616f;
+  }
+
+    
   .link-group {
     text-align: center;
   }
-  
+    
   .link {
     margin: 5px;
     color: rgb(168, 29, 29);
     cursor: pointer;
     text-align: left;
   }
-  
+    
   .loginform-group {
     margin-bottom: 5px;
   }
-  
+    
   .submit-group {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
+    
   .diabot {
     text-align: center;
     margin: auto;
   }
-  </style>
+
+</style>
   
