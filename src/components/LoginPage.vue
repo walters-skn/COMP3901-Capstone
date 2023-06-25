@@ -28,7 +28,10 @@
         </form>
       </div>
     </div>
-  </template>
+    <div class="footer-bottom">
+        <p>&copy; 2023 Your Website. All rights reserved.</p>
+      </div>
+</template>
   
 <script>
   export default {
@@ -44,6 +47,14 @@
 </script>
   
 <style>
+
+  .footer-bottom {
+      text-align: center;
+      background-color: #d8d8d8;
+      padding: 10px 0;
+      color: #777777;
+    }
+
   .page-container {
     display: flex;
     justify-content: center;
@@ -86,11 +97,10 @@
     margin-bottom: 10px;
   }
 
-  .btn:hover{
+    .btn:hover{
     background-color: #21616f;
   }
 
-    
   .link-group {
     text-align: center;
   }

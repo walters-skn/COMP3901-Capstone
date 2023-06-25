@@ -65,8 +65,8 @@
   
     /* navigation link */
     .nav-link{
-      color: #000000;
-    }
+    color: white;
+  }
   
     .collapse{
       font-family: Georgia, 'Times New Roman', Times, serif;

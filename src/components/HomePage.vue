@@ -44,34 +44,23 @@
 
         <p class="end"> Ready to take control of your diabetes management? </p>
         <p class="end"> <strong> Click the button below to get started. </strong> </p>
-
-        <!-- <router-link to="/diabot"> -->
-          <button class="btn btn-primary btn-block" @click="goToDiabotPage" >DIABOT</button>
-        <!-- </router-link> -->
+        
+        <button class="btn btn-primary btn-block" @click="goToDiabotPage" >DIABOT</button>
 
       </div>
     </div>
-
-  <FooterView/>
+  <div class="footer-bottom">
+    <p>&copy; 2023 Your Website. All rights reserved.</p>
+  </div>
 
 </template>
 
 <script>
+
   // import { useRouter } from 'vue-router';
   import ImagePath2 from '@/assets/img/logo.png'
-  import FooterView from '@/src/components/FooterView.vue'
 
   export default {
-    // methods: {
-    //   goToDiabotPage() {
-    //     const router = useRouter();
-    //     router.push('/diabot');
-    //   },
-    // },
-
-    components: {
-      FooterView,
-    },
     data(){
       return{
         imagePath2: ImagePath2,
@@ -81,6 +70,13 @@
 </script>
 
 <style scoped>
+
+  .footer-bottom {
+      text-align: center;
+      background-color: #d8d8d8;
+      padding: 10px 0;
+      color: #777777;
+    }
 
   /* logo */
   .home{ 
@@ -97,7 +93,7 @@
 
   /* navigation link */
   .nav-link{
-    color: #000000;
+    color: white;
   }
 
     /* position to the right */
@@ -106,15 +102,6 @@
     font-size: 20px;
     display: flex;
     justify-content: flex-end;
-  }
-
-  .tools {
-    /* position: absolute;
-    top: 0;
-    bottom: 0; */
-    width: 20%;
-    /* height: 50%; */
-    margin: 20px;
   }
 
   .end{
