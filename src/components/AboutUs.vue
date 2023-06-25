@@ -8,15 +8,15 @@
 
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav ml-auto">
+
             <li class="nav-item">
               <a href="#" class="nav-link">Home ||</a>
             </li>
+
             <li class="nav-item">
               <a href="#" class="nav-link">About Us ||</a>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">Log In</a>
-            </li>
+
           </ul>
         </div>
       </div>
@@ -24,7 +24,8 @@
     
     <div class="container">
       <div class="label">
-        <img :src="imagePath" alt="tools" class="tools">
+        <img :src="imagePath" alt="logo" class="logo">
+
         <h1>WELCOME TO DIABOT</h1>
         <p>
           Diabot is an innovative solution to address the complexities of diabetes management. While Diabetes is a
@@ -32,9 +33,10 @@
           insufficient insulin production, Diabot takes a personalized approach to diabetes care, considering individual
           patient data and medical history to tailor its recommendations and advice.
         </p>
-      </div>
 
-<div class="content">
+      </div>
+      
+      <div class="content">
         <h3>Guidelines For Using Diabot</h3>
         <p>Before getting started with Diabot, it's important to follow the guidelines. These include:</p>
 

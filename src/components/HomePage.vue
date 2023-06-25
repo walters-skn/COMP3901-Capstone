@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a href="#" class="nav-link"> <strong> Home || </strong></a>
+              <a href="./src/components/HomePage.vue" class="nav-link"> <strong> Home || </strong></a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link"><strong> About Us </strong></a>
@@ -45,29 +45,39 @@
         <p class="end"> Ready to take control of your diabetes management? </p>
         <p class="end"> <strong> Click the button below to get started. </strong> </p>
 
-        <button class="btn btn-primary btn-block">DIABOT</button>
+        <!-- <router-link to="/diabot"> -->
+          <button class="btn btn-primary btn-block" @click="goToDiabotPage" >DIABOT</button>
+        <!-- </router-link> -->
 
       </div>
     </div>
 
-  <footer></footer>
+  <FooterView/>
+
 </template>
 
 <script>
-
-  // import ImagePath from '@/assets/img/tools.png';
+  // import { useRouter } from 'vue-router';
   import ImagePath2 from '@/assets/img/logo.png'
-
+  import FooterView from '@/src/components/FooterView.vue'
 
   export default {
-      data(){
-          return{
-              // imagePath:ImagePath,
-              imagePath2:ImagePath2,
-          };
-      }
-  }; 
+    // methods: {
+    //   goToDiabotPage() {
+    //     const router = useRouter();
+    //     router.push('/diabot');
+    //   },
+    // },
 
+    components: {
+      FooterView,
+    },
+    data(){
+      return{
+        imagePath2: ImagePath2,
+      };
+    }
+  }; 
 </script>
 
 <style scoped>
@@ -149,10 +159,10 @@
 
   .btn {
     display: block;
-    width: 40%;
+    width: 100%;
     max-width: 150px;
     margin: 20px auto;
-    padding: 10px;
+    padding:15px;
     color: white;
     background-color: #5ca2b1;
     border: none;

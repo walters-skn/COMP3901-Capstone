@@ -1,15 +1,12 @@
-
 <template>
 
   <div id="app">
     <nav class="navbar navbar-expand navbar-light fixed-top">
       <div class="container">
-        <img :src="imagePath2" alt="home-logo" class="home">
-
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a href="#" class="nav-link"> <strong> Home || </strong></a>
+              <a href="./src/components/HomePage.vue" class="nav-link"> <strong> Home || </strong></a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link"><strong> About Us </strong></a>
@@ -18,75 +15,59 @@
         </div>
       </div>
     </nav>
-  
-    <div class="container mt-4">
-        <div class="label">
-        <h1 class="diabot"> <strong> WELCOME TO DIABOT </strong> </h1>
-        <p class="diabot-content">
-          Diabot is an innovative solution to address the complexities of diabetes management. While Diabetes is a
-          chronic disorder affecting millions of people worldwide, characterized by high blood glucose levels and
-          insufficient insulin production, Diabot takes a personalized approach to diabetes care, considering individual
-          patient data and medical history to tailor its recommendations and advice.
-        </p>
-      </div>
-      <!-- <img :src="imagePath" alt="tools" class="tools"> -->
+  </div>
+<div class="chatbox-container"> 
+  <div class="chatbox">
+    <div class="chatbox-header">
+      <h2 class="head"> DIABOT CHAT </h2>
     </div>
-
-  <div class="guidelines-container">
-        <h3 class="guidelines"> <b>Guidelines For Using Diabot </b></h3>
-        <p>Before getting started with Diabot, it's important to follow the guidelines. These include:</p>
-        <p> Follow the recommended guidelines and suggestions provided by Diabot</p>
-        <ul>
-          <li>Regularly update your profile and data to ensure accuracy</li>
-          <li>Utilize the various features and resources offered by Diabot</li>
-          <li>Regularly review and monitor your progress</li>
-        </ul>
-
-        <p class="end"> Ready to take control of your diabetes management? </p>
-        <p class="end"> <strong> Click the button below to get started. </strong> </p>
-
-        <button class="btn btn-primary btn-block">DIABOT</button>
-
+    <div class="chatbox-body">
+      <div v-for="(message, index) in messages" :key="index" class="message" :class="{ 'user-message': message.isUserMessage }">
+        <div class="message-content">
+          {{ message.content }}
+        </div>
       </div>
     </div>
-
-  <FooterView/>
-
+    <div class="chatbox-footer">
+      <input type="text" v-model="newMessage" placeholder="Type a message..." @keydown.enter="sendMessage">
+      <button class="btn" @click="sendMessage">Send</button>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
 
-  // import ImagePath from '@/assets/img/tools.png';
-  import ImagePath2 from '@/assets/img/logo.png'
-  import FooterView from '../src/components/FooterView.vue'
 
-
-  export default {
-    components: {
-      FooterView,
-    },
-    data(){
-      return{
-        // imagePath:ImagePath,
-        imagePath2:ImagePath2,
-        };
+export default {
+  data() {
+    return {
+      messages: [],
+      newMessage: ''
+    };
+  },
+  methods: {
+    sendMessage() {
+      if (this.newMessage.trim() !== '') {
+        this.messages.push({ content: this.newMessage, isUserMessage: true });
+        this.newMessage = '';
       }
-  }; 
-
+    }
+  }
+};
 </script>
 
 <style scoped>
 
-  /* logo */
-  .home{ 
+.home{
     height: 10%;
     width: 100px;
     margin: -1%;
   }
 
 /* navigation bar */
-  .navbar {
-    padding: 5px;
+.navbar {
+    padding: 0px;
     background-color: #5ca2b1;
   }
 
@@ -95,7 +76,6 @@
     color: #000000;
   }
 
-    /* position to the right */
   .collapse{
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 20px;
@@ -103,69 +83,75 @@
     justify-content: flex-end;
   }
 
-  .tools {
-    /* position: absolute;
-    top: 0;
-    bottom: 0; */
-    width: 20%;
-    /* height: 50%; */
-    margin: 20px;
-  }
-
-  .end{
-    text-align: center;
-  }
-
-  .label{
-    text-align: center;
-    margin-top: 80px;
-    flex:1;
-  }
-
-  .diabot-content{
-    text-align: justify;
-    font-size: 23px;
-    font-family: 'Times New Roman', Times, serif;
-  }
-
-  .diabot {
-    font-family: fantasy;
-    margin-top: 80px;
-    padding: 50px;
-    font-size: 50px;
-  }
-
-  .guidelines-container{
-    flex: 1;
-    background-color: #8ec5d0;
-    padding: 50px;
+  .chatbox-container{
+    height:100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
+    flex-direction: row;
+    justify-content: flex-end;
   }
+  
+  .head{
+  font-family: fantasy;
+  color: white;  
+  text-align: center;
+  margin: 0;
+  font-size:45px;
+}
+.chatbox {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row; /*this allows the "Diabot Chat" to go on the left side of the page*/
+}
 
-  .guidelines{
-    font-family: fantasy;
-    font-size: 45px;
-    margin-bottom: 0px;
-  }
 
-  .btn {
-    display: block;
-    width: 40%;
-    max-width: 150px;
-    margin: 20px auto;
-    padding: 10px;
-    color: white;
-    background-color: #5ca2b1;
-    border: none;
-    cursor: pointer;
-  }
+.chatbox-header {
+  padding: 50px;
+  background-color: #5ca2b1;
+  display: flex;
+  align-items: center;
+}
 
-  .btn:hover{
-    background-color: #21616f;
-  }
+.chatbox-body {
+  flex: 1;
+  /* padding: 1px; */
+  overflow-y: auto;
+}
+
+.chatbox-footer {
+  display: flex;
+  align-items: flex-end;
+  padding: 10px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.chatbox-footer input[type="text"] {
+  flex: 1;
+  margin-right: 10px;
+  padding: 7px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.chatbox-footer button {
+  padding: 5px 10px;
+  background-color: #5599ab;
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 14px;
+}
+
+.message {
+  padding: 5px;
+font-size: 15px;
+}
+
+.message-content {
+  padding: 5px;
+  font-size: 16px;
+}
+
 
 </style>

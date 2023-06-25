@@ -54,9 +54,10 @@
             handleSubmit(){
                 console.log('submitted')
             }
-        }
+        },
     }
     
+
 </script>
 
 <style scoped >
