@@ -59,14 +59,8 @@
     margin: -1%;
   }
 
-  .body{ 
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-
   .page-container{
     background-color:#5CA2B1;
-    min-height: 5vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

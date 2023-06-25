@@ -18,6 +18,7 @@ const DiaBot ={template: '<div>DiaBot</div>'}
 const NavBar ={template: '<div>NavBar</div>'}
 const NavBar2 ={template: '<div>NavBar2</div>'}
 const ProfilePage ={template: '<div>ProfilePage</div>'}
+const SignOut ={template: '<div>SignOut</div>'}
 
 const routes = [
     // { path: '/', component: HomePage },
@@ -27,7 +28,8 @@ const routes = [
     { path: '/footer', component: FooterView},
     { path: '/diabot', component: DiaBot},
     {path: '/navbar', component: NavBar},
-    {path: '/navbar2', component: NavBar2}
+    {path: '/navbar2', component: NavBar2},
+    {path: '/signout', component: SignOut}
 
 ]
 const router = createRouter({

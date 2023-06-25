@@ -54,7 +54,6 @@
     
 <script>
   
-    import ImagePath2 from '@/assets/img/logo.png'
     import FooterView from '@/components/FooterView.vue';
     import NavBar from '@/components/NavBar.vue';
 
@@ -69,11 +68,6 @@
                 console.log('submitted')
             }
         },
-        data(){
-            return{
-                imagePath2: ImagePath2,
-            };
-        }
     };
 
 </script>

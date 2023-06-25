@@ -71,14 +71,9 @@
         </div>
         
     </div> 
-    <FooterView/>
 
-</template>
-
+  </template>
   <script>
-    
-    import FooterView from '@/components/FooterView.vue';
-
     import NavBar from '@/components/NavBar.vue';
     import ImagePath from '@/assets/img/profile.png'
     import ImagePath2 from '@/assets/img/location.png'
@@ -100,84 +95,76 @@
       },
       name: 'register',
       components:{
-        NavBar,
-        FooterView
+        NavBar
       }
     };
     
   </script>
-  <style scoped>
-  
-    /* navigation */
-      .navbar {
-        padding: 5px;
-        background-color: #5ca2b1;
+    
+  <style scoped >
+
+  /* navigation */
+  .navbar {
+    padding: 5px;
+    background-color: #5ca2b1;
       }
     
-      .nav-link{
-        color: white;
-      }
+  .nav-link{
+    color: white;
+  }
+
+  .header{
+    margin-top: 20px;
+    align-content: center;
+    text-align: center;
+  }
     
-      .header{
-          margin: 50px;
-          padding: 15px;
-  
-      }
+  .img{ 
+    height: 100px;
+    width: 100px;
+  }
+
+  .container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .title{
+    font-size:18px;
+    font-family: 'Times New Roman', Times, serif;
+  }
     
-      .page-container{
-        background-color:#5CA2B1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
+  .page-container{
+    background-color:#5CA2B1;
+    min-height: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
             
-      .collapse{
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        font-size: 20px;
-        display: flex;
-        justify-content: flex-end;
-      }
-  
-      .name{
-          font-family: 'Times New Roman', Times, serif;
-          font-size: 35px;
-          padding-top:5px;
-      }
-      
-      .img{ 
-          height: 100px;
-          width: 100px;
-      }
-  
-      .title{
-          font-size:18px;
-          font-family: 'Times New Roman', Times, serif;
-      }
-  
-      .container{
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-          justify-content: center;
-          text-align: center;
-          padding: 40px;
-      }
-  
-      .layout{
-          padding: 30px;
-          display: flex;
-          color: white;
-      }
-  
-      .page-layout{
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-          background-color: #5ca2b1;
-          flex-grow: 1;
-        } 
-  
+  .collapse{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .layout{
+    padding: 30px;
+    display: flex;
+    color: white;
+  }
+
+  .page-layout{
+    margin-top: 20%;
+    padding: 30px;
+    display: flex;
+    background-color: #5ca2b1;
+    align-items: center;
+    } 
+
     </style>
-    
-    
