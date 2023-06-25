@@ -1,27 +1,7 @@
 
 <template> 
-    <div class="page-container">
-        <div>
-            <nav class="navbar navbar-expand navbar-light fixed-top">
-                    <div class="container">
-                        
-                        <img :src="imagePath2" alt="home-logo" class="home">
-
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="./src/components/HomePage.vue" class="nav-link"> <strong> Home || </strong></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link"><strong> About Us </strong></a>
-                        </li>
-                        </ul>
-                        </div>  
-
-                    </div>
-            </nav>
-        </div>
-
+<div class="page-container">
+    <NavBar/>
         <div class="body">
             <h2 class = "title"> New User? <br> SIGN UP TO GET STARTED </h2> 
         </div>
@@ -68,18 +48,22 @@
                 </div>
             </div>
         </form>
-    </div>  
-    <div class="footer-bottom">
-        <p>&copy; 2023 Your Website. All rights reserved.</p>
-    </div>
+    <FooterView/>
+</div>
 </template>
     
 <script>
   
     import ImagePath2 from '@/assets/img/logo.png'
-    
+    import FooterView from '@/components/FooterView.vue';
+    import NavBar from '@/components/NavBar.vue';
+
     export default {
-        name: 'RegisterPage',
+        name: 'register',
+        components:{
+            FooterView,
+            NavBar
+        },
         methods:{
             handleSubmit(){
                 console.log('submitted')
@@ -96,59 +80,23 @@
 
 <style scoped >
 
-    .footer-bottom {
-        text-align: center;
-        background-color: #d8d8d8;
-        padding: 10px 0;
-        color: #777777;
+    .page-container {
+    background-color: #5ca2b1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     }
-
-  /* navigation */
-    .navbar {
-      padding: 5px;
-      background-color: #5ca2b1;
-    }
-  
-    .nav-link{
-      color: white;
-    }
-  
-    .home{ 
-      height: 10%;
-      width: 100px;
-      margin: -1%;
-    }
-  
-    .body{ 
-      padding: 10px;
-      margin-bottom: 20px;
-    }
-  
-    .page-container{
-      background-color:#5CA2B1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-          
-    .collapse{
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      font-size: 20px;
-      display: flex;
-      justify-content: flex-end;
-    }
-
+    
     /* form */
     .form-container{
       background-color: #ACC5CB;
-      margin: auto;
-      margin-right: auto;
+      width: 100%;
+      margin: 0 auto;
     }
   
     .form{
-      padding: 10px;
+      padding: 5px;
       border: 5px solid #ccc;
       border-radius: 5px;
       width: 100%;

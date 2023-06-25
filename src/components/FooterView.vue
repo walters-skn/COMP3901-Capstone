@@ -1,6 +1,6 @@
 <template>
       <div class="footer-bottom">
-        <p>&copy; 2023 Your Website. All rights reserved.</p>
+        <p>&copy; COMP3911 Capstone - Diabot All rights reserved.</p>
       </div>
   </template>
   

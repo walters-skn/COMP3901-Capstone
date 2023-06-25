@@ -1,4 +1,5 @@
 <template> 
+<!-- This page will get the other navigation pane -->
 
     <form @submit.prevent="handleSubmit">
         <h3> New User</h3>

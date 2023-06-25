@@ -1,23 +1,6 @@
 
 <template>
-
-  <div id="app">
-    <nav class="navbar navbar-expand navbar-light fixed-top">
-      <div class="container">
-        <img :src="imagePath2" alt="home-logo" class="home">
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a href="./src/components/HomePage.vue" class="nav-link"> <strong> Home || </strong></a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link"><strong> About Us </strong></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <NavBar/>
   
     <div class="container mt-4">
         <div class="label">
@@ -47,11 +30,8 @@
         
         <button class="btn btn-primary btn-block" @click="goToDiabotPage" >DIABOT</button>
 
-      </div>
     </div>
-  <div class="footer-bottom">
-    <p>&copy; 2023 Your Website. All rights reserved.</p>
-  </div>
+  <FooterView/>
 
 </template>
 
@@ -59,8 +39,16 @@
 
   // import { useRouter } from 'vue-router';
   import ImagePath2 from '@/assets/img/logo.png'
+  import FooterView from './components/FooterView.vue';
+  import NavBar from '@/components/NavBar.vue';
+
 
   export default {
+      name:"myApp",
+      components:{
+          FooterView,
+          NavBar
+      },
     data(){
       return{
         imagePath2: ImagePath2,
@@ -70,14 +58,6 @@
 </script>
 
 <style scoped>
-
-  .footer-bottom {
-      text-align: center;
-      background-color: #d8d8d8;
-      padding: 10px 0;
-      color: #777777;
-    }
-
   /* logo */
   .home{ 
     height: 10%;
