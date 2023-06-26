@@ -1,18 +1,21 @@
 
 <template>
   <div class="chatbox-container"> 
-      <div class="chatbox">
 
-        <div class="chatbox-header">
-            <h2 class="head"> DIABOT CHAT </h2>
-        </div>
-        <div class="chatbox-body">
-            <div v-for="(message, index) in messages" :key="index" class="message" :class="{ 'user-message': message.isUserMessage }">
-            <div class="message-content">
-                {{ message.content }}
-            </div>
-            </div>
-        </div>
+    <div class="chatbox-header">
+      <h2 class="head"> DIABOT CHAT </h2>
+    </div>
+
+    <div class="chatbox">
+
+      <div class="chatbox-body">
+        <div v-for="(message, index) in messages" :key="index" class="message" :class="{ 'user-message': message.isUserMessage }">
+          <div class="message-content">
+            {{ message.content }}
+          </div>
+          </div>
+      </div>
+
         <div class="chatbox-footer">
             <input type="text" v-model="newMessage" placeholder="Type a message..." @keydown.enter="sendMessage">
             <button class="btn" @click="sendMessage">Send</button>
@@ -44,10 +47,9 @@
 
 <style scoped>
   .chatbox-container{
-    height:100vh;
+    height:90vh;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
   }
   
   .head{
@@ -57,19 +59,25 @@
   font-size:45px;
 }
 
-.chatbox {
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row; /*this allows the "Diabot Chat" to go on the left side of the page*/
-}
-
+  .chatbox {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row; /*this allows the "Diabot Chat" to go on the left side of the page*/
+  }
 
 .chatbox-header {
-  padding: 50px;
-  height: 100vh;
-  background-color: #5ca2b1;
+  position: absolute;
+    left: 0;
+    width: 20%;
+    height: 90vh;
+    padding: 50px;
+    background-color: #4C8F9E;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    align-items: center;
 }
 
 .chatbox-body {
@@ -80,7 +88,7 @@
 .chatbox-footer {
   display: flex;
   align-items: flex-end;
-  padding: 10px;
+  height: 90vh;
   width: 100%;
   font-size: 14px;
 }

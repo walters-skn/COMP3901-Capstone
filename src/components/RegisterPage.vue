@@ -1,9 +1,8 @@
 
 <template> 
 <div class="page-container">
-    <NavBar/>
         <div class="body">
-            <h2 class = "title"> New User? <br> SIGN UP TO GET STARTED </h2> 
+            <h2 class = "title"> New User <br> SIGN UP TO GET STARTED </h2> 
         </div>
         
         <form @submit.prevent="handleSubmit">
@@ -41,7 +40,7 @@
                         </div>
                         
                         <div class="submit-group">
-                            <button class="btn btn-primary btn-block" @click="signUp" >Sign In</button>
+                            <button class="btn btn-primary btn-block" @click="signUp" >Sign Up</button>
                         </div> 
     
                     </div>
@@ -53,16 +52,8 @@
 </template>
     
 <script>
-  
-    import FooterView from '@/components/FooterView.vue';
-    import NavBar from '@/components/NavBar.vue';
-
     export default {
         name: 'registerPage',
-        components:{
-            FooterView,
-            NavBar
-        },
         methods:{
             handleSubmit(){
                 console.log('submitted')
@@ -80,11 +71,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
     }
     
     /* form */
     .form-container{
-      background-color: #ACC5CB;
+      background-color: #8eb9c4;
       width: 100%;
       margin: 0 auto;
     }
@@ -111,13 +103,6 @@
         color: white;
         font-family: 'Times New Roman', Times, serif;
         text-align: center;
-        padding-top: 50px;
-        margin-top: 50px;
-    }
-    
-    .box{
-        width: 100%;
-        background-color: #ACC5CB;
     }
     
     .submit-group {
@@ -126,11 +111,14 @@
         align-items: center;
     }
   
+    .btn{
+        border-radius: 2px;
+    }
     .btn.btn-primary {
         background-color: #4C8F9E;
-        border: 2px solid #FAE9E9;
+        border: 2px solid #f8f0f0;
         color: white;
-        font-size: 15px;
+        font-size: 18px;
         font-family: 'Times New Roman', Times, serif;
     }
   

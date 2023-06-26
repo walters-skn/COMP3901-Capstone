@@ -30,34 +30,21 @@
         <p class="end"> Ready to take control of your diabetes management? </p>
         <br>
         <p class="end"> <strong> Click the button below to get started. </strong> </p>
-        
-        <button class="btn btn-primary btn-block" @click="goToDiabotPage" >DIABOT</button>
+
+        <router-link to="/diabot" class="btn btn-primary btn-block"> Diabot</router-link>
 
     </div>
-  <!-- <FooterView/> -->
 
 </template>
 
 <script>
-
-  // import { useRouter } from 'vue-router';
   import ImagePath from '@/assets/img/tools.png'
 
-  import ImagePath2 from '@/assets/img/logo.png'
-  // import FooterView from '@/components/FooterView.vue';
-  // import NavBar from '@/components/NavBar.vue';
-
-
   export default {
-      name:"myApp",
-      // components:{
-      //     FooterView,
-      //     NavBar
-      // },
+      name:"homePage",
     data(){
       return{
         imagePath: ImagePath,
-        imagePath2: ImagePath2,
       };
     }
   }; 
@@ -90,8 +77,6 @@
     margin: auto 0;
     padding: 5px;
     padding-right: 20px;
-
-
   }
 
   .diabot-content{
