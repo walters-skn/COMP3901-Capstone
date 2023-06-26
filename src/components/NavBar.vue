@@ -1,6 +1,5 @@
 <template> 
   <div class="page-container">
-      <div>
           <nav class="navbar navbar-expand navbar-light fixed-top">
             <div class="container">
                       
@@ -23,8 +22,8 @@
 
             </div>
           </nav> 
-          <router-view></router-view>
-      </div>
+      <router-view></router-view>
+
     </div>
 
 </template>
@@ -41,12 +40,12 @@
   };
 </script>
 
-<style scoped >
+<style scoped>
 
 /* navigation */
   .navbar {
-    padding: 5px;
-    background-color: #5ca2b1;
+    padding: 10px;
+    background-color: #5CA2B1;
   }
 
   .nav-link{
@@ -54,13 +53,13 @@
   }
 
   .home{ 
-    height: 10%;
-    width: 100px;
+    height: 65px;
+    width: 90px;
     margin: -1%;
   }
 
   .page-container{
-    background-color:#5CA2B1;
+    /* background-color:#5CA2B1; */
     display: flex;
     flex-direction: column;
     justify-content: center;

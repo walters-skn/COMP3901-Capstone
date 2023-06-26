@@ -1,5 +1,5 @@
 <template>
-  <NavBar/>
+  <!-- <NavBar/> -->
 
   <div class="page-container">
     <div class="side-menu">
@@ -30,21 +30,21 @@
       </form>
     </div>
   </div>
-  <FooterView/>
+  <!-- <FooterView/> -->
 </template>
 
 <script>
 
-import FooterView from '@/components/FooterView.vue';
-import NavBar from '@/components/NavBar.vue';
+// import FooterView from '@/components/FooterView.vue';
+// import NavBar from '@/components/NavBar.vue';
 
 
 export default {
   name: 'LoginPage',
-    components:{
-        FooterView,
-        NavBar
-    },
+  //   components:{
+  //       FooterView,
+  //       NavBar
+  //   },
   methods: {
     forgotPassword() {
       //Handle create account click

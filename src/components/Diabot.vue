@@ -1,39 +1,30 @@
 
 <template>
-  <NavBar/>
   <div class="chatbox-container"> 
       <div class="chatbox">
-      <div class="chatbox-header">
-          <h2 class="head"> DIABOT CHAT </h2>
-      </div>
-      <div class="chatbox-body">
-          <div v-for="(message, index) in messages" :key="index" class="message" :class="{ 'user-message': message.isUserMessage }">
-          <div class="message-content">
-              {{ message.content }}
-          </div>
-          </div>
-      </div>
-      <div class="chatbox-footer">
-          <input type="text" v-model="newMessage" placeholder="Type a message..." @keydown.enter="sendMessage">
-          <button class="btn" @click="sendMessage">Send</button>
-      </div>
+
+        <div class="chatbox-header">
+            <h2 class="head"> DIABOT CHAT </h2>
+        </div>
+        <div class="chatbox-body">
+            <div v-for="(message, index) in messages" :key="index" class="message" :class="{ 'user-message': message.isUserMessage }">
+            <div class="message-content">
+                {{ message.content }}
+            </div>
+            </div>
+        </div>
+        <div class="chatbox-footer">
+            <input type="text" v-model="newMessage" placeholder="Type a message..." @keydown.enter="sendMessage">
+            <button class="btn" @click="sendMessage">Send</button>
+        </div>
       </div>
   </div>
-  <FooterView/>
-
   </template>
 
 <script>
 
-import FooterView from '@/components/FooterView.vue';
-import NavBar from '@/components/NavBar.vue';
-
   export default {
     name: 'DiaBot',
-      components:{
-          FooterView,
-          NavBar
-      },
       data() {
       return {
           messages: [],
@@ -56,14 +47,13 @@ import NavBar from '@/components/NavBar.vue';
     height:100vh;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
   
   .head{
   font-family: fantasy;
   color: white;  
   text-align: center;
-  margin: 0;
   font-size:45px;
 }
 
@@ -78,14 +68,13 @@ import NavBar from '@/components/NavBar.vue';
 
 .chatbox-header {
   padding: 50px;
+  height: 100vh;
   background-color: #5ca2b1;
-  display: flex;
-  align-items: center;
 }
 
 .chatbox-body {
   flex: 1;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 .chatbox-footer {
@@ -114,11 +103,10 @@ import NavBar from '@/components/NavBar.vue';
 
 .message {
   padding: 5px;
-font-size: 15px;
+  font-size: 15px;
 }
 
 .message-content {
-  padding: 5px;
   font-size: 16px;
 }
 

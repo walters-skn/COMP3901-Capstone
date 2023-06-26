@@ -58,7 +58,7 @@
     import ImagePath3 from '@/assets/img/chat.png'
     
     export default {
-        name: 'profile',
+        name: 'profilePage',
         components: {
             FooterView
         },

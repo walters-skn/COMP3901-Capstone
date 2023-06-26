@@ -58,7 +58,7 @@
     import NavBar from '@/components/NavBar.vue';
 
     export default {
-        name: 'register',
+        name: 'registerPage',
         components:{
             FooterView,
             NavBar
