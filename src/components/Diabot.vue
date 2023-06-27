@@ -1,120 +1,116 @@
 
 <template>
-  <div class="chatbox-container"> 
-
-    <div class="chatbox-header">
-      <h2 class="head"> DIABOT CHAT </h2>
-    </div>
-
-    <div class="chatbox">
-
-      <div class="chatbox-body">
-        <div v-for="(message, index) in messages" :key="index" class="message" :class="{ 'user-message': message.isUserMessage }">
-          <div class="message-content">
-            {{ message.content }}
-          </div>
-          </div>
-      </div>
-
-        <div class="chatbox-footer">
-            <input type="text" v-model="newMessage" placeholder="Type a message..." @keydown.enter="sendMessage">
-            <button class="btn" @click="sendMessage">Send</button>
+    <div class="chat-container">
+        <div class="chat-sidebar">
+            <h1> <b><strong>DIABOT <br> CHAT</strong></b></h1>
+        </div>    
+    <div class="chat-content">
+        <div class="chat-messages">
+            <div v-for="message in messages" :key="message.id" class="message" :class="{ 'user-message': message.from === 'user', 'bot-message': message.from === 'bot' }">
+                <div class="message-content">
+                    {{ message.text }}
+                </div>
+            </div>
         </div>
-      </div>
+    <div class="chat-input">
+        <input v-model="inputText" @keydown.enter="sendMessage" placeholder="Type your message..." />
+        <button @click="sendMessage">Send</button>
+    </div>
   </div>
+    </div>
   </template>
-
-<script>
-
+  
+  <script>
+  import { reactive, ref } from 'vue';
+  
   export default {
-    name: 'DiaBot',
-      data() {
-      return {
-          messages: [],
-          newMessage: ''
-      };
-      },
-      methods: {
-      sendMessage() {
-          if (this.newMessage.trim() !== '') {
-          this.messages.push({ content: this.newMessage, isUserMessage: true });
-          this.newMessage = '';
-          }
+  name: 'diaBot',
+  setup() {
+    const messages = reactive([]);
+    const inputText = ref('');
+  
+    const sendMessage = () => {
+      const text = inputText.value.trim();
+      if (text) {
+        messages.push({ id: Date.now(), text, from: 'user' });
+        inputText.value = '';
       }
-      }
+    };
+  
+    return { messages, inputText, sendMessage };
+  },
   };
-</script>
-
-<style scoped>
-  .chatbox-container{
-    width: 80%;
-    margin-left:0;
-    /* height:90vh; */
-    /* display: flex; */
-    /* flex-direction: row; */
-  }
-
-  .chatbox-header {
-    position: absolute;
-    left: 0;
-    width: 20%;
-    height: 90vh;
-    /* padding: 50px; */
-    background-color: #4C8F9E;
-    color: white;
-    font-family: 'Times New Roman', Times, serif;
-    display: flex;
-    align-items: center;
-}
-  .head{
-  font-family: fantasy;
-  color: white;  
-  text-align: center;
-  font-size:45px;
-  }
-
-  .chatbox-body {
-    padding: 90px;
-  }
-
-  .chatbox {
-    display: flex;
-    flex-direction: row; /*this allows the "Diabot Chat" to go on the left side of the page*/
-  }
-
-.chatbox-footer {
-  display: flex;
-  align-items: flex-end;
-  height: 90vh;
-  width: 100%;
-  font-size: 14px;
-  margin-left: 0;
-}
-
-.chatbox-footer input[type="text"] {
-  flex: 1;
-  margin-right: 10px;
-  padding: 7px;
-  font-size: 14px;
-  text-align: left;
-}
-
-.chatbox-footer button {
-  padding: 5px 10px;
-  background-color: #5599ab;
-  color: white;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 14px;
-}
-
-.message {
-  padding: 5px;
-  font-size: 15px;
-  background-color: #92aeb5;
-}
-
-.message-content {
-  font-size: 16px;
-}
-
-</style>
+  </script>
+  
+  <style scoped>
+  
+    .chat-container{
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        margin: 0 auto;
+    }
+  
+    .chat-content{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+  
+    .chat-messages{
+        flex:1;
+        font-size: 10px;
+    }
+  
+    .message{
+        font-size: 20px;
+    }
+  
+    .user-message{
+        background-color: #898a8a;
+        border-radius: 5px;
+        align-self: flex-end;
+    }
+  
+    .bot-message{
+        background-color: #e2e2e2;
+        border-radius: 5px;
+        align-self: flex-start;
+    }
+  
+    .chat-input{
+        display: flex;
+        justify-content: flex-end;
+    }
+  
+    .chat-input input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+  
+    .chat-input button {
+         border-radius: 5px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+  
+    .chat-sidebar {
+        width: 25%;
+        padding: 5px;
+        border-left: 1px solid #ccc;
+        background-color: #4C8F9E;
+    }
+  
+    .chat-sidebar h1 {
+        color: white;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+  </style>

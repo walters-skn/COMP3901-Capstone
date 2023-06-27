@@ -14,8 +14,6 @@
           patient data and medical history to tailor its recommendations and advice.
         </p>
       </div>
-      <img :src="imagePath" alt="tools" class="tools">
-
     </div>
 
   <div class="guidelines-container">
@@ -39,16 +37,11 @@
 </template>
 
 <script>
-  import ImagePath from '@/assets/img/tools.png'
 
   export default {
       name:"homePage",
-    data(){
-      return{
-        imagePath: ImagePath,
-      };
-    }
   }; 
+  
 </script>
 
 <style scoped>
@@ -58,11 +51,6 @@
     align-items: center;
     justify-content: flex-end;
     margin: 0 auto;
-  }
-
-  .tools{
-    width: 400px;
-    height: 300px;
   }
 
   .end{

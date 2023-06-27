@@ -1,9 +1,16 @@
 
 
 <template> 
-    <p class="error">{{ error }}</p>
-    <p> {{ decodedString }}</p>
-    <qrcode-stream @init="onInit" @decode="onDecode"></qrcode-stream>
+
+    <div class="heading">
+        <h2> <b> <strong> Scan Meal To Get Nutritional Content of Meal </strong></b></h2>
+        <p class="error">{{ error }}</p>
+        <p> {{ decodedString }}</p>
+    </div>
+    <div class="scanner" >
+        <qrcode-stream @init="onInit" @decode="onDecode"></qrcode-stream>
+    </div>
+
 </template>
 
 
@@ -53,9 +60,28 @@ export default{
 </script>
 
 <style scoped> 
-.error {
-  font-weight: bold;
-  color: red;
-}
+
+    .heading{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 15%;
+        color: #4C8F9E;
+    }
+
+    .scanner{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+        width: 100vh;
+    }
+
+    .error {
+    font-weight: bold;
+    color: red;
+    }
 
 </style>

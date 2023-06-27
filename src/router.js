@@ -9,7 +9,6 @@ import ProfilePage from '@/components/ProfilePage.vue'
 import FooterView from '@/components/FooterView.vue'
 import DiaBot from '@/components/DiaBot.vue'
 import NavBar from '@/components/NavBar.vue';
-import NavBar2 from '@/components/NavBar.vue';
 import SubscriberPage from '@/components/SubscriberPage.vue'
 import NutritionalScanner from '@/components/NutritionalScanner.vue'
 
@@ -22,7 +21,6 @@ const routes = [
     { path: '/footer', component: FooterView},
     { path: '/diabot', component: DiaBot},
     {path: '/navbar', component: NavBar},
-    {path: '/navbar2', component: NavBar2},
     {path: '/home', component: HomePage},
     // {path: '/signout', component: SignOut}
     {path: '/subscriber', component: SubscriberPage},
