@@ -13,7 +13,7 @@
         </div>
     <div class="chat-input">
         <input v-model="inputText" @keydown.enter="sendMessage" placeholder="Type your message..." />
-        <button @click="sendMessage">Send</button>
+        <button @click="sendMessage"> <strong>SEND </strong></button>
     </div>
   </div>
     </div>
@@ -47,7 +47,8 @@
         display: flex;
         width: 100%;
         height: 100vh;
-        margin: -25px;
+        margin: -25px; 
+        margin-bottom: -115px;
     }
   
     .chat-content{
@@ -66,7 +67,7 @@
     }
   
     .user-message{
-        background-color: #898a8a;
+        background-color: #c8d1d1;
         border-radius: 5px;
         align-self: flex-end;
     }
@@ -91,14 +92,13 @@
   
     .chat-input button {
         border-radius: 5px;
-        background-color: #4caf50;
+        background-color: #4C8F9E;
         color: #fff;
         border: none;
         cursor: pointer;
     }
-  
     .chat-sidebar {
-        width: 25%;
+        width: 22%;
         padding: 2px;
         border-left: 1px solid #ccc;
         background-color: #4C8F9E;
