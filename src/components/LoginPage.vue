@@ -26,7 +26,7 @@
 
         <div class="submit-group">
           <router-link to='/profile'>
-          <button class="btn btn-primary btn-block">Sign In</button>
+          <button class="btn btn-primary btn-block"> <strong> <b>SIGN IN </b></strong></button>
           </router-link>
         </div>
 
@@ -104,7 +104,7 @@ export default {
   .btn.btn-primary {
     background-color: white;
     border: 2px solid #2f2c2c;
-    color: black;
+    color: #528995;
     font-size: 15px;
     font-family: 'Times New Roman', Times, serif;
   }

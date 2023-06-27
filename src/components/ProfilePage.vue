@@ -6,26 +6,38 @@
     </div>
 
     <div class="profile-layout">
+
         <div class="layout">
+
             <div class="container" >
                 <img :src="imagePath" alt="profile" class="img">
+                <router-link link to="/profile">
                 <div class="title"> 
-                    <strong> Profile Information </strong>
+                    <button class="btn btn-primary btn-block"> <strong> <b>View Profile Information </b></strong> </button>
                 </div>
+                </router-link>
             </div>
         </div>
 
         <div class="layout">
             <div class="container" >
                 <img :src="imagePath2" alt="profile" class="img">
-                <div class="title"><strong>  Notifications </strong></div>
+                <router-link link to='/diabot'>
+                <div class="title"> 
+                    <button class="btn btn-primary btn-block"> <strong> <b> Create Notifications</b></strong></button>
+                </div>
+                </router-link>
             </div>
         </div>
 
         <div class="layout">
             <div class="container" >
                 <img :src="imagePath3" alt="profile" class="img">
-                <div class="title"> <strong> Diabot Chat </strong></div>
+                <router-link link to='/diabot'>
+                <div class="title"> 
+                    <button class="btn btn-primary btn-block"><strong> <b>Diabot Chat </b></strong></button>
+                </div>
+                </router-link>
             </div>
         </div>
 
@@ -61,13 +73,14 @@
 <style scoped>
 
     .page-container{
-        margin-top: 0;
+        margin-top: -20vh;
         padding-top: 0;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 100%;
         display: flex;
+        margin-top: -30vh;
     }
 
     .header{
@@ -103,6 +116,14 @@
         text-align: center;
         padding: 20px;
         background-color: #5ca2b1;
+    }
+
+    .btn.btn-primary {
+        background-color: white;
+        border: none;
+        color: #5ca2b1;
+        font-size: 15px;
+        font-family: 'Times New Roman', Times, serif;
     }
 
     .layout{

@@ -48,6 +48,7 @@
         width: 100%;
         height: 100vh;
         margin: -25px; 
+        margin-top: -155px;
         margin-bottom: -115px;
     }
   
