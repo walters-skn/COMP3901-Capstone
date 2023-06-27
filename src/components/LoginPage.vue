@@ -12,12 +12,12 @@
       <form>
         <div class="form-group">
           <label> <b>Email Address</b></label>
-          <input type="email" class="form-control" placeholder="Email Address"/>
+          <input type="email" class="form-control" placeholder="Email Address" required/>
         </div>
         <br>
         <div class="loginform-group">
           <label> <b>Password</b></label>
-          <input type="password" class="form-control" placeholder="Password" />
+          <input type="password" class="form-control" placeholder="Password" required />
         </div>
 
         <div class="link-group">
@@ -29,7 +29,6 @@
           <button class="btn btn-primary btn-block">Sign In</button>
           </router-link>
         </div>
-
 
       </form>
 
@@ -138,19 +137,6 @@ export default {
   .diabot {
     text-align: center;
     margin: 50px auto 0;
-  }
-
-  /*phone view */
-
-  @media(max-width:480px){
-    .side-menu{
-      display:block;
-    }
-
-    .content-container{
-      padding:10px;
-      margin-top: 20px;
-    }
   }
 
   </style>

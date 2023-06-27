@@ -1,22 +1,24 @@
 
 <template>
   <NavBar/>
-  <FooterView/>
 
+  <br> <br> <br> <br>  
+
+  <FooterView/>
 </template>
 
 <script>
 
-// import { useRouter } from 'vue-router';
 import ImagePath2 from '@/assets/img/logo.png'
-import FooterView from '@/components/FooterView.vue';
 import NavBar from '@/components/NavBar.vue';
+import FooterView from '@/components/FooterView.vue';
+
 
 export default {
     name:"myApp",
     components:{
-        FooterView,
-        NavBar
+        NavBar,
+        FooterView
     },
   data(){
     return{
@@ -25,5 +27,3 @@ export default {
   }
 }; 
 </script>
-
-<style scoped></style>
