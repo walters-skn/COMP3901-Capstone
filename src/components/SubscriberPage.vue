@@ -1,52 +1,86 @@
 <template> 
     <div class="header"> 
-        <h2 class="name"> WELCOME TO DIABOT</h2>
+      <h2 class="name"> <strong> WELCOME TO DIABOT</strong>  </h2>
     </div>
 
     <div class="page-layout">
       
-      <div class="layout">
-            <div class="container" >
-                <img :src="imagePath" alt="profile" class="img">
-                <div class="title"> <strong> Update Medical Data </strong></div>
+      <div class="links">
+        <div class="container" >
+          <img :src="imagePath" alt="profile" class="img">
+          <p class="detail"> Click Here To Update Your Medical Data </p>
+          <router-link link to="/diabot">
+            <div class="title">
+              <strong> Update Medical Data </strong>
             </div>
+          </router-link>
         </div>
+      </div>
 
-        <div class="layout">
-            <div class="container" >
-                <img :src="imagePath2" alt="profile" class="img">
-                <div class="title"><strong>  Nearest Clinics </strong></div>
+      
+      <div class="links">
+        <div class="container" >
+          <img :src="imagePath2" alt="profile" class="img">
+          <p class="detail">Click Here to View The Nearest Clinics Near You</p>
+          <router-link link to="/diabot">
+            <div class="title">
+              <strong> Nearest Clinics </strong>
             </div>
+          </router-link>
         </div>
+      </div>
 
-        <div class="layout">
-            <div class="container" >
-                <img :src="imagePath3" alt="profile" class="img">
-                <div class="title"> <strong> Create Notification</strong></div>
+      <div class="links">
+        <div class="container" >
+          <img :src="imagePath3" alt="profile" class="img">
+          <p class="detail">Click Here To Create or View Notifications</p>
+          <router-link link to="/diabot">
+            <div class="title">
+              <strong> Create Notifications </strong>
             </div>
+          </router-link>
         </div>
+      </div>
+    </div>
 
-        <div class="layout">
-            <div class="container" >
-                <img :src="imagePath4" alt="profile" class="img">
-                <div class="title"> <strong> Recommend Mean Plan </strong></div>
-            </div>
-        </div>
+    <div class="layout">
 
-        <div class="layout">
-            <div class="container" >
-                <img :src="imagePath5" alt="profile" class="img">
-                <div class="title"> <strong> Nutritional Scanner </strong></div>
+      <div class="links">
+        <div class="container" >
+          <img :src="imagePath4" alt="profile" class="img">
+          <p class="detail">Click Here To View Your Recommended Meal Plans</p>
+          <router-link link to="/diabot">
+            <div class="title">
+              <strong> Recommended Mean Plan </strong>
             </div>
+          </router-link>
         </div>
+      </div>
 
-        <div class="layout">
-            <div class="container" >
-                <img :src="imagePath6" alt="profile" class="img">
-                <div class="title"> <strong> History </strong></div>
-            </div>
+      <div class="links">
+        <div class="container" >
+          <img :src="imagePath6" alt="profile" class="img">
+          <p class="detail"> Click Here To View Your Chat History</p>
+          <router-link link to="/diabot">
+          <div class="title">
+            <strong> <b> View History </b> </strong> 
+          </div>
+          </router-link>
         </div>
-        
+      </div> 
+
+      <div class="links">
+        <div class="container" >
+          <img :src="imagePath4" alt="profile" class="img">
+          <p class="detail">Click Here To Scan To Get The Nutritional Content of Your Meal</p>
+          <router-link link to="/scanner">
+            <div class="title">
+              <strong> Nutritional Scanner </strong>
+            </div>
+          </router-link>
+        </div>
+      </div>    
+
     </div> 
   </template>
 
@@ -77,41 +111,69 @@
   <style scoped >
 
   .header{
-    margin-top: 20px;
-    align-content: center;
+    margin: 0;
+    padding: 5px;
+    width: 100%;
+    display: inline-block;
     text-align: center;
+    justify-content: center;
   }
-    
+
+  .name{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: BLACK;
+    font-size: 50px;
+    margin-top: 20px;
+    padding-top: 100px;
+  }
+
   .img{ 
-    height: 100px;
-    width: 100px;
+    height: 85px;
+    width: 85px;
   }
 
   .container{
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     text-align: center;
+    background-color: #5ca2b1;
+    padding: 15px;
+
   }
 
   .title{
-    font-size:18px;
+    font-size:20px;
     font-family: 'Times New Roman', Times, serif;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    margin-top: 10px;
   }
 
-  .layout{
-    padding: 30px;
+  .title:hover{
+    background-color: #1c606f ;
+  }
+
+  .detail{
+    margin-top: 12px;
+    font-size:20px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #143e47;
+  }
+
+  .links{
+    padding: 15px;
     display: flex;
     color: white;
   }
 
-  .page-layout{
-    margin-top: 20%;
-    padding: 30px;
+  .page-layout ,.layout{
+    margin-top: 5%;
+    padding: 20px;
     display: flex;
-    background-color: #5ca2b1;
     align-items: center;
-    } 
+  } 
 
     </style>

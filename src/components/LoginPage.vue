@@ -107,6 +107,7 @@ export default {
     color: #528995;
     font-size: 15px;
     font-family: 'Times New Roman', Times, serif;
+    display: inline-block;
   }
 
   .btn:hover{

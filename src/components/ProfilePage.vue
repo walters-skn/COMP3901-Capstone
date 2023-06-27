@@ -13,7 +13,7 @@
                 <img :src="imagePath" alt="profile" class="img">
                 <router-link link to="/profile">
                 <div class="title"> 
-                    <button class="btn btn-primary btn-block"> <strong> <b>View Profile Information </b></strong> </button>
+                    <strong> <b>View Profile Information </b></strong>
                 </div>
                 </router-link>
             </div>
@@ -24,7 +24,7 @@
                 <img :src="imagePath2" alt="profile" class="img">
                 <router-link link to='/diabot'>
                 <div class="title"> 
-                    <button class="btn btn-primary btn-block"> <strong> <b> Create Notifications</b></strong></button>
+                    <strong> <b> Create Notifications</b></strong>
                 </div>
                 </router-link>
             </div>
@@ -35,7 +35,7 @@
                 <img :src="imagePath3" alt="profile" class="img">
                 <router-link link to='/diabot'>
                 <div class="title"> 
-                    <button class="btn btn-primary btn-block"><strong> <b>Diabot Chat </b></strong></button>
+                    <strong> <b>Diabot Chat </b></strong>
                 </div>
                 </router-link>
             </div>
@@ -80,7 +80,7 @@
         align-items: center;
         width: 100%;
         display: flex;
-        margin-top: -30vh;
+        margin-top: -20vh;
     }
 
     .header{
@@ -106,6 +106,7 @@
         font-size:20px;
         font-family: Georgia, 'Times New Roman', Times, serif;
         color: white;
+        display: inline-block;
     }
 
     .container{

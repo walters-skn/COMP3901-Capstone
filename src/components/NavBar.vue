@@ -12,6 +12,9 @@
                     <router-link to="/" class="nav-link"> <strong>Home ||</strong></router-link>
                   </li>
                   <li class="nav-item">
+                    <router-link to='/login' class="nav-link"><strong>About Us || </strong></router-link>
+                  </li>
+                  <li class="nav-item">
                     <router-link to='/login' class="nav-link"><strong>Login </strong></router-link>
                   </li>
                 </ul>
