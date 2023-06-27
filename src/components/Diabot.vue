@@ -1,4 +1,3 @@
-
 <template>
     <div class="chat-container">
         <div class="chat-sidebar">
@@ -48,7 +47,7 @@
         display: flex;
         width: 100%;
         height: 100vh;
-        margin: 0 auto;
+        margin: -25px;
     }
   
     .chat-content{
@@ -91,7 +90,7 @@
     }
   
     .chat-input button {
-         border-radius: 5px;
+        border-radius: 5px;
         background-color: #4caf50;
         color: #fff;
         border: none;
@@ -100,7 +99,7 @@
   
     .chat-sidebar {
         width: 25%;
-        padding: 5px;
+        padding: 2px;
         border-left: 1px solid #ccc;
         background-color: #4C8F9E;
     }

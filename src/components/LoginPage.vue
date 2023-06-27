@@ -1,21 +1,22 @@
+
 <template>
+
   <div class="page-container">
-    
+
     <div class="side-menu">
-      <h1 class="diabot">WELCOME TO DIABOT</h1>
+      <h1> <b><strong> WELCOME <br> TO <br> DIABOT </strong></b></h1>
     </div>
 
     <div class="content-container">
       <h1 class="title"> <strong>LOGIN </strong></h1>
-
       <form>
         <div class="form-group">
-          <label>Email</label>
-          <input type="email" class="form-control" placeholder="Email" />
+          <label> <b>Email Address</b></label>
+          <input type="email" class="form-control" placeholder="Email Address"/>
         </div>
-
+        <br>
         <div class="loginform-group">
-          <label>Password</label>
+          <label> <b>Password</b></label>
           <input type="password" class="form-control" placeholder="Password" />
         </div>
 
@@ -24,12 +25,14 @@
         </div>
 
         <div class="submit-group">
+          <router-link to='/profile'>
           <button class="btn btn-primary btn-block">Sign In</button>
+          </router-link>
         </div>
 
-        <router-link to="/register" class="link" > Don't Have An Account? Click Here To Register </router-link>
 
       </form>
+
     </div>
   </div>
 </template>
@@ -55,39 +58,31 @@ export default {
   }
 
   .side-menu {
-    position: absolute;
-    left: 0;
     width: 20%;
-    height: 100vh;
-    padding: 50px;
+    padding: 2px;
     background-color: #4C8F9E;
     color: white;
-    font-family: 'Times New Roman', Times, serif;
+    flex: 0 0 25%;
+    position: fixed;
+    top: 0; bottom: 0; left: 0;
     display: flex;
+    justify-content: center;
     align-items: center;
-  }
-
-  .link{
-    color: rgb(163, 41, 41);
-  }
-
-  .link :hover{
-    color:#d8d8d8;
   }
 
   .page-container {
     display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
-    min-height: 100vh;
+    width: 100%;
+    margin-top: 6%;
+    margin-bottom: 1%;
+    margin-left: 0;
+    height: 80vh;
+
   }
-  
+
   .content-container {
-    flex: 1;
-    padding: 90px;
-    background-color: white;
-    margin-left: 200px;
-    position: relative;
+    flex:1;
+    width: 50%;
   }
   
   .title {
@@ -95,6 +90,7 @@ export default {
     margin-bottom: 20px;
     color: #4C8F9E;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 35px;
   }
   
   .form-group {
@@ -102,8 +98,8 @@ export default {
   }
   
   .btn {
-  display: block;
-  margin-bottom: 10px;
+    display: block;
+    margin-bottom: 10px;
   }
 
   .btn.btn-primary {
@@ -115,8 +111,8 @@ export default {
   }
 
   .btn:hover{
-  background-color: #21616f;
-}
+  background-color: #528995;
+  }
 
   .link-group {
     text-align: center;
@@ -142,6 +138,19 @@ export default {
   .diabot {
     text-align: center;
     margin: 50px auto 0;
+  }
+
+  /*phone view */
+
+  @media(max-width:480px){
+    .side-menu{
+      display:block;
+    }
+
+    .content-container{
+      padding:10px;
+      margin-top: 20px;
+    }
   }
 
   </style>

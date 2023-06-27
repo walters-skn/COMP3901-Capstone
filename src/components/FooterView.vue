@@ -1,6 +1,6 @@
 <template>
       <div class="footer-bottom">
-        <p>&copy; COMP3901 Capstone - Diabot All rights reserved.</p>
+        <p>&copy; COMP3901 Capstone - Diabot Project All rights reserved.</p>
       </div>
   </template>
   

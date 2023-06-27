@@ -2,21 +2,18 @@
   <div class="page-container">
           <nav class="navbar navbar-expand navbar-light fixed-top">
             <div class="container">
-                      
-              <img :src="imagePath2" alt="home-logo" class="home">
+              <router-link to="/">
+                  <img :src="imagePath2" alt="home-logo" class="home">
+              </router-link>
 
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
                     <router-link to="/" class="nav-link"><strong>Home ||</strong></router-link>
-                    <!-- <a href="./src/components/HomePage.vue" class="nav-link"> <strong> Home || </strong></a> -->
                   </li>
                   <li class="nav-item">
                     <router-link to='/login' class="nav-link"><strong>Login </strong></router-link>
                   </li>
-                  <!-- <li class="nav-item">
-                    <a href="#" class="nav-link"><strong> Login </strong></a>
-                  </li> -->
                 </ul>
               </div>  
 
@@ -54,7 +51,7 @@
 
   .home{ 
     height: 65px;
-    width: 90px;
+    width: 100px;
     margin: -1%;
   }
 

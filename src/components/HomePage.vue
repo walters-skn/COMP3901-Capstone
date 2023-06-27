@@ -1,7 +1,6 @@
 
 <template>
-    <!-- <NavBar/> -->
-    
+
     <div class="container mt-4">
 
       <div class="label">
@@ -14,24 +13,24 @@
           patient data and medical history to tailor its recommendations and advice.
         </p>
       </div>
+
     </div>
+    
+    <div class="guidelines-container">
+      <h3 class="guidelines"> <strong> <b>Guidelines For Using Diabot  </b> </strong></h3>
+      <p>Before getting started with Diabot, it's important to follow the guidelines. These include:</p>
+      <p> Follow the recommended guidelines and suggestions provided by Diabot</p>
+      <ul>
+        <li>Regularly update your profile and data to ensure accuracy</li>
+        <li>Utilize the various features and resources offered by Diabot</li>
+        <li>Regularly review and monitor your progress</li>
+      </ul>
 
-  <div class="guidelines-container">
-        <h3 class="guidelines"> <strong> <b>Guidelines For Using Diabot  </b> </strong></h3>
-        <p>Before getting started with Diabot, it's important to follow the guidelines. These include:</p>
-        <p> Follow the recommended guidelines and suggestions provided by Diabot</p>
-        <ul>
-          <li>Regularly update your profile and data to ensure accuracy</li>
-          <li>Utilize the various features and resources offered by Diabot</li>
-          <li>Regularly review and monitor your progress</li>
-        </ul>
+      <p class="end"> Ready to take control of your diabetes management? </p>
+      <br>
+      <p class="end"> <strong> Click the button below to get started. </strong> </p>
 
-        <p class="end"> Ready to take control of your diabetes management? </p>
-        <br>
-        <p class="end"> <strong> Click the button below to get started. </strong> </p>
-
-        <router-link to="/diabot" class="btn btn-primary btn-block"> Diabot</router-link>
-
+      <router-link to="/diabot" class="btn btn-primary btn-block"> Diabot</router-link>
     </div>
 
 </template>
@@ -46,7 +45,7 @@
 
 <style scoped>
 
-.container{
+  .container{
     display: flex;
     align-items: center;
     justify-content: flex-end;
