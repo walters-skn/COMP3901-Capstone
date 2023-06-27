@@ -47,43 +47,40 @@
 
 <style scoped>
   .chatbox-container{
-    height:90vh;
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .head{
-  font-family: fantasy;
-  color: white;  
-  text-align: center;
-  font-size:45px;
-}
-
-  .chatbox {
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row; /*this allows the "Diabot Chat" to go on the left side of the page*/
+    width: 80%;
+    margin-left:0;
+    /* height:90vh; */
+    /* display: flex; */
+    /* flex-direction: row; */
   }
 
-.chatbox-header {
-  position: absolute;
+  .chatbox-header {
+    position: absolute;
     left: 0;
     width: 20%;
     height: 90vh;
-    padding: 50px;
+    /* padding: 50px; */
     background-color: #4C8F9E;
     color: white;
     font-family: 'Times New Roman', Times, serif;
     display: flex;
     align-items: center;
 }
+  .head{
+  font-family: fantasy;
+  color: white;  
+  text-align: center;
+  font-size:45px;
+  }
 
-.chatbox-body {
-  flex: 1;
-  /* overflow-y: auto; */
-}
+  .chatbox-body {
+    padding: 90px;
+  }
+
+  .chatbox {
+    display: flex;
+    flex-direction: row; /*this allows the "Diabot Chat" to go on the left side of the page*/
+  }
 
 .chatbox-footer {
   display: flex;
@@ -91,6 +88,7 @@
   height: 90vh;
   width: 100%;
   font-size: 14px;
+  margin-left: 0;
 }
 
 .chatbox-footer input[type="text"] {
@@ -112,6 +110,7 @@
 .message {
   padding: 5px;
   font-size: 15px;
+  background-color: #92aeb5;
 }
 
 .message-content {

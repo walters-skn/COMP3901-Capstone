@@ -26,12 +26,4 @@ export default {
 }; 
 </script>
 
-<style scoped>
-  .page-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-</style> 
+<style scoped></style>

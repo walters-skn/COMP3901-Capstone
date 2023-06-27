@@ -1,7 +1,7 @@
 
 <template>
     <!-- <NavBar/> -->
-  
+    
     <div class="container mt-4">
 
       <div class="label">
@@ -15,6 +15,7 @@
         </p>
       </div>
       <img :src="imagePath" alt="tools" class="tools">
+
     </div>
 
   <div class="guidelines-container">
@@ -52,18 +53,16 @@
 
 <style scoped>
 
-  /* {margin: 0; padding: 0 } */
-  .container{
+.container{
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 10px;
-    margin-left: 30px;
+    justify-content: flex-end;
+    margin: 0 auto;
   }
 
   .tools{
-    width: 300px;
-    height: 400px;
+    width: 400px;
+    height: 300px;
   }
 
   .end{
@@ -75,8 +74,10 @@
     flex-grow:1;
     background-color: white;
     margin: auto 0;
-    padding: 5px;
     padding-right: 20px;
+    /* display: flex; */
+    /* flex-direction: row-reverse; */
+    align-items: center;
   }
 
   .diabot-content{
@@ -87,10 +88,8 @@
 
   .diabot {
     font-family: 'Times New Roman', Times, serif;
-    /* margin-top: 50px;
-    padding: 50px; */
     font-size: 55px;
-    padding: 2px;
+    /* padding: 2px; */
   }
 
   .guidelines-container{
