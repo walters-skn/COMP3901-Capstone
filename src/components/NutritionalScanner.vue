@@ -3,7 +3,7 @@
 <template> 
 
     <div class="heading">
-        <h2> <b> <strong> Scan Meal To Get Nutritional Content of Meal </strong></b></h2>
+        <h2> <b> <strong> Place Barcode Within The Frame To Get Nutritional Content of Meal </strong></b></h2>
         <p class="error">{{ error }}</p>
         <p> {{ decodedString }}</p>
     </div>

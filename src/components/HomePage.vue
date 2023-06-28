@@ -63,7 +63,7 @@ export default {
   }
 
   .diabot-content{
-    text-align: center;
+    text-align: justify;
     font-size: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     padding-top: 2%;
