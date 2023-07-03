@@ -10,8 +10,13 @@ cursor = cnx.cursor()
 
 
 TABLES = {}
-# TABLES['admin'] = (
-#     "CREATE TABLE `admin` ("
+TABLES['admin'] = (
+    "CREATE TABLE `admin` ("
+    "  `admin_id` varchar(50) NOT NULL,"
+    "  `password` varchar(50) NOT NULL,"
+    "  `email` varchar(50) NOT NULL,"
+    "  PRIMARY KEY (`admin_id`)"
+    ") ENGINE=InnoDB")
 
 
 TABLES['patients'] = (
@@ -48,23 +53,26 @@ TABLES['appointments'] = (
     "  KEY `patient_id` (`patient_id`),"
     "  CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`patient_id`) "
     "     REFERENCES `patients` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE"
+    "  KEY `med_id` (`med_id`),"
+    "  CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`med_id`) "
+    "     REFERENCES `medications` (`med_id`) ON DELETE CASCADE ON UPDATE CASCADE"
     ") ENGINE=InnoDB")
 
-# TABLES['symptoms'] = (
-#     "CREATE TABLE `symptoms` ("
-#     "  `symptom_id` int(11) NOT NULL AUTO_INCREMENT,"
-#     "  `gender` varchar(6) NOT NULL,"
-#     "  `weight` float NOT NULL,"
-#     "  `height` float NOT NULL,"
-#     "  `age` int(11) NOT NULL,"
-#     "  `waist_circumference` float NOT NULL,"
-#     "  `is_physically_active` tinyint(1) NOT NULL,"
-#     "  `fruit_veggie_intake` int(11) NOT NULL,"
-#     "  `has_high_bp_medication` tinyint(1) NOT NULL,"
-#     "  `has_hyperglycemia_history` tinyint(1) NOT NULL,"
-#     "  `has_family_history` tinyint(1) NOT NULL,"
-#     "  PRIMARY KEY (`symptom_id`)"
-#     ") ENGINE=InnoDB")
+TABLES['symptoms'] = (
+    "CREATE TABLE `symptoms` ("
+    "  `symptom_id` int(11) NOT NULL AUTO_INCREMENT,"
+    "  `gender` varchar(6) NOT NULL,"
+    "  `weight` float NOT NULL,"
+    "  `height` float NOT NULL,"
+    "  `age` int(11) NOT NULL,"
+    "  `waist_circumference` float NOT NULL,"
+    "  `is_physically_active` tinyint(1) NOT NULL,"
+    "  `fruit_veggie_intake` int(11) NOT NULL,"
+    "  `has_high_bp_medication` tinyint(1) NOT NULL,"
+    "  `has_hyperglycemia_history` tinyint(1) NOT NULL,"
+    "  `has_family_history` tinyint(1) NOT NULL,"
+    "  PRIMARY KEY (`symptom_id`)"
+    ") ENGINE=InnoDB")
 
 # TABLES['risks'] = (
 #     "CREATE TABLE `risks` ("
