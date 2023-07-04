@@ -1,5 +1,6 @@
 <template> 
     <div class="header"> 
+      <SubscriberNavbar/>
       <h2 class="name"> <strong> WELCOME TO DIABOT</strong>  </h2>
     </div>
 
@@ -81,7 +82,7 @@
         </div>
       </div>
 
-      <!-- <div class="links">
+      <div class="links">
         <div class="container" >
           <img :src="imagePath7" alt="profile" class="img">
           <router-link link to="/scanner">
@@ -91,7 +92,7 @@
           </router-link>
           <p class="detail">Check The Nutritional Value of Your Meal</p>
         </div>
-      </div>     -->
+      </div>    
 
       <div class="links">
         <div class="container" >
@@ -109,6 +110,7 @@
   </template>
 
   <script>
+    import SubscriberNavbar from './SubscriberNavbar.vue'
     import ImagePath from '@/assets/img/profile.png'
     import ImagePath2 from '@/assets/img/profile.png'
     import ImagePath3 from '@/assets/img/location.png'
@@ -129,7 +131,10 @@
           imagePath7 : ImagePath7
         }
       },
-      name:"subscriberPage"
+      name:"subscriberPage",
+      components:{
+        SubscriberNavbar,
+      },
     }
 
   </script>

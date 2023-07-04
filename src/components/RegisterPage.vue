@@ -40,7 +40,7 @@
                         </div>
                             
                         <div class="submit-group">
-                            <router-link to="/profile" >
+                            <router-link to="/subscriber" >
                             <button class="btn btn-primary btn-block" @click="signUp" >Sign Up</button>
                         </router-link>
                         </div> 
