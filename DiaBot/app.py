@@ -31,6 +31,19 @@ def predict(patient_id=None):
     risk_category = determine_risk_category(risk_score)
     chance_of_developing_diabetes = determine_chance_of_diabetes(risk_score)
     screening_recommendation = determine_screening_recommendation(risk_category)
+
+    # create a .json file with the risk score, risk category, chance of developing diabetes, and screening recommendation
+    import json
+    data = {
+        "risk_score": risk_score,
+        "risk_category": risk_category,
+        "chance_of_developing_diabetes": chance_of_developing_diabetes,
+        "screening_recommendation": screening_recommendation
+    }
+
+    with open("diabetes_risk.json", "w") as f:
+        json.dump(data, f)
+
     
     return jsonify({
         'total_risk_score': risk_score,
