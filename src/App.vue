@@ -1,4 +1,3 @@
-
 <template>
   <NavBar/>
 </template>
