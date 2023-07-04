@@ -3,19 +3,19 @@
         <div class="chat-sidebar">
             <h1> <b><strong>DIABOT <br> CHAT</strong></b></h1>
         </div>    
-    <div class="chat-content">
-        <div class="chat-messages">
-            <div v-for="message in messages" :key="message.id" class="message" :class="{ 'user-message': message.from === 'user', 'bot-message': message.from === 'bot' }">
-                <div class="message-content">
-                    {{ message.text }}
+        <!-- <div class="chat-content">
+            <div class="chat-messages">
+                <div v-for="message in messages" :key="message.id" class="message" :class="{ 'user-message': message.from === 'user', 'bot-message': message.from === 'bot' }">
+                    <div class="message-content">
+                        {{ message.text }}
+                    </div>
                 </div>
             </div>
+        <div class="chat-input">
+            <input v-model="inputText" @keydown.enter="sendMessage" placeholder="Type your message..." />
+            <button @click="sendMessage"> <strong>SEND </strong></button>
         </div>
-    <div class="chat-input">
-        <input v-model="inputText" @keydown.enter="sendMessage" placeholder="Type your message..." />
-        <button @click="sendMessage"> <strong>SEND </strong></button>
-    </div>
-  </div>
+        </div> -->
     </div>
   </template>
   
