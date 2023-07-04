@@ -12,8 +12,9 @@
         localStorage.clear();
         // Redirect to the login page
         this.$router.push('/login');
-      },
+      }, //correction
     },
   };
+  //correction//correction//correction//correction//correction
   </script>
   
