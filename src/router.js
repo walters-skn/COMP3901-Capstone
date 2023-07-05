@@ -4,7 +4,7 @@ import {createRouter,createWebHistory} from 'vue-router';
 import LoginPage from '@/components/LoginPage.vue'
 import HomePage from '@/components/HomePage.vue'
 import RegisterPage from '@/components/RegisterPage.vue'
-import DiaBot from '@/components/DiaBot.vue'
+import DiabotPage from '@/components/DiabotPage.vue'
 import NavBar from '@/components/NavBar.vue';
 import SubscriberPage from '@/components/SubscriberPage.vue';
 import NutritionalScanner from '@/components/NutritionalScanner.vue';
@@ -15,7 +15,7 @@ const routes = [
     { path: '/', component: HomePage },
     { path: '/login', component: LoginPage },
     { path: '/register', component: RegisterPage },
-    { path: '/diabot', component: DiaBot},
+    { path: '/diabot', component: DiabotPage},
     {path: '/navbar', component: NavBar},
     {path: '/home', component: HomePage},
     {path: '/signout', component: SignOut},

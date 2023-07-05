@@ -23,7 +23,7 @@
   import { reactive, ref } from 'vue';
   
   export default {
-  name: 'diaBot',
+  name: 'diabotPage',
   setup() {
     const messages = reactive([]);
     const inputText = ref('');
