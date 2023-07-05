@@ -9,7 +9,8 @@
 
     <div class="content-container">
       <h1 class="title"> <strong>LOGIN </strong></h1>
-      <form>
+
+      <form @submit="handleSubmit">
         <div class="form-group">
           <label> <b>Email Address</b></label>
           <input type="email" class="form-control" placeholder="Email Address" required/>
@@ -25,7 +26,7 @@
         </div>
 
         <div class="submit-group">
-          <router-link to='/profile'>
+          <router-link to='/subscriber'>
           <button class="btn btn-primary btn-block"> <strong> <b>SIGN IN </b></strong></button>
           </router-link>
         </div>
@@ -41,6 +42,9 @@
 export default {
   name: 'LoginPage',
   methods: {
+    handleSubmit(){
+      console.log('submitted');
+    },
     forgotPassword() {
       //Handle create account click
       console.log('Forgot password clicked');
