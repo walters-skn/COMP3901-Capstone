@@ -1,30 +1,30 @@
 <template> 
-  <div class="page-container">
-          <nav class="navbar navbar-expand navbar-light fixed-top">
-            <div class="container">
-              <router-link to="/">
-                  <img :src="imagePath2" alt="home-logo" class="home">
-              </router-link>
+  <div class="nav_container">
+    <nav class="navbar">
+      <router-link to="/">
+          <img :src="imagePath2" alt="home-logo" class="home">
+      </router-link>
 
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
+      <div class="collapse">
+        <ul class="navbar_nav">
 
-                  <li class="nav-item">
-                    <router-link to="/" class="nav-link"> <strong> Home ||</strong></router-link>
-                  </li>
+          <li class="nav-item">
+            <router-link to="/" class="nav-link"> <strong> Home ||</strong></router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/" class="nav-link"> <strong> About Us ||</strong></router-link>
+          </li>
 
-                  <li class="nav-item">
-                    <router-link to='/login' class="nav-link"><strong> Login </strong></router-link>
-                  </li>
-                </ul>
-              </div>  
+          <li class="nav-item">
+            <router-link to='/login' class="nav-link"><strong> Login </strong></router-link>
+          </li>
+        </ul>
+      </div>  
+    </nav>
 
-            </div>
-          </nav> 
-      <router-view></router-view>
+    <router-view></router-view>
 
-    </div>
-
+  </div>
 </template>
 
 <script>
@@ -41,10 +41,25 @@
 
 <style scoped>
 
+.nav_container{
+  width: 100%;
+}
+
 /* navigation */
-  .navbar {
-    padding: 10px;
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
     background-color: #5CA2B1;
+  }
+
+  .navbar_nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    gap: 8px;
   }
 
   .nav-link{
@@ -57,13 +72,7 @@
     margin: -1%;
   }
 
-  .page-container{
-    /* background-color:#5CA2B1; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+ 
         
   .collapse{
     font-family: Georgia, 'Times New Roman', Times, serif;
