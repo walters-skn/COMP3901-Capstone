@@ -10,15 +10,14 @@ cursor = cnx.cursor()
 
 
 TABLES = {}
-TABLES['admin'] = (
-    "CREATE TABLE `admin` ("
-    "  `admin_id` varchar(50) NOT NULL,"
-    "  `password` varchar(50) NOT NULL,"
-    "  `email` varchar(50) NOT NULL,"
-    "  PRIMARY KEY (`admin_id`)"
-    ") ENGINE=InnoDB")
-
-
+TABLES['users'] = (
+    "CREATE TABLE `users` ("
+    "  `user_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
+    "  `password` VARCHAR(255) NOT NULL,"
+    "  `email` VARCHAR(255) NOT NULL,"
+    "  `is_admin` INT"
+    ") ENGINE=InnoDB"
+)
 TABLES['patients'] = (
     "CREATE TABLE `patients` ("
     "  `patient_id` varchar(50) NOT NULL,"
@@ -29,7 +28,8 @@ TABLES['patients'] = (
     "  `address` varchar(50) NOT NULL,"
     "  `contact` varchar(50) NOT NULL,"
     "  PRIMARY KEY (`patient_id`)"
-    ") ENGINE=InnoDB")
+    ") ENGINE=InnoDB"
+)
 
 TABLES['medications'] = (
     "CREATE TABLE `medications` ("
