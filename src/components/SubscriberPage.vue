@@ -9,7 +9,7 @@
       <div class="links">
         <div class="container" >
           <img :src="imagePath" alt="profile" class="img">
-          <router-link link to="/diabot">
+          <router-link link to="/diabot2">
             <div class="title">
               <strong> Profile </strong>
             </div>
@@ -21,7 +21,7 @@
       <div class="links">
         <div class="container" >
           <img :src="imagePath2" alt="profile" class="img">
-          <router-link link to="/diabot">
+          <router-link link to="/diabot2">
             <div class="title">
               <strong> Medical Data </strong>
             </div>
@@ -33,7 +33,7 @@
       <div class="links">
         <div class="container" >
           <img :src="imagePath7" alt="profile" class="img">
-          <router-link link to="/diabot">
+          <router-link link to="/diabot2">
           <div class="title">
             <strong> <b> Diabot Chat </b> </strong> 
           </div>
@@ -45,7 +45,7 @@
       <div class="links">
         <div class="container" >
           <img :src="imagePath6" alt="profile" class="img">
-          <router-link link to="/diabot">
+          <router-link link to="/diabot2">
           <div class="title">
             <strong> <b> View History </b> </strong> 
           </div>
@@ -61,7 +61,7 @@
       <div class="links">
         <div class="container" >
           <img :src="imagePath3" alt="profile" class="img">
-          <router-link link to="/diabot">
+          <router-link link to="/diabot2">
             <div class="title">
               <strong> Nearby Clinics </strong>
             </div>
@@ -73,7 +73,7 @@
       <div class="links">
         <div class="container" >
           <img :src="imagePath5" alt="profile" class="img">
-          <router-link link to="/diabot">
+          <router-link link to="/diabot2">
             <div class="title">
               <strong> Mean Plan </strong>
             </div>
@@ -97,7 +97,7 @@
       <div class="links">
         <div class="container" >
           <img :src="imagePath4" alt="profile" class="img">
-          <router-link link to="/diabot">
+          <router-link link to="/diabot2">
             <div class="title">
               <strong> Create Notifications </strong>
             </div>

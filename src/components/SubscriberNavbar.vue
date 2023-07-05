@@ -1,23 +1,24 @@
 <template>
+
     <nav class="navbar navbar-expand navbar-light fixed-top">
       <div class="container">
         <router-link to="/subscriber">
           <img :src="imagePath2" alt="home-logo" class="home">
         </router-link>
-  
         <div class="collapse navbar-collapse" id="navbarNav">
+
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <router-link to="/subscriber" class="nav-link"> <strong>Home ||</strong></router-link>
             </li>
-            <!-- <li class="nav-item">
-              <router-link to='/signout' class="nav-link"><strong>Sign Out </strong></router-link>
-            </li> -->
+
             <SignOut/>
           </ul>
+
         </div>  
       </div>
     </nav> 
+    
   </template>
   
   <script>
