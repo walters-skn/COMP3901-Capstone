@@ -37,7 +37,7 @@
 
 <script>
 import { useRouter } from 'vue-router';
-import axios from axios;
+import axios from 'axios';
 
 export default {
   name: 'LoginPage',
