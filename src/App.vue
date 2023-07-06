@@ -13,3 +13,10 @@ export default {
     },
 }; 
 </script>
+
+<style>
+  body {
+    margin: 0;
+    max-height: 100vh;
+  }
+</style>

@@ -13,3 +13,7 @@
 
 ## Install requirements
 ```pip install -r requirements.txt```
+
+<!-- create a link to resource -->
+### Resources
+[FINDRISC Diabetes Risk Calculator](https://qxmd.com/calculate/calculator_236/findrisc-diabetes-risk-calculator#)

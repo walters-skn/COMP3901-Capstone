@@ -1,3 +1,4 @@
+-- DROP DATABASE diabot;
 create database diabot;
 USE diabot;
 
@@ -37,33 +38,50 @@ CREATE TABLE `meals` (
     FOREIGN KEY(patient_id) REFERENCES patients(patient_id)
 );
 CREATE TABLE `medications` (
-    med_id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    med_name CHAR(200) NOT NULL,
+    medication_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    med_name varchar(255) NOT NULL,
     qty INT NOT NULL,
-    patient_id int NOT NULL,
-    PRIMARY KEY(med_id),
-    FOREIGN KEY(patient_id) REFERENCES patients(patient_id) ON UPDATE CASCADE ON DELETE CASCADE
+    patient_id INT,
+    FOREIGN KEY(patient_id) REFERENCES patients(patient_id)
 );
 CREATE TABLE `reminders` (
-    app_id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    rem_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     app_date date NOT NULL,
-    patient_id varchar(50) NOT NULL,
+    patient_id INT NOT NULL,
     remind_type varchar(255) NOT NULL,
     remind_desc varchar(255) NOT NULL,
-    PRIMARY KEY(app_id),
-    FOREIGN KEY(patient_id) REFERENCES patients(patient_id) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY(patient_id) REFERENCES patients(patient_id)
 );
 CREATE TABLE `symptoms` (
     symptom_id int PRIMARY key NOT NULL AUTO_INCREMENT,
     gender varchar(6) NOT NULL,
     weight float NOT NULL,
     height float NOT NULL,
-    age int(11) NOT NULL,
+    age int NOT NULL,
     waist_circumference float NOT NULL,
-    is_physically_active tinyint(1) NOT NULL,
-    fruit_veggie_intake int(11) NOT NULL,
-    has_high_bp_medication tinyint(1) NOT NULL,
-    has_hyperglycemia_history tinyint(1) NOT NULL,
-    has_family_history tinyint(1) NOT NULL,
-    PRIMARY KEY(symptom_id)
+    is_physically_active int NOT NULL,
+    fruit_veggie_intake int NOT NULL,
+    has_high_bp_medication int NOT NULL,
+    has_hyperglycemia_history int NOT NULL,
+    has_family_history int NOT NULL
 );
+
+CREATE TABLE diabetes_questions(
+	db_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, 
+	questions VARCHAR(255) NOT NULL
+);
+
+
+
+INSERT INTO diabetes_questions(questions)
+VALUES('What is your gender?'),
+	  ('What is your height?'),
+	  ('What is your weight?'),
+     	 ('What is your age?'),
+  ('What is your waist circumference?'),
+ ('Are you physically active?'),
+ ('Do you prefer fruits or vegetables?'),
+ ('Are you taking any form of medication for high blood pressure?'),
+ ('When last did you check your glucose level and what was the reading?'),
+ ('Do you have any family member who may have diabetes?');
+      

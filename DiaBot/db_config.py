@@ -3,75 +3,63 @@ from __future__ import print_function
 import mysql.connector
 from mysql.connector import errorcode
 
-DB_NAME = 'diabot'
+DB_NAME = 'diabot1'
 
 cnx = mysql.connector.connect(user='root', password='mysql-25', host='localhost', database=DB_NAME)
 cursor = cnx.cursor()
 
 
 TABLES = {}
-TABLES['admin'] = (
-    "CREATE TABLE `admin` ("
-    "  `admin_id` varchar(50) NOT NULL,"
-    "  `password` varchar(50) NOT NULL,"
-    "  `email` varchar(50) NOT NULL,"
-    "  PRIMARY KEY (`admin_id`)"
-    ") ENGINE=InnoDB")
-
-
+TABLES['users'] = (
+    "CREATE TABLE `users` ("
+    "  `user_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
+    "  `password` VARCHAR(255) NOT NULL,"
+    "  `email` VARCHAR(255) NOT NULL,"
+    "  `is_admin` INT"
+    ") ENGINE=InnoDB"
+)
 TABLES['patients'] = (
     "CREATE TABLE `patients` ("
-    "  `patient_id` varchar(50) NOT NULL,"
-    "  `pfirst_name` varchar(50) NOT NULL,"
-    "  `plast_name` varchar(50) NOT NULL,"
-    "  `Plast_name` varchar(50) NOT NULL,"
-    "  `uname` varchar(50) NOT NULL,"
-    "  `address` varchar(50) NOT NULL,"
-    "  `contact` varchar(50) NOT NULL,"
-    "  PRIMARY KEY (`patient_id`)"
-    ") ENGINE=InnoDB")
+    "  `patient_id` INT PRIMARY KEY,"
+    "  `address1` varchar(255),"
+    "  `address2` varchar(255),"
+    "  `first_name` varchar(255) NOT NULL,"
+    "  `last_name` varchar(255) NOT NULL,"
+    ") ENGINE=InnoDB"
+)
 
 TABLES['medications'] = (
     "CREATE TABLE `medications` ("
-    "  `med_id` varchar(50) NOT NULL,"
-    "  `med_name` varchar(50) NOT NULL,"
-    "  `qty` varchar(50) NOT NULL,"
-    "  `patient_id` varchar(50) NOT NULL,"
-    "  PRIMARY KEY (`med_id`)"
-    "  KEY `patient_id` (`patient_id`),"
-    "  CONSTRAINT `medications_ibfk_1` FOREIGN KEY (`patient_id`) "
-    "     REFERENCES `patients` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE"
+    "  `medication_id`  INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
+    "  `med_name` varchar(255) NOT NULL,"
+    "  `qty` INT NOT NULL,"
+    "  `patient_id` INT,"
+    "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB")
 
-TABLES['appointments'] = (
-    "CREATE TABLE `appointments` ("
-    "  `app_id` varchar(50) NOT NULL,"
+TABLES['reminders'] = (
+    "CREATE TABLE `reminders` ("
+    "  `rem_id `INT PRIMARY KEY NOT NULL AUTO_INCREMENT,,"
     "  `app_date` date NOT NULL,"
-    "  `patient_id` varchar(50) NOT NULL,"
-    "  `med_id` varchar(50) NOT NULL,"
-    "  PRIMARY KEY (`app_id`)"
-    "  KEY `patient_id` (`patient_id`),"
-    "  CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`patient_id`) "
-    "     REFERENCES `patients` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE"
-    "  KEY `med_id` (`med_id`),"
-    "  CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`med_id`) "
-    "     REFERENCES `medications` (`med_id`) ON DELETE CASCADE ON UPDATE CASCADE"
+    "  `patient_id` INT NOT NULL,"
+    "  `remind_type` varchar(255) NOT NULL,"
+    " `remind_desc` varchar(255) NOT NULL,"
+    "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB")
 
 TABLES['symptoms'] = (
     "CREATE TABLE `symptoms` ("
-    "  `symptom_id` int(11) NOT NULL AUTO_INCREMENT,"
+    "  `symptom_id` int PRIMARY key NOT NULL AUTO_INCREMENT,"
     "  `gender` varchar(6) NOT NULL,"
     "  `weight` float NOT NULL,"
     "  `height` float NOT NULL,"
-    "  `age` int(11) NOT NULL,"
+    "  `age` int NOT NULL,"
     "  `waist_circumference` float NOT NULL,"
-    "  `is_physically_active` tinyint(1) NOT NULL,"
-    "  `fruit_veggie_intake` int(11) NOT NULL,"
-    "  `has_high_bp_medication` tinyint(1) NOT NULL,"
-    "  `has_hyperglycemia_history` tinyint(1) NOT NULL,"
-    "  `has_family_history` tinyint(1) NOT NULL,"
-    "  PRIMARY KEY (`symptom_id`)"
+    "  `is_physically_active` INT NOT NULL,"
+    "  `fruit_veggie_intake` int NOT NULL,"
+    "  `has_high_bp_medication` INT NOT NULL,"
+    "  `has_hyperglycemia_history` INT NOT NULL,"
+    "  `has_family_history` INT NOT NULL,"
     ") ENGINE=InnoDB")
 
 # TABLES['risks'] = (
@@ -88,39 +76,31 @@ TABLES['symptoms'] = (
 #     "     REFERENCES `symptoms` (`symptom_id`) ON DELETE CASCADE"
 #     ") ENGINE=InnoDB")
 
-TABLES['clinic'] = (
-    "CREATE TABLE `clinic` ("
-    "  `clinic_id` int(11) NOT NULL AUTO_INCREMENT,"
-    "  `clinic_name` varchar(50) NOT NULL,"
-    "  `clinic_type` varchar(50) NULL,"
-    "  `clinic_address` varchar(100) NOT NULL,"
-    "  PRIMARY KEY (`clinic_id`)"
+TABLES['clinics'] = (
+    "CREATE TABLE `clinics` ("
+    "  `clinic_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,"
+    "  `patient_id INT`,"
+    "  `name` varchar(50),"
+    "  `type` varchar(10),"
+    "  `address` varchar(100),"
+    "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB")
 
-TABLES['meal'] = (
-    "CREATE TABLE `meal` ("
-    "  `meal_id` int(11) NOT NULL AUTO_INCREMENT,"
-    "  `patient_id` int(11) NOT NULL,"
-    "  `meal_name` varchar(50) NOT NULL,"
-    "  `meal_type` varchar(50) NOT NULL,"
-    "  `meal_description` varchar(100) NOT NULL,"
-    "  PRIMARY KEY (`meal_id`),"
-    "  KEY `patient_id` (`patient_id`),"
-    "  CONSTRAINT `meal_ibfk_1` FOREIGN KEY (`patient_id`) "
-    "     REFERENCES `patients` (`patient_id`) ON DELETE CASCADE"
+TABLES['meals'] = (
+    "CREATE TABLE `meals` ("
+    "  `meal_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,"
+    "  `patient_id` int,"
+    "  `meal_type` varchar(120),"
+    "  `meal_cont` varchar(200) NOT NULL,"
+    "  `nutri_lvl` DOUBLE NOT NULL,"
+    " FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB")
 
-TABLES['meal_content'] = (
-    "CREATE TABLE `meal_content` ("
-    "  `meal_content_id` int(11) NOT NULL AUTO_INCREMENT,"
-    "  `meal_id` int(11) NOT NULL,"
-    "  `food_name` varchar(50) NOT NULL,"
-    "  `food_type` varchar(50) NOT NULL,"
-    "  `food_description` varchar(100) NOT NULL,"
-    "  PRIMARY KEY (`meal_content_id`),"
-    " KEY `meal_id` (`meal_id`),"
-    " CONSTRAINT `meal_content_ibfk_1` FOREIGN KEY (`meal_id`) "
-    "     REFERENCES `meal` (`meal_id`) ON DELETE CASCADE"
+TABLES['diabetes_questions'] = (
+    "CREATE TABLE 'diabetes_questions'("
+    "   `db_id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL," 
+	"   `questions` VARCHAR(255) NOT NULL"
+    
     ") ENGINE=InnoDB")
 
 
