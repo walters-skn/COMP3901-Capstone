@@ -5,8 +5,7 @@ import LoginPage from '@/components/LoginPage.vue'
 import HomePage from '@/components/HomePage.vue'
 import RegisterPage from '@/components/RegisterPage.vue'
 import DiabotPage from '@/components/DiabotPage.vue'
-import SubDiabotPage2 from '@/components/SubDiabotPage.vue'
-import NavigationBar from '@/components/NavigationBar.vue';
+import NavBar from '@/components/NavBar.vue';
 import SubscriberPage from '@/components/SubscriberPage.vue';
 import NutritionalScanner from '@/components/NutritionalScanner.vue';
 import SubscriberNavbar from '@/components/SubscriberNavbar.vue';
@@ -18,8 +17,7 @@ const routes = [
     { path: '/register', component: RegisterPage },
     { path: '/login', component: LoginPage },
     { path: '/diabot', component: DiabotPage},
-    { path: '/diabot2', component: SubDiabotPage2},
-    {path: '/navbar', component: NavigationBar},
+    {path: '/navbar', component: NavBar},
     {path: '/subscriber', component: SubscriberPage},
     {path: '/scanner', component: NutritionalScanner},
     {path: '/snavbar', component: SubscriberNavbar},
