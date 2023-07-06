@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+import mysql.connector
+
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -120,6 +122,21 @@ def determine_screening_recommendation(risk_category):
         return 'Recommend screening every 1-2 years with Health Professional.'
     else:
         return 'Recommend annual screening with Health Professional.'
+
+def send_questions_to_client():
+    try:
+        cnx = mysql.connector.connect(user='root', password='mysql-25', host='localhost', database=DB_NAME)
+        cursor = cnx.cursor()
+        cursor.execute(
+            "SELECT * FROM questions"
+        )
+        question = cursor.fetchone()
+        # send question to client and get response
+        # update question in database where question_id = question[0] and change is_answered to 1
+        # repeat until all questions are answered
+    except Exception as e:
+        print(e)
+
     
 
 if __name__ == "__main__":

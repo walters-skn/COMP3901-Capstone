@@ -101,7 +101,8 @@ TABLES['meals'] = (
 TABLES['diabetes_questions'] = (
     "CREATE TABLE `diabetes_questions` ("
     "   `db_id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL," 
-	"   `questions` VARCHAR(255) NOT NULL"
+	"   `questions` VARCHAR(255) NOT NULL,"
+    "   `is_answered` INT NOT NULL DEFAULT 0"
     ") ENGINE=InnoDB"
 )
 
