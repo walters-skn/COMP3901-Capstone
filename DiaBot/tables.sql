@@ -73,15 +73,4 @@ CREATE TABLE diabetes_questions(
 
 
 
-INSERT INTO diabetes_questions(questions)
-VALUES('What is your gender?'),
-	  ('What is your height?'),
-	  ('What is your weight?'),
-     	 ('What is your age?'),
-  ('What is your waist circumference?'),
- ('Are you physically active?'),
- ('Do you prefer fruits or vegetables?'),
- ('Are you taking any form of medication for high blood pressure?'),
- ('When last did you check your glucose level and what was the reading?'),
- ('Do you have any family member who may have diabetes?');
-      
+

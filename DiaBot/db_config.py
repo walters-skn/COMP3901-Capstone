@@ -54,7 +54,7 @@ TABLES['reminders'] = (
 TABLES['symptoms'] = (
     "CREATE TABLE `symptoms` ("
     "  `symptom_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
-    "  `gender` VARCHAR(10) NOT NULL,"
+    "  `gender` VARCHAR(255) NOT NULL,"
     "  `weight` FLOAT NOT NULL,"
     "  `height` FLOAT NOT NULL,"
     "  `age` INT NOT NULL,"
@@ -67,27 +67,22 @@ TABLES['symptoms'] = (
     ") ENGINE=InnoDB"
 )
 
-# TABLES['risks'] = (
-#     "CREATE TABLE `risks` ("
-#     "  `risk_id` int(11) NOT NULL AUTO_INCREMENT,"
-#     "  `patient_id` int(11) NOT NULL,"
-#     "  `risk_score` int(11) NOT NULL,"
-#     "  `risk_category` varchar(10) NOT NULL,"
-#     "  `chance_of_developing_diabetes` float NOT NULL,"
-#     "  `screening_recommendation` varchar(100) NOT NULL,"
-#     "  PRIMARY KEY (`risk_id`),"
-#     "  KEY `patient_id` (`patient_id`),"
-#     "  CONSTRAINT `risks_ibfk_1` FOREIGN KEY (`patient_id`) "
-#     "     REFERENCES `symptoms` (`symptom_id`) ON DELETE CASCADE"
-#     ") ENGINE=InnoDB")
-
 TABLES['clinics'] = (
     "CREATE TABLE `clinics` ("
-    "  `clinic_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,"
+    "  `clinic_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
     "  `patient_id` INT NOT NULL,"
-    "  `name` VARCHAR(50),"
-    "  `type` VARCHAR(10),"
-    "  `address` VARCHAR(100),"
+    "  `name` VARCHAR(255),"
+    "  `type` VARCHAR(255),"
+    "  `address` VARCHAR(255),"
+    "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
+    ") ENGINE=InnoDB"
+)
+
+TABLES['contacts'] = (
+    "CREATE TABLE `contacts` ("
+    "  `patient_id` INT NOT NULL,"
+    "  `phone` VARCHAR(255),"
+    "   PRIMARY KEY(patient_id, phone),"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"
 )
@@ -98,7 +93,7 @@ TABLES['meals'] = (
     "  `patient_id` INT NOT NULL,"
     "  `meal_type` VARCHAR(255),"
     "  `meal_cont` VARCHAR(255) NOT NULL,"
-    "  `nutri_lvl` DOUBLE NOT NULL,"
+    "  `nutri_lvl` INT NOT NULL,"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"
 )
