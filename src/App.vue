@@ -17,6 +17,6 @@ export default {
 <style>
   body {
     margin: 0;
-    max-height: 100vh;
+    /* max-height: 100vh; */
   }
 </style>

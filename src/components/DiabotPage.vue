@@ -13,7 +13,7 @@
         </div>
         <div class="chat-input">
           <input v-model="inputText" @keydown.enter="sendMessage" placeholder="Type your message..." />
-          <button @click="sendMessage"> <strong>SEND </strong></button>
+          <button @click="sendMessage" style="margin-right: 25px;"> <strong>SEND </strong></button>
         </div>
       </div>
     </div>
@@ -60,13 +60,10 @@ export default {
 </script>
 
 <style scoped>
+
   .chat-container {
     display: flex;
     width: 100%;
-    height: 100vh;
-    margin: -25px;
-    margin-top: -155px;
-    margin-bottom: -115px;
   }
 
   .chat-content {
@@ -144,9 +141,11 @@ export default {
 
   .chat-sidebar {
     width: 22%;
+    min-height: 84.5vh;
     padding: 2px;
     border-left: 1px solid #ccc;
     background-color: #4C8F9E;
+    z-index: -1;
   }
 
   .chat-sidebar h1 {
