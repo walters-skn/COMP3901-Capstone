@@ -7,9 +7,9 @@ app.config.from_object(__name__)
 
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-# @app.route('/', methods=['GET'])
-# def home():
-#     return "Hello World"
+@app.route('/', methods=['GET'])
+def home():
+    return "Hello World"
 
 @app.route('/predict', methods=['POST'])
 def predict(patient_id=None):
@@ -34,6 +34,7 @@ def predict(patient_id=None):
 
     # create a .json file with the risk score, risk category, chance of developing diabetes, and screening recommendation
     import json
+
     data = {
         "risk_score": risk_score,
         "risk_category": risk_category,
@@ -42,7 +43,7 @@ def predict(patient_id=None):
     }
 
     with open("diabetes_risk.json", "w") as f:
-        json.dump(data, f)
+        json.dump(data, f, indent=4)
 
     
     return jsonify({
@@ -62,7 +63,7 @@ def calculate_risk_score(gender, weight, height, age, waist_circumference, is_ph
         risk_score += 3
     
     # BMI
-    bmi = weight / (height * height)
+    bmi = weight / (height * height) # weight in kg, height in m
     if bmi >= 25:
         risk_score += 3
     

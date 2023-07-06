@@ -21,6 +21,7 @@
   
   <script>
   import { reactive, ref } from 'vue';
+  import axios from 'axios';
   
   export default {
   name: 'diabotPage',
@@ -35,6 +36,13 @@
         inputText.value = '';
       }
     };
+
+    const path = 'http://localhost:5000/predict';
+
+    axios.get(path)
+        .then(response => {
+        console.log(response.data);
+        })
   
     return { messages, inputText, sendMessage };
   },
