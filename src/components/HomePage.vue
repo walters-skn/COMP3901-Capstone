@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container mt-4">
+  <div class="container">
 
     <div class="label">
       <h1 class="diabot"> <strong> WELCOME TO DIABOT </strong> </h1>

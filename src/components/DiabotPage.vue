@@ -1,116 +1,160 @@
 <template>
     <div class="chat-container">
-        <div class="chat-sidebar">
-            <h1> <b><strong>DIABOT <br> CHAT</strong></b></h1>
-        </div>    
-    <div class="chat-content">
-        <div class="chat-messages">
-            <div v-for="message in messages" :key="message.id" class="message" :class="{ 'user-message': message.from === 'user', 'bot-message': message.from === 'bot' }">
-                <div class="message-content">
-                    {{ message.text }}
-                </div>
+      <div class="chat-sidebar">
+        <h1> <b><strong>DIABOT <br> CHAT</strong></b></h1>
+      </div>    
+      <div class="chat-content">
+        <div class="chat-messages" ref='chatMessages'>
+          <div v-for="message in messages" :key="message.id" class="message" :class="{ 'user-message': message.from === 'user', 'bot-message': message.from === 'bot' }">
+            <div class="message-content">
+              {{ message.text }}
             </div>
+          </div>
         </div>
-    <div class="chat-input">
-        <input v-model="inputText" @keydown.enter="sendMessage" placeholder="Type your message..." />
-        <button @click="sendMessage"> <strong>SEND </strong></button>
-    </div>
-  </div>
+        <div class="chat-input">
+          <input v-model="inputText" @keydown.enter="sendMessage" placeholder="Type your message..." />
+          <button @click="sendMessage"> <strong>SEND </strong></button>
+        </div>
+      </div>
     </div>
   </template>
-  
-  <script>
-  import { reactive, ref } from 'vue';
-  
-  export default {
-  name: 'diabotPage',
-  setup() {
-    const messages = reactive([]);
-    const inputText = ref('');
-  
-    const sendMessage = () => {
-      const text = inputText.value.trim();
-      if (text) {
-        messages.push({ id: Date.now(), text, from: 'user' });
-        inputText.value = '';
-      }
+
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'ChatBox',
+  data() {
+    return {
+      message: '',
+      messages: []
     };
-  
-    return { messages, inputText, sendMessage };
   },
-  };
-  </script>
-  
-  <style scoped>
-  
-    .chat-container{
-        display: flex;
-        width: 100%;
-        height: 100vh;
-        margin: -25px; 
-        margin-top: -155px;
-        margin-bottom: -115px;
+  methods: {
+  sendMessage() {
+    const message = this.inputText.trim();
+    if (message) {
+      this.messages.push({ id: Date.now(), text: message, from: 'user' });
+      this.inputText = '';
+
+      axios.get(`https://www.cleverbot.com/getreply?key=CC8uqcCcSO3VsRFvp5-uW5Nxvow&input=${message}`)
+        .then(res => {
+          this.messages.push({
+            id: Date.now(),
+            text: res.data.output,
+            from: 'bot'
+          });
+
+          this.$nextTick(() => {
+            const chatMessages = this.$refs.chatMessages;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          });
+        })
+        .catch(error => {
+          console.log('An error occurred:', error);
+        });
     }
-  
-    .chat-content{
-        display: flex;
-        flex-direction: column;
-        flex: 1;
+  }
+}
+};
+</script>
+
+<style scoped>
+  .chat-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    margin: -25px;
+    margin-top: -155px;
+    margin-bottom: -115px;
+  }
+
+  .chat-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .chat-messages {
+    flex: 1;
+    font-size: 10px;
+    overflow-y: auto; /* Enable vertical scrolling */
     }
-  
-    .chat-messages{
-        flex:1;
-        font-size: 10px;
+  .message {
+    font-size: 20px;
+  }
+
+  .client {
+    /* Add the styles for client messages here */
+    span {
+      background: #0070C8;
+      padding: 8px;
+      color: white;
+      border-radius: 4px;
     }
-  
-    .message{
-        font-size: 20px;
+    p {
+      float: left;
     }
-  
-    .user-message{
-        background-color: #c8d1d1;
-        border-radius: 5px;
-        align-self: flex-end;
+  }
+
+  .server {
+    /* Add the styles for server messages here */
+    span {
+      background: #99cc00;
+      padding: 8px;
+      color: white;
+      border-radius: 4px;
     }
-  
-    .bot-message{
-        background-color: #e2e2e2;
-        border-radius: 5px;
-        align-self: flex-start;
+    p {
+      float: right;
     }
-  
-    .chat-input{
-        display: flex;
-        justify-content: flex-end;
-    }
-  
-    .chat-input input {
-        flex: 1;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-  
-    .chat-input button {
-        border-radius: 5px;
-        background-color: #4C8F9E;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-    }
-    .chat-sidebar {
-        width: 22%;
-        padding: 2px;
-        border-left: 1px solid #ccc;
-        background-color: #4C8F9E;
-    }
-  
-    .chat-sidebar h1 {
-        color: white;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-    }
-  </style>
+  }
+
+  .user-message {
+    background-color: #c8d1d1;
+    border-radius: 5px;
+    align-self: flex-end;
+  }
+
+  .bot-message {
+    background-color: #e2e2e2;
+    border-radius: 5px;
+    align-self: flex-start;
+  }
+
+  .chat-input {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .chat-input button {
+    border-radius: 5px;
+    background-color: #4C8F9E;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .chat-sidebar {
+    width: 22%;
+    padding: 2px;
+    border-left: 1px solid #ccc;
+    background-color: #4C8F9E;
+  }
+
+  .chat-sidebar h1 {
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+</style>

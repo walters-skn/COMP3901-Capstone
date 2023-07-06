@@ -4,7 +4,7 @@
 
 <script>
 
-import NavBar from '@/components/NavigationBar.vue';
+import NavBar from '@/components/NavBar.vue';
 
 export default {
     name:"myApp",

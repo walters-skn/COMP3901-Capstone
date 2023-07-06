@@ -9,16 +9,16 @@
 
     <div class="content-container">
       <h1 class="title"> <strong>LOGIN </strong></h1>
-
-      <form @submit="handleSubmit">
+      
+      <form>
         <div class="form-group">
           <label> <b>Email Address</b></label>
-          <input type="email" class="form-control" placeholder="Email Address" required/>
+          <input type="email" class="form-control" placeholder="Email Address" v-model="email" required/>
         </div>
         <br>
         <div class="loginform-group">
           <label> <b>Password</b></label>
-          <input type="password" class="form-control" placeholder="Password" required />
+          <input type="password" class="form-control" placeholder="Password" v-model="password" required />
         </div>
 
         <div class="link-group">
@@ -26,9 +26,7 @@
         </div>
 
         <div class="submit-group">
-          <router-link to='/subscriber'>
-          <button class="btn btn-primary btn-block"> <strong> <b>SIGN IN </b></strong></button>
-          </router-link>
+          <button class="btn btn-primary btn-block" @click="login" > <strong> <b>SIGN IN </b></strong></button>
         </div>
 
       </form>
@@ -38,19 +36,48 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+import axios from axios;
 
 export default {
   name: 'LoginPage',
-  methods: {
-    handleSubmit(){
-      console.log('submitted');
-    },
-    forgotPassword() {
-      //Handle create account click
-      console.log('Forgot password clicked');
-    },
+  created(){
+    this.$router = useRouter();
   },
-};
+  data(){
+    return {
+      email: '',
+      password: '',
+      token: ''
+    };
+  },
+  methods: {
+    async login(){
+      const path ='http://localhost5000/login'
+      
+      const response = await axios.post(path,{ 
+        email: this.email,
+        password: this.password
+
+      })
+      this.token = response.data.access_token
+      console.log(this.token)
+      /* 1. store token in local storage */
+      /* 2. redirect to subscriber page */
+
+    },
+    //   if (this.email === 'user@example.com' && this.password === 'password'){
+    //   this.$router.push('/subscriber');
+    //   }else {
+    //     console.log('Invalid credentials')
+    //   }
+    // },
+    // forgotPassword() {
+    //   //Handle create account click
+    //   console.log('Forgot password clicked');
+    // }
+  }
+}
 
 </script>
 

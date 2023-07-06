@@ -11,38 +11,36 @@
                     <div class="box">
                         <div class="form-group">
                             <label> First Name: </label>
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" v-model="fname" required/>
                         </div>
                             
                         <div class="form-group">
                             <label> Last Name: </label>
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" v-model="lname" required/>
                         </div>
                             
                         <div class="form-group">
                             <label> Email Address: </label>
-                            <input type="email" class="form-control" />
+                            <input type="email" class="form-control" v-model="email" required/>
                         </div>
             
                         <div class="form-group">
                             <label> Telephone Number: </label>
-                            <input type="tel" class="form-control" />
+                            <input type="tel" class="form-control" v-model="phone" required/>
                         </div>
                 
                         <div class="form-group form-inline">
                             <label> Password: </label>
-                            <input type="password" />
+                            <input type="hidden" v-model="password" required/>
                                 
                             <div class="form-group">
                                 <label> Re-Enter Password: </label>
-                                <input type="password" />
+                                <input type="hidden" v-model="repassword" required/>
                             </div>
                         </div>
                             
                         <div class="submit-group">
-                            <router-link to="/subscriber" >
                             <button class="btn btn-primary btn-block" @click="signUp" >Sign Up</button>
-                        </router-link>
                         </div> 
         
                     </div>
@@ -53,11 +51,41 @@
 </template>
         
 <script>
+
+import { useRouter } from 'vue-router';
+
     export default {
         name: 'registerPage',
+        created(){
+            this.$router = useRouter();
+        },
+        data(){
+            return {
+                lname: '',
+                fname: '',
+                email: '',
+                phone: '',
+                password: '',
+                repassword: ''
+            };
+        },
         methods:{
+            signUp(){
+                if(this.password !== this.repassword){
+                    alert('Passwords Do Not Match');
+                    return;
+                }
+                //Here the user information is going to be sent to the backend
+                console.log('User Registration:',{
+                    fname: this.fname,
+                    lname: this.lname,
+                    email: this.email,
+                    phone: this.phone,
+                    password: this.password
+                });
+            },
             handleSubmit(){
-                console.log('submitted')
+                console.log(' Form submitted')
             }
         },
     };
