@@ -12,21 +12,24 @@
                             <label> First Name: </label>
                             <input type="text" class="form-control" v-model="fname" required/>
                         </div>
-                            
+                        <br>
                         <div class="form-group">
                             <label> Last Name: </label>
                             <input type="text" class="form-control" v-model="lname" required/>
                         </div>
+                        <br>
                             
                         <div class="form-group">
                             <label> Email Address: </label>
                             <input type="email" class="form-control" v-model="email" required/>
                         </div>
+                        <br>
             
                         <div class="form-group">
                             <label> Telephone Number: </label>
                             <input type="tel" class="form-control" v-model="phone" required/>
                         </div>
+                        <br>
                 
                         <div class="form-group form-inline">
                             <label> Password: </label>
@@ -91,12 +94,11 @@ import { useRouter } from 'vue-router';
 <style scoped >
     
     .page-container {
-    background-color: #5ca2b1;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding-top: 0px;
+        background-color: #5ca2b1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
     }
         
     .form-container{
@@ -111,14 +113,17 @@ import { useRouter } from 'vue-router';
     .form-group{
         align-items: center;
     }
+  
       
     .box{
         display: flex;
         flex-direction:column ;
         margin-bottom: 10px;
         max-width: 400px;
+        width: 400px;
         font-size: 20px;
     }
+    
     .form-inline{
         display: flex;
         align-items: center;
