@@ -15,19 +15,25 @@
   
     <div class="guidelines_container">
       <h3 class="guidelines"> <strong> <b>Guidelines For Using Diabot  </b> </strong></h3>
-      <p>Before getting started with Diabot, it's important to follow the guidelines. These include:</p>
-      <p> Follow the recommended guidelines and suggestions provided by Diabot</p>
-      <ul>
-        <li>Regularly update your profile and data to ensure accuracy</li>
-        <li>Utilize the various features and resources offered by Diabot</li>
-        <li>Regularly review and monitor your progress</li>
-      </ul>
+      <p> <strong> It's vital to follow the instructions before using Diabot.</strong>  <br> <strong>These consist of:</strong>
+        <ul>
+          <li> 1. To maintain accuracy, regularly update your profile and data.</li>
+          <li> 2. Utilize the numerous features and resources Diabot has to offer.</li>
+          <li> 3. Consistently evaluate and track your development.</li>
+        </ul>
+      </p>
+
+      <br>
 
       <p class="end"> Ready to take control of your diabetes management? </p>
-      <br>
-      <p class="end"> <strong> Click the button below to get started. </strong> </p>
 
-      <router-link to="/diabot" class="btn"> Diabot</router-link>
+      <div class="button-container">
+        <p class="end">
+          <strong> Click the button below to get started. </strong> 
+        </p>
+        <router-link to="/diabot" class="btn"> Diabot</router-link>
+      </div>
+
     </div>
   </div>
 
@@ -49,6 +55,8 @@ export default {
     justify-content: flex-end;
     flex-direction: column;
     width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .end{
@@ -77,9 +85,16 @@ export default {
   .guidelines_container{
     background-color: #8ec5d0;
     width: 100%;
+    padding-bottom: 90px;
     text-align: center;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
+  }
+
+  .guidelines_container ul li{
+    display: flex;
+    margin-right: 10px;
+    justify-content: center;
   }
 
   .guidelines{
@@ -97,10 +112,18 @@ export default {
     background-color: #5ca2b1;
     border: none;
     cursor: pointer;
+    align-content: center;
+    justify-content: center;
   }
 
   .btn:hover{
     background-color: #21616f;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center
   }
 
 </style>

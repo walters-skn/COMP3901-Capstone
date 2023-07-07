@@ -111,6 +111,7 @@
 
 <script>
   import SubscriberNavbar from './SubscriberNavbar.vue'
+  
   import ImagePath from '@/assets/img/profile.png'
   import ImagePath2 from '@/assets/img/profile.png'
   import ImagePath3 from '@/assets/img/location.png'

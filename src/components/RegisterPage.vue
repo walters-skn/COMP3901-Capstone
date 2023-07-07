@@ -7,7 +7,6 @@
             
         <form @submit.prevent="handleSubmit">
             <div class = "form-container">
-                <div class="form">
                     <div class="box">
                         <div class="form-group">
                             <label> First Name: </label>
@@ -31,12 +30,10 @@
                 
                         <div class="form-group form-inline">
                             <label> Password: </label>
-                            <input type="hidden" v-model="password" required/>
+                            <input type="password" v-model="password" required/>
                                 
-                            <div class="form-group">
-                                <label> Re-Enter Password: </label>
-                                <input type="hidden" v-model="repassword" required/>
-                            </div>
+                            <label> Re-Enter Password: </label>
+                            <input type="passsword" v-model="repassword" required/>
                         </div>
                             
                         <div class="submit-group">
@@ -44,7 +41,6 @@
                         </div> 
         
                     </div>
-                </div>
             </div>
         </form>
     </div>
@@ -100,26 +96,29 @@ import { useRouter } from 'vue-router';
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 0;
-    padding-top: 0;
+    padding-top: 0px;
     }
         
     .form-container{
         background-color: #8eb9c4;
-        width: 100%;
-    }
-      
-    .form{
-        padding: 5px;
-        border: 5px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
+        padding: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
     }
         
     .form-group{
         align-items: center;
     }
       
+    .box{
+        display: flex;
+        flex-direction:column ;
+        margin-bottom: 10px;
+        max-width: 400px;
+        font-size: 20px;
+    }
     .form-inline{
         display: flex;
         align-items: center;

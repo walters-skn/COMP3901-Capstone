@@ -1,8 +1,11 @@
 <template>
+
     <div class="chat-container">
+
       <div class="chat-sidebar">
         <h1> <b><strong>DIABOT <br> CHAT</strong></b></h1>
       </div>    
+
       <div class="chat-content">
         <div class="chat-messages" ref='chatMessages'>
           <div v-for="message in messages" :key="message.id" class="message" :class="{ 'user-message': message.from === 'user', 'bot-message': message.from === 'bot' }">
@@ -11,12 +14,17 @@
             </div>
           </div>
         </div>
+
         <div class="chat-input">
           <input v-model="inputText" @keydown.enter="sendMessage" placeholder="Type your message..." />
+
           <button @click="sendMessage" style="margin-right: 25px;"> <strong>SEND </strong></button>
+
         </div>
       </div>
+      
     </div>
+
   </template>
 
 <script>

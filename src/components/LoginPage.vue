@@ -58,10 +58,11 @@ export default {
       const response = await axios.post(path,{ 
         email: this.email,
         password: this.password
-
       })
+
       this.token = response.data.access_token
       console.log(this.token)
+      
       /* 1. store token in local storage */
       /* 2. redirect to subscriber page */
 
