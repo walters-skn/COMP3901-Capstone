@@ -62,122 +62,86 @@ def register():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
-@app.route('/questions', methods=['GET'])
+@app.route('/predict', methods=['GET', 'POST'])
 def send_questions_to_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM diabetes_questions WHERE is_answered = 0 LIMIT 1")
     question_data = []
     
-    try:
-        cursor.execute("SELECT * FROM diabetes_questions WHERE is_answered = 0")
-    
-        for db_id, question, is_answered in cursor:
-            question_obj = {}
-            question_obj['db_id'] = db_id
-            question_obj['question'] = question
-            question_obj['is_answered'] = is_answered
-            question_data.append(question_obj)
-    
-        return jsonify({'questions': question_data}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
-    
-    cnx.commit()
-    cnx.close()
-    cursor.close()
+    if request.method == 'GET':
+        try:
+            for db_id, questions, is_answered in cursor:
+                if is_answered == 1:
+                    continue
+                question = {}
+                question['db_id'] = db_id
+                question['question'] = questions
+                question['is_answered'] = is_answered
+                question_data.append(question)
+
+                cursor.execute("UPDATE diabetes_questions SET is_answered = 1 WHERE db_id = %s", (db_id,))
+                cnx.commit()
+            cursor.close()
+            return jsonify(question_data)
+        except Exception as e:
+            return jsonify({'error': str(e)}), 400
+
+    # query the is_answered column in the database to see if the question has been answered
+    # if it has been answered, predict if the patient has diabetes
+    # if it has not been answered, return the question to the client
+    if request.method == 'POST':
+        try:
+            db_id = request.json.get('db_id')
+            answer = request.json.get('answer')
+            cursor.execute("UPDATE diabetes_questions SET is_answered = 1 WHERE db_id = %s", (db_id,))
+            cnx.commit()
+            cursor.close()
+            return jsonify({'message': 'Answer successfully saved'}), 200
+        except Exception as e:
+            return jsonify({'error': str(e)}), 400
 
 
-@app.route('/answers', methods=['POST'])
-def receive_symptoms_from_client():
+
+def predict(patient_id=None):
+    patient_id = request.json.get('patient_id')
+    gender = request.json.get('gender')
+    weight = float(request.json.get('weight'))
+    height = float(request.json.get('height'))
+    age = int(request.json.get('age'))
+    waist_circumference = float(request.json.get('waist_circumference'))
+    is_physically_active = request.json.get('is_physically_active')
+    fruit_veggie_intake = request.json.get('fruit_veggie_intake')
+    has_high_bp_medication = request.json.get('has_high_bp_medication')
+    has_hyperglycemia_history = request.json.get('has_hyperglycemia_history')
+    has_family_history = request.json.get('has_family_history')
+    
+    risk_score = calculate_risk_score(gender, weight, height, age, waist_circumference, is_physically_active,
+                                      fruit_veggie_intake, has_high_bp_medication, has_hyperglycemia_history,
+                                      has_family_history)
+    
+    risk_category = determine_risk_category(risk_score)
+    chance_of_developing_diabetes = determine_chance_of_diabetes(risk_score)
+    screening_recommendation = determine_screening_recommendation(risk_category)
+
+    # store the request data as a patient symptoms in the patients table
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
-
-    try:
-        answers = request.json.get('responses')
-        print("Response from client: ", answers)
-        cursor.execute("UPDATE diabetes_questions SET is_answered = 1 WHERE is_answered = 0")
-        cnx.commit()
-
-        # for answer in answers:
-        gender = answers[0]
-        weight = float(answers[1])
-        height = float(answers[2])
-        age = int(answers[3])
-        waist_circumference = float(answers[4])
-        is_physically_active = int(answers[5])
-        fruit_veggie_intake = int(answers[6])
-        has_high_bp_medication = int(answers[7])
-        has_hyperglycemia_history = int(answers[8])
-        has_family_history = int(answers[9])
-
-        cursor.execute(""" 
-            INSERT INTO symptoms 
-                (gender, weight, height, age, waist_circumference, is_physically_active, fruit_veggie_intake, has_high_bp_medication, has_hyperglycemia_history, has_family_history)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, (
-            gender, weight, height, age, waist_circumference, 
-            is_physically_active, fruit_veggie_intake, has_high_bp_medication, 
-            has_hyperglycemia_history, has_family_history
-        ))
-        cnx.commit()
-
-        cursor.execute("SELECT * FROM symptoms ORDER BY symptom_id DESC LIMIT 1")
-        patient_symptoms = cursor.fetchone()
-        print("Patient symptoms: ", patient_symptoms)
-
-        if patient_symptoms is not None:
-            risk_score = calculate_risk_score(
-                patient_symptoms[2], patient_symptoms[3], patient_symptoms[4], 
-                patient_symptoms[5], patient_symptoms[6], patient_symptoms[7], patient_symptoms[8], 
-                patient_symptoms[9], patient_symptoms[10], patient_symptoms[11]
-            )
-            risk_category = determine_risk_category(risk_score)
-            chance_of_diabetes = determine_chance_of_diabetes(risk_score)
-            screening_recommendation = determine_screening_recommendation(risk_category)
-
-            # cursor.execute(""" 
-            #     INSERT INTO diabetes_risk (risk_score, risk_category, chance_of_diabetes, screening_recommendation)
-            #     VALUES (%s, %s, %s, %s)
-            # """, (
-            #     risk_score, risk_category, chance_of_diabetes, screening_recommendation
-            # ))
-            # cnx.commit()
-
-            # cursor.execute("SELECT * FROM diabetes_risk ORDER BY risk_id DESC LIMIT 1")
-            # diabetes_risk = cursor.fetchone()
-
-            # cursor.execute("SELECT * FROM patients ORDER BY patient_id DESC LIMIT 1")
-            # patient = cursor.fetchone()
-
-            # cursor.execute(""" 
-            #     INSERT INTO patients_diabetes_risk (patient_id, risk_id)
-            #     VALUES (%s, %s)
-            # """, (
-            #     patient[0], diabetes_risk[0]
-            # ))
-            # cnx.commit()
-
-            cursor.execute("UPDATE diabetes_questions SET is_answered = 0 WHERE is_answered = 1")
-            cnx.commit()
-
-            return jsonify({
-                'risk_score': risk_score,
-                'risk_category': risk_category,
-                'chance_of_diabetes': chance_of_diabetes,
-                'screening_recommendation': screening_recommendation
-            }), 200
-        else:
-            return jsonify({'error': 'Symptoms not received'}), 400
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
-
+    cursor.execute("""
+        INSERT INTO patients 
+            (patient_id, gender, weight, height, age, waist_circumference, is_physically_active, fruit_veggie_intake, has_high_bp_medication, has_hyperglycemia_history, has_family_history) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (patient_id, gender, weight, height, age, waist_circumference, is_physically_active, fruit_veggie_intake, has_high_bp_medication, has_hyperglycemia_history, has_family_history))
+    cnx.commit()
     cursor.close()
-    cnx.close()
-
-
-
     
+    return jsonify({
+        'total_risk_score': risk_score,
+        'risk_category': risk_category,
+        'chance_of_developing_diabetes': chance_of_developing_diabetes,
+        'screening_recommendation': screening_recommendation
+    })
+
 def calculate_risk_score(gender, weight, height, age, waist_circumference, is_physically_active,
                          fruit_veggie_intake, has_high_bp_medication, has_hyperglycemia_history,
                          has_family_history):
@@ -248,10 +212,6 @@ def determine_screening_recommendation(risk_category):
 
 
 
-
-
-# Clinic Recommendations
-# @app.route('/clinic', methods=['GET'])
     
 
 if __name__ == "__main__":

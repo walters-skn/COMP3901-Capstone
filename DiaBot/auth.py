@@ -1,15 +1,21 @@
-from flask import Flask, request, jsonify
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-import mysql.connector
+# from flask import Flask, request, jsonify
 
-db_config = {
-    "user": "root",
-    "password": "mysql-25",
-    "host": "localhost",
-    "database": "diabot"
-}
 
-def connect_to_db():
-    cnx = mysql.connector.connect(**db_config)
-    cursor = cnx.cursor()
-    return cnx, cursor
+# auth = Flask(__name__)
+
+
+
+# def connect_to_db():
+#     cnx = mysql.connector.connect(**db_config)
+#     cursor = cnx.cursor()
+#     return cnx, cursor
+
+# @auth.route('/login', methods=['POST'])
+# def login():
+#     email = request.json.get('email')
+#     password = request.json.get('password')
+#     cnx, cursor = connect_to_db()
+#     cursor.execute("SELECT * FROM users WHERE email = %s AND password = %s", (email, password))
+#     user = cursor.fetchone()
+#     # check if is_admin is 0, if so, it is a patient
+#     print(user)
