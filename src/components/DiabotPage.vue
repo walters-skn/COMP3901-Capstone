@@ -1,37 +1,23 @@
 <template>
-  <div class="chat-container">
-    <div class="chat-sidebar">
-      <h1>DIABOT <br>CHAT</h1>
-    </div>
-    <div class="chat-content">
-      <div v-if="!greeted">
-        <h2>Welcome! How can I assist you?</h2>
-        <button v-on:click="startAssessment">Start Assessment</button>
-      </div>
-      <div v-else>
-        <section v-if="!assessmentComplete" class="chat-messages">
-          <div class="message">
-            <h2 class="message-content">
-              {{ question.question }}
-            </h2>
+    <div class="chat-container">
+      <div class="chat-sidebar">
+        <h1> <b><strong>DIABOT <br> CHAT</strong></b></h1>
+      </div>    
+      <div class="chat-content">
+        <div class="chat-messages" ref='chatMessages'>
+          <div v-for="message in messages" :key="message.id" class="message" :class="{ 'user-message': message.from === 'user', 'bot-message': message.from === 'bot' }">
+            <div class="message-content">
+              {{ message.text }}
+            </div>
           </div>
-          <div class="chat-input">
-            <input type="text" ref="answer" v-model="response">
-            <button v-on:click="answerQuestion">Submit Answer</button>
-          </div>
-        </section>
-        <section v-else>
-          <h2>Assessment Complete!</h2>
-          <h2>Your Risk</h2>
-          <p>Risk Score: {{ risk_score }}</p>
-          <p>Risk Category: {{ risk_category }}</p>
-          <p>Chance of Developing Diabetes: {{ chance_of_diabetes }}</p>
-          <p>Screening Recommendation: {{ screening_recommendation }}</p>
-        </section>
+        </div>
+        <div class="chat-input">
+          <input v-model="inputText" @keydown.enter="sendMessage" placeholder="Type your message..." />
+          <button @click="sendMessage" style="margin-right: 25px;"> <strong>SEND </strong></button>
+        </div>
       </div>
     </div>
-  </div>
-</template>
+  </template>
 
 <script>
 import axios from 'axios';
@@ -128,32 +114,6 @@ export default {
     }
   .message {
     font-size: 20px;
-  }
-
-  .client {
-    /* Add the styles for client messages here */
-    span {
-      background: #0070C8;
-      padding: 8px;
-      color: white;
-      border-radius: 4px;
-    }
-    p {
-      float: left;
-    }
-  }
-
-  .server {
-    /* Add the styles for server messages here */
-    span {
-      background: #99cc00;
-      padding: 8px;
-      color: white;
-      border-radius: 4px;
-    }
-    p {
-      float: right;
-    }
   }
 
   .user-message {
