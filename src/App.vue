@@ -1,26 +1,24 @@
 <template>
-  <NavBar/>
-  <!-- <SubscriberNavBar v-if="$route.path === '/subscriber'" /> -->
+  
+  <!-- <NavBar/> -->
+  <router-view/>
 
 </template>
 
 <script>
 
-import NavBar from '@/components/NavBar.vue';
-// import SubscriberNavBar from '@/components/SubscriberNav'
+// import NavBar from '@/components/NavBar.vue';
 
 export default {
     name:"myApp",
-    components:{
-        NavBar
-        // SubscriberNavBar
-    },
+    // components:{
+    //     NavBar
+    // },
 }; 
 </script>
 
 <style>
   body {
     margin: 0;
-    /* max-height: 100vh; */
   }
 </style>

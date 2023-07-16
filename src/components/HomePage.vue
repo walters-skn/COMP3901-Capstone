@@ -1,5 +1,7 @@
 <template>
 
+  <NavBar/>
+
   <div class="container">
 
     <div class="label">
@@ -41,7 +43,11 @@
 
 <script>
 
+import NavBar from './NavBar.vue'
 export default {
+  components:{
+    NavBar,
+  },
     name:"homePage",
 }; 
 

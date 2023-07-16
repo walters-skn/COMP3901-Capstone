@@ -1,4 +1,7 @@
 <template>
+
+  <NavBar/>
+
   <div class="chat-container">
     <div class="chat-sidebar">
       <h1>DIABOT <br>CHAT</h1>
@@ -36,9 +39,14 @@
 </template>
 
 <script>
+
 import axios from 'axios';
+import NavBar from './NavBar.vue'
 
 export default {
+  components:{
+    NavBar,
+  },
   name: 'ChatBox',
   data() {
     return {

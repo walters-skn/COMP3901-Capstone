@@ -1,5 +1,8 @@
 
 <template> 
+
+  <NavBar/>
+
     <div class="page-container">
         <div class="body">
             <h2 class = "title"> New User <br> SIGN UP TO GET STARTED </h2> 
@@ -59,7 +62,11 @@
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
-export default {
+import NavBar from './NavBar.vue'
+    export default {
+    components:{
+        NavBar,
+    },
     name: 'registerPage',
     created(){
         this.$router = useRouter();
