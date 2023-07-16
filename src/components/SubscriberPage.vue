@@ -60,6 +60,19 @@
 
     <div class="links">
       <div class="container" >
+        <img :src="imagePath4" alt="profile" class="img">
+        <router-link link to="/notifications">
+          <div class="title">
+            <strong> Create Notifications </strong>
+          </div>
+        </router-link>
+        <p class="detail">Create or View Notifications</p>
+      </div>
+    </div>
+
+
+    <div class="links">
+      <div class="container" >
         <img :src="imagePath3" alt="profile" class="img">
         <router-link link to="/clinics">
           <div class="title">
@@ -90,26 +103,16 @@
             <strong> Nutritional Scanner </strong>
           </div>
         </router-link>
-        <p class="detail">Check Your Meal's Nutritional Value</p>
+        <p class="detail"> Review Your Meal's Nutritional Value</p>
       </div>
     </div>    
 
-    <div class="links">
-      <div class="container" >
-        <img :src="imagePath4" alt="profile" class="img">
-        <router-link link to="/diabot">
-          <div class="title">
-            <strong> Create Notifications </strong>
-          </div>
-        </router-link>
-        <p class="detail">Create or View Notifications</p>
-      </div>
-    </div>
 
   </div> 
 </template>
 
 <script>
+
   import SubscriberNavbar from './SubscriberNavbar.vue'
   
   import ImagePath from '@/assets/img/profile.png'

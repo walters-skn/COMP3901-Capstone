@@ -11,19 +11,21 @@ import NutritionalScanner from '@/components/NutritionalScanner.vue';
 import SubscriberNavbar from '@/components/SubscriberNavbar.vue';
 import SignOut from '@/components/SignOut.vue';
 import ClinicsPage from '@/components/ClinicsPage.vue';
+import NotificationPage from '@/components/NotificationPage.vue';
 
 const routes = [
     { path: '/', component: HomePage },
-    {path: '/home', component: HomePage},
+    { path: '/home', component: HomePage},
     { path: '/register', component: RegisterPage },
     { path: '/login', component: LoginPage },
     { path: '/diabot', component: DiabotPage},
-    {path: '/navbar', component: NavBar},
-    {path: '/subscriber', component: SubscriberPage},
-    {path: '/scanner', component: NutritionalScanner},
-    {path: '/snavbar', component: SubscriberNavbar},
-    {path: '/signout', component: SignOut},
-    {path: '/clinics', component:ClinicsPage}
+    { path: '/navbar', component: NavBar},
+    { path: '/subscriber', component: SubscriberPage},
+    { path: '/scanner', component: NutritionalScanner},
+    { path: '/snavbar', component: SubscriberNavbar},
+    { path: '/signout', component: SignOut},
+    { path: '/clinics', component:ClinicsPage},
+    { path: '/notifications', component: NotificationPage}
 
 ]
 
