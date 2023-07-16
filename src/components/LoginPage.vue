@@ -1,6 +1,8 @@
 
 <template>
 
+  <NavBar/>
+
   <div class="page-container">
 
     <div class="side-menu">
@@ -11,12 +13,14 @@
       <h1 class="title"> <strong>LOGIN </strong></h1>
       
         <form>
+
           <div class="form-group">
-            <label> Email Address:</label>
+            <label for="email"> Email Address:</label>
             <input type="email" class="form-control" placeholder="Email Address" v-model="email" required/>
-          <br>
-          <br>
-            <label> Password: </label>
+          </div>
+
+          <div class="form-group">
+            <label for="password"> Password: </label>
             <input type="password" class="form-control" placeholder="Password" v-model="password" required />
           </div>
 
@@ -25,16 +29,23 @@
           </div>
 
         </form>
-      </div>
+
+    </div>
 
   </div>
 </template>
 
 <script>
+
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import NavBar from './NavBar.vue'
+
 
 export default {
+  components:{
+    NavBar,
+  },
   name: 'LoginPage',
   created(){
     this.$router = useRouter();
@@ -77,25 +88,30 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 
   .side-menu {
     width: 20%;
     padding: 2px;
-    background-color: #4C8F9E;
+    background-color: #5CA2B1;
     color: white;
     position: fixed;
-    top: 0; bottom: 0; left: 0;
+    top: 9.5%; bottom: 0; left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
+  label{
+    margin-bottom: 5px;
+  }
+
   .page-container {
     display: flex;
-    width: 100%;
+    width: 80%;
     margin-top: 6%;
     margin-bottom: 1%;
+
   }
 
   .content-container {
@@ -116,13 +132,15 @@ export default {
   }
   
   .form-group {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 10px;
   }
 
   .form-control {
     border-radius: 1px solid #000000;
     height: 40px;
-    width: 80%; 
+    width: 100%; 
   }
   
   .btn {
@@ -142,31 +160,12 @@ export default {
   .btn:hover{
   background-color: #528995;
   }
-
-  .link-group {
-    text-align: center;
-  }
-    
-  .link {
-    margin: 5px;
-    color: rgb(168, 29, 29);
-    cursor: pointer;
-    text-align: left;
-  }
-    
-  .loginform-group {
-    margin-bottom: 5px;
-  }
     
   .submit-group {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-    
-  .diabot {
-    text-align: center;
-    margin: 50px auto 0;
+    margin-top: 20px;
   }
 
-  </style>
+</style>
