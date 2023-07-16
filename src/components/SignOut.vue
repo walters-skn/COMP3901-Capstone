@@ -1,20 +1,42 @@
 <template>
-    <button @click="signOut">Sign Out</button>
-  </template>
+  <div class="signout" @click="signOut">
+    <img class="logout" :src="imagePath" alt="logout">
+  </div>
   
-  <script>
+</template>
+  
+<script>
+
+import ImagePath from '@/assets/img/logout.png'
+
   export default {
+      data(){
+        return{
+            imagePath: ImagePath,
+          };
+      },
     methods: {
       signOut() {
-        // Implement your sign-out logic here
-        // For example, you can clear local storage or session data
-        // and redirect the user to the login page
         localStorage.clear();
         // Redirect to the login page
         this.$router.push('/login');
-      }, //correction
+      },
     },
   };
-  //correction//correction//correction//correction//correction
-  </script>
+</script>
+
+<style scoped>
+  .logout{ 
+    height: 40px;
+    width: 40px;
+    margin: -1%;
+    /* transition: transform 0.3s ease-in-out; */
+    cursor: pointer;
+  }
+
+  .logout:hover{
+    transform: scale(1.2)
+  }
+
+</style>
   

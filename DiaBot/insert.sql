@@ -11,12 +11,39 @@ INSERT INTO contacts(patient_id, phone)VALUES(1,'1876-233-8765');
 INSERT INTO contacts(patient_id, phone)VALUES(2,'1876-675-0089');
 INSERT INTO contacts(patient_id, phone)VALUES(3,'1876-142-8523');
 
-INSERT INTO meals(patient_id, meal_type, meal_cont, nutri_lvl)VALUES(1, 'breakfast', '2 slice wheat bread with eggs', '2');
-INSERT INTO meals(patient_id, meal_type, meal_cont, nutri_lvl)VALUES(2, 'dinner', '3 spoon rice with baked chicken and broccoli', '3');
+INSERT INTO contacts (patient_id, phone) VALUES ( 2,'1876-233-8765');
+INSERT INTO contacts (patient_id, phone) VALUES ( 2, '1876-675-0089');
+INSERT INTO contacts (patient_id, phone) VALUES ( 3, '1876-142-8523');
 
-INSERT INTO medications(med_name, qty, patient_id)VALUES('insulin isophane', 500mg, 1);
-INSERT INTO medications(med_name, qty, patient_id)VALUES('metaformin', 1000mg, 2);
+INSERT INTO meals (patient_id, meal_type, meal_cont, nutri_lvl) VALUES (2, 'breakfast', '2 slice wheat bread with eggs', 2);
+INSERT INTO meals (patient_id, meal_type, meal_cont, nutri_lvl) VALUES (2, 'dinner', '3 spoon rice with baked chicken and broccoli', 3);
 
-INSERT INTO reminders(app_date, patient_id, remind_type, remind_desc)VALUES('21-07-23', 1, 'appointment', 'patient has appointment at Sir Bustamante Hospital');
-INSERT INTO reminders(app_date, patient_id, remind_type, remind_desc)VALUES('07-07-23', 2, 'medication', 'patient has meds to take at 2pm');
+INSERT INTO medications (patient_id, med_name, qty) VALUES (NULL, 'insulin isophane', 500);
+INSERT INTO medications (patient_id, med_name, qty) VALUES (3, 'metaformin', 1000);
+
+INSERT INTO reminders (patient_id, app_date, remind_type, remind_desc) VALUES (3, '21-07-23', 'appointment', 'patient has appointment at Sir Bustamante Hospital');
+INSERT INTO reminders (patient_id, app_date, remind_type, remind_desc) VALUES (2, '07-07-23', 'medication', 'patient has meds to take at 2pm');
+
+INSERT INTO diabetes_questions (question) VALUES ('What is your gender?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your height?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your weight?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your age?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your waist circumference?');
+INSERT INTO diabetes_questions (question) VALUES ('Are you physically active?');
+INSERT INTO diabetes_questions (question) VALUES ('Do you prefer fruits or vegetables?');
+INSERT INTO diabetes_questions (question) VALUES ('Are you taking any form of medication for high blood pressure?');
+INSERT INTO diabetes_questions (question) VALUES ('When last did you check your glucose level and what was the reading?');
+INSERT INTO diabetes_questions (question) VALUES ('Do you have any family member who may have diabetes?');
+      
+
+
+-- Inspect dummy data
+SELECT * FROM patients;
+SELECT * FROM clinics;
+SELECT * FROM contacts;
+SELECT * FROM meals;
+SELECT * FROM medications;
+SELECT * FROM reminders;
+SELECT * FROM diabetes_questions;
+
 

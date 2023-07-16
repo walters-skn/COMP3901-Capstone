@@ -9,10 +9,7 @@
         <ul class="navbar_nav">
 
           <li class="nav-item">
-            <router-link to="/" class="nav-link"> <strong> Home ||</strong></router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/" class="nav-link"> <strong> About Us ||</strong></router-link>
+            <router-link to="/" class="nav-link"> <strong> Home </strong></router-link>
           </li>
 
           <li class="nav-item">
@@ -31,10 +28,10 @@
   import ImagePath2 from '@/assets/img/logo.png'
 
   export default {
-      data(){
-          return{
-              imagePath2: ImagePath2,
-          };
+    data(){
+      return{
+          imagePath2: ImagePath2,
+        };
       }
   };
 </script>
@@ -71,9 +68,7 @@
     width: 100px;
     margin: -1%;
   }
-
- 
-        
+    
   .collapse{
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 20px;

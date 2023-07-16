@@ -3,7 +3,7 @@
 ## _Remember to change out db credentials in db_config.py line 8_
 
 ## Run app
-``` flask --app app  run --debug --reload```
+``` flask run --debug```
 
 ## Create virtual environment
 ```python -m venv venv```

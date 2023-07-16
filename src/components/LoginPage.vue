@@ -10,28 +10,23 @@
     <div class="content-container">
       <h1 class="title"> <strong>LOGIN </strong></h1>
       
-      <form>
-        <div class="form-group">
-          <label> <b>Email Address</b></label>
-          <input type="email" class="form-control" placeholder="Email Address" v-model="email" required/>
-        </div>
-        <br>
-        <div class="loginform-group">
-          <label> <b>Password</b></label>
-          <input type="password" class="form-control" placeholder="Password" v-model="password" required />
-        </div>
+        <form>
+          <div class="form-group">
+            <label> Email Address:</label>
+            <input type="email" class="form-control" placeholder="Email Address" v-model="email" required/>
+          <br>
+          <br>
+            <label> Password: </label>
+            <input type="password" class="form-control" placeholder="Password" v-model="password" required />
+          </div>
 
-        <div class="link-group">
-          <a class="link" @click="forgotPassword"> Forgot Password?</a>
-        </div>
+          <div class="submit-group">
+            <button class="btn btn-primary btn-block" @click="login" > <strong> <b>SIGN IN </b></strong></button>
+          </div>
 
-        <div class="submit-group">
-          <button class="btn btn-primary btn-block" @click="login" > <strong> <b>SIGN IN </b></strong></button>
-        </div>
+        </form>
+      </div>
 
-      </form>
-
-    </div>
   </div>
 </template>
 
@@ -58,10 +53,11 @@ export default {
       const response = await axios.post(path,{ 
         email: this.email,
         password: this.password
-
       })
+
       this.token = response.data.access_token
       console.log(this.token)
+      
       /* 1. store token in local storage */
       /* 2. redirect to subscriber page */
 
@@ -83,16 +79,11 @@ export default {
 
 <style>
 
-  .form-control{
-      border-radius: 1px solid #000000;
-  }
-
   .side-menu {
     width: 20%;
     padding: 2px;
     background-color: #4C8F9E;
     color: white;
-    flex: 0 0 25%;
     position: fixed;
     top: 0; bottom: 0; left: 0;
     display: flex;
@@ -105,14 +96,15 @@ export default {
     width: 100%;
     margin-top: 6%;
     margin-bottom: 1%;
-    margin-left: 0;
-    height: 80vh;
-
   }
 
   .content-container {
     flex:1;
-    width: 50%;
+    width: 80%;
+    margin-left: 50%;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
   }
   
   .title {
@@ -125,6 +117,12 @@ export default {
   
   .form-group {
     margin-bottom: 10px;
+  }
+
+  .form-control {
+    border-radius: 1px solid #000000;
+    height: 40px;
+    width: 80%; 
   }
   
   .btn {
