@@ -52,18 +52,19 @@ CREATE TABLE `reminders` (
     remind_desc varchar(255) NOT NULL,
     FOREIGN KEY(patient_id) REFERENCES patients(patient_id)
 );
+
 CREATE TABLE `symptoms` (
     symptom_id int PRIMARY key NOT NULL AUTO_INCREMENT,
-    gender varchar(6) NOT NULL,
-    weight float NOT NULL,
-    height float NOT NULL,
-    age int NOT NULL,
-    waist_circumference float NOT NULL,
-    is_physically_active int NOT NULL,
-    fruit_veggie_intake int NOT NULL,
-    has_high_bp_medication int NOT NULL,
-    has_hyperglycemia_history int NOT NULL,
-    has_family_history int NOT NULL
+    gender varchar(10) ,
+    weight float ,
+    height float ,
+    age int ,
+    waist_circumference float,
+    is_physically_active BOOLEAN ,
+    fruit_veggie_intake int ,
+    has_high_bp_medication BOOLEAN,
+    has_hyperglycemia_history BOOLEAN,
+    has_family_history BOOLEAN
 );
 
 CREATE TABLE diabetes_questions(
@@ -72,16 +73,16 @@ CREATE TABLE diabetes_questions(
 );
 
 
-
 INSERT INTO diabetes_questions(questions)
 VALUES('What is your gender?'),
-	  ('What is your height?'),
-	  ('What is your weight?'),
-     	 ('What is your age?'),
-  ('What is your waist circumference?'),
- ('Are you physically active?'),
- ('Do you prefer fruits or vegetables?'),
- ('Are you taking any form of medication for high blood pressure?'),
- ('When last did you check your glucose level and what was the reading?'),
- ('Do you have any family member who may have diabetes?');
+	  ('What is your height(meters)?'),
+	  ('What is your weight(kg)?'),
+      ('What is your age?'),
+      ('What is your waist circumference(cm)?'),
+      ('Are you physically active?'),
+      ('How many times per day do you eat fruits or vegetables?'),
+      ('Are you taking any form of medication for high blood pressure?'),
+      ('Is your glucose level above 130mg/dL?'),
+      ('Is there a history of diabetes in your family?');
       
+
