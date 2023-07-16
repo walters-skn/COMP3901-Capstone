@@ -3,9 +3,15 @@ INSERT INTO patients( address1, address2, first_name, last_name )VALUES('Richard
 INSERT INTO patients( address1, address2, first_name, last_name )VALUES('David Ave',NULL, 'Patrick', 'Allen');
 INSERT INTO patients( address1, address2, first_name, last_name )VALUES('Doherty DR', 'Cider Walk Ave', 'Mitchell', 'Montana');
 
-INSERT INTO clinics( name, type, address )VALUES('kingston public hospital','public', '6 Mona Rd');
-INSERT INTO clinics( name, type, address )VALUES('UWI hospital', 'public', 'Mona Rd');
-INSERT INTO clinics( name, type, address )VALUES('Sir Bustamante hospital', 'public', 'Musgrave Rd');
+INSERT INTO clinics( name, type, address )VALUES('Angels Health Care AMDG', 'Private', 'shop 16 Angles Plaza Ang1 Spanish Town St. Catherine');
+INSERT INTO clinics( name, type, address )VALUES('Amadeo Medical Group', 'Private', '11A Young St, Spanish Town St. Catherine');
+INSERT INTO clinics( name, type, address )VALUES('St Jago Park Health Center (SERHA)', 'Public', ' Burke Road, Spanish Town St. Catherine');
+INSERT INTO clinics( name, type, address )VALUES('Andrews Memorial Seventh-Day Adventist Hospital', 'Private', '27 Hope Rd, Kingston');
+INSERT INTO clinics( name, type, address )VALUES('Medical Associates', 'Private', '18, 10 Tangerine Pl, Kingston');
+INSERT INTO clinics( name, type, address )VALUES('Kingston Public Hospital (K.P.H.)', 'Private', '3 Barnett St, Montego Bay');
+INSERT INTO clinics( name, type, address )VALUES('Sekhmet Medical Center', 'Private', 'Shop 14, Bogue City Center, Bogue Rd, Montego Bay');
+INSERT INTO clinics( name, type, address )VALUES('Cornwall Regional Hospital', 'Public', 'Montego Bay, St James');
+
 
 INSERT INTO contacts(patient_id, phone)VALUES(1,'1876-233-8765');
 INSERT INTO contacts(patient_id, phone)VALUES(2,'1876-675-0089');
