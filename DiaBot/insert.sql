@@ -31,15 +31,15 @@ INSERT INTO reminders (patient_id, app_date, remind_type, remind_desc) VALUES (3
 INSERT INTO reminders (patient_id, app_date, remind_type, remind_desc) VALUES (2, '07-07-23', 'medication', 'patient has meds to take at 2pm');
 
 INSERT INTO diabetes_questions (question) VALUES ('What is your gender?');
-INSERT INTO diabetes_questions (question) VALUES ('What is your height?');
-INSERT INTO diabetes_questions (question) VALUES ('What is your weight?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your height(meters)?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your weight(kg)?');
 INSERT INTO diabetes_questions (question) VALUES ('What is your age?');
-INSERT INTO diabetes_questions (question) VALUES ('What is your waist circumference?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your waist circumference(cm)?');
 INSERT INTO diabetes_questions (question) VALUES ('Are you physically active?');
-INSERT INTO diabetes_questions (question) VALUES ('Do you prefer fruits or vegetables?');
+INSERT INTO diabetes_questions (question) VALUES ('How many times per day do you eat fruits or vegetables?');
 INSERT INTO diabetes_questions (question) VALUES ('Are you taking any form of medication for high blood pressure?');
-INSERT INTO diabetes_questions (question) VALUES ('When last did you check your glucose level and what was the reading?');
-INSERT INTO diabetes_questions (question) VALUES ('Do you have any family member who may have diabetes?');
+INSERT INTO diabetes_questions (question) VALUES ('Is your glucose level above 130mg/dL?');
+INSERT INTO diabetes_questions (question) VALUES ('Is there a history of diabetes in your family?');
       
 
 
