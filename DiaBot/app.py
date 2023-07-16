@@ -27,6 +27,38 @@ def home():
     return "Hello World"
 
 
+@app.route('/register', methods=['POST'])
+def register():
+    email = request.json.get('email')
+    password = request.json.get('password')
+    fname = request.json.get('fname')
+    lname = request.json.get('lname')
+    address1 = request.json.get('address1')
+    address2 = request.json.get('address2')
+
+    try:
+        cnx = mysql.connector.connect(**db_config)
+        cursor = cnx.cursor()
+        # check if email already exists
+        cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+        user = cursor.fetchone()
+        if user:
+            return jsonify({"error": "Email already exists"}), 400
+        cursor.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
+        cnx.commit()
+
+        cursor.execute("SELECT user_id FROM users WHERE email = $s", (email,))
+        user_id = cursor.fetchone()[0]
+        if user_id:
+            cursor.execute("""
+                INSERT INTO patients (user_id, address1, address2, fname, lname,) 
+                VALUES (%s, %s, %s, %s, %s)""", (user_id, address1, address2, fname, lname))
+            cnx.commit()
+
+        return jsonify({"message": "Patient successfully registered"}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
 @app.route('/login', methods=['POST'])
 def login():
     email = request.json.get('email')
@@ -44,23 +76,6 @@ def login():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
-@app.route('/register', methods=['POST'])
-def register():
-    email = request.json.get('email')
-    password = request.json.get('password')
-    try:
-        cnx = mysql.connector.connect(**db_config)
-        cursor = cnx.cursor()
-        # check if email already exists
-        cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
-        user = cursor.fetchone()
-        if user:
-            return jsonify({"error": "Email already exists"}), 400
-        cursor.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
-        cnx.commit()
-        return jsonify({"message": "Patient successfully registered"}), 201
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
 
 @app.route('/questions', methods=['GET'])
 def send_questions_to_client():
@@ -77,6 +92,10 @@ def send_questions_to_client():
             question_obj['question'] = question
             question_obj['is_answered'] = is_answered
             question_data.append(question_obj)
+
+            # Update is_answered to 1
+            cursor.execute("UPDATE diabetes_questions SET is_answered = 1 WHERE db_id = %s", (db_id,))
+            cnx.commit()
     
         return jsonify({'questions': question_data}), 200
     except Exception as e:
@@ -95,8 +114,6 @@ def receive_symptoms_from_client():
     try:
         answers = request.json.get('responses')
         print("Response from client: ", answers)
-        cursor.execute("UPDATE diabetes_questions SET is_answered = 1 WHERE is_answered = 0")
-        cnx.commit()
 
         # for answer in answers:
         gender = answers[0]
@@ -104,11 +121,32 @@ def receive_symptoms_from_client():
         height = float(answers[2])
         age = int(answers[3])
         waist_circumference = float(answers[4])
-        is_physically_active = int(answers[5])
+        
+        is_physically_active = answers[5]
+        if is_physically_active.lower() == 'yes':
+            is_physically_active = True
+        else:
+            is_physically_active = False
+
         fruit_veggie_intake = int(answers[6])
-        has_high_bp_medication = int(answers[7])
-        has_hyperglycemia_history = int(answers[8])
-        has_family_history = int(answers[9])
+
+        has_high_bp_medication = answers[7]
+        if has_high_bp_medication.lower() == 'yes':
+            has_high_bp_medication = True
+        else:
+            has_high_bp_medication = False
+
+        has_hyperglycemia_history = answers[8]
+        if has_hyperglycemia_history.lower() == 'yes':
+            has_hyperglycemia_history = True
+        else:
+            has_hyperglycemia_history = False
+
+        has_family_history = answers[9]
+        if has_family_history.lower() == 'yes':
+            has_family_history = True
+        else:
+            has_family_history = False
 
         cursor.execute(""" 
             INSERT INTO symptoms 

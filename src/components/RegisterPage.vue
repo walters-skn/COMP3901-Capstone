@@ -24,20 +24,25 @@
                             <input type="email" class="form-control" v-model="email" required/>
                         </div>
                         <br>
-            
+
                         <div class="form-group">
-                            <label> Telephone Number: </label>
-                            <input type="tel" class="form-control" v-model="phone" required/>
+                            <label> Password: </label>
+                            <input type="password" class="form-control" v-model="password" required/>
                         </div>
                         <br>
-                
-                        <div class="form-group form-inline">
-                            <label> Password: </label>
-                            <input type="password" v-model="password" required/>
-                                
-                            <label> Re-Enter Password: </label>
-                            <input type="passsword" v-model="repassword" required/>
+            
+                        <div class="form-group">
+                            <label> Address 1: </label>
+                            <input type="text" class="form-control" v-model="addrees1" required/>
                         </div>
+                        <br>
+
+                        <div class="form-group">
+                            <label> Address 2: </label>
+                            <input type="text" class="form-control" v-model="address2" required/>
+                        </div>
+                        <br>
+            
                             
                         <div class="submit-group">
                             <button class="btn btn-primary btn-block" @click="signUp" >Sign Up</button>
@@ -52,42 +57,44 @@
 <script>
 
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 
-    export default {
-        name: 'registerPage',
-        created(){
-            this.$router = useRouter();
+export default {
+    name: 'registerPage',
+    created(){
+        this.$router = useRouter();
+    },
+    data(){
+        return {
+            lname: '',
+            fname: '',
+            email: '',
+            password: '',
+            address1: '',
+            address2: ''
+        };
+    },
+    methods:{
+        signUp(){
+            axios.post('http://localhost:5000/register', {
+                lname: this.lname,
+                fname: this.fname,
+                email: this.email,
+                password: this.password,
+                address1: this.address1,
+                address2: this.address2
+            }).then((response) => {
+                console.log("signUp Information: ", response)
+                this.$router.push('/login')
+            }).catch((error) => {
+                console.log(error)
+            })
         },
-        data(){
-            return {
-                lname: '',
-                fname: '',
-                email: '',
-                phone: '',
-                password: '',
-                repassword: ''
-            };
-        },
-        methods:{
-            signUp(){
-                if(this.password !== this.repassword){
-                    alert('Passwords Do Not Match');
-                    return;
-                }
-                //Here the user information is going to be sent to the backend
-                console.log('User Registration:',{
-                    fname: this.fname,
-                    lname: this.lname,
-                    email: this.email,
-                    phone: this.phone,
-                    password: this.password
-                });
-            },
-            handleSubmit(){
-                console.log(' Form submitted')
-            }
-        },
-    };
+        handleSubmit(){
+            console.log(' Form submitted')
+        }
+    },
+};
     
 </script>
     
