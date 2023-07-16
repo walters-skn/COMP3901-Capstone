@@ -3,7 +3,7 @@
   <SubscriberNavbar/>
 
   <div class="notification">
-    
+    notification
   </div>
   
 </template>

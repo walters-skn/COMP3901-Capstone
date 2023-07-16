@@ -3,7 +3,7 @@
   <div class="nav_container">
 
     <nav class="navbar">
-      <router-link to="/">
+      <router-link to="/subscriber">
           <img :src="imagePath2" alt="home-logo" class="home">
       </router-link>
 
