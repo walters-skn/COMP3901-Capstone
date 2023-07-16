@@ -11,7 +11,7 @@
         <ul class="navbar_nav">
 
           <li class="nav-item">
-            <router-link to="/" class="nav-link"> <strong> Home </strong></router-link>
+            <router-link to="/subscriber" class="nav-link"> <strong> Home </strong></router-link>
           </li>
 
           <li class="nav-item">
@@ -19,6 +19,7 @@
           </li>
 
           <SignOut/>
+
         </ul>
       </div> 
 

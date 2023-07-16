@@ -10,6 +10,7 @@ import SubscriberPage from '@/components/SubscriberPage.vue';
 import NutritionalScanner from '@/components/NutritionalScanner.vue';
 import SubscriberNavbar from '@/components/SubscriberNavbar.vue';
 import SignOut from '@/components/SignOut.vue';
+import ClinicsPage from '@/components/ClinicsPage.vue';
 
 const routes = [
     { path: '/', component: HomePage },
@@ -21,7 +22,8 @@ const routes = [
     {path: '/subscriber', component: SubscriberPage},
     {path: '/scanner', component: NutritionalScanner},
     {path: '/snavbar', component: SubscriberNavbar},
-    {path: '/signout', component: SignOut}
+    {path: '/signout', component: SignOut},
+    {path: '/clinics', component:ClinicsPage}
 
 ]
 

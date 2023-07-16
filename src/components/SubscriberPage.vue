@@ -61,7 +61,7 @@
     <div class="links">
       <div class="container" >
         <img :src="imagePath3" alt="profile" class="img">
-        <router-link link to="/diabot">
+        <router-link link to="/clinics">
           <div class="title">
             <strong> Nearby Clinics </strong>
           </div>
