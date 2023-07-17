@@ -6,12 +6,14 @@
         <h1 class="heading"> <strong> <b> List of Nearby Clinics and Hospitals</b></strong></h1>
 
         <div class="filter">
-            <label for="parish-select"> Parishes:</label>
-            <select id="parish-select" v-model="selectedParish">
+            <label for="parish-select" class="parish"> <strong> Parishes: </strong></label>
+            <select id="parish-select" v-model="selectedParish" class="parishselect">
                 <option value=""> ALL</option>
                 <option v-for="parish in parishes" :value="parish" :key="parish">{{ parish }}</option>
             </select>
         </div>
+
+        <br>
 
         <div class="hospital-list">
             <div v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
@@ -127,10 +129,21 @@
 </script>
 
   <style scoped>
+
+  .parish{
+    font-family: times, "Times New Roman";
+    font-size: 20px;
+  }
+
+  .parishselect{
+    padding: 5px;
+  }
+  
   .heading{
     color: #4C8F9E;
     text-align: center;
   }
+
   .hospital-list {
     padding-left: 30px;
   }
