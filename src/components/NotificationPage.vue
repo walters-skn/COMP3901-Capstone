@@ -3,42 +3,46 @@
   <SubscriberNavbar/>
 
   <div class="notification">
+    <div class="option-section">
+      <input type="checkbox" v-model="medication" class="options"> 
+      <label for="medication" class="checkbox-label"> Medication</label>
 
-    <input type="checkbox" v-model="medication" class="options"> 
-    <label for="medication" class="checkbox-label"> Medication</label>
+      <div v-if="medication" class="meds">
+        <label>Medication Type:</label>
+        <input type="text" v-model="medicationType" class="input">
 
-    <input type="checkbox" v-model="appointment" class="options">
-    <label for="appointment" class="checkbox-label"> Appointment</label>
- 
+        <label>Frequency:</label>
+        <select v-model="frequency" class="input">
+          <option value="daily">Daily</option>
+          <option value="3_times_daily">Everyday (3 times daily)</option>
+        </select>
 
-    <div v-if="medication" class="meds">
-      <label>Medication Type:</label>
-      <input type="text" v-model="medicationType" class="input">
+        <label>Date:</label>
+        <input type="date" v-model="medicationDate" class="input">
 
-      <label>Frequency:</label>
-      <select v-model="frequency">
-        <option value="daily" class="input">Daily</option>
-        <option value="3_times_daily" class="input">Everyday (3 times daily)</option>
-      </select>
-
-      <label>Date:</label>
-      <input type="date" v-model="medicationDate" class="input">
-
-      <label>Time:</label>
-      <input type="time" v-model="medicationTime" class="input">
+        <label>Time:</label>
+        <input type="time" v-model="medicationTime" class="input">
+      </div>
     </div>
 
-    <div v-if="appointment" class="apt">
-      <label>Location (Doctor's Office):</label>
-      <input type="text" v-model="location" class="input">
+    <div class="option-section">
+      <input type="checkbox" v-model="appointment" class="options">
+      <label for="appointment" class="checkbox-label"> Appointment</label>
 
-      <label>Date:</label>
-      <input type="date" v-model="appointmentDate" class="input">
+      <div v-if="appointment" class="apt">
+        <label>Location (Doctor's Office):</label>
+        <input type="text" v-model="location" class="input">
 
-      <label>Time:</label>
-      <input type="time" v-model="appointmentTime" class="input">
+        <label> Name of Doctor(s):</label>
+        <input type="text" v-model="location" class="input">
+
+        <label>Date:</label>
+        <input type="date" v-model="appointmentDate" class="input">
+
+        <label>Time:</label>
+        <input type="time" v-model="appointmentTime" class="input">
+      </div>
     </div>
-
   </div>
 </template>
     
@@ -81,15 +85,11 @@
   .notification{
     font-family: 'Times New Roman', Times, serif;
     font-size: 25px;
-    /* margin-left: 20px; */
     padding-top: 50px;
   }
 
   .options{
     font-family: 'Times New Roman', Times, serif;
-    /* font-size: 70px;
-    margin-left: 20px;
-    padding: 50px; */
     margin-left: 20px;
     transform: scale(1.5);
 
@@ -105,6 +105,14 @@
 
   .input{
     padding: 8px;
+    font-size: 16px;
+  }
+
+  .checkbox-label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
   }
 
 </style>
