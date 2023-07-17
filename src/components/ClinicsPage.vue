@@ -111,6 +111,12 @@
     text-align: center;
   }
 
+  .filter{
+    padding: 5px;
+    margin-left: 35px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
   .hospital-list {
     padding-left: 30px;
   }
