@@ -1,4 +1,3 @@
-
 <template>
     <div>
         <SubscriberNavbar/>
@@ -6,11 +5,8 @@
         <h1 class="heading"> <strong> <b> List of Nearby Clinics and Hospitals</b></strong></h1>
 
         <div class="filter">
-            <label for="parish-select" class="parish"> <strong> Parishes: </strong></label>
-            <select id="parish-select" v-model="selectedParish" class="parishselect">
-                <option value=""> ALL</option>
-                <option v-for="parish in parishes" :value="parish" :key="parish">{{ parish }}</option>
-            </select>
+            <label for="address-input" class="address"> <strong> Address: </strong></label>
+            <input id="address-input" v-model="selectedAddress" class="addressinput" placeholder="Enter address">
         </div>
 
         <br>
@@ -26,7 +22,7 @@
             </div>
         </div>
     </div>
-  </template>
+</template>
   
 <script>
 
@@ -102,30 +98,22 @@
                         parish: 'Kingston',
                     },
                 ],
-                selectedParish: '',
-                parishes: [],
+                selectedAddress: '',
             };
         },
         computed: {
             filteredHospitals() {
-            if (!this.selectedParish) {
-                return this.hospitals;
-            } else {
-                return this.hospitals.filter((hospital) => hospital.parish === this.selectedParish);
-            }
+                if (!this.selectedAddress) {
+                    return this.hospitals;
+                } else {
+                    const selectedAddressLower = this.selectedAddress.toLowerCase();
+                    return this.hospitals.filter((hospital) =>
+                        hospital.address.toLowerCase().includes(selectedAddressLower)
+                    );
+                }
             },
         },
-        mounted() {
-            this.parishes = Array.from(new Set(this.hospitals.map((hospital) => hospital.parish)));
-        },
-        methods: {
-            filterByParish() {
-            this.filteredHospitals = this.selectedParish
-                ? this.hospitals.filter((hospital) => hospital.parish === this.selectedParish)
-                : this.hospitals;
-            },
-        },
-        };
+    };
 </script>
 
   <style scoped>
