@@ -5,19 +5,35 @@
 
         <h1 class="heading"> <strong> <b> List of Nearby Clinics and Hospitals</b></strong></h1>
 
+        <!-- <div class="filter">
+            <label for="parish-select" class="parish"> <strong> Parishes: </strong></label>
+            <select id="parish-select" v-model="selectedParish" class="parishselect">
+                <option value=""> ALL</option>
+                <option v-for="parish in parishes" :value="parish" :key="parish">{{ parish }}</option>
+            </select>
+        </div> -->
+        <div class="filter">
+            <label for="address-input" class="address"> <strong> Filter Clinics/Hospitals by Parish </strong></label>
+            <input id="address-input" v-model="selectedAddress" class="addressinput" placeholder="Enter your Parish">
+        </div>
+
+
+        <br>
+
         <div class="hospital-list">
-            <div v-for="hospital in hospitals" :key="hospital.name" class="hospital">
+            <div v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
                 <div class="details">
                     <h3 class="name" >{{ hospital.name }}</h3>
                     <p><strong>Type:</strong> {{ hospital.type }}</p>
                     <p><strong>Address:</strong> {{ hospital.address }}</p>
+                    <p><strong>Parish:</strong> {{ hospital.parish }}</p>
                 </div>
             </div>
         </div>
     </div>
   </template>
   
-  <script>
+<script>
 
     import SubscriberNavbar from './SubscriberNavbar.vue'
     import axios from 'axios'
@@ -28,7 +44,10 @@
         },
         data() {
             return {
-                hospitals: []
+                hospitals: [],
+                parishes: [],
+                selectedParish: '',
+                selectedAddress: '',
             };
         },
         methods: {
@@ -40,20 +59,58 @@
                     }).catch((error) => {
                         console.log('getAllHospitals- error:', error);
                     })
+            },
+            filterByParish() {
+            this.filteredHospitals = this.selectedParish
+                ? this.hospitals.filter((hospital) => hospital.parish === this.selectedParish)
+                : this.hospitals;
             }
         },
         created() {
             this.getAllHospitals();
+            this.filterByParish();
+        },
+        computed: {
+            // filteredHospitals() {
+            //     if (!this.selectedParish) {
+            //         return this.hospitals;
+            //     } else {
+            //         return this.hospitals.filter((hospital) => hospital.parish === this.selectedParish);
+            //     }
+            // },
+            filteredHospitals() {
+                if (!this.selectedAddress) {
+                    return this.hospitals;
+                } else {
+                    const selectedAddressLower = this.selectedAddress.toLowerCase();
+                    return this.hospitals.filter((hospital) =>
+                        hospital.address.toLowerCase().includes(selectedAddressLower)
+                    );
+                }
+            },
+        },
+        mounted() {
+            this.parishes = Array.from(new Set(this.hospitals.map((hospital) => hospital.parish)));
         }
-    };
-     
-  </script>
-  
+    }
+</script>
+
   <style scoped>
+
+  .parish{
+    font-family: times, "Times New Roman";
+    font-size: 20px;
+  }
+
+  .parishselect{
+    padding: 5px;
+  }
+  
   .heading{
     color: #4C8F9E;
     text-align: center;
   }
+
   .hospital-list {
     padding-left: 30px;
   }
@@ -68,17 +125,14 @@
   }
   
   .hospital {
-    /* Add hospital item styles here */
     margin-bottom: 20px;
   }
   
   h3 {
-    /* Add hospital name styles here */
     font-size: 20px;
   }
   
   p {
-    /* Add hospital details styles here */
     margin: 5px 0;
   }
   </style>

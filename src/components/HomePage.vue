@@ -31,7 +31,7 @@
         <p class="points">
           <strong> Click the button below to get started. </strong> 
         </p>
-        <router-link to="/diabot2" class="btn"> Diabot</router-link>
+        <router-link to="/diabot" class="btn"> Diabot</router-link>
       </div>
 
     </div>

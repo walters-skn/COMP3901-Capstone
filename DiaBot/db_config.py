@@ -78,6 +78,7 @@ TABLES['clinics'] = (
     "  `name` VARCHAR(255),"
     "  `type` VARCHAR(255),"
     "  `address` VARCHAR(255),"
+    "  `parish` VARCHAR(255),"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"
 )

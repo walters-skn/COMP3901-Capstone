@@ -183,20 +183,21 @@ def receive_symptoms_from_client():
 
 
 @app.route('/clinic', methods=['GET'])
-@jwt_required()
+# @jwt_required()
 def get_clinic_recommendations():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
     clinic_data = []
     
     try:
-        cursor.execute("SELECT name, type, address FROM clinics")
+        cursor.execute("SELECT name, type, address, parish FROM clinics")
 
-        for name, type, address in cursor:
+        for name, type, address, parish in cursor:
             clinic = {}
             clinic['name'] = name
             clinic['type'] = type
             clinic['address'] = address
+            clinic['parish'] = parish
             clinic_data.append(clinic)
 
         return jsonify({'clinics': clinic_data}), 200
