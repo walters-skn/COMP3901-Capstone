@@ -20,62 +20,31 @@
   <script>
 
     import SubscriberNavbar from './SubscriberNavbar.vue'
+    import axios from 'axios'
 
     export default {
         components:{
             SubscriberNavbar,
         },
         data() {
-        return {
-            hospitals: [
-                {
-                    name: 'Kingston Public Hospital (K.P.H.)',
-                    type: 'Public',
-                    address: 'North St, Kingston',
-                },
-                {
-                    name: 'Andrews Memorial Seventh-Day Adventist Hospital',
-                    type: 'Private',
-                    address: '27 Hope Rd, Kingston',
-                },
-                {
-                    name: 'Cornwall Regional Hospital',
-                    type: 'Public',
-                    address: 'Montego Bay, St James',
-                },
-                {
-                    name: 'Angels Health Care AMDG',
-                    type: 'Private',
-                    address: 'Shop 16 Angles Plaza Ang1 Spanish Town St. Catherine',
-                },
-                {
-                    name: 'St Jago Park Health Center (SERHA)',
-                    type: 'Public',
-                    address: 'Burke Road, Spanish Town St. Catherine',
-                },
-                {
-                    name: 'Amadeo Medical Group',
-                    type: 'Private',
-                    address: '11A Young St, Spanish Town St. Catherine',
-                },
-                {
-                    name: 'Trinity Mall Medical Centre',
-                    type: 'Private',
-                    address: '3 Barnett St, Montego Bay',
-                },
-                {
-                    name: 'Sekhmet Medical Center',
-                    type: 'Private',
-                    address: 'Shop 14, Bogue City Center, Bogue Rd, Montego Bay',
-                },
-                {
-                    name: 'Medical Associates',
-                    type: 'Private',
-                    address: '18, 10 Tangerine Pl, Kingston',
-                },
-            ],
-        };
+            return {
+                hospitals: []
+            };
         },
+        methods: {
+            getAllHospitals() {
+                axios.get('http://localhost:5000/clinic')
+                    .then((response) => {
+                        console.log('getAllHospitals- response:', response);
+                        this.hospitals = response.data.clinics;
+                    }).catch((error) => {
+                        console.log('getAllHospitals- error:', error);
+                    })
+            }
+        },
+        created() {
+            this.getAllHospitals();
+        }
     };
      
   </script>

@@ -3,9 +3,6 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 import mysql.connector
 
-import mysql.connector
-
-
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config["JWT_SECRET_KEY"] = "comp3901-secret-key"
@@ -19,12 +16,6 @@ db_config = {
     "host": "localhost",
     "database": "diabot"
 }
-
-
-
-@app.route('/', methods=['GET'])
-def home():
-    return "Hello World"
 
 
 @app.route('/register', methods=['POST'])
@@ -59,6 +50,7 @@ def register():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
+
 @app.route('/login', methods=['POST'])
 def login():
     email = request.json.get('email')
@@ -78,6 +70,7 @@ def login():
 
 
 @app.route('/questions', methods=['GET'])
+@jwt_required()
 def send_questions_to_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
@@ -92,10 +85,6 @@ def send_questions_to_client():
             question_obj['question'] = question
             question_obj['is_answered'] = is_answered
             question_data.append(question_obj)
-
-            # Update is_answered to 1
-            cursor.execute("UPDATE diabetes_questions SET is_answered = 1 WHERE db_id = %s", (db_id,))
-            cnx.commit()
     
         return jsonify({'questions': question_data}), 200
     except Exception as e:
@@ -107,6 +96,7 @@ def send_questions_to_client():
 
 
 @app.route('/answers', methods=['POST'])
+@jwt_required()
 def receive_symptoms_from_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
@@ -173,28 +163,6 @@ def receive_symptoms_from_client():
             chance_of_diabetes = determine_chance_of_diabetes(risk_score)
             screening_recommendation = determine_screening_recommendation(risk_category)
 
-            # cursor.execute(""" 
-            #     INSERT INTO diabetes_risk (risk_score, risk_category, chance_of_diabetes, screening_recommendation)
-            #     VALUES (%s, %s, %s, %s)
-            # """, (
-            #     risk_score, risk_category, chance_of_diabetes, screening_recommendation
-            # ))
-            # cnx.commit()
-
-            # cursor.execute("SELECT * FROM diabetes_risk ORDER BY risk_id DESC LIMIT 1")
-            # diabetes_risk = cursor.fetchone()
-
-            # cursor.execute("SELECT * FROM patients ORDER BY patient_id DESC LIMIT 1")
-            # patient = cursor.fetchone()
-
-            # cursor.execute(""" 
-            #     INSERT INTO patients_diabetes_risk (patient_id, risk_id)
-            #     VALUES (%s, %s)
-            # """, (
-            #     patient[0], diabetes_risk[0]
-            # ))
-            # cnx.commit()
-
             cursor.execute("UPDATE diabetes_questions SET is_answered = 0 WHERE is_answered = 1")
             cnx.commit()
 
@@ -214,6 +182,27 @@ def receive_symptoms_from_client():
     cnx.close()
 
 
+@app.route('/clinic', methods=['GET'])
+@jwt_required()
+def get_clinic_recommendations():
+    cnx = mysql.connector.connect(**db_config)
+    cursor = cnx.cursor()
+    clinic_data = []
+    
+    try:
+        cursor.execute("SELECT name, type, address FROM clinics")
+
+        for name, type, address in cursor:
+            clinic = {}
+            clinic['name'] = name
+            clinic['type'] = type
+            clinic['address'] = address
+            clinic_data.append(clinic)
+
+        return jsonify({'clinics': clinic_data}), 200
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
     
 def calculate_risk_score(gender, weight, height, age, waist_circumference, is_physically_active,
