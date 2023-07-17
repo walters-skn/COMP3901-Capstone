@@ -119,10 +119,14 @@
   import ImagePath5 from '@/assets/img/meal.png'
   import ImagePath6 from '@/assets/img/scan.png'
   import ImagePath7 from '@/assets/img/chat.png'
+
+  import axios from 'axios'
   
   export default {
     data(){
       return{
+        user: null,
+
         imagePath: ImagePath,
         imagePath2: ImagePath2,
         imagePath3: ImagePath3,
@@ -136,6 +140,13 @@
     components:{
       SubscriberNavbar,
     },
+    created() {
+      axios.get('user').then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    }
   }
 
 </script>

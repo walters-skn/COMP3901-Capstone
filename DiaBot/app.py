@@ -29,10 +29,10 @@ def home():
 
 @app.route('/register', methods=['POST'])
 def register():
-    email = request.json.get('email')
-    password = request.json.get('password')
     fname = request.json.get('fname')
     lname = request.json.get('lname')
+    email = request.json.get('email')
+    password = request.json.get('password')
     address1 = request.json.get('address1')
     address2 = request.json.get('address2')
 
@@ -47,12 +47,12 @@ def register():
         cursor.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
         cnx.commit()
 
-        cursor.execute("SELECT user_id FROM users WHERE email = $s", (email,))
+        cursor.execute("SELECT user_id FROM users WHERE email = %s", (email,))
         user_id = cursor.fetchone()[0]
         if user_id:
             cursor.execute("""
-                INSERT INTO patients (user_id, address1, address2, fname, lname,) 
-                VALUES (%s, %s, %s, %s, %s)""", (user_id, address1, address2, fname, lname))
+                INSERT INTO patients (user_id, first_name, last_name, address1, address2) 
+                VALUES (%s, %s, %s, %s, %s)""", (user_id, fname, lname, address1, address2))
             cnx.commit()
 
         return jsonify({"message": "Patient successfully registered"}), 201

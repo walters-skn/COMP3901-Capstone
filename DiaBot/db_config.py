@@ -24,10 +24,10 @@ TABLES['patients'] = (
     "CREATE TABLE `patients` ("
     "  `patient_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
     "  `user_id` INT,"
-    "  `address1` VARCHAR(255),"
-    "  `address2` VARCHAR(255),"
     "  `first_name` VARCHAR(255) NOT NULL,"
     "  `last_name` VARCHAR(255) NOT NULL,"
+    "  `address1` VARCHAR(255),"
+    "  `address2` VARCHAR(255),"
     "  FOREIGN KEY(user_id) REFERENCES `users`(user_id)"
     ") ENGINE=InnoDB"
 )
@@ -56,7 +56,8 @@ TABLES['reminders'] = (
 TABLES['symptoms'] = (
     "CREATE TABLE `symptoms` ("
     "  `symptom_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
-    "  `gender` VARCHAR(10),"
+    "  `patient_id` INT,"
+    "  `gender` VARCHAR(255),"
     "  `weight` FLOAT,"
     "  `height` FLOAT,"
     "  `age` INT,"
@@ -65,7 +66,8 @@ TABLES['symptoms'] = (
     "  `fruit_veggie_intake` INT,"
     "  `has_high_bp_medication` BOOLEAN,"
     "  `has_hyperglycemia_history` BOOLEAN,"
-    "  `has_family_history` BOOLEAN"
+    "  `has_family_history` BOOLEAN,"
+    "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"
 )
 
@@ -82,7 +84,7 @@ TABLES['clinics'] = (
 
 TABLES['contacts'] = (
     "CREATE TABLE `contacts` ("
-    "  `patient_id` INT NOT NULL,"
+    "  `patient_id` INT,"
     "  `phone` VARCHAR(255),"
     "   PRIMARY KEY(patient_id, phone),"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
@@ -92,7 +94,7 @@ TABLES['contacts'] = (
 TABLES['meals'] = (
     "CREATE TABLE `meals` ("
     "  `meal_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
-    "  `patient_id` INT NOT NULL,"
+    "  `patient_id` INT,"
     "  `meal_type` VARCHAR(255),"
     "  `meal_cont` VARCHAR(255) NOT NULL,"
     "  `nutri_lvl` INT NOT NULL,"

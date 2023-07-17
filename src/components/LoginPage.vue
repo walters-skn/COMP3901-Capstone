@@ -10,7 +10,7 @@
     <div class="content-container">
       <h1 class="title"> <strong>LOGIN </strong></h1>
       
-        <form>
+        <form v-on:submit.prevent="handleLogin">
           <div class="form-group">
             <label> Email Address:</label>
             <input type="email" class="form-control" placeholder="Email Address" v-model="email" required/>
@@ -21,7 +21,7 @@
           </div>
 
           <div class="submit-group">
-            <button class="btn btn-primary btn-block" @click="login" > <strong> <b>SIGN IN </b></strong></button>
+            <button class="btn btn-primary btn-block"> <strong> <b>SIGN IN </b></strong></button>
           </div>
 
         </form>
@@ -47,31 +47,19 @@ export default {
     };
   },
   methods: {
-    async login(){
-      const path ='http://localhost5000/login'
-      
-      const response = await axios.post(path,{ 
+    handleLogin(){
+      axios.post('http://localhost:5000/login', { 
         email: this.email,
         password: this.password
+      }).then(response => {
+        console.log(response.data)
+        this.token = response.data.access_token
+        localStorage.setItem('token', this.token)
+        this.$router.push('/subscriber')
+      }).catch(error => {
+        console.log(error)
       })
-
-      this.token = response.data.access_token
-      console.log(this.token)
-      
-      /* 1. store token in local storage */
-      /* 2. redirect to subscriber page */
-
     },
-    //   if (this.email === 'user@example.com' && this.password === 'password'){
-    //   this.$router.push('/subscriber');
-    //   }else {
-    //     console.log('Invalid credentials')
-    //   }
-    // },
-    // forgotPassword() {
-    //   //Handle create account click
-    //   console.log('Forgot password clicked');
-    // }
   }
 }
 
