@@ -1,5 +1,7 @@
 <template>
 
+  <NavBar/>
+
   <div class="container">
 
     <div class="label">
@@ -15,23 +17,21 @@
   
     <div class="guidelines_container">
       <h3 class="guidelines"> <strong> <b>Guidelines For Using Diabot  </b> </strong></h3>
-      <p> <strong> It's vital to follow the instructions before using Diabot.</strong>  <br> <strong>These consist of:</strong>
-        <ul>
+      <p class="points"> <strong> It's vital to follow the instructions before using Diabot.</strong>  <br> <strong>These consist of:</strong>
+        <ul class="points">
           <li> 1. To maintain accuracy, regularly update your profile and data.</li>
           <li> 2. Utilize the numerous features and resources Diabot has to offer.</li>
           <li> 3. Consistently evaluate and track your development.</li>
         </ul>
       </p>
 
-      <br>
-
-      <p class="end"> Ready to take control of your diabetes management? </p>
+      <p class="points"> <strong> Ready to take control of your diabetes management? </strong></p>
 
       <div class="button-container">
-        <p class="end">
+        <p class="points">
           <strong> Click the button below to get started. </strong> 
         </p>
-        <router-link to="/diabot" class="btn"> Diabot</router-link>
+        <router-link to="/diabot2" class="btn"> Diabot</router-link>
       </div>
 
     </div>
@@ -41,7 +41,12 @@
 
 <script>
 
+import NavBar from './NavBar.vue'
+
 export default {
+  components:{
+    NavBar,
+  },
     name:"homePage",
 }; 
 
@@ -59,10 +64,6 @@ export default {
     padding-right: 5px;
   }
 
-  .end{
-    text-align: center;
-  }
-
   .label{
     text-align: center;
     flex-grow:1;
@@ -73,13 +74,16 @@ export default {
 
   .diabot-content{
     text-align: justify;
-    font-size: 20px;
+    font-size: 22px;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    padding-left: 15%;
+    padding-right: 15%;
   }
 
   .diabot {
     font-family: 'Times New Roman', Times, serif;
     font-size: 50px;
+    /* color: #5CA2B1; */
   }
 
   .guidelines_container{
@@ -103,6 +107,11 @@ export default {
     color: white;
   }
 
+  .points{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+  }
+
   .btn {
     display: block;
     width: 100%;
@@ -114,6 +123,8 @@ export default {
     cursor: pointer;
     align-content: center;
     justify-content: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
   }
 
   .btn:hover{

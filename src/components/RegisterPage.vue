@@ -1,5 +1,7 @@
 
 <template> 
+    <NavBar/>
+  
     <div class="page-container">
         <div class="body">
             <h2 class = "title"> New User <br> SIGN UP TO GET STARTED </h2> 
@@ -48,16 +50,22 @@
                     </div> 
                 </div>
             </div>
+
         </form>
     </div>
 </template>
         
 <script>
 
-import { useRouter } from 'vue-router';
-import axios from 'axios';
+    import { useRouter } from 'vue-router';
+    import axios from 'axios';
+    import NavBar from './NavBar.vue';
 
-export default {
+    export default {
+    components:{
+        NavBar,
+    },
+    
     name: 'registerPage',
     created() {
         this.$router = useRouter();
@@ -109,14 +117,12 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-
     }
         
     .form-group{
         align-items: center;
     }
   
-      
     .box{
         display: flex;
         flex-direction:column ;
@@ -125,17 +131,14 @@ export default {
         width: 400px;
         font-size: 20px;
     }
-    
-    .form-inline{
-        display: flex;
-        align-items: center;
-    }
         
     .title {
         background-color: #5CA2B1;
         color: white;
         font-family: 'Times New Roman', Times, serif;
+        padding-top: 10px;
         text-align: center;
+        font-size: 25px;
     }
         
     .submit-group {
@@ -144,14 +147,20 @@ export default {
         align-items: center;
     }
       
-    .btn{
-        border-radius: 2px;
-    }
     .btn.btn-primary {
         background-color: #4C8F9E;
-        border: 2px solid #f8f0f0;
+        border: 3px solid #f8f0f0;
+        padding: 10px;
         color: white;
-        font-size: 18px;
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        cursor: pointer;
+    }
+
+    .form-control{
+        padding: 10px;
+        width: 100%;
+        font-size: 20px;
         font-family: 'Times New Roman', Times, serif;
     }
 

@@ -1,5 +1,4 @@
 
-
 <template> 
 
     <div class="heading">
@@ -12,7 +11,6 @@
     </div>
 
 </template>
-
 
 <script>
 
@@ -60,7 +58,6 @@ export default{
 </script>
 
 <style scoped> 
-
     .heading{
         display: flex;
         flex-direction: column;

@@ -3,7 +3,7 @@
   <div class="nav_container">
 
     <nav class="navbar">
-      <router-link to="/">
+      <router-link to="/subscriber">
           <img :src="imagePath2" alt="home-logo" class="home">
       </router-link>
 
@@ -11,7 +11,7 @@
         <ul class="navbar_nav">
 
           <li class="nav-item">
-            <router-link to="/" class="nav-link"> <strong> Home </strong></router-link>
+            <router-link to="/subscriber" class="nav-link"> <strong> Home || </strong></router-link>
           </li>
 
           <li class="nav-item">
@@ -19,6 +19,7 @@
           </li>
 
           <SignOut/>
+
         </ul>
       </div> 
 
@@ -45,18 +46,17 @@
 
   </script>
   
-  <style scoped>
-  /* navigation */
+<style scoped>
+
 .nav_container{
   width: 100%;
 }
 
-/* navigation */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 50px;
+    padding: 20px 50px;
     background-color: #5CA2B1;
   }
 
@@ -65,7 +65,6 @@
     justify-content: space-between;
     align-items: center;
     list-style: none;
-    gap: 8px;
   }
 
   .nav-link{
@@ -83,7 +82,6 @@
     font-size: 20px;
     display: flex;
     justify-content: flex-end;
-    /* width: 100%; */
   }
 
 </style>

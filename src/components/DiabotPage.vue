@@ -1,4 +1,7 @@
 <template>
+
+  <NavBar/>
+
   <div class="chat-container">
     <div class="chat-sidebar">
       <h1>DIABOT <br>CHAT</h1>
@@ -8,6 +11,7 @@
         <h2>Welcome! How can I assist you?</h2>
         <button v-on:click="startAssessment">Start Assessment</button>
       </div>
+      
       <div v-else>
         <section v-if="!assessmentComplete" class="chat-messages">
           <div class="message">
@@ -20,6 +24,7 @@
             <button v-on:click="answerQuestion">Submit Answer</button>
           </div>
         </section>
+
         <section v-else>
           <h2>Assessment Complete!</h2>
           <h2>Your Risk</h2>
@@ -34,9 +39,14 @@
 </template>
 
 <script>
+
 import axios from 'axios';
+import NavBar from './NavBar.vue'
 
 export default {
+  components:{
+    NavBar,
+  },
   name: 'ChatBox',
   data() {
     return {
@@ -128,49 +138,6 @@ export default {
     }
   .message {
     font-size: 20px;
-  }
-
-  .client {
-    /* Add the styles for client messages here */
-    span {
-      background: #0070C8;
-      padding: 8px;
-      color: white;
-      border-radius: 4px;
-    }
-    p {
-      float: left;
-    }
-  }
-
-  .server {
-    /* Add the styles for server messages here */
-    span {
-      background: #99cc00;
-      padding: 8px;
-      color: white;
-      border-radius: 4px;
-    }
-    p {
-      float: right;
-    }
-  }
-
-  .user-message {
-    background-color: #c8d1d1;
-    border-radius: 5px;
-    align-self: flex-end;
-  }
-
-  .bot-message {
-    background-color: #e2e2e2;
-    border-radius: 5px;
-    align-self: flex-start;
-  }
-
-  .chat-input {
-    display: flex;
-    justify-content: flex-end;
   }
 
   .chat-input input {
