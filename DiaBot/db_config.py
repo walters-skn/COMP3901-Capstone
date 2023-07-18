@@ -42,21 +42,6 @@ TABLES['medications'] = (
     ") ENGINE=InnoDB"
 )
 
-TABLES['reminders'] = (
-    "CREATE TABLE `reminders` ("
-    "  `rem_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
-    "  `patient_id` INT,"
-    "  `clinic_id` INT,"
-    "  `medication_id` INT,"
-    "  `app_date` DATE NOT NULL,"
-    "  `remind_type` VARCHAR(255) NOT NULL,"
-    "  `remind_desc` VARCHAR(255) NOT NULL,"
-    "  FOREIGN KEY(clinic_id) REFERENCES `clinics`(clinics_id),"
-    "  FOREIGN KEY(medication_id) REFERENCES `medications(medication_id),"
-    "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
-    ") ENGINE=InnoDB"
-)
-
 TABLES['symptoms'] = (
     "CREATE TABLE `symptoms` ("
     "  `symptom_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
@@ -84,6 +69,21 @@ TABLES['clinics'] = (
     "  `address` VARCHAR(255),"
     "  `parish` VARCHAR(255),"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
+    ") ENGINE=InnoDB"
+)
+
+TABLES['reminders'] = (
+    "CREATE TABLE `reminders` ("
+    "  `rem_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
+    "  `patient_id` INT,"
+    "  `clinic_id` INT,"
+    "  `medication_id` INT,"
+    "  `app_date` DATE NOT NULL,"
+    "  `remind_type` VARCHAR(255) NOT NULL,"
+    "  `remind_desc` VARCHAR(255) NOT NULL,"
+    "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id),"
+    "  FOREIGN KEY(clinic_id) REFERENCES `clinics`(clinic_id),"
+    "  FOREIGN KEY(medication_id) REFERENCES `medications`(medication_id)"
     ") ENGINE=InnoDB"
 )
 

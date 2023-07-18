@@ -70,7 +70,7 @@ def login():
 
 
 @app.route('/questions', methods=['GET'])
-@jwt_required()
+# @jwt_required()
 def send_questions_to_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
@@ -96,7 +96,7 @@ def send_questions_to_client():
 
 
 @app.route('/answers', methods=['POST'])
-@jwt_required()
+# @jwt_required()
 def receive_symptoms_from_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
@@ -167,7 +167,7 @@ def receive_symptoms_from_client():
             cnx.commit()
 
             return jsonify({
-                'risk_score': risk_score,
+                'risk_score': f'{risk_score:.2f}%',  # Format risk score as a percentage with two decimal places
                 'risk_category': risk_category,
                 'chance_of_diabetes': chance_of_diabetes,
                 'screening_recommendation': screening_recommendation
@@ -248,20 +248,23 @@ def calculate_risk_score(gender, weight, height, age, waist_circumference, is_ph
     if has_family_history:
         risk_score += 3
     
-    return risk_score
+    total_questions = 10  # Total number of questions contributing to the risk score
+    percentage_score = (total_questions / risk_score) * 100
+    
+    return percentage_score
 
 def determine_risk_category(risk_score):
-    if risk_score <= 14 and risk_score >= 0:
+    if risk_score <= 14:
         return 'Low to moderate risk'
-    elif risk_score <= 20 and risk_score >= 15:
+    elif risk_score <= 20:
         return 'High risk'
     else:
         return 'Very high risk'
 
 def determine_chance_of_diabetes(risk_score):
-    if risk_score <= 14 and risk_score >= 0:
+    if risk_score <= 14:
         return '1-17%'
-    elif risk_score <= 20 and risk_score >= 15:
+    elif risk_score <= 20:
         return '33%'
     else:
         return '50%'
