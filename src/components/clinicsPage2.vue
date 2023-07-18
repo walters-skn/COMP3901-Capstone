@@ -116,16 +116,8 @@
     };
 </script>
 
-  <style scoped>
+<style scoped>
 
-  .parish{
-    font-family: times, "Times New Roman";
-    font-size: 20px;
-  }
-
-  .parishselect{
-    padding: 5px;
-  }
   
   .heading{
     color: #4C8F9E;
@@ -163,4 +155,3 @@
     margin: 5px 0;
   }
   </style>
-  

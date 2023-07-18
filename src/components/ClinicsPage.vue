@@ -128,7 +128,7 @@
         };
 </script>
 
-  <style scoped>
+<style scoped>
 
   .parish{
     font-family: times, "Times New Roman";

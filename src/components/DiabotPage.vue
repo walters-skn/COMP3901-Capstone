@@ -32,6 +32,7 @@
           <p>Risk Category: {{ risk_category }}</p>
           <p>Chance of Developing Diabetes: {{ chance_of_diabetes }}</p>
           <p>Screening Recommendation: {{ screening_recommendation }}</p>
+          <button v-on:click="redirectToRegister">Register Now</button>
         </section>
       </div>
     </div>
@@ -113,6 +114,9 @@ export default {
           console.log('submitResponses error:', error);
         });
       this.assessmentComplete = true;
+    },
+    redirectToRegister(){
+      this.$router.push('/register')
     }
   }
 };
