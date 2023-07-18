@@ -105,7 +105,7 @@ export default {
       })
         .then((response) => {
           console.log('submitResponses response:', response);
-          this.risk_score = response.data.total_risk_score;
+          this.risk_score = response.data.risk_score;
           this.risk_category = response.data.risk_category;
           this.chance_of_diabetes = response.data.chance_of_diabetes;
           this.screening_recommendation = response.data.screening_recommendation;

@@ -5,13 +5,18 @@
 
         <h1 class="heading"> <strong> <b> List of Nearby Clinics and Hospitals</b></strong></h1>
 
-        <div class="filter">
+        <!-- <div class="filter">
             <label for="parish-select" class="parish"> <strong> Parishes: </strong></label>
             <select id="parish-select" v-model="selectedParish" class="parishselect">
                 <option value=""> ALL</option>
                 <option v-for="parish in parishes" :value="parish" :key="parish">{{ parish }}</option>
             </select>
+        </div> -->
+        <div class="filter">
+            <label for="address-input" class="address"> <strong> Filter Clinics/Hospitals by Parish </strong></label>
+            <input id="address-input" v-model="selectedAddress" class="addressinput" placeholder="Enter your Parish">
         </div>
+
 
         <br>
 
@@ -31,6 +36,7 @@
 <script>
 
     import SubscriberNavbar from './SubscriberNavbar.vue'
+    import axios from 'axios'
 
     export default {
         components:{
@@ -38,94 +44,55 @@
         },
         data() {
             return {
-                hospitals: [
-                    {
-                        name: 'Kingston Public Hospital (K.P.H.)',
-                        type: 'Public',
-                        address: 'North St, Kingston',
-                        parish: 'Kingston',
-
-                    },
-                    {
-                        name: 'Andrews Memorial Seventh-Day Adventist Hospital',
-                        type: 'Private',
-                        address: '27 Hope Rd, Kingston',
-                        parish: 'Kingston',
-
-                    },
-                    {
-                        name: 'Cornwall Regional Hospital',
-                        type: 'Public',
-                        address: 'Montego Bay, St James',
-                        parish: 'St James',
-
-                    },
-                    {
-                        name: 'Angels Health Care AMDG',
-                        type: 'Private',
-                        address: 'Shop 16 Angles Plaza Ang1 Spanish Town St. Catherine',
-                        parish: 'St. Catherine',
-
-                    },
-                    {
-                        name: 'St Jago Park Health Center (SERHA)',
-                        type: 'Public',
-                        address: 'Burke Road, Spanish Town St. Catherine',
-                        parish: 'St. Catherine',
-
-                    },
-                    {
-                        name: 'Amadeo Medical Group',
-                        type: 'Private',
-                        address: '11A Young St, Spanish Town St. Catherine',
-                        parish: 'St. Catherine',
-
-                    },
-                    {
-                        name: 'Trinity Mall Medical Centre',
-                        type: 'Private',
-                        address: '3 Barnett St, Montego Bay',
-                        parish: 'Montego Bay',
-
-                    },
-                    {
-                        name: 'Sekhmet Medical Center',
-                        type: 'Private',
-                        address: 'Shop 14, Bogue City Center, Bogue Rd, Montego Bay',
-                        parish: 'Montego Bay',
-
-                    },
-                    {
-                        name: 'Medical Associates',
-                        type: 'Private',
-                        address: '18, 10 Tangerine Pl, Kingston',
-                        parish: 'Kingston',
-                    },
-                ],
-                selectedParish: '',
+                hospitals: [],
                 parishes: [],
+                selectedParish: '',
+                selectedAddress: '',
             };
         },
-        computed: {
-            filteredHospitals() {
-            if (!this.selectedParish) {
-                return this.hospitals;
-            } else {
-                return this.hospitals.filter((hospital) => hospital.parish === this.selectedParish);
-            }
-            },
-        },
-        mounted() {
-            this.parishes = Array.from(new Set(this.hospitals.map((hospital) => hospital.parish)));
-        },
         methods: {
+            getAllHospitals() {
+                axios.get('http://localhost:5000/clinic')
+                    .then((response) => {
+                        console.log('getAllHospitals- response:', response);
+                        this.hospitals = response.data.clinics;
+                    }).catch((error) => {
+                        console.log('getAllHospitals- error:', error);
+                    })
+            },
             filterByParish() {
             this.filteredHospitals = this.selectedParish
                 ? this.hospitals.filter((hospital) => hospital.parish === this.selectedParish)
                 : this.hospitals;
+            }
+        },
+        created() {
+            this.getAllHospitals();
+            this.filterByParish();
+        },
+        computed: {
+            // filteredHospitals() {
+            //     if (!this.selectedParish) {
+            //         return this.hospitals;
+            //     } else {
+            //         return this.hospitals.filter((hospital) => hospital.parish === this.selectedParish);
+            //     }
+            // },
+            filteredHospitals() {
+                if (!this.selectedAddress) {
+                    return this.hospitals;
+                } else {
+                    const selectedAddressLower = this.selectedAddress.toLowerCase();
+                    return this.hospitals.filter((hospital) =>
+                        hospital.address.toLowerCase().includes(selectedAddressLower)
+                    );
+                }
             },
         },
-        };
+        mounted() {
+            this.parishes = Array.from(new Set(this.hospitals.map((hospital) => hospital.parish)));
+        }
+    }
 </script>
 
 <style scoped>
