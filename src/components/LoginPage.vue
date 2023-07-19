@@ -125,15 +125,15 @@ export default {
     }
         
     .title {
-      background-color: white;
-        color: #5CA2B1;
+        color: white;
         font-family: 'Times New Roman', Times, serif;
-        padding: 10px 0;
-        width: 400px;
+        padding: 10px px;
+        width: 100%;
         text-align: center;
-        font-size: 35px;
-        margin-bottom: 20px;
+        font-size: 45px;
+        margin-bottom: 10px;
     }
+
         
     .submit-group {
         display: flex;
