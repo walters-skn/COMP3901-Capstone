@@ -12,7 +12,7 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 db_config = {
     "user": "root",
-    "password": "mysql-25",
+    "password": "Walters09",
     "host": "localhost",
     "database": "diabot"
 }

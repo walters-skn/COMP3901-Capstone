@@ -4,14 +4,19 @@ import {createRouter,createWebHistory} from 'vue-router';
 import LoginPage from '@/components/LoginPage.vue'
 import HomePage from '@/components/HomePage.vue'
 import RegisterPage from '@/components/RegisterPage.vue'
+
 import DiabotPage from '@/components/DiabotPage.vue'
-// import DiabotPage2 from '@/components/DiabotPage2.vue'
+import DiabotPage2 from '@/components/DiabotPage2.vue'
+
 import NavBar from '@/components/NavBar.vue';
 import SubscriberPage from '@/components/SubscriberPage.vue';
 import NutritionalScanner from '@/components/NutritionalScanner.vue';
 import SubscriberNavbar from '@/components/SubscriberNavbar.vue';
 import SignOut from '@/components/SignOut.vue';
+
 import ClinicsPage from '@/components/ClinicsPage.vue';
+import clinicsPage2 from '@/components/clinicsPage2.vue';
+
 import NotificationPage from '@/components/NotificationPage.vue';
 
 const routes = [
@@ -19,14 +24,19 @@ const routes = [
     { path: '/home', component: HomePage},
     { path: '/register', component: RegisterPage },
     { path: '/login', component: LoginPage },
+
     { path: '/diabot', component: DiabotPage},
-    // { path: '/diabot2', component: DiabotPage2},
+    { path: '/diabot2', component: DiabotPage2},
+
     { path: '/navbar', component: NavBar},
     { path: '/subscriber', component: SubscriberPage},
     { path: '/scanner', component: NutritionalScanner},
     { path: '/snavbar', component: SubscriberNavbar},
     { path: '/signout', component: SignOut},
+
     { path: '/clinics', component:ClinicsPage},
+    { path: '/clinics2', component:clinicsPage2},
+
     { path: '/notifications', component: NotificationPage}
 
 ]

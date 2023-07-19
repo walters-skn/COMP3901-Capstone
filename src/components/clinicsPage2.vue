@@ -1,157 +1,118 @@
 <template>
-    <div>
-        <SubscriberNavbar/>
 
-        <h1 class="heading"> <strong> <b> List of Nearby Clinics and Hospitals</b></strong></h1>
+  <SubscriberNavbar/>
 
-        <div class="filter">
-            <label for="address-input" class="address"> <strong> Address: </strong></label>
-            <input id="address-input" v-model="selectedAddress" class="addressinput" placeholder="Enter address">
-        </div>
+  <div class="notification">
+    <div class="option-section">
+      <input type="checkbox" v-model="medication" class="options"> 
+      <label for="medication" class="checkbox-label"> Medication</label>
 
-        <br>
+      <div v-if="medication" class="meds">
+        <label>Medication Type:</label>
+        <input type="text" v-model="medicationType" class="input">
 
-        <div class="hospital-list">
-            <div v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
-                <div class="details">
-                    <h3 class="name" >{{ hospital.name }}</h3>
-                    <p><strong>Type:</strong> {{ hospital.type }}</p>
-                    <p><strong>Address:</strong> {{ hospital.address }}</p>
-                    <p><strong>Parish:</strong> {{ hospital.parish }}</p>
-                </div>
-            </div>
-        </div>
+        <label>Frequency:</label>
+        <select v-model="frequency" class="input">
+          <option value="daily">Daily</option>
+          <option value="3_times_daily">Everyday (3 times daily)</option>
+        </select>
+
+        <label>Date:</label>
+        <input type="date" v-model="medicationDate" class="input">
+
+        <label>Time:</label>
+        <input type="time" v-model="medicationTime" class="input">
+      </div>
     </div>
+
+    <div class="option-section">
+      <input type="checkbox" v-model="appointment" class="options">
+      <label for="appointment" class="checkbox-label"> Appointment</label>
+
+      <div v-if="appointment" class="apt">
+        <label>Location (Doctor's Office):</label>
+        <input type="text" v-model="location" class="input">
+
+        <label> Name of Doctor(s):</label>
+        <input type="text" v-model="location" class="input">
+
+        <label>Date:</label>
+        <input type="date" v-model="appointmentDate" class="input">
+
+        <label>Time:</label>
+        <input type="time" v-model="appointmentTime" class="input">
+      </div>
+    </div>
+  </div>
 </template>
-  
-<script>
+    
+<script>    
 
-    import SubscriberNavbar from './SubscriberNavbar.vue'
+  import SubscriberNavbar from './SubscriberNavbar.vue'
 
-    export default {
-        components:{
-            SubscriberNavbar,
-        },
-        data() {
-            return {
-                hospitals: [
-                    {
-                        name: 'Kingston Public Hospital (K.P.H.)',
-                        type: 'Public',
-                        address: 'North St, Kingston',
-                        parish: 'Kingston',
-
-                    },
-                    {
-                        name: 'Andrews Memorial Seventh-Day Adventist Hospital',
-                        type: 'Private',
-                        address: '27 Hope Rd, Kingston',
-                        parish: 'Kingston',
-
-                    },
-                    {
-                        name: 'Cornwall Regional Hospital',
-                        type: 'Public',
-                        address: 'Montego Bay, St James',
-                        parish: 'St James',
-
-                    },
-                    {
-                        name: 'Angels Health Care AMDG',
-                        type: 'Private',
-                        address: 'Shop 16 Angles Plaza Ang1 Spanish Town St. Catherine',
-                        parish: 'St. Catherine',
-
-                    },
-                    {
-                        name: 'St Jago Park Health Center (SERHA)',
-                        type: 'Public',
-                        address: 'Burke Road, Spanish Town St. Catherine',
-                        parish: 'St. Catherine',
-
-                    },
-                    {
-                        name: 'Amadeo Medical Group',
-                        type: 'Private',
-                        address: '11A Young St, Spanish Town St. Catherine',
-                        parish: 'St. Catherine',
-
-                    },
-                    {
-                        name: 'Trinity Mall Medical Centre',
-                        type: 'Private',
-                        address: '3 Barnett St, Montego Bay',
-                        parish: 'Montego Bay',
-
-                    },
-                    {
-                        name: 'Sekhmet Medical Center',
-                        type: 'Private',
-                        address: 'Shop 14, Bogue City Center, Bogue Rd, Montego Bay',
-                        parish: 'Montego Bay',
-
-                    },
-                    {
-                        name: 'Medical Associates',
-                        type: 'Private',
-                        address: '18, 10 Tangerine Pl, Kingston',
-                        parish: 'Kingston',
-                    },
-                ],
-                selectedAddress: '',
-            };
-        },
-        computed: {
-            filteredHospitals() {
-                if (!this.selectedAddress) {
-                    return this.hospitals;
-                } else {
-                    const selectedAddressLower = this.selectedAddress.toLowerCase();
-                    return this.hospitals.filter((hospital) =>
-                        hospital.address.toLowerCase().includes(selectedAddressLower)
-                    );
-                }
-            },
-        },
+  export default {
+    components:{
+      SubscriberNavbar,
+    },
+    data() {
+    return {
+      medication: false,
+      appointment: false,
+      showMedicationOptions: false,
+      medicationType: '',
+      frequency: '',
+      medicationDate: '',
+      medicationTime: '',
+      location: '',
+      appointmentDate: '',
+      appointmentTime: '',
     };
+  },
+  watch: {
+    medication(value) {
+      if (value) {
+        this.showMedicationOptions = true;
+      } else {
+        this.showMedicationOptions = false;
+      }
+    },
+  },
+};
 </script>
-
+      
 <style scoped>
 
-  
-  .heading{
-    color: #4C8F9E;
-    text-align: center;
-  }
-
-  .filter{
-    padding: 5px;
-    margin-left: 35px;
+  .notification{
     font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+    padding-top: 50px;
   }
 
-  .hospital-list {
-    padding-left: 30px;
+  .options{
+    font-family: 'Times New Roman', Times, serif;
+    margin-left: 20px;
+    transform: scale(1.5);
+
   }
 
-  .details{
-    /* background-color: #6b7578; */
-    padding: 10px;
-    border: 5px solid #ccc;
-    border-radius: 4px ;
-    color: black;
-    width: 50%;
+  .meds, .apt{
+    padding:30px;
   }
-  
-  .hospital {
-    margin-bottom: 20px;
+
+  .checkbox-label{
+    font-size: 25px;
   }
-  
-  h3 {
-    font-size: 20px;
+
+  .input{
+    padding: 8px;
+    font-size: 16px;
   }
-  
-  p {
-    margin: 5px 0;
+
+  .checkbox-label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
   }
-  </style>
+
+</style>
