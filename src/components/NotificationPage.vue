@@ -65,19 +65,19 @@
     
 <script>    
 
-  import SubscriberNavbar from './SubscriberNavbar.vue'
+import SubscriberNavbar from './SubscriberNavbar.vue'
 
-  export default {
-    components:{
-      SubscriberNavbar,
-    },
-    data() {
+export default {
+  components:{
+    SubscriberNavbar,
+  },
+  data() {
     return {
       medications: [],
       appointments: [],
       medication: false,
       appointment: false,
-      // showMedicationOptions: false,
+      showMedicationOptions: false,
       // medicationType: '',
       // comDate: '',
       // termDate: '',
@@ -99,23 +99,23 @@
     },
   },
   methods:{
-      addMedication(){
-        this.medications.push({
-          medicationType: '',
-          comDate: '',
-          termDate: '',
-          frequency: '',
-          medicationTime: '',
-        });
-      },
-      addAppointment(){
-        this.appointments.push({
-          location: '',
-          name: '',
-          appointmentDate: '',
-          appointmentTime: '',
-        });
-      },
+    addMedication(){
+      this.medications.push({
+        medicationType: '',
+        comDate: '',
+        termDate: '',
+        frequency: '',
+        medicationTime: '',
+      });
+    },
+    addAppointment(){
+      this.appointments.push({
+        location: '',
+        name: '',
+        appointmentDate: '',
+        appointmentTime: '',
+      });
+    },
   },
 
 };

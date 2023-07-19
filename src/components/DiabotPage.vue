@@ -32,17 +32,11 @@
           <p>Risk Category: {{ risk_category }}</p>
           <p>Chance of Developing Diabetes: {{ chance_of_diabetes }}</p>
           <p>Screening Recommendation: {{ screening_recommendation }}</p>
-<<<<<<< HEAD
 
           <div v-if="risk_category==='High risk' || risk_category==='Very high risk'">
             <h2>Do you want to subscribe to be a patient of Diabot? 🏥</h2>
             <button v-on:click="subscribeMe">Yes 👀</button>
           </div>
-=======
-          <br>
-          <h3>To Subscribe To Diabot, Click the Button Below </h3>
-          <button v-on:click="redirectToRegister"> Register </button>
->>>>>>> d10f888fe0650986da95b991123e38472720793a
         </section>
       </div>
     </div>
@@ -125,7 +119,6 @@ export default {
         });
       this.assessmentComplete = true;
     },
-<<<<<<< HEAD
     subscribeMe() {
       axios.post('http://localhost:5000/register')
         .then((response) => {
@@ -136,10 +129,6 @@ export default {
         });
 
         this.$router.push('/register')
-=======
-    redirectToRegister(){
-      this.$router.push('/register')
->>>>>>> d10f888fe0650986da95b991123e38472720793a
     }
   }
 };
