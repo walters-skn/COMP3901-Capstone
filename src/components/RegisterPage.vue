@@ -41,7 +41,7 @@
 
                     <div class="form-group">
                         <label> Address 2: </label>
-                        <input type="text" class="form-control" placeholder="Address 2"  v-model="address2" required/>
+                        <input type="text" class="form-control" placeholder="Address 2"  v-model="address2"/>
                     </div>
                     <br>
         
