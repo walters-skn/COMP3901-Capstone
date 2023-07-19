@@ -7,11 +7,11 @@ INSERT INTO patients (first_name, last_name, address1, address2) VALUES ('Pamell
 INSERT INTO patients (first_name, last_name, address1, address2) VALUES ('Patrick', 'Allen', 'David Ave', NULL);
 INSERT INTO patients (first_name, last_name, address1, address2) VALUES ('Mitchell', 'Montana', 'Doherty DR', 'Cider Walk Ave');
 
-INSERT INTO medications (patient_id, med_name, qty) VALUES (NULL, 'insulin isophane', 500);
-INSERT INTO medications (patient_id, med_name, qty) VALUES (3, 'metaformin', 1000);
+INSERT INTO medications (patient_id, med_type, quantity_mg, commence_date, terminate_date, frequency) VALUES (1, 'insulin isophane', 500, '18-07-23', '26-07-23', 'once daily');
+INSERT INTO medications (patient_id, med_type, quantity_mg, commence_date, terminate_date, frequency) VALUES (2, 'metaformin', 1000, '23-08-23', '12-08-23', 'twice daily');
 
-INSERT INTO reminders (patient_id, app_date, remind_type, remind_desc) VALUES (3, '21-07-23', 'appointment', 'patient has appointment at Sir Bustamante Hospital');
-INSERT INTO reminders (patient_id, app_date, remind_type, remind_desc) VALUES (2, '07-07-23', 'medication', 'patient has meds to take at 2pm');
+INSERT INTO reminders(patient_id, clinic_id, medication_id, appt_location, doc_name, appt_date, appt_time, remind_type, remind_desc)VALUES(1, 1, 'Angels Health Care AMDG', 'Dr Wang', '21-07-23', '06:00:00', 'appointment', 'patient has appointment at 6am');
+INSERT INTO reminders(patient_id, clinic_id, medication_id, appt_location, doc_name, appt_date, appt_time, remind_type, remind_desc)VALUES(2, 3, 2, NULL, NULL, NULL, NULL, 'medication', 'patient has meds to take at 2pm');
 
 INSERT INTO clinics (name, type, address, parish) VALUES ('Angels Health Care AMDG', 'Private', 'Shop 16 Angles Plaza Ang1 Spanish Town St. Catherine', 'St. Catherine');
 INSERT INTO clinics (name, type, address, parish) VALUES ('Amadeo Medical Group', 'Private', '11A Young St, Spanish Town St. Catherine', 'St. Catherine');
