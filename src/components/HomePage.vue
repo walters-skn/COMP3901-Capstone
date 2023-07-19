@@ -25,7 +25,7 @@
 
         <div class="guidelines-content">
           <h3 class="guidelines"> <strong> <b>Guidelines For Using Diabot  </b> </strong></h3>
-          <p class="points"> <strong> Before using Diabot, <i></i>t's vital to follow these instructions carefully.</strong>  <br> <strong>These consist of:</strong>
+          <p class="points"> <strong> Before using Diabot, it is vital to follow these instructions carefully.</strong>  <br> <strong>These consist of:</strong>
             <ul class="points">
               <li> 1. Keep Your Profile and Data Updated: To maintain accuracy, regularly update your profile and data.</li>
               <li> 2. Leverage Diabot's Numerous Features: Make the most of the various features and resources Diabot has to offer.</li>
@@ -33,17 +33,13 @@
             </ul>
           </p>
         </div>
+        <br>
 
-      <p class="points"> <strong> Ready to take control of your diabetes management? </strong></p>
+        <p class="points"> <strong> Ready to take control of your diabetes management? <br> Click the button below to get started. </strong></p>
 
-    <!-- </div> -->
-
-      <div class="button-container">
-        <p class="points">
-          <strong> Click the button below to get started. </strong> 
-        </p>
-        <router-link to="/diabot" class="btn"> Diabot</router-link>
-      </div>
+        <div class="button-container">
+          <router-link to="/diabot" class="btn"> Diabot</router-link>
+        </div>
     </div>
 
     <div class="image-container">
@@ -79,7 +75,7 @@ export default {
 <style scoped>
 
   .img{ 
-    height: 58vh;
+    height: 64vh;
     width: 100%;
   }
 

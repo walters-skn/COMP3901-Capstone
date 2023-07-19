@@ -6,38 +6,40 @@
     <div class="chat-sidebar">
       <h1>DIABOT <br>CHAT</h1>
     </div>
-    <div class="chat-content">
-      <div v-if="!greeted">
-        <h2>Welcome! How can I assist you?</h2>
-        <button v-on:click="startAssessment">Start Assessment</button>
-      </div>
-      
-      <div v-else>
-        <section v-if="!assessmentComplete" class="chat-messages">
-          <div class="message">
-            <h2 class="message-content">
-              {{ question.question }}
-            </h2>
-          </div>
-          <div class="chat-input">
-            <input type="text" ref="answer" v-model="response">
-            <button v-on:click="answerQuestion">Submit Answer</button>
-          </div>
-        </section>
 
-        <section v-else>
-          <h2>Assessment Complete!</h2>
-          <h2>Your Risk</h2>
-          <p>Risk Score: {{ risk_score }}</p>
-          <p>Risk Category: {{ risk_category }}</p>
-          <p>Chance of Developing Diabetes: {{ chance_of_diabetes }}</p>
-          <p>Screening Recommendation: {{ screening_recommendation }}</p>
-          <br>
-          <h3>To Subscribe To Diabot, Click the Button Below </h3>
-          <button v-on:click="redirectToRegister"> Register </button>
-        </section>
+    <div class="chat-content">
+        <div v-if="!greeted">
+          <h2>Welcome! How can I assist you?</h2>
+          <button v-on:click="startAssessment" class="button">Start Assessment</button>
+        </div>
+
+        <div v-else>
+          <section v-if="!assessmentComplete" class="chat-messages">
+            <div class="message">
+              <h2 class="message-content">
+                {{ question.question }}
+              </h2>
+            </div>
+            <div class="chat-input">
+              <input class="input" type="text" ref="answer" v-model="response">
+              <button v-on:click="answerQuestion" class="btn">Submit </button>
+            </div>
+          </section>
+
+          <section v-else>
+            <h2>Assessment Complete!</h2>
+            <h2>Your Risk</h2>
+            <p>Risk Score: {{ risk_score }}</p>
+            <p>Risk Category: {{ risk_category }}</p>
+            <p>Chance of Developing Diabetes: {{ chance_of_diabetes }}</p>
+            <p>Screening Recommendation: {{ screening_recommendation }}</p>
+            <br>
+            <h3>To Subscribe To Diabot, Click the Button Below </h3>
+            <button v-on:click="redirectToRegister"> Register </button>
+          </section>
+        </div>
       </div>
-    </div>
+
   </div>
 </template>
 
@@ -126,10 +128,39 @@ export default {
 
 <style scoped>
 
+  .btn{
+    width: 10vh;
+    padding: 5px;
+    color: white;
+    background-color: #4C8F9E;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+  }
+/* 
+  .input{
+    padding: 5px;
+    border: 3px solid #ccc;
+  } */
+
+  .button{
+    display: block;
+    width: 30vh;
+    padding: 10px;
+    color: white;
+    background-color: #4C8F9E;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+  }
+
   .chat-container {
     display: flex;
     width: 60%;
-    height: 88vh;
+    height: 40vh;
   }
 
   .chat-messages {
@@ -158,7 +189,8 @@ export default {
 
   .chat-sidebar {
     width: 22%;
-    min-height: 84.5vh;
+    height: 90vh;
+    /* min-height: 84.5vh; */
     padding: 2px;
     border-left: 1px solid #ccc;
     background-color: #4C8F9E;
@@ -172,5 +204,9 @@ export default {
     align-items: center;
     justify-content: center;
     height: 100%;
+  }
+
+  .chat-content {
+    padding-left: 10px;
   }
 </style>
