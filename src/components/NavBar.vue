@@ -11,7 +11,7 @@
         <ul class="navbar_nav">
 
           <li class="nav-item">
-            <router-link to="/" class="nav-link"> <strong> Home ||</strong></router-link>
+            <router-link to="/register" class="nav-link"> <strong> Sign Up ||</strong></router-link>
           </li>
           <li class="nav-item">
             <router-link to="/login" class="nav-link"> <strong> Login </strong></router-link>

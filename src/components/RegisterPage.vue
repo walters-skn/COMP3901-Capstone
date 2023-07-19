@@ -4,7 +4,7 @@
   
     <div class="page-container">
         <div class="body">
-            <h2 class = "title"> New User <br> SIGN UP TO GET STARTED </h2> 
+            <h2 class = "title"> SIGN UP TO GET STARTED </h2> 
         </div>
             
         <form v-on:submit.prevent="handleRegister">
@@ -14,36 +14,30 @@
                         <label> First Name: </label>
                         <input type="text" class="form-control" placeholder="First Name" v-model="fname" required/>
                     </div>
-                    <br>
                     <div class="form-group">
                         <label> Last Name: </label>
                         <input type="text" class="form-control" placeholder="Last Name" v-model="lname" required/>
                     </div>
-                    <br>
                         
                     <div class="form-group">
                         <label> Email Address: </label>
                         <input type="email" class="form-control" placeholder="Email Address" v-model="email" required/>
                     </div>
-                    <br>
 
                     <div class="form-group">
                         <label> Password: </label>
                         <input type="password" class="form-control" placeholder="Password" v-model="password" required/>
                     </div>
-                    <br>
         
                     <div class="form-group">
                         <label> Address 1: </label>
                         <input type="text" class="form-control" placeholder="Address 1"  v-model="address1" required/>
                     </div>
-                    <br>
 
                     <div class="form-group">
                         <label> Address 2: </label>
-                        <input type="text" class="form-control" placeholder="Address 2"  v-model="address2" required/>
+                        <input type="text" class="form-control" placeholder="Address 2"  v-model="address2"/>
                     </div>
-                    <br>
         
                     <div class="submit-group">
                         <button class="btn btn-primary btn-block">Sign Up</button>
@@ -105,22 +99,33 @@
     
     .page-container {
         background-color: #5ca2b1;
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 100%;
+        /* width: 50%; */
+        height: 85vh;
+        margin-top: 10px;
     }
         
     .form-container{
-        background-color: #8eb9c4;
-        padding: 80px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding:20px;
+        width: 70vh;
         display: flex;
+        height: 65vh;
         justify-content: center;
-        align-items: center;
     }
         
     .form-group{
-        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label{
+        margin-bottom: 5px;
     }
   
     .box{
@@ -133,12 +138,13 @@
     }
         
     .title {
-        background-color: #5CA2B1;
         color: white;
         font-family: 'Times New Roman', Times, serif;
-        padding-top: 10px;
+        padding: 10px px;
+        width: 100%;
         text-align: center;
-        font-size: 25px;
+        font-size: 45px;
+        margin-bottom: 10px;
     }
         
     .submit-group {
@@ -149,19 +155,30 @@
       
     .btn.btn-primary {
         background-color: #4C8F9E;
-        border: 3px solid #f8f0f0;
-        padding: 10px;
+        border-radius: 5px;
+        padding: 12px 10px;
         color: white;
         font-size: 20px;
         font-family: 'Times New Roman', Times, serif;
         cursor: pointer;
+        width: 50%;
     }
 
     .form-control{
-        padding: 10px;
+        padding: 15px;
         width: 100%;
         font-size: 20px;
         font-family: 'Times New Roman', Times, serif;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .error-message{
+      color:red;
+      font-size: 15px;
+      text-align: center;
+      margin-top:10px
     }
 
 </style>

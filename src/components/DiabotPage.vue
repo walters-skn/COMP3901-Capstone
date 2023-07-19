@@ -1,3 +1,5 @@
+
+
 <template>
 
   <NavBar/>
@@ -34,12 +36,14 @@
             <p>Chance of Developing Diabetes: {{ chance_of_diabetes }}</p>
             <p>Screening Recommendation: {{ screening_recommendation }}</p>
             <br>
-            <h3>To Subscribe To Diabot, Click the Button Below </h3>
-            <button v-on:click="redirectToRegister"> Register </button>
-          </section>
-        </div>
-      </div>
 
+          <div v-if="risk_category==='High risk' || risk_category==='Very high risk'">
+            <h2>Do you want to subscribe to be a patient of Diabot? 🏥</h2>
+            <button v-on:click="subscribeMe">Yes 👀</button>
+          </div>
+        </section>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -119,8 +123,16 @@ export default {
         });
       this.assessmentComplete = true;
     },
-    redirectToRegister(){
-      this.$router.push('/register')
+    subscribeMe() {
+      axios.post('http://localhost:5000/register')
+        .then((response) => {
+          console.log('subscribeMe response:', response);
+        })
+        .catch((error) => {
+          console.log('subscribeMe error:', error);
+        });
+
+        this.$router.push('/register')
     }
   }
 };
@@ -138,11 +150,6 @@ export default {
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px;
   }
-/* 
-  .input{
-    padding: 5px;
-    border: 3px solid #ccc;
-  } */
 
   .button{
     display: block;
@@ -160,7 +167,7 @@ export default {
   .chat-container {
     display: flex;
     width: 60%;
-    height: 40vh;
+    height: 80vh;
   }
 
   .chat-messages {
@@ -189,7 +196,7 @@ export default {
 
   .chat-sidebar {
     width: 22%;
-    height: 90vh;
+    height: vh;
     /* min-height: 84.5vh; */
     padding: 2px;
     border-left: 1px solid #ccc;

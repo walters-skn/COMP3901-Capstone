@@ -272,17 +272,10 @@ def determine_chance_of_diabetes(risk_score):
 def determine_screening_recommendation(risk_category):
     if risk_category == 'Low to moderate risk':
         return 'Recommend screening every 3-5 years with Health Professional.'
-    elif risk_category == 'High risk':
-        return 'Recommend screening every 1-2 years with Health Professional.'
-    else:
-        return 'Recommend annual screening with Health Professional.'
+    elif risk_category == 'High risk' or risk_category == 'Very high risk':
+        return 'You are at high risk of developing diabetes. Please see health professional.'
+   
 
-
-
-
-
-# Clinic Recommendations
-# @app.route('/clinic', methods=['GET'])
     
 
 if __name__ == "__main__":

@@ -27,8 +27,9 @@
             <option value="every_other_day"> Every Other Day</option>
           </select>
 
-          <label> Custom Time:</label>
-          <input type="date" v-model="med.medicationTime" class="input">
+          <!-- quanity of medication -->
+          <!-- <label> Custom Time:</label>
+          <input type="date" v-model="med.medicationTime" class="input"> -->
         </div>
 
         <button @click="addMedication"> Add Medication </button>
@@ -61,19 +62,19 @@
     
 <script>    
 
-  import SubscriberNavbar from './SubscriberNavbar.vue'
+import SubscriberNavbar from './SubscriberNavbar.vue'
 
-  export default {
-    components:{
-      SubscriberNavbar,
-    },
-    data() {
+export default {
+  components:{
+    SubscriberNavbar,
+  },
+  data() {
     return {
       medications: [],
       appointments: [],
       medication: false,
       appointment: false,
-      // showMedicationOptions: false,
+      showMedicationOptions: false,
       // medicationType: '',
       // comDate: '',
       // termDate: '',
@@ -95,23 +96,23 @@
     },
   },
   methods:{
-      addMedication(){
-        this.medications.push({
-          medicationType: '',
-          comDate: '',
-          termDate: '',
-          frequency: '',
-          medicationTime: '',
-        });
-      },
-      addAppointment(){
-        this.appointments.push({
-          location: '',
-          name: '',
-          appointmentDate: '',
-          appointmentTime: '',
-        });
-      },
+    addMedication(){
+      this.medications.push({
+        medicationType: '',
+        comDate: '',
+        termDate: '',
+        frequency: '',
+        medicationTime: '',
+      });
+    },
+    addAppointment(){
+      this.appointments.push({
+        location: '',
+        name: '',
+        appointmentDate: '',
+        appointmentTime: '',
+      });
+    },
   },
 
 };

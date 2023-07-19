@@ -26,6 +26,10 @@
 
               <br>
 
+              <div v-if="errorMessage" class="error-message">
+                {{ errorMessage }}
+              </div>
+
               <div class="submit-group">
                 <button class="btn btn-primary btn-block"> <strong> <b>SIGN IN </b></strong></button>
             </div>
@@ -56,7 +60,8 @@ export default {
     return {
       email: '',
       password: '',
-      token: ''
+      token: '',
+      errorMessage: ''
     };
   },
   methods: {
@@ -71,6 +76,7 @@ export default {
         this.$router.push('/subscriber')
       }).catch(error => {
         console.log(error)
+        this.errorMessage = 'You have entered an incorrect email address or password'
       })
     },
   }
@@ -84,23 +90,29 @@ export default {
         background-color: #5ca2b1;
         display: flex;
         flex-direction: column;
-        /* justify-content: center;
-        align-items: center; */
-        width: 50%;
-        height: 100vh;
-        margin: 0 auto;
-    }
-        
-    .form-container{
-        background-color: #8eb9c4;
-        padding: 80px;
-        display: flex;
         justify-content: center;
         align-items: center;
+        /* width: 50%; */
+        height: 83vh;
+        margin-top: 20px;
+      }
+        
+    .form-container{
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding: 90px;
+        display: flex;
     }
         
     .form-group{
-        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 5px;
+    }
+
+    .form-group label{
+        margin-bottom: 5px;
     }
   
     .box{
@@ -113,12 +125,14 @@ export default {
     }
         
     .title {
-        background-color: #5CA2B1;
-        color: white;
+      background-color: white;
+        color: #5CA2B1;
         font-family: 'Times New Roman', Times, serif;
-        padding-top: 10px;
+        padding: 10px 0;
+        width: 400px;
         text-align: center;
         font-size: 35px;
+        margin-bottom: 20px;
     }
         
     .submit-group {
@@ -129,12 +143,13 @@ export default {
       
     .btn.btn-primary {
         background-color: #4C8F9E;
-        border: 3px solid #f8f0f0;
-        padding: 10px;
+        border-radius: 5px;
+        padding: 12px 10px;
         color: white;
         font-size: 20px;
         font-family: 'Times New Roman', Times, serif;
         cursor: pointer;
+        width: 50%;
     }
 
     .form-control{
@@ -142,6 +157,16 @@ export default {
         width: 100%;
         font-size: 20px;
         font-family: 'Times New Roman', Times, serif;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .error-message{
+      color:red;
+      font-size: 15px;
+      text-align: center;
+      margin-top:10px
     }
 
 </style>
