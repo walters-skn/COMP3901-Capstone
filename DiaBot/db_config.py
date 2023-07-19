@@ -5,7 +5,7 @@ from mysql.connector import errorcode
 
 DB_NAME = 'diabot'
 
-cnx = mysql.connector.connect(user='root', password='monestlevetre24', host='localhost', database=DB_NAME)
+cnx = mysql.connector.connect(user='root', password='', host='localhost', database=DB_NAME)
 cursor = cnx.cursor()
 
 
