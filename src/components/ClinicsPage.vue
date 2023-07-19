@@ -17,7 +17,6 @@
             <input id="address-input" v-model="selectedAddress" class="addressinput" placeholder="Enter your Parish">
         </div>
 
-
         <br>
 
         <div class="hospital-list-container">

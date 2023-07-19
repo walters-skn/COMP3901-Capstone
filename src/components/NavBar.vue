@@ -69,8 +69,8 @@
   }
 
   .home{ 
-    height: 65px;
-    width: 100px;
+    height: 75px;
+    width: 90px;
     margin: -1%;
   }
         
