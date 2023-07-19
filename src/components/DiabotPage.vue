@@ -32,6 +32,9 @@
           <p>Risk Category: {{ risk_category }}</p>
           <p>Chance of Developing Diabetes: {{ chance_of_diabetes }}</p>
           <p>Screening Recommendation: {{ screening_recommendation }}</p>
+          <br>
+          <h3>To Subscribe To Diabot, Click the Button Below </h3>
+          <button v-on:click="redirectToRegister"> Register </button>
         </section>
       </div>
     </div>
@@ -113,6 +116,9 @@ export default {
           console.log('submitResponses error:', error);
         });
       this.assessmentComplete = true;
+    },
+    redirectToRegister(){
+      this.$router.push('/register')
     }
   }
 };
@@ -122,13 +128,8 @@ export default {
 
   .chat-container {
     display: flex;
-    width: 100%;
-  }
-
-  .chat-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    width: 60%;
+    height: 88vh;
   }
 
   .chat-messages {

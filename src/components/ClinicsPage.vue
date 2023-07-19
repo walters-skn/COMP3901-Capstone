@@ -13,23 +13,26 @@
             </select>
         </div> -->
         <div class="filter">
-            <label for="address-input" class="address"> <strong> Filter Clinics/Hospitals by Parish </strong></label>
+            <label for="address-input" class="address"> <strong> Enter Health Care Facilities By Parish</strong></label>
             <input id="address-input" v-model="selectedAddress" class="addressinput" placeholder="Enter your Parish">
         </div>
 
 
         <br>
 
-        <div class="hospital-list">
-            <div v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
-                <div class="details">
-                    <h3 class="name" >{{ hospital.name }}</h3>
-                    <p><strong>Type:</strong> {{ hospital.type }}</p>
-                    <p><strong>Address:</strong> {{ hospital.address }}</p>
-                    <p><strong>Parish:</strong> {{ hospital.parish }}</p>
+        <div class="hospital-list-container">
+            <div class="hospital-list">
+                <div v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
+                    <div class="details">
+                        <h3 class="name" >{{ hospital.name }}</h3>
+                        <p><strong>Type:</strong> {{ hospital.type }}</p>
+                        <p><strong>Address:</strong> {{ hospital.address }}</p>
+                        <p><strong>Parish:</strong> {{ hospital.parish }}</p>
+                    </div>
                 </div>
             </div>
         </div>
+                
     </div>
   </template>
   
@@ -95,51 +98,66 @@
     }
 </script>
 
-  <style scoped>
+<style scoped>
 
-  .parish{
-    font-family: times, "Times New Roman";
-    font-size: 20px;
-  }
+    .address{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 24px;
+    }
+  
+    .heading{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: #4890a0;
+        text-align: center;
+        font-size: 40px;
+    }
 
-  .parishselect{
-    padding: 5px;
-  }
-  
-  .heading{
-    color: #4C8F9E;
-    text-align: center;
-  }
+    .filter{
+        padding: 5px;
+        margin-left: 35px;
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
 
-  .filter{
-    padding: 5px;
-    margin-left: 35px;
-    font-family: 'Times New Roman', Times, serif;
-  }
+    }
 
-  .hospital-list {
-    padding-left: 30px;
-  }
+    .addressinput{
+        padding: 5px;
+        width: 10%;
+        height: 2vh;
+        border: 3px solid #ccc;
+        /* border-radius: 10px; */
+    }
 
-  .details{
-    /* background-color: #6b7578; */
-    padding: 10px;
-    border: 5px solid #ccc;
-    border-radius: 4px ;
-    color: black;
-    width: 50%;
-  }
-  
-  .hospital {
-    margin-bottom: 20px;
-  }
-  
-  h3 {
-    font-size: 20px;
-  }
-  
-  p {
-    margin: 5px 0;
-  }
-  </style>
-  
+    .hospital-list-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .hospital-list{
+        width: 80%;
+        max-width: 800px;
+    }
+
+    .details{
+        /* background-color: #6b7578; */
+        padding: 10px;
+        border: 5px solid #ccc;
+        border-radius: 4px ;
+        color: black;
+        width: 50%;
+    }
+    
+    .hospital {
+        margin-bottom: 20px;
+    }
+    
+    h3 {
+        font-size: 20px;
+    }
+    
+    p {
+        margin: 5px 0;
+    }
+</style>
