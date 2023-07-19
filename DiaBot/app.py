@@ -12,7 +12,7 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 db_config = {
     "user": "root",
-    "password": "Walters09",
+    "password": "",
     "host": "localhost",
     "database": "diabot"
 }

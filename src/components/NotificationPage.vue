@@ -4,7 +4,6 @@
 
   <div class="notification">
     <div class="option-section">
-      <!-- <input type="checkbox" v-model="medication" class="options">  -->
       <label for="medication" class="checkbox-label"> Medication</label>
 
       <div class="meds">
@@ -31,9 +30,6 @@
           <label> Custom Time:</label>
           <input type="date" v-model="med.medicationTime" class="input">
         </div>
-
-          <!-- <label>Termination Time:</label>
-          <input type="date" v-model="medicationDate" class="input"> -->
 
         <button @click="addMedication"> Add Medication </button>
       </div>
@@ -130,15 +126,15 @@
     padding-top: 50px;
   }
 
-  .meds, .apt{
+  /* .meds, .apt{
     padding:30px;
+  } */
+/* 
+  .meds{
     display: flex;
     flex-direction: column;
-  }
-
-  .meds label, .apt label{
-    margin-bottom:10px;
-  }
+    margin-bottom: 10px;
+  } */
 
   .checkbox-label{
     font-size: 25px;

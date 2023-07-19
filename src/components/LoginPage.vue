@@ -1,37 +1,40 @@
 
 <template>
-
   <NavBar/>
 
   <div class="page-container">
-
-    <div class="side-menu">
-      <h1> <b><strong> WELCOME <br> TO <br> DIABOT </strong></b></h1>
-    </div>
-
-    <div class="content-container">
+    <div class="body">
       <h1 class="title"> <strong>LOGIN </strong></h1>
+    </div>
       
         <form v-on:submit.prevent="handleLogin">
-          <div class="form-group">
-            <label for="email"> Email Address:</label>
-            <input type="email" class="form-control" placeholder="Email Address" v-model="email" required/>
-          </div>
+          <div class = "form-container">
 
-          <div class="form-group">
-            <label for="password"> Password: </label>
-            <input type="password" class="form-control" placeholder="Password" v-model="password" required />
-          </div>
+            <div class = "box">
 
-          <div class="submit-group">
-            <button class="btn btn-primary btn-block"> <strong> <b>SIGN IN </b></strong></button>
-          </div>
+              <div class="form-group">
+                <label for="email"> Email Address:</label>
+                <input type="email" class="form-control" placeholder="Email Address" v-model="email" required/>
+              </div>
 
+              <br>
+
+              <div class="form-group">
+                <label for="password"> Password: </label>
+                <input type="password" class="form-control" placeholder="Password" v-model="password" required />
+              </div>
+
+              <br>
+
+              <div class="submit-group">
+                <button class="btn btn-primary btn-block"> <strong> <b>SIGN IN </b></strong></button>
+            </div>
+          
+          </div>
+          </div>
         </form>
-
     </div>
 
-  </div>
 </template>
 
 <script>
@@ -75,89 +78,70 @@ export default {
 
 </script>
 
-<style scoped>
-
-  .side-menu {
-    width: 20%;
-    padding: 2px;
-    background-color: #5CA2B1;
-    color: white;
-    position: fixed;
-    top: 9.5%; bottom: 0; left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  label{
-    margin-bottom: 5px;
-  }
-
-  .page-container {
-    display: flex;
-    width: 80%;
-    margin-top: 6%;
-    margin-bottom: 1%;
-
-  }
-
-  .content-container {
-    flex:1;
-    width: 80%;
-    margin-left: 50%;
-    font-size: 25px;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .title {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #4C8F9E;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 35px;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-
-  .form-control {
-    border-radius: 1px solid #000000;
-    height: 40px;
-    width: 100%; 
-  }
-  
-  .btn {
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .btn.btn-primary {
-    background-color: white;
-    border: 2px solid #2f2c2c;
-    color: #528995;
-    font-size: 15px;
-    font-family: 'Times New Roman', Times, serif;
-    display: inline-block;
-  }
-
-  .btn:hover{
-  background-color: #528995;
-  }
+<style scoped >
     
-  .submit-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-    
-  .diabot {
-    text-align: center;
-    margin: 50px auto 0;
-  }
+    .page-container {
+        background-color: #5ca2b1;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center;
+        align-items: center; */
+        width: 50%;
+        height: 100vh;
+        margin: 0 auto;
+    }
+        
+    .form-container{
+        background-color: #8eb9c4;
+        padding: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+        
+    .form-group{
+        align-items: center;
+    }
+  
+    .box{
+        display: flex;
+        flex-direction:column ;
+        margin-bottom: 10px;
+        max-width: 400px;
+        width: 400px;
+        font-size: 20px;
+    }
+        
+    .title {
+        background-color: #5CA2B1;
+        color: white;
+        font-family: 'Times New Roman', Times, serif;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 35px;
+    }
+        
+    .submit-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+      
+    .btn.btn-primary {
+        background-color: #4C8F9E;
+        border: 3px solid #f8f0f0;
+        padding: 10px;
+        color: white;
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        cursor: pointer;
+    }
 
-  </style>
+    .form-control{
+        padding: 10px;
+        width: 100%;
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+</style>

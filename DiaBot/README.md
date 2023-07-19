@@ -15,6 +15,9 @@
 
 ```venv\Scripts\activate```
 
+## Activate virtual environment (MAC)
+```. venv/bin/activate```
+
 ## Install requirements
 
 ```pip install -r requirements.txt```
