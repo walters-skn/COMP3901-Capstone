@@ -60,45 +60,48 @@ export default {
     justify-content: flex-end;
     flex-direction: column;
     width: 100%;
-    padding-left: 5px;
-    padding-right: 5px;
+    /* padding: 20px; */
   }
 
   .label{
     text-align: center;
-    flex-grow:1;
     background-color: white;
-    margin: 0 50px;
-    align-items: center;
   }
 
   .diabot-content{
     text-align: justify;
-    font-size: 22px;
+    font-size: 25px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    padding-left: 15%;
-    padding-right: 15%;
+    padding: 0 10% ;
   }
 
   .diabot {
     font-family: 'Times New Roman', Times, serif;
     font-size: 50px;
-    /* color: #5CA2B1; */
+    color: #5CA2B1;
   }
 
   .guidelines_container{
-    background-color: #8ec5d0;
+    background-color: #5CA2B1;
     width: 100%;
-    padding-bottom: 90px;
+    padding: 50px 0;
     text-align: center;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
+
+    /* text-align: center; */
+    /* margin: 30px 50px;
+    padding: 20px; */
+  }
+
+  .guidelines_container ul{
+    list-style: none;
+    padding: 0;
+    /* display: flex;
+    margin-right: 10px;
+    justify-content: center; */
   }
 
   .guidelines_container ul li{
-    display: flex;
-    margin-right: 10px;
-    justify-content: center;
+    margin: 10px 0;
   }
 
   .guidelines{
@@ -110,6 +113,7 @@ export default {
   .points{
     font-family: 'Times New Roman', Times, serif;
     font-size: 25px;
+    color: white;
   }
 
   .btn {
@@ -118,11 +122,10 @@ export default {
     max-width: 150px;
     padding: 15px;
     color: white;
-    background-color: #5ca2b1;
+    background-color: #37717e;
     border: none;
     cursor: pointer;
-    align-content: center;
-    justify-content: center;
+    text-align: center;
     font-family: 'Times New Roman', Times, serif;
     font-size: 25px;
   }
