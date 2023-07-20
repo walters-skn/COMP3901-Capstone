@@ -36,7 +36,7 @@ TABLES['medications'] = (
     "  `commencement_date` DATE,"
     "  `termination_date` DATE,"
     "  `frequency` VARCHAR(255),"
-    "  `quantity_of_medication` INT,"
+    "  `quantity` INT,"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"
 )
@@ -74,7 +74,7 @@ TABLES['reminders'] = (
     "  `patient_id` INT,"
     "  `clinic_id` INT,"
     "  `medication_id` INT,"
-    "  `location_(Doctor office)` VARCHAR(255),"
+    "  `location` VARCHAR(255),"
     "  `appt_date` DATE,"
     "  `appt_time` DATE,"
     "  `remind_type` VARCHAR(255),"

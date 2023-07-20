@@ -7,11 +7,11 @@ INSERT INTO patients (first_name, last_name, address1, address2) VALUES ('Pamell
 INSERT INTO patients (first_name, last_name, address1, address2) VALUES ('Patrick', 'Allen', 'David Ave', NULL);
 INSERT INTO patients (first_name, last_name, address1, address2) VALUES ('Mitchell', 'Montana', 'Doherty DR', 'Cider Walk Ave');
 
-INSERT INTO medications (patient_id, medication_name, commencement_date, termination_date, frequency,  quantity_of_medication) VALUES (1, 'insulin isophane', '18-07-23', '26-07-23', 'once daily', 500);
-INSERT INTO medications (patient_id, medication_name,  commencement_date, termination_date, frequency, quantity_of_medication) VALUES (2, 'metaformin', '23-08-23', '12-08-23', 'twice daily'), 1000;
+INSERT INTO medications (patient_id, medication_name, commencement_date, termination_date, frequency,  quantity) VALUES (1, 'insulin isophane', '18-07-23', '26-07-23', 'once daily', 500);
+INSERT INTO medications (patient_id, medication_name,  commencement_date, termination_date, frequency, quantity) VALUES (2, 'metaformin', '23-08-23', '12-08-23', 'twice daily'), 1000;
 
-INSERT INTO reminders(patient_id, clinic_id, medication_id, location_(Doctor office), appt_date, appt_time, remind_type, remind_desc)VALUES(1, 1, 'Angels Health Care AMDG', '21-07-23', '06:00:00', 'appointment', 'patient has appointment at 6am');
-INSERT INTO reminders(patient_id, clinic_id, medication_id, location_(Doctor office), appt_date, appt_time, remind_type, remind_desc)VALUES(2, 3, 2, NULL, NULL, NULL, 'medication', 'patient has meds to take at 2pm');
+INSERT INTO reminders(patient_id, clinic_id, medication_id, location, appt_date, appt_time, remind_type, remind_desc)VALUES(1, 1, 'Angels Health Care AMDG', '21-07-23', '06:00:00', 'appointment', 'patient has appointment at 6am');
+INSERT INTO reminders(patient_id, clinic_id, medication_id, location, appt_date, appt_time, remind_type, remind_desc)VALUES(2, 3, 2, NULL, NULL, NULL, 'medication', 'patient has meds to take at 2pm');
 
 INSERT INTO clinics (name, type, address, parish) VALUES ('Angels Health Care AMDG', 'Private', 'Shop 16 Angles Plaza Ang1 Spanish Town St. Catherine', 'St. Catherine');
 INSERT INTO clinics (name, type, address, parish) VALUES ('Amadeo Medical Group', 'Private', '11A Young St, Spanish Town St. Catherine', 'St. Catherine');
