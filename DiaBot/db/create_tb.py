@@ -1,16 +1,14 @@
-from __future__ import print_function
-
 import mysql.connector
 from mysql.connector import errorcode
 
+from db.connect import db_config
+
 DB_NAME = 'diabot'
 
-cnx = mysql.connector.connect(user='root', password='', host='localhost', database=DB_NAME)
+cnx = mysql.connector.connect(**db_config)
 cursor = cnx.cursor()
 
-
 TABLES = {}
-
 TABLES['users'] = (
     "CREATE TABLE `users` ("
     "  `user_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
@@ -19,7 +17,6 @@ TABLES['users'] = (
     "  `is_admin` INT NOT NULL DEFAULT 0"
     ") ENGINE=InnoDB"
 )
-
 TABLES['patients'] = (
     "CREATE TABLE `patients` ("
     "  `patient_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
@@ -31,7 +28,6 @@ TABLES['patients'] = (
     "  FOREIGN KEY(user_id) REFERENCES `users`(user_id)"
     ") ENGINE=InnoDB"
 )
-
 TABLES['medications'] = (
     "CREATE TABLE `medications` ("
     "  `medication_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
@@ -40,11 +36,10 @@ TABLES['medications'] = (
     "  `quantity_mg` INT,"
     "  `commence_date` DATE,"
     "  `terminate_date` DATE,"
-    "  `frequency` VARCHAR,"
+    "  `frequency` VARCHAR(255),"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"
 )
-
 TABLES['symptoms'] = (
     "CREATE TABLE `symptoms` ("
     "  `symptom_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
@@ -62,7 +57,6 @@ TABLES['symptoms'] = (
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"
 )
-
 TABLES['clinics'] = (
     "CREATE TABLE `clinics` ("
     "  `clinic_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
@@ -74,7 +68,6 @@ TABLES['clinics'] = (
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"
 )
-
 TABLES['reminders'] = (
     "CREATE TABLE `reminders` ("
     "  `rem_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
@@ -82,9 +75,9 @@ TABLES['reminders'] = (
     "  `clinic_id` INT,"
     "  `medication_id` INT,"
     "  `appt_location` VARCHAR(255),"
-    "  `doc_name` VARCHAR(120),"
+    "  `doc_name` VARCHAR(255),"
     "  `appt_date` DATE,"
-    "  `appt_time`, DATE,"
+    "  `appt_time` DATE,"
     "  `remind_type` VARCHAR(255),"
     "  `remind_desc` VARCHAR(255),"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id),"
@@ -92,7 +85,6 @@ TABLES['reminders'] = (
     "  FOREIGN KEY(medication_id) REFERENCES `medications`(medication_id)"
     ") ENGINE=InnoDB"
 )
-
 TABLES['contacts'] = (
     "CREATE TABLE `contacts` ("
     "  `patient_id` INT,"
@@ -101,7 +93,6 @@ TABLES['contacts'] = (
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"
 )
-
 TABLES['meals'] = (
     "CREATE TABLE `meals` ("
     "  `meal_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
@@ -112,7 +103,6 @@ TABLES['meals'] = (
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"
 )
-
 TABLES['diabetes_questions'] = (
     "CREATE TABLE `diabetes_questions` ("
     "   `db_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT," 

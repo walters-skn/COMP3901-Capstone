@@ -77,7 +77,7 @@ export default {
       this.getQuestions();
     },
     getQuestions() {
-      axios.get(`http://localhost:5000/questions`)
+      axios.get('http://localhost:5000/questions')
         .then((response) => {
           console.log('getQuestions response:', response);
           this.questions = response.data.questions;
