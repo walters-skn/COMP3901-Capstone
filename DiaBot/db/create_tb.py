@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import errorcode
 
-from db.connect import db_config
+from connect import db_config
 
 DB_NAME = 'diabot'
 
