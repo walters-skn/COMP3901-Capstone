@@ -3,13 +3,15 @@
   <SubscriberNavbar/>
 
   <div class="notification">
+
     <div class="option-section">
-      <label for="medication" class="checkbox-label"> Medication</label>
+      <label for="medication" class="label"> <strong> Set Medication Reminder</strong></label>
+      <button @click="addMedication" class="btn"> +</button>
 
       <div class="meds">
-        <div v-for="(med,index) in medications" :key="index"> 
-          <label>Medication Type:</label>
-          <input type="text" v-model="med.medicationType" class="input">
+        <div v-for="(med,index) in medications" :key="index" class="medication-container"> 
+          <label>Medication Name:</label>
+          <input type="text" v-model="med.medicationName" class="input">
 
           <label>Commencement Date:</label>
           <input type="date" v-model="med.comDate" class="input">
@@ -27,20 +29,25 @@
             <option value="every_other_day"> Every Other Day</option>
           </select>
 
-          <!-- quanity of medication -->
-          <!-- <label> Custom Time:</label>
-          <input type="date" v-model="med.medicationTime" class="input"> -->
+          <label> Quanty of Medication (eg.500mg):</label>
+          <input type="text" v-model="med.quantityMeds" class="input">
+
         </div>
 
-        <button @click="addMedication"> Add Medication </button>
+        <!-- <button @click="addMedication" class="add-button"> + </button> -->
+        <button @click="saveData" class="submit"> Submit </button>
+
       </div>
-    </div>
+
+      </div>
+      
 
       <div class="option-section">
-        <label for="appointment" class="checkbox-label"> Appointment</label>
+        <label for="appointment" class="label"><strong> Set Appointment Reminder</strong></label>
+        <button @click="addAppointment" class="btn"> +</button>
 
         <div class="apt">
-          <div v-for="(apt,index) in medications" :key="index"> 
+          <div v-for="(apt,index) in appointments" :key="index" class="appointment-container"> 
             <label>Location (Doctor's Office):</label>
             <input type="text" v-model="apt.location" class="input">
 
@@ -53,7 +60,10 @@
             <label>Time:</label>
             <input type="time" v-model="apt.appointmentTime" class="input">
           </div>
-          <button @click="addAppointment"> Add Appointment </button>
+
+          <!-- <button @click="addAppointment" class="add-button"> + </button> -->
+          <button @click="saveData" class="submit"> Submit </button>
+
         </div>
       </div>
   </div>
@@ -74,7 +84,9 @@ export default {
       appointments: [],
       medication: false,
       appointment: false,
-      showMedicationOptions: false,
+      activeMedicationIndex: -1,
+      activeAppointmentIndex: -1,
+      // showMedicationOptions: false,
       // medicationType: '',
       // comDate: '',
       // termDate: '',
@@ -98,12 +110,14 @@ export default {
   methods:{
     addMedication(){
       this.medications.push({
-        medicationType: '',
+        medicationName: '',
         comDate: '',
         termDate: '',
         frequency: '',
         medicationTime: '',
+        quantityMeds:'',
       });
+      this.activeMedicationIndex= this.medications.length -1;
     },
     addAppointment(){
       this.appointments.push({
@@ -112,6 +126,8 @@ export default {
         appointmentDate: '',
         appointmentTime: '',
       });
+      this.activeAppointmentIndex= this.medications.length -1;
+
     },
   },
 
@@ -121,42 +137,72 @@ export default {
       
 <style scoped>
 
-  .notification{
+  .label{
     font-family: 'Times New Roman', Times, serif;
-    font-size: 25px;
-    padding-top: 50px;
+    font-size: 20px;
   }
 
-  /* .meds, .apt{
-    padding:30px;
-  } */
-/* 
-  .meds{
+  .option-section{
+    margin-bottom: 50px 20px;
+  }
+
+  .meds, .apt{
     display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  } */
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .notification{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px 20px;
+  }
 
   .checkbox-label{
-    font-size: 25px;
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: bold;
   }
 
   .input{
     padding: 8px;
     font-size: 16px;
-  }
-
-  .checkbox-label{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
     margin-bottom: 10px;
   }
 
-  button{
+  .medication-container,.appointment-container{
+    flex: 1 1 45%;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+  }
+
+  .submit{
+    background-color: #33717f;
+    border: none;
+    color: white;
     margin-top: 10px ;
     padding: 8px 16px;
     font-size: 16px;
+  }
+
+  .btn{
+    background-color: #33717f ;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: 10px ;
+    padding: 8px 16px;
+    font-size: 16px;
+  }
+
+  .btn:hover{
+    background-color: #ccc;
   }
 
 </style>
