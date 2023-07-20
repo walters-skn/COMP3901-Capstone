@@ -139,7 +139,9 @@ export default {
 
   .label{
     font-family: 'Times New Roman', Times, serif;
+    display: block;
     font-size: 20px;
+    flex: 1;
   }
 
   .option-section{
@@ -156,13 +158,6 @@ export default {
     max-width: 800px;
     margin: 0 auto;
     padding: 50px 20px;
-  }
-
-  .checkbox-label{
-    display: block;
-    font-size: 16px;
-    margin-bottom: 5px;
-    font-weight: bold;
   }
 
   .input{
