@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 import mysql.connector
 from db.connect import db_config
 
-clinic_bp = Blueprint('clinics', __name__)
+clinic_bp = Blueprint('clinic', __name__)
 
 
 @clinic_bp.route('/clinic', methods=['GET'])
