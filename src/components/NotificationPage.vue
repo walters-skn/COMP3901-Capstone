@@ -29,7 +29,7 @@
             <option value="every_other_day"> Every Other Day</option>
           </select>
 
-          <label> Quanty of Medication (eg.500mg):</label>
+          <label> Quantity(eg.500mg):</label>
           <input type="text" v-model="med.quantityMeds" class="input">
 
         </div>
@@ -48,11 +48,9 @@
 
         <div class="apt">
           <div v-for="(apt,index) in appointments" :key="index" class="appointment-container"> 
-            <label>Location (Doctor's Office):</label>
-            <input type="text" v-model="apt.location" class="input">
 
-            <label> Name of Doctor(s):</label>
-            <input type="text" v-model="apt.name" class="input">
+            <label>Location:</label>
+            <input type="text" v-model="apt.location" class="input">
 
             <label>Date:</label>
             <input type="date" v-model="apt.appointmentDate" class="input">
@@ -117,7 +115,6 @@ export default {
         frequency: '',
         quantityMeds:'',
       });
-      this.activeMedicationIndex= this.medications.length -1;
     },
     addAppointment(){
       this.appointments.push({
@@ -126,8 +123,6 @@ export default {
         appointmentDate: '',
         appointmentTime: '',
       });
-      this.activeAppointmentIndex= this.medications.length -1;
-
     },
   },
 
