@@ -91,6 +91,15 @@ export default {
       selectedReminder: '',
       medications: [],
       appointments: [],
+      userResponses: [],
+      medicationName: '',
+      comDate: '',
+      termDate: '',
+      frequency: '',
+      quantityMeds: '',
+      location: '',
+      appointmentDate: '',
+      appointmentTime: '',
     }
   },
   methods:{
@@ -129,14 +138,30 @@ export default {
       });
     },
     saveData(){
-      axios.post('http://localhost:5000/reminders')
+      console.log('userResponses:', this.userResponses)
+      axios.post('http://localhost:5000/reminders',{
+        responses: this.userResponses
+      })
       .then((response) => {
         console.log('Data successfully stored', response);
+        this.medicationName = response.data.medicationName;
+        this.comDate = response.data.comDate;
+        this.termDate = response.data.termDate;
+        this.frequency = response.data.frequency;
+        this.quantityMeds = response.data.quantityMeds;
+        this.location = response.data.location;
+        this.appointmentDate = response.data.appointmentDate;
+        this.appointmentTime = response.data.appointmentTime;
       })
       .catch((error) => {
         console.log('Error', error);
       });
-    }
+      
+      // Clears form after submission
+      this.selectedReminder = '';
+      this.medications = [];
+      this.appointments =[];
+    },
   },
 };
 
