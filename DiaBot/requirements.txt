@@ -22,6 +22,7 @@ mysql-connector-python==8.0.33
 protobuf==3.20.3
 PyJWT==2.7.0
 pyodbc==4.0.39
+python-dotenv==1.0.0
 pytz==2023.3
 requests==2.31.0
 twilio==8.5.0

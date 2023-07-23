@@ -6,12 +6,11 @@ from db.connect import db_config
 
 # Download the helper library from https://www.twilio.com/docs/python/install
 import os
-import datetime
-from twilio.rest import Clientdentials
+# import datetime
+from dotenv import load_dotenv
 from twilio.rest import Client
 
-
-notification_bp = Blueprint('notification')
+notification_bp = Blueprint('notification', __name__)
 
 @notification_bp.route('/notification', methods=['POST'])
 @jwt_required()
@@ -21,34 +20,96 @@ def add_notification():
 
     try:
         # Medication Table
-        # patient_id = request.json.get('patientId')
         medication_name = request.json.get('medicationName')
         commence_date = request.json.get('comDate')
         terminate_date = request.json.get('termDate')
         frequency = request.json.get('frequency')
         quantity_mg = request.json.get('quantityMeds')
 
+        # get the patient_id from the user_id
+        user_id = get_jwt_identity()
+        cursor.execute("SELECT patient_id FROM patients WHERE user_id = %s LIMIT 1", (user_id,))
+        patient_row = cursor.fetchone()
+        if patient_row is not None:
+            patient_id = patient_row[0]
+        else:
+            return jsonify({'error': 'Patient not found'}), 400
+
+        # insert into medication table
+        cursor.execute("""
+            INSERT INTO medications (patient_id, medication_name, commencement_date, termination_date, frequency, quantity)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (patient_id, medication_name, commence_date, terminate_date, frequency, quantity_mg))
+        cnx.commit()
+
+        # Fetch the newly inserted medication_id
+        cursor.execute("SELECT LAST_INSERT_ID()")
+        medication_id_row = cursor.fetchone()
+        if medication_id_row is not None:
+            medication_id = medication_id_row[0]
+        else:
+            return jsonify({'error': 'Medication not found'}), 400
+
+        # Clinics Table
+        clinic_name = request.json.get('clinicName')
+
         # Reminder Table
-        # patient_id = request.json.get('patientId') # For both medication and reminder table
-        # clinic_id = request.json.get('clinicId')
-        # medication_id = #fetch from medication table
-        appt_location = request.json.get('location')
         appt_date = request.json.get('appointmentDate')
         appt_time = request.json.get('appointmentTime')
-        # remind_type = request.json.get('reminderType')
-        # remind_desc = request.json.get('reminderDesc')
+        remind_type = request.json.get('reminderType')
+        remind_desc = request.json.get('reminderDesc')
 
-        cursor.execute("INSERT INTO medications ()")
+        # use the clinicName to get the clinic_id from the clinics table
+        cursor.execute("SELECT clinic_id FROM clinics WHERE cname = %s LIMIT 1", (clinic_name,))
+        clinic_row = cursor.fetchone()
+        if clinic_row is not None:
+            clinic_id = clinic_row[0]
+        else:
+            return jsonify({'error': 'Clinic not found'}), 400
 
+
+        # insert into reminders table
+        cursor.execute("""
+            INSERT INTO reminders (patient_id, clinic_id, medication_id, appt_date, appt_time, remind_type, remind_desc)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """, (patient_id, clinic_id, medication_id, appt_date, appt_time, remind_type, remind_desc))
+        cnx.commit()
+
+        
+        # SENDING REMINDER WITH TWILIO
+        
+        # get the patient's phone number
+        cursor.execute("""
+            SELECT phone FROM contacts c
+                INNER JOIN reminders r ON c.patient_id = r.patient_id
+            WHERE r.patient_id = %s LIMIT 1
+        """, (patient_id,))
+
+        customer_phone_number = cursor.fetchone()
+        if customer_phone_number is not None:
+            customer_phone_number = customer_phone_number[0]
+        else:
+            return jsonify({'error': 'Patient not found'}), 400
+
+        send_appointment_reminder(customer_phone_number, appt_date, appt_time)
+
+        return jsonify({'message': 'Reminder added successfully!'}), 200
+
+        # close the connection
+        cursor.close()
+        cnx.close()
     
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
 
-def send_appointment_reminder():
+def send_appointment_reminder(customer_phone_number, appt_date, appt_time):
+    load_dotenv('../.env.local')
+
     account_sid = os.environ['TWILIO_ACCOUNT_SID']
     auth_token = os.environ['TWILIO_AUTH_TOKEN']
     twilio_number = os.environ['TWILIO_NUMBER']
+    
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(
@@ -57,4 +118,4 @@ def send_appointment_reminder():
         to=customer_phone_number
     )
 
-    return jsonify({'message': 'Message sent successfully'}), 200
+    return message
