@@ -86,7 +86,7 @@ export default {
   components:{
     SubscriberNavbar,
   },
-  data(){
+ data(){
     return{
       selectedReminder: '',
       medications: [],
@@ -128,7 +128,7 @@ export default {
         appointmentTime: '',
       });
     },
-    saveData(){
+    saveData(){       
       axios.post('http://localhost:5000/reminders')
       .then((response) => {
         console.log('Data successfully stored', response);
