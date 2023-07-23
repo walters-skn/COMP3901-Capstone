@@ -15,10 +15,9 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/login" class="nav-link"> <strong> Logout </strong></router-link>
+            <router-link to="/login" class="nav-link" v-on:click="logoutPatient"> <strong> Logout </strong></router-link>
           </li>
 
-          <SignOut/>
 
         </ul>
       </div> 
@@ -31,16 +30,21 @@
   
   <script>
   import ImagePath2 from '@/assets/img/logo.png'
-  import SignOut from './SignOut.vue'
   
   export default {
-    components:{
-        SignOut,
-    },
+    name: 'SubscriberNavbar',
     data() {
       return {
         imagePath2: ImagePath2,
       };
+    },
+    methods: {
+      logoutPatient() {
+        // remove token from local storage
+        localStorage.removeItem('token');
+        // redirect to login page
+        this.$router.push('/login');
+      },
     },
   };
 

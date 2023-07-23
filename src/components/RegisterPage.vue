@@ -83,8 +83,7 @@
                 password: this.password,
                 address1: this.address1,
                 address2: this.address2
-            }).then((response) => {
-                console.log("Response: ", response)
+            }).then(() => {
                 this.$router.push('/login')
             }).catch((error) => {
                 console.log(error)

@@ -69,8 +69,7 @@ export default {
       axios.post('http://localhost:5000/login', { 
         email: this.email,
         password: this.password
-      }).then(response => {
-        console.log(response.data)
+      }).then((response) => {
         this.token = response.data.access_token
         localStorage.setItem('token', this.token)
         this.$router.push('/subscriber')

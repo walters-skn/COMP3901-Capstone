@@ -1,6 +1,6 @@
 db_config = {
     "user": "root",
-    "password": "",
+    "password": "mysql-25",
     "host": "localhost",
     "database": "diabot"
 }

@@ -5,13 +5,6 @@
 
         <h1 class="heading"> <strong> <b> List of Nearby Clinics and Hospitals</b></strong></h1>
 
-        <!-- <div class="filter">
-            <label for="parish-select" class="parish"> <strong> Parishes: </strong></label>
-            <select id="parish-select" v-model="selectedParish" class="parishselect">
-                <option value=""> ALL</option>
-                <option v-for="parish in parishes" :value="parish" :key="parish">{{ parish }}</option>
-            </select>
-        </div> -->
         <div class="filter">
             <label for="address-input" class="address"> <strong> Enter Health Care Facilities By Parish</strong></label>
             <input id="address-input" v-model="selectedAddress" class="addressinput" placeholder="Enter your Parish">
@@ -39,6 +32,7 @@
 
     import SubscriberNavbar from './SubscriberNavbar.vue'
     import axios from 'axios'
+    import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
     export default {
         components:{
@@ -46,6 +40,9 @@
         },
         data() {
             return {
+                token: null,
+                isAuthenticated: false,
+
                 hospitals: [],
                 parishes: [],
                 selectedParish: '',
@@ -56,7 +53,6 @@
             getAllHospitals() {
                 axios.get('http://localhost:5000/clinic')
                     .then((response) => {
-                        console.log('getAllHospitals- response:', response);
                         this.hospitals = response.data.clinics;
                     }).catch((error) => {
                         console.log('getAllHospitals- error:', error);
@@ -71,15 +67,16 @@
         created() {
             this.getAllHospitals();
             this.filterByParish();
+
+            this.isAuthenticated = isAuthenticated();
+            if(!this.isAuthenticated){
+                this.$router.push('/login')
+            } else {
+                this.token = localStorage.getItem('token');
+                setAuthorizationHeader(this.token);
+            }
         },
         computed: {
-            // filteredHospitals() {
-            //     if (!this.selectedParish) {
-            //         return this.hospitals;
-            //     } else {
-            //         return this.hospitals.filter((hospital) => hospital.parish === this.selectedParish);
-            //     }
-            // },
             filteredHospitals() {
                 if (!this.selectedAddress) {
                     return this.hospitals;

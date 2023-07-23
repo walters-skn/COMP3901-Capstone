@@ -24,7 +24,7 @@ def register():
         user = cursor.fetchone()
         if user:
             return jsonify({"error": "Email already exists"}), 400
-        cursor.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
+        cursor.execute("INSERT INTO users (email, upassword) VALUES (%s, %s)", (email, password))
         cnx.commit()
 
         cursor.execute("SELECT user_id FROM users WHERE email = %s", (email,))
@@ -47,7 +47,7 @@ def login():
     try:
         cnx = mysql.connector.connect(**db_config)
         cursor = cnx.cursor()
-        cursor.execute("SELECT * FROM users WHERE email = %s AND password = %s", (email, password))
+        cursor.execute("SELECT * FROM users WHERE email = %s AND upassword = %s", (email, password))
         user = cursor.fetchone()
         if user:
             access_token = create_access_token(identity=user[0])

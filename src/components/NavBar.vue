@@ -17,7 +17,6 @@
             <router-link to="/login" class="nav-link"> <strong> Login </strong></router-link>
           </li>
 
-          <SignOut/>
         </ul>
       </div> 
 
@@ -28,12 +27,9 @@
   
 <script>
   import ImagePath2 from '@/assets/img/logo.png'
-  import SignOut from './SignOut.vue'
   
   export default {
-    components:{
-        SignOut,
-    },
+    name: 'NavBar',
     data() {
       return {
         imagePath2: ImagePath2,

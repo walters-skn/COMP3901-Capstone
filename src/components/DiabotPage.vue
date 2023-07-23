@@ -79,7 +79,6 @@ export default {
     getQuestions() {
       axios.get('http://localhost:5000/questions')
         .then((response) => {
-          console.log('getQuestions response:', response);
           this.questions = response.data.questions;
           this.getNextQuestion();
         })
@@ -88,10 +87,8 @@ export default {
         });
     },
     getNextQuestion() {
-      console.log('getNextQuestion called. currentQuestionIndex:', this.currentQuestionIndex);
       if (this.currentQuestionIndex < this.questions.length) {
         this.question = this.questions[this.currentQuestionIndex];
-        console.log('Displaying question:', this.question);
       } else {
         this.submitResponses();
       }
@@ -107,12 +104,10 @@ export default {
       this.response = ''; // Clear the response input
     },
     submitResponses() {
-      console.log('submitResponses called. userResponses:', this.userResponses);
       axios.post('http://localhost:5000/answers', {
         responses: this.userResponses
       })
         .then((response) => {
-          console.log('submitResponses response:', response);
           this.risk_score = response.data.risk_score;
           this.risk_category = response.data.risk_category;
           this.chance_of_diabetes = response.data.chance_of_diabetes;
@@ -124,15 +119,7 @@ export default {
       this.assessmentComplete = true;
     },
     subscribeMe() {
-      axios.post('http://localhost:5000/register')
-        .then((response) => {
-          console.log('subscribeMe response:', response);
-        })
-        .catch((error) => {
-          console.log('subscribeMe error:', error);
-        });
-
-        this.$router.push('/register')
+      this.$router.push('/register')
     }
   }
 };

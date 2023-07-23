@@ -8,7 +8,7 @@
     
     <div class="links">
       <div class="container" >
-        <img :src="imagePath" alt="profile" class="img">
+        <img :src="imagePath1" alt="profile" class="img">
         <router-link link to="/diabot">
           <div class="title">
             <strong> Profile </strong>
@@ -111,42 +111,44 @@
 
 <script>
   import SubscriberNavbar from './SubscriberNavbar.vue'
-  
-  import ImagePath from '@/assets/img/profile.png'
+  import { isAuthenticated, setAuthorizationHeader } from '@/authUtils'
+
+  import ImagePath1 from '@/assets/img/profile.png'
   import ImagePath2 from '@/assets/img/profile.png'
   import ImagePath3 from '@/assets/img/location.png'
   import ImagePath4 from '@/assets/img/notify.png'
   import ImagePath5 from '@/assets/img/meal.png'
   import ImagePath6 from '@/assets/img/scan.png'
   import ImagePath7 from '@/assets/img/chat.png'
-
-  // import axios from 'axios'
   
   export default {
     data(){
       return{
-        // user: null,
+        token: null,
+        isAuthenticated: false,
 
-        imagePath: ImagePath,
+        imagePath1: ImagePath1,
         imagePath2: ImagePath2,
         imagePath3: ImagePath3,
-        imagePath4 : ImagePath4,
-        imagePath5 : ImagePath5,
-        imagePath6 : ImagePath6,
-        imagePath7 : ImagePath7
+        imagePath4: ImagePath4,
+        imagePath5: ImagePath5,
+        imagePath6: ImagePath6,
+        imagePath7: ImagePath7
       }
     },
     name:"subscriberPage",
     components:{
       SubscriberNavbar,
     },
-    // created() {
-    //   axios.get('user').then(response => {
-    //     console.log(response.data)
-    //   }).catch(error => {
-    //     console.log(error)
-    //   })
-    // }
+    created() {
+      this.isAuthenticated = isAuthenticated();
+      if(!this.isAuthenticated){
+        this.$router.push('/login')
+      } else {
+        this.token = localStorage.getItem('token');
+        setAuthorizationHeader(this.token);
+      }
+    }
   }
 
 </script>

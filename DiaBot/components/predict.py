@@ -1,4 +1,6 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
+
 import mysql.connector
 from db.connect import db_config
 
@@ -6,7 +8,7 @@ predict_bp = Blueprint('predict', __name__)
 
 
 @predict_bp.route('/questions', methods=['GET'])
-# @jwt_required()
+@jwt_required()
 def send_questions_to_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
@@ -32,7 +34,7 @@ def send_questions_to_client():
 
 
 @predict_bp.route('/answers', methods=['POST'])
-# @jwt_required()
+@jwt_required()
 def receive_symptoms_from_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
