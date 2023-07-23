@@ -160,22 +160,8 @@ export default {
         appointmentTime: '',
       });
     },
-<<<<<<< HEAD
     saveData(){       
       axios.post('http://localhost:5000/reminders')
-=======
-    removeMedication(index){
-      this.userResponses.medications.splice(index,1);
-    },
-    removeAppointment(index){
-      this.userResponses.appointments.splice(index,1);
-    },
-    saveData(){
-      console.log('userResponses:', this.userResponses)
-      axios.post('http://localhost:5000/reminders',{
-        responses: this.userResponses
-      })
->>>>>>> 6ec54bd9536de40ba7b1c0e550bc828b7ccaa020
       .then((response) => {
         console.log('Data successfully stored', response);
         this.medicationName = response.data.medicationName;
