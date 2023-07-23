@@ -76,7 +76,7 @@ TABLES['reminders'] = (
     "  `medication_id` INT,"
     "  `appt_date` DATE,"
     "  `appt_time` DATE,"
-    "  `remind_type` VARCHAR(255) NOT NULL,"
+    "  `remind_type` VARCHAR(25) NOT NULL,"
     "  `remind_desc` VARCHAR(255),"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id),"
     "  FOREIGN KEY(clinic_id) REFERENCES `clinics`(clinic_id),"
