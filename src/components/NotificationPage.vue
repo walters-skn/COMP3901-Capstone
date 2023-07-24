@@ -80,6 +80,7 @@
 
 import SubscriberNavbar from './SubscriberNavbar.vue'
 import axios from 'axios';
+import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
 export default {
   components:{
@@ -87,11 +88,14 @@ export default {
   },
  data(){
     return{
+      token: null,
+      isAuthenticated: false,
+
+
       selectedReminder: '',
       medications: [],
       appointments: [],
       // userResponses: [],
-      selectedReminder: '',
       medicationName: '',
       comDate: '',
       termDate: '',
@@ -138,20 +142,20 @@ export default {
       });
     },
     saveData(){
-      axios.post('http://localhost:5000/notifications',{
+      axios.post('http://localhost:5000/notification',{
       })
       .then((response) => {
         console.log('Data successfully stored', response);
 
-        this.selectedReminder = response.data.selectedReminder
-        this.medicationName = response.data.medicationName;
-        this.comDate = response.data.comDate;
-        this.termDate = response.data.termDate;
+        this.selectedReminder = response.data.remind_type
+        this.medicationName = response.data.medication_name;
+        this.comDate = response.data.commencement_date;
+        this.termDate = response.data.termination_date;
         this.frequency = response.data.frequency;
-        this.quantityMeds = response.data.quantityMeds;
-        this.location = response.data.location;
-        this.appointmentDate = response.data.appointmentDate;
-        this.appointmentTime = response.data.appointmentTime;
+        this.quantityMeds = response.data.quantity;
+        this.location = response.data.cname;
+        this.appointmentDate = response.data.appt_date;
+        this.appointmentTime = response.data.appt_time;
 
         this.selectedReminder = '';
         this.medications = [];
@@ -161,6 +165,16 @@ export default {
         console.log('Error', error);
       });
     },
+    created() {
+      this.isAuthenticated = isAuthenticated();
+        if(!this.isAuthenticated){
+            this.$router.push('/login')
+        } else {
+            this.token = localStorage.getItem('token');
+            setAuthorizationHeader(this.token);
+        }
+    }
+
   },
 };
 
