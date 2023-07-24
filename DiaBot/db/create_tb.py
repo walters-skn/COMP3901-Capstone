@@ -108,6 +108,13 @@ TABLES['diabetes_questions'] = (
     "   `is_answered` INT NOT NULL DEFAULT 0"
     ") ENGINE=InnoDB"
 )
+TABLES['profiles'] = (
+    "CREATE TABLE `profiles` ("
+    "    `profile_id` INT PRIMARY KEY,"
+    "    `patient_id` INT,"
+    "    FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
+    ")ENGINE=InnoDB"
+)
 
 
 def create_database(cursor):
