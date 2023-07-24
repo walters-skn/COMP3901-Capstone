@@ -91,11 +91,9 @@ export default {
       token: null,
       isAuthenticated: false,
 
-
       selectedReminder: '',
       medications: [],
       appointments: [],
-      // userResponses: [],
       medicationName: '',
       comDate: '',
       termDate: '',
@@ -147,7 +145,7 @@ export default {
       .then((response) => {
         console.log('Data successfully stored', response);
 
-        this.selectedReminder = response.data.remind_type
+        this.selectedReminder = response.data.remind_type;
         this.medicationName = response.data.medication_name;
         this.comDate = response.data.commencement_date;
         this.termDate = response.data.termination_date;

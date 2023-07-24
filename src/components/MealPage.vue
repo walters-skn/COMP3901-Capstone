@@ -5,45 +5,75 @@
     <SubscriberNavbar/>
 
     <div class="meals-container">
-        <h2> Enter your meal details below:</h2>
 
-        <label>Meal Type:</label>
-        <input type="text" class="input">
+        <h2 class="details"> Enter your meal details below:</h2>
+        
+        <div class="form-group">
+            <label>Meal Type: </label>
+            <input type="text" v-model="mealType" class="input">
+        </div>
 
-        <label>Meal Content:</label>
-        <input type="text" class="input">
+        <div class="form-group"> 
+            <label>Meal Content: </label>
+            <input type="text" v-model="mealCont" class="input">
+        </div>
 
-        <label>Nutritional Level:</label>
-        <input type="text" class="input">
+        <div class="form-group">        
+            <label>Nutritional Level: </label>
+            <input type="text" v-model="nutriLvl" class="input">
+        </div>
 
         <button @click="saveData" class="submit"> Submit </button>
 
     </div>
-
 </template>
 
 <script>
 
 import SubscriberNavbar from './SubscriberNavbar.vue'
 import axios from 'axios'
+import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
+
 
 export default {
     components:{
         SubscriberNavbar,
     },
+    data(){
+        return{
+            token: null,
+            isAuthenticated: false,
+        }
+    },
     methods:{
-        saveDate(){
+        saveData(){
             axios.post('http://localhost:5000/meal',{
             })
             .then((response) => {
                 console.log('Data successfully stored', response)
 
-                // this.
+                this.mealType = response.data.mealType;
+                this.mealCont = response.data.mealCont;
+                this.nutriLvl = response.data.nutriLvl;
+
+                this.mealType = [];
+                this.mealCont = [];
+                this.nutriLvl = [];
             })
             .catch((error) => {
                 console.log('Error', error)
             });
         },
+        created() {
+            this.isAuthenticated = isAuthenticated();
+            if(!this.isAuthenticated){
+                this.$router.push('/login')
+            } else {
+                this.token = localStorage.getItem('token');
+                setAuthorizationHeader(this.token);
+            }
+        }
+
     },
 };
 
@@ -51,6 +81,16 @@ export default {
 
 <style scoped>
 
+.meals-container{
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.details{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
 .submit{
     background-color: #33717f;
     color: white;
@@ -58,7 +98,7 @@ export default {
     margin-top: 10px ;
     padding: 8px 16px;
     font-size: 16px;
-    width: 20%;
+    width: 10%;
     cursor: pointer;
   }
 
