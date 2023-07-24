@@ -7,7 +7,7 @@ from db.connect import db_config
 meal_bp = Blueprint('meal', __name__)
 
 @meal_bp.route('/meal', methods=['POST'])
-@jwt_required()
+# @jwt_required()
 def get_meal():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
@@ -51,4 +51,12 @@ def get_meal():
         return jsonify({'error': str(e)}), 400
     
 def analyze_meal():
-    pass
+    # access the meal_cont from the meals table
+    cursor.execute("SELECT meal_cont FROM meals WHERE patient_id = %s", (patient_id,))
+    meal_row = cursor.fetchone()
+    if meal_row is not None:
+        meal = meal_row[0]
+    else:
+        return jsonify({'error': 'Meal not found'}), 400
+
+    

@@ -105,24 +105,6 @@ export default {
     }
   },
   methods:{
-    // addReminder(){
-    //   if(!this.selectedReminder) return;
-    //   if (this.selectedReminder === 'medication') {
-    //     this.medications.push({
-    //       medicationName: '',
-    //       comDate: '',
-    //       termDate: '',
-    //       frequency: '',
-    //       quantityMeds:'',
-    //     });
-    //   } else if(this.selectedReminder === 'appointment'){
-    //       this.appointments.push({
-    //         location: '',
-    //         appointmentDate: '',
-    //         appointmentTime: '',
-    //       });
-    //   }
-    // },
     addMedication(){
       this.medications.push({
         medicationName: '',
@@ -153,9 +135,6 @@ export default {
       })
       .then((response) => {
         console.log('Data successfully stored', response);
-        // this.selectedReminder = '';
-        // this.medications = [];
-        // this.appointments = [];
       })
       .catch((error) => {
         console.log('Error', error);
