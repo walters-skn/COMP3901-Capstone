@@ -30,7 +30,9 @@ def get_meal():
         cursor.execute("""
             INSERT INTO meals (patient_id, meal_type, meal_cont, nutri_lvl)
             VALUES (%s, %s, %s, %s)
-        """, (patient_id, meal_type, ))
+        """, (patient_id, meal_type, meal_cont, nutri_lvl))
+
+        cnx.commit()
 
         # Fetch the newly inserted meal
         cursor.execute("SELECT meal_cont FROM meals WHERE patient_id = %s", (patient_id,))
@@ -40,6 +42,10 @@ def get_meal():
         else:
             return jsonify({'error': 'Meal not found'}), 400
 
+        return jsonify({'message': 'Meal added successfully'}), 201
+
+        cursor.close()
+        cnx.close()
 
     except Exception as e:
         return jsonify({'error': str(e)}), 400

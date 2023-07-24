@@ -4,7 +4,7 @@
 
     <SubscriberNavbar/>
 
-    <div class="meals-container">
+    <form v-on:submit.prevent="saveData" class="meals-container">
 
         <h2 class="details"> Enter your meal details below:</h2>
         
@@ -23,9 +23,9 @@
             <input type="text" v-model="nutriLvl" class="input">
         </div>
 
-        <button @click="saveData" class="submit"> Submit </button>
+        <button class="submit"> Submit </button>
 
-    </div>
+    </form>
 </template>
 
 <script>
@@ -36,45 +36,43 @@ import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
 
 export default {
-    components:{
+    components: {
         SubscriberNavbar,
     },
-    data(){
-        return{
+    data() {
+        return {
             token: null,
             isAuthenticated: false,
+
+            mealType: '',
+            mealCont: '',
+            nutriLvl: ''
         }
     },
-    methods:{
-        saveData(){
-            axios.post('http://localhost:5000/meal',{
+    methods: {
+        saveData() {
+            axios.post('http://localhost:5000/meal', {
+                mealType: this.mealType,
+                mealCont: this.mealCont,
+                nutriLvl: this.nutriLvl
             })
             .then((response) => {
-                console.log('Data successfully stored', response)
-
-                this.mealType = response.data.mealType;
-                this.mealCont = response.data.mealCont;
-                this.nutriLvl = response.data.nutriLvl;
-
-                this.mealType = [];
-                this.mealCont = [];
-                this.nutriLvl = [];
+                console.log('saveData response: ', response)
             })
             .catch((error) => {
-                console.log('Error', error)
+                console.log('saveData Error: ', error)
             });
         },
-        created() {
-            this.isAuthenticated = isAuthenticated();
-            if(!this.isAuthenticated){
-                this.$router.push('/login')
-            } else {
-                this.token = localStorage.getItem('token');
-                setAuthorizationHeader(this.token);
-            }
-        }
-
     },
+    created() {
+        this.isAuthenticated = isAuthenticated();
+        if(!this.isAuthenticated){
+            this.$router.push('/login')
+        } else {
+            this.token = localStorage.getItem('token');
+            setAuthorizationHeader(this.token);
+        }
+    }
 };
 
 </script>

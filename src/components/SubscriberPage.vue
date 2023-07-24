@@ -9,7 +9,7 @@
     <div class="links">
       <div class="container" >
         <img :src="imagePath1" alt="profile" class="img">
-        <router-link link to="/diabot">
+        <router-link link to="/subscriber">
           <div class="title">
             <strong> Profile </strong>
           </div>
@@ -21,7 +21,7 @@
     <div class="links">
       <div class="container" >
         <img :src="imagePath2" alt="profile" class="img">
-        <router-link link to="/diabot">
+        <router-link link to="/subscriber">
           <div class="title">
             <strong> Medical Data </strong>
           </div>
@@ -45,7 +45,7 @@
     <div class="links">
       <div class="container" >
         <img :src="imagePath6" alt="profile" class="img">
-        <router-link link to="/diabot">
+        <router-link link to="/subscriber">
         <div class="title">
           <strong> <b> View History </b> </strong> 
         </div>
@@ -73,7 +73,7 @@
     <div class="links">
       <div class="container" >
         <img :src="imagePath5" alt="profile" class="img">
-        <router-link link to="/diabot">
+        <router-link link to="/meal">
           <div class="title">
             <strong> Mean Plan </strong>
           </div>
@@ -85,7 +85,7 @@
     <div class="links">
       <div class="container" >
         <img :src="imagePath7" alt="profile" class="img">
-        <router-link link to="/meal">
+        <router-link link to="/subscriber">
           <div class="title">
             <strong> Nutritional Scanner </strong>
           </div>

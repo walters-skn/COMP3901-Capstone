@@ -93,7 +93,7 @@ def add_notification():
 
         send_appointment_reminder(customer_phone_number, appt_date, appt_time)
 
-        return jsonify({'message': 'Reminder added successfully!'}), 200
+        return jsonify({'message': 'Reminder added successfully!'}), 201
 
         # close the connection
         cursor.close()
