@@ -42,4 +42,4 @@ INSERT INTO diabetes_questions (question) VALUES ('Are you taking any form of me
 INSERT INTO diabetes_questions (question) VALUES ('Is your glucose level above 130mg/dL?');
 INSERT INTO diabetes_questions (question) VALUES ('Is there a history of diabetes in your family?');
 
-
+INSERT INTO profiles (profile_id, patient_id) VALUES ();

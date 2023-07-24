@@ -7,7 +7,6 @@
       <label class="reminder_label"><strong>Select Reminder</strong></label>
       <select v-model="selectedReminder" class="reminder">
         <option disabled value=""> Please select one</option>
-        <!-- <option value="none">None</option> -->
         <option value="medication">Medication</option>
         <option value="appointment">Appointment</option>
       </select>
@@ -75,35 +74,13 @@
 
   </div>
 
-  <!-- Users can see the information they just entered -->
-  <div class="entries">
-    <h2> Entries </h2>
-
-    <ul>
-      <li v-for="(med,index) in userResponses.medications" :key="index" > 
-        <strong> Medication Name</strong> {{ med.medicationName }}
-        <strong> Commencement Date</strong> {{ med.comDate }}
-        <strong> Termination Date</strong> {{ med.termDate }}
-        <strong> Frequency </strong> {{ med.frequency }}
-        <strong> Quantity</strong> {{ med.quantityMeds }}
-        <button @click="removeMedication(index)">Delete</button>
-      </li>
-
-      <li v-for="(apt,index) in userResponses.appointments" :key="index">
-        <strong>Location</strong> {{ apt.location }}
-        <strong> Appointment Date</strong> {{ apt.appointmentDate }}
-        <strong> Appointment Time</strong> {{ apt.appointmentTime }}
-        <button @click="removeAppointment(index)">Delete</button>
-      </li>
-    </ul>
-  </div>
-
 </template>
 
 <script>
 
 import SubscriberNavbar from './SubscriberNavbar.vue'
 import axios from 'axios';
+import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
 export default {
   components:{
@@ -111,10 +88,14 @@ export default {
   },
  data(){
     return{
+      token: null,
+      isAuthenticated: false,
+
+
       selectedReminder: '',
       medications: [],
       appointments: [],
-      userResponses: [],
+      // userResponses: [],
       medicationName: '',
       comDate: '',
       termDate: '',
@@ -160,43 +141,40 @@ export default {
         appointmentTime: '',
       });
     },
-    removeMedication(index){
-      this.userResponses.medications.splice(index,1);
-    },
-    removeAppointment(index){
-      this.userResponses.appointments.splice(index,1);
-    },
     saveData(){
-      console.log('userResponses:', this.userResponses)
-      axios.post('http://localhost:5000/reminders',{
-        responses: this.userResponses
+      axios.post('http://localhost:5000/notification',{
       })
       .then((response) => {
         console.log('Data successfully stored', response);
-        this.medicationName = response.data.medicationName;
-        this.comDate = response.data.comDate;
-        this.termDate = response.data.termDate;
-        this.frequency = response.data.frequency;
-        this.quantityMeds = response.data.quantityMeds;
-        this.location = response.data.location;
-        this.appointmentDate = response.data.appointmentDate;
-        this.appointmentTime = response.data.appointmentTime;
 
-        this.userResponses.medications = this.medications.slice();
-        this.userResponses.appointments = this.appointments.slice();
+        this.selectedReminder = response.data.remind_type
+        this.medicationName = response.data.medication_name;
+        this.comDate = response.data.commencement_date;
+        this.termDate = response.data.termination_date;
+        this.frequency = response.data.frequency;
+        this.quantityMeds = response.data.quantity;
+        this.location = response.data.cname;
+        this.appointmentDate = response.data.appt_date;
+        this.appointmentTime = response.data.appt_time;
+
+        this.selectedReminder = '';
+        this.medications = [];
+        this.appointments = [];
       })
       .catch((error) => {
         console.log('Error', error);
       });
-      this.userResponses={
-        medications: this.medications.slice(),
-        appointments: this.appointments.slice()
-      };
-      // Clears form after submission
-      this.selectedReminder = '';
-      // this.medications = [];
-      // this.appointments =[];
     },
+    created() {
+      this.isAuthenticated = isAuthenticated();
+        if(!this.isAuthenticated){
+            this.$router.push('/login')
+        } else {
+            this.token = localStorage.getItem('token');
+            setAuthorizationHeader(this.token);
+        }
+    }
+
   },
 };
 
