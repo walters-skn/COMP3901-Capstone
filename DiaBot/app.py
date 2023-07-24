@@ -8,6 +8,7 @@ from db.connect import db_config
 app = create_app()
 app.config.from_object(__name__)
 app.config["JWT_SECRET_KEY"] = "comp3901-secret-key"
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
 jwt = JWTManager(app)
 
 CORS(app, resources={r'/*': {'origins': '*'}})
