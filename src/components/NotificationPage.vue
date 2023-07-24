@@ -91,7 +91,6 @@ export default {
       medications: [],
       appointments: [],
       // userResponses: [],
-      selectedReminder: '',
       medicationName: '',
       comDate: '',
       termDate: '',

@@ -85,7 +85,7 @@
     <div class="links">
       <div class="container" >
         <img :src="imagePath7" alt="profile" class="img">
-        <router-link link to="/scanner">
+        <router-link link to="/meal">
           <div class="title">
             <strong> Nutritional Scanner </strong>
           </div>
