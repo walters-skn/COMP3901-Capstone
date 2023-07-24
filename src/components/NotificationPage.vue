@@ -7,7 +7,6 @@
       <label class="reminder_label"><strong>Select Reminder</strong></label>
       <select v-model="selectedReminder" class="reminder">
         <option disabled value=""> Please select one</option>
-        <!-- <option value="none">None</option> -->
         <option value="medication">Medication</option>
         <option value="appointment">Appointment</option>
       </select>
@@ -75,29 +74,6 @@
 
   </div>
 
-  <!-- Users can see the information they just entered -->
-  <div class="entries">
-    <h2> Entries </h2>
-
-    <ul>
-      <li v-for="(med,index) in userResponses.medications" :key="index" > 
-        <strong> Medication Name</strong> {{ med.medicationName }}
-        <strong> Commencement Date</strong> {{ med.comDate }}
-        <strong> Termination Date</strong> {{ med.termDate }}
-        <strong> Frequency </strong> {{ med.frequency }}
-        <strong> Quantity</strong> {{ med.quantityMeds }}
-        <button @click="removeMedication(index)">Delete</button>
-      </li>
-
-      <li v-for="(apt,index) in userResponses.appointments" :key="index">
-        <strong>Location</strong> {{ apt.location }}
-        <strong> Appointment Date</strong> {{ apt.appointmentDate }}
-        <strong> Appointment Time</strong> {{ apt.appointmentTime }}
-        <button @click="removeAppointment(index)">Delete</button>
-      </li>
-    </ul>
-  </div>
-
 </template>
 
 <script>
@@ -114,7 +90,8 @@ export default {
       selectedReminder: '',
       medications: [],
       appointments: [],
-      userResponses: [],
+      // userResponses: [],
+      selectedReminder: '',
       medicationName: '',
       comDate: '',
       termDate: '',
@@ -160,19 +137,13 @@ export default {
         appointmentTime: '',
       });
     },
-    removeMedication(index){
-      this.userResponses.medications.splice(index,1);
-    },
-    removeAppointment(index){
-      this.userResponses.appointments.splice(index,1);
-    },
     saveData(){
-      console.log('userResponses:', this.userResponses)
-      axios.post('http://localhost:5000/reminders',{
-        responses: this.userResponses
+      axios.post('http://localhost:5000/notifications',{
       })
       .then((response) => {
         console.log('Data successfully stored', response);
+
+        this.selectedReminder = response.data.selectedReminder
         this.medicationName = response.data.medicationName;
         this.comDate = response.data.comDate;
         this.termDate = response.data.termDate;
@@ -182,20 +153,13 @@ export default {
         this.appointmentDate = response.data.appointmentDate;
         this.appointmentTime = response.data.appointmentTime;
 
-        this.userResponses.medications = this.medications.slice();
-        this.userResponses.appointments = this.appointments.slice();
+        this.selectedReminder = '';
+        this.medications = [];
+        this.appointments = [];
       })
       .catch((error) => {
         console.log('Error', error);
       });
-      this.userResponses={
-        medications: this.medications.slice(),
-        appointments: this.appointments.slice()
-      };
-      // Clears form after submission
-      this.selectedReminder = '';
-      // this.medications = [];
-      // this.appointments =[];
     },
   },
 };
