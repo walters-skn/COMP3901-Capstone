@@ -3,8 +3,11 @@
   <div class="nav_container">
 
     <nav class="navbar">
-      <router-link to="/">
+      <router-link to="/subscriber" class="nav-link">
+        <div class="inline">
           <img :src="imagePath" alt="home-logo" class="home">
+          <span class="brand-name"> <strong> DIABOT </strong></span>
+        </div>
       </router-link>
 
       <div class="collapse">
@@ -39,18 +42,33 @@
 
   </script>
   
-<style scoped>
+  <style scoped>
 
-.nav_container{
-  width: 100%;
-}
+  .brand-name{
+    font-size:24px;
+    color: white;
+    margin-left: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-decoration: none;
+  }
+
+  .inline{
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .nav_container{
+    width: 100%;
+    height: 30%;
+  }
 
   .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
+    padding: 20px 30px;
     background-color: #5CA2B1;
+    height: auto;
   }
 
   .navbar_nav {
@@ -62,16 +80,17 @@
 
   .nav-link{
     color: white;
+    text-decoration: none;
+    padding: 0 10px;
   }
 
-  .nav-item{
-    margin-right: 10px;
+  .nav-link:hover{
+    background-color:#4a7e8a;
   }
 
   .home{ 
     height: 50px;
     width: 70px;
-    margin: -1%;
   }
         
   .collapse{
@@ -79,7 +98,6 @@
     font-size: 20px;
     display: flex;
     justify-content: flex-end;
-    padding-right: 20px;
   }
 
 </style>

@@ -7,7 +7,7 @@
     
     <div class="content-container">
         <SideMenu/>
-
+    <!-- </div> -->
         <div class="filter">
             <h1 class="heading"> <strong> <b> List of Health Care Facilities</b></strong></h1>
             <label for="address-input" class="address">  Enter Health Care Facilities You Wish To Locate By Parish </label>
@@ -70,7 +70,8 @@
                 ? this.hospitals.filter((hospital) => hospital.parish === this.selectedParish)
                 : this.hospitals;
             }
-        },
+        }
+        ,
         // created() {
         //     // this.getAllHospitals();
         //     // this.filterByParish();
@@ -162,6 +163,7 @@
     }
 
     .details{
+        /* background-color: #6b7578; */
         padding: 10px;
         border: 5px solid #ccc;
         border-radius: 4px ;
@@ -180,5 +182,4 @@
     p {
         margin: 5px 0;
     }
-
 </style>

@@ -4,7 +4,7 @@
   
     <div class="page-container">
         <div class="body">
-            <h2 class = "title"> SIGN UP TO GET STARTED </h2> 
+            <h2 class = "title"> Create Account </h2> 
         </div>
             
         <div class = "form-container">
@@ -144,7 +144,7 @@
         padding: 10px px;
         width: 100%;
         text-align: center;
-        font-size: 45px;
+        font-size: 40px;
         margin-bottom: 10px;
     }
         
