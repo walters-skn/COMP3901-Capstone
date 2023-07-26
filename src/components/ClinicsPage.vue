@@ -47,6 +47,7 @@
                 parishes: [],
                 selectedParish: '',
                 selectedAddress: '',
+                filteredHospitals: [],
             };
         },
         methods: {
@@ -54,6 +55,7 @@
                 axios.get('http://localhost:5000/clinic')
                     .then((response) => {
                         this.hospitals = response.data.clinics;
+                        this.filterByParish();
                     }).catch((error) => {
                         console.log('getAllHospitals- error:', error);
                     })
@@ -65,8 +67,8 @@
             }
         },
         created() {
-            this.getAllHospitals();
-            this.filterByParish();
+            // this.getAllHospitals();
+            // this.filterByParish();
 
             this.isAuthenticated = isAuthenticated();
             if(!this.isAuthenticated){
@@ -75,21 +77,31 @@
                 this.token = localStorage.getItem('token');
                 setAuthorizationHeader(this.token);
             }
+
+            this.getAllHospitals();
         },
-        computed: {
-            filteredHospitals() {
-                if (!this.selectedAddress) {
-                    return this.hospitals;
-                } else {
-                    const selectedAddressLower = this.selectedAddress.toLowerCase();
-                    return this.hospitals.filter((hospital) =>
-                        hospital.address.toLowerCase().includes(selectedAddressLower)
-                    );
-                }
-            },
-        },
+        // computed: {
+        //     filteredHospitals() {
+        //         if (!this.selectedAddress) {
+        //             return this.hospitals;
+        //         } else {
+        //             const selectedAddressLower = this.selectedAddress.toLowerCase();
+        //             return this.hospitals.filter((hospital) =>
+        //                 hospital.address.toLowerCase().includes(selectedAddressLower)
+        //             );
+        //         }
+        //     },
+        // },
         mounted() {
             this.parishes = Array.from(new Set(this.hospitals.map((hospital) => hospital.parish)));
+        },
+        watch: {
+            selectedAddress() {
+                this.filterByParish();
+            },
+            selectedParish() {
+                this.filterByParish();
+            }
         }
     }
 </script>

@@ -6,17 +6,17 @@
 
   <div class="page-layout">
     
-    <div class="links">
+    <!-- <router-link link to="/subscriber">
+      <div class="links">
       <div class="container" >
         <img :src="imagePath1" alt="profile" class="img">
-        <router-link link to="/diabot">
           <div class="title">
             <strong> Profile </strong>
           </div>
-        </router-link>
-        <p class="detail"> View Profile Information </p>
+          <p class="detail"> View Profile Information </p>
+        </div>
       </div>
-    </div>
+    </router-link> -->
 
     <div class="links">
       <div class="container" >
@@ -50,7 +50,7 @@
           <strong> <b> View History </b> </strong> 
         </div>
         </router-link>
-        <p class="detail"> View Your Chat History</p>
+        <p class="detail"> View Your Meal History</p>
       </div>
     </div>
     
@@ -78,7 +78,7 @@
             <strong> Meal Plan </strong>
           </div>
         </router-link>
-        <p class="detail">Suggested Meal Plans</p>
+        <p class="detail">Recommended Meal Plans</p>
       </div>
     </div>
 

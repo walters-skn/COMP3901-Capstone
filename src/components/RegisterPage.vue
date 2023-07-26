@@ -7,13 +7,15 @@
             <h2 class = "title"> SIGN UP TO GET STARTED </h2> 
         </div>
             
-        <form v-on:submit.prevent="handleRegister">
-            <div class = "form-container">
+        <div class = "form-container">
+            <form v-on:submit.prevent="handleRegister">
                 <div class="box">
+                    
                     <div class="form-group">
                         <label> First Name: </label>
                         <input type="text" class="form-control" placeholder="First Name" v-model="fname" required/>
                     </div>
+
                     <div class="form-group">
                         <label> Last Name: </label>
                         <input type="text" class="form-control" placeholder="Last Name" v-model="lname" required/>
@@ -44,10 +46,9 @@
                     </div> 
 
                 </div>
-            </div>
+            </form>
+        </div>
 
-
-        </form>
     </div>
 </template>
         
@@ -130,7 +131,7 @@
   
     .box{
         display: flex;
-        flex-direction:column ;
+        flex-direction: column;
         margin-bottom: 10px;
         max-width: 400px;
         width: 400px;
