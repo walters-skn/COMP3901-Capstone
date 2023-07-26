@@ -7,8 +7,8 @@
             <h2 class = "title"> SIGN UP TO GET STARTED </h2> 
         </div>
             
-        <form v-on:submit.prevent="handleRegister">
-            <div class = "form-container">
+        <div class = "form-container">
+            <form v-on:submit.prevent="handleRegister">
                 <div class="box">
                     <div class="form-group">
                         <label> First Name: </label>
@@ -43,9 +43,9 @@
                         <button class="btn btn-primary btn-block">Sign Up</button>
                     </div> 
                 </div>
-            </div>
-
-        </form>
+                
+            </form>
+        </div>
     </div>
 </template>
         
@@ -103,7 +103,7 @@
         justify-content: center;
         align-items: center;
         /* width: 50%; */
-        height: 85vh;
+        /* height: calc(100vh - 90px); */
         margin-top: 10px;
     }
         
@@ -114,7 +114,7 @@
         padding:20px;
         width: 70vh;
         display: flex;
-        height: 65vh;
+        /* heiht: 65vh; */
         justify-content: center;
     }
         
@@ -129,7 +129,7 @@
   
     .box{
         display: flex;
-        flex-direction:column ;
+        flex-direction: column;
         margin-bottom: 10px;
         max-width: 400px;
         width: 400px;
