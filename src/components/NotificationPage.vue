@@ -48,32 +48,31 @@
       </div>
     </div>
       
-      <div class="option-section">
+    <div class="option-section">
 
-        <div v-if="selectedReminder === 'appointment'">
-          <label for="appointment" class="label"><strong> Appointment Reminder</strong></label>
+      <div v-if="selectedReminder === 'appointment'">
+        <label for="appointment" class="label"><strong> Appointment Reminder</strong></label>
 
-          <div class="apt">
-            <div v-for="(apt,index) in appointments" :key="index" class="appointment-container">  
-              <label>Location:</label>
-              <input type="text" v-model="apt.location" class="input">
+        <div class="apt">
+          <div v-for="(apt,index) in appointments" :key="index" class="appointment-container">  
+            <label>Location:</label>
+            <input type="text" v-model="apt.location" class="input">
 
-              <label>Date:</label>
-              <input type="date" v-model="apt.appointmentDate" class="input">
+            <label>Date:</label>
+            <input type="date" v-model="apt.appointmentDate" class="input">
 
-              <label>Time:</label>
-              <input type="time" v-model="apt.appointmentTime" class="input">
-            </div>
-
-            <button @click="addAppointment" class="btn">+</button>
-            <button @click="saveData" class="submit"> Submit </button>
-
+            <label>Time:</label>
+            <input type="time" v-model="apt.appointmentTime" class="input">
           </div>
+
+          <button @click="addAppointment" class="btn">+</button>
+          <button @click="saveData" class="submit"> Submit </button>
+
         </div>
       </div>
+    </div>
 
   </div>
-
 </template>
 
 <script>
@@ -105,24 +104,6 @@ export default {
     }
   },
   methods:{
-    addReminder(){
-      if(!this.selectedReminder) return;
-      if (this.selectedReminder === 'medication') {
-        this.medications.push({
-          medicationName: '',
-          comDate: '',
-          termDate: '',
-          frequency: '',
-          quantityMeds:'',
-        });
-      } else if(this.selectedReminder === 'appointment'){
-          this.appointments.push({
-            location: '',
-            appointmentDate: '',
-            appointmentTime: '',
-          });
-      }
-    },
     addMedication(){
       this.medications.push({
         medicationName: '',

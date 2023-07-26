@@ -26,6 +26,7 @@
         <button @click="saveData" class="submit"> Submit </button>
 
     </div>
+
 </template>
 
 <script>

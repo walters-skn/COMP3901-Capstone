@@ -11,7 +11,7 @@
         <ul class="navbar_nav">
 
           <li class="nav-item">
-            <router-link to="/register" class="nav-link"> <strong> Sign Up ||</strong></router-link>
+            <router-link to="/register" class="nav-link"> <strong> Sign Up </strong></router-link>
           </li>
           <li class="nav-item">
             <router-link to="/login" class="nav-link"> <strong> Login </strong></router-link>
@@ -64,6 +64,10 @@
     color: white;
   }
 
+  .nav-item{
+    margin-right: 10px;
+  }
+
   .home{ 
     height: 75px;
     width: 90px;
@@ -75,6 +79,7 @@
     font-size: 20px;
     display: flex;
     justify-content: flex-end;
+    padding-right: 20px;
   }
 
 </style>

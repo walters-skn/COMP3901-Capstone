@@ -8,18 +8,6 @@
     
     <div class="links">
       <div class="container" >
-        <img :src="imagePath1" alt="profile" class="img">
-        <router-link link to="/diabot">
-          <div class="title">
-            <strong> Profile </strong>
-          </div>
-        </router-link>
-        <p class="detail"> View Profile Information </p>
-      </div>
-    </div>
-
-    <div class="links">
-      <div class="container" >
         <img :src="imagePath2" alt="profile" class="img">
         <router-link link to="/diabot">
           <div class="title">
@@ -73,16 +61,16 @@
     <div class="links">
       <div class="container" >
         <img :src="imagePath5" alt="profile" class="img">
-        <router-link link to="/diabot">
+        <router-link link to="/meal">
           <div class="title">
-            <strong> Mean Plan </strong>
+            <strong> Meal Plan </strong>
           </div>
         </router-link>
         <p class="detail">Suggested Meal Plans</p>
       </div>
     </div>
 
-    <div class="links">
+    <!-- <div class="links">
       <div class="container" >
         <img :src="imagePath7" alt="profile" class="img">
         <router-link link to="/meal">
@@ -92,7 +80,7 @@
         </router-link>
         <p class="detail">Check Your Meal's Nutritional Value</p>
       </div>
-    </div>    
+    </div>     -->
 
     <div class="links">
       <div class="container" >
@@ -139,7 +127,8 @@
     name:"subscriberPage",
     components:{
       SubscriberNavbar,
-    },
+    }
+    ,
     created() {
       this.isAuthenticated = isAuthenticated();
       if(!this.isAuthenticated){
