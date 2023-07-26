@@ -39,7 +39,8 @@
 
           <div v-if="risk_category==='High risk' || risk_category==='Very high risk'">
             <h2>Do you want to subscribe to be a patient of Diabot? 🏥</h2>
-            <button v-on:click="subscribeMe">Yes </button>
+            <button v-on:click="subscribeMe">Yes</button>
+            <button>No</button>
           </div>
         </section>
       </div>
@@ -120,7 +121,10 @@ export default {
     },
     subscribeMe() {
       this.$router.push('/register')
-    }
+    },
+    // subscribeMeNot() {
+    //   // 
+    // }
   }
 };
 </script>
