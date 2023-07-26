@@ -38,14 +38,14 @@
                         <label> Address 2: </label>
                         <input type="text" class="form-control" placeholder="Address 2"  v-model="address2"/>
                     </div>
-        
-                    <div class="submit-group">
-                        <button class="btn btn-primary btn-block">Sign Up</button>
-                    </div> 
                 </div>
-                
-            </form>
-        </div>
+            </div>
+
+            <div class="submit-group">
+                <button class="btn btn-primary btn-block">Sign Up</button>
+            </div> 
+
+        </form>
     </div>
 </template>
         
@@ -114,7 +114,7 @@
         padding:20px;
         width: 70vh;
         display: flex;
-        /* heiht: 65vh; */
+        height: 65vh;
         justify-content: center;
     }
         
@@ -160,7 +160,7 @@
         font-size: 20px;
         font-family: 'Times New Roman', Times, serif;
         cursor: pointer;
-        width: 50%;
+        width: 20%;
     }
 
     .form-control{
@@ -173,11 +173,8 @@
         margin-bottom: 10px;
     }
 
-    .error-message{
-      color:red;
-      font-size: 15px;
-      text-align: center;
-      margin-top:10px
+    .btn:hover{
+        background-color: #6da6b3;
     }
 
 </style>

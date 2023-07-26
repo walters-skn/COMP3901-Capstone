@@ -82,7 +82,7 @@
       </div>
     </div>
 
-    <div class="links">
+    <!-- <div class="links">
       <div class="container" >
         <img :src="imagePath7" alt="profile" class="img">
         <router-link link to="/subscriber">
@@ -92,7 +92,7 @@
         </router-link>
         <p class="detail">Check Your Meal's Nutritional Value</p>
       </div>
-    </div>    
+    </div>     -->
 
     <div class="links">
       <div class="container" >
@@ -139,7 +139,8 @@
     name:"subscriberPage",
     components:{
       SubscriberNavbar,
-    },
+    }
+    ,
     created() {
       this.isAuthenticated = isAuthenticated();
       if(!this.isAuthenticated){

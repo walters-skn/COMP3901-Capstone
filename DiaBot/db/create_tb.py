@@ -95,10 +95,14 @@ TABLES['meals'] = (
     "CREATE TABLE `meals` ("
     "  `meal_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
     "  `patient_id` INT,"
+    "  `recommend_id` INT,"
     "  `meal_type` VARCHAR(255),"
     "  `meal_cont` VARCHAR(255) NOT NULL,"
     "  `nutri_lvl` INT NOT NULL,"
-    "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
+    "  `meal_date` DATE,"
+    "  `meal_time` TIME,"
+    "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id),"
+    "  FOREIGN KEY(recommend_id) REFERENCES `recommendations`(recommend_id)"
     ") ENGINE=InnoDB"
 )
 TABLES['diabetes_questions'] = (
@@ -115,6 +119,14 @@ TABLES['profiles'] = (
     "    FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ")ENGINE=InnoDB"
 )
+TABLES['recommendations'] = (
+    "CREATE TABLE `recommendations` ("
+    "    `recommend_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
+	"    `risk_category` VARCHAR(120),"
+	"    `risk_meals` VARCHAR(255)"
+    ")ENGINE=InnoDB"
+)
+
 
 
 def create_database(cursor):
