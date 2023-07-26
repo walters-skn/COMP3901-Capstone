@@ -5,7 +5,7 @@
     <nav class="navbar">
       <router-link to="/subscriber" class="nav-link">
         <div class="inline">
-          <img :src="imagePath2" alt="home-logo" class="home">
+          <img :src="imagePath" alt="home-logo" class="home">
           <span class="brand-name"> <strong> DIABOT </strong></span>
         </div>
       </router-link>
@@ -36,13 +36,13 @@
 </template>
   
 <script>
-  import ImagePath2 from '@/assets/img/home.png'
+  import ImagePath from '@/assets/img/home.png'
   
   export default {
     name: 'SubscriberNavbar',
     data() {
       return {
-        imagePath2: ImagePath2,
+        imagePath: ImagePath,
         showDropdown: false,
         showLogoutDropdown: false,
       };

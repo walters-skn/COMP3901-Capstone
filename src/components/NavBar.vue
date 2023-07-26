@@ -4,7 +4,7 @@
 
     <nav class="navbar">
       <router-link to="/">
-          <img :src="imagePath2" alt="home-logo" class="home">
+          <img :src="imagePath" alt="home-logo" class="home">
       </router-link>
 
       <div class="collapse">
@@ -26,13 +26,13 @@
 </template>
   
 <script>
-  import ImagePath2 from '@/assets/img/logo.png'
+  import ImagePath from '@/assets/img/home.png'
   
   export default {
     name: 'NavBar',
     data() {
       return {
-        imagePath2: ImagePath2,
+        imagePath: ImagePath,
       };
     },
   };
@@ -69,7 +69,7 @@
   }
 
   .home{ 
-    height: 75px;
+    height: 70px;
     width: 90px;
     margin: -1%;
   }
