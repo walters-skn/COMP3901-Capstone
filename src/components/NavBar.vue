@@ -45,7 +45,7 @@
   width: 100%;
 }
 
-.navbar {
+  .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -69,8 +69,8 @@
   }
 
   .home{ 
-    height: 70px;
-    width: 90px;
+    height: 50px;
+    width: 70px;
     margin: -1%;
   }
         

@@ -27,13 +27,12 @@
           <h3 class="guidelines"> <strong> <b>Guidelines For Using Diabot  </b> </strong></h3>
           <p class="points"> <strong> Before using Diabot, it is vital to follow these instructions carefully.</strong>  <br> <strong>These consist of:</strong>
             <ul class="points">
-              <li> 1. Keep Your Profile and Data Updated: To maintain accuracy, regularly update your profile and data.</li>
-              <li> 2. Leverage Diabot's Numerous Features: Make the most of the various features and resources Diabot has to offer.</li>
-              <li> 3. Consistently Evaluate and Track Your Development: Monitor your development and progress regularly.</li>
+              <li> 1. Keep Your Profile and Data Updated.</li>
+              <li> 2. Leverage Diabot's Numerous Features.</li>
+              <li> 3. Consistently Evaluate and Track Your Development.</li>
             </ul>
           </p>
         </div>
-        <br>
 
         <p class="points"> <strong> Ready to take control of your diabetes management? <br> Click the button below to get started. </strong></p>
 
@@ -75,7 +74,7 @@ export default {
 <style scoped>
 
   .img{ 
-    height: 64vh;
+    height: 51vh;
     width: 100%;
   }
 
@@ -106,7 +105,7 @@ export default {
 
   .diabot-content{
     text-align: justify;
-    font-size: 25px;
+    font-size: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     padding: 0 10% ;
   }
@@ -138,33 +137,31 @@ export default {
 
   .guidelines{
     font-family: 'Times New Roman', Times, serif;
-    font-size: 30px;
+    font-size: 24px;
     color: white;
     /* text-align: justify; */
   }
 
   .points{
     font-family: 'Times New Roman', Times, serif;
-    font-size: 25px;
+    font-size: 22px;
     color: white;
   }
 
   .btn {
     display: block;
-    width: 100%;
-    max-width: 150px;
-    padding: 15px;
+    width: 10%;
+    padding: 10px;
     color: white;
     background-color: #37717e;
-    border: none;
     cursor: pointer;
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 25px;
+    font-size: 22px;
   }
 
   .btn:hover{
-    background-color: #21616f;
+    background-color: #4a7e8a;
   }
 
   .button-container {
