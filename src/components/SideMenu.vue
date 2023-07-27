@@ -36,7 +36,7 @@
         </router-link>
 
         <!-- View Meal History -->
-        <router-link @click="toggleDropdown('/meal')" :class="{ 'links': true, 'active': selectedLink === '/meal' }" to="/meal">
+        <router-link @click="toggleDropdown('/history')" :class="{ 'links': true, 'active': selectedLink === '/history' }" to="/history">
             <div class="container">
                 <img :src="imagePath4" alt="profile" class="img">
                 <h3 class="title"> Meal History </h3>
@@ -98,10 +98,10 @@
   
 <style scoped>
 
-    .title{
-        font-size:18px;
-        margin: 0;
-    }
+  .title{
+    font-size:18px;
+    margin: 0;
+  }
 
   .img{
     width: 35px;

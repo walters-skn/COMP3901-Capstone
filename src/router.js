@@ -15,6 +15,7 @@ import MealPlan from '@/components/MealPlan.vue';
 import MedicalData from './components/MedicalData.vue';
 import SideMenu from './components/SideMenu.vue';
 import MedicalHisory from './components/MedicalHistory.vue';
+import AdminPage from './components/AdminPage.vue';
 
 const routes = [
     { path: '/', component: HomePage },
@@ -32,6 +33,7 @@ const routes = [
     { path: '/medical', component: MedicalData},
     { path: '/menu', component: SideMenu},
     { path: '/history', component: MedicalHisory},
+    { path: '/admin', component: AdminPage},
 ]
 
 const router = createRouter({
