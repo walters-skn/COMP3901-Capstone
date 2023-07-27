@@ -1,13 +1,17 @@
 
 <template>
-    <div>
-        <SubscriberNavbar/>
 
-        <h1 class="heading"> <strong> <b> List of Nearby Clinics and Hospitals</b></strong></h1>
+    <div class="main-container">
+        <SubscriberNavbar/>
+    </div>
+    
+    <div class="content-container">
+        <SideMenu/>
 
         <div class="filter">
-            <label for="address-input" class="address"> <strong> Enter Health Care Facilities By Parish</strong></label>
-            <input id="address-input" v-model="selectedAddress" class="addressinput" placeholder="Enter your Parish">
+            <h1 class="heading"> <strong> <b> List of Health Care Facilities</b></strong></h1>
+            <label for="address-input" class="address">  Enter Health Care Facilities You Wish To Locate By Parish </label>
+            <input id="address-input" v-model="selectedAddress" class="address-input" placeholder="Enter your Parish">
         </div>
 
         <br>
@@ -29,14 +33,15 @@
   </template>
   
 <script>
-
+    import SideMenu from './SideMenu.vue'
     import SubscriberNavbar from './SubscriberNavbar.vue'
     import axios from 'axios'
-    import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
+    // import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
     export default {
         components:{
             SubscriberNavbar,
+            SideMenu,
         },
         data() {
             return {
@@ -66,20 +71,20 @@
                 : this.hospitals;
             }
         },
-        created() {
-            // this.getAllHospitals();
-            // this.filterByParish();
+        // created() {
+        //     // this.getAllHospitals();
+        //     // this.filterByParish();
 
-            this.isAuthenticated = isAuthenticated();
-            if(!this.isAuthenticated){
-                this.$router.push('/login')
-            } else {
-                this.token = localStorage.getItem('token');
-                setAuthorizationHeader(this.token);
-            }
+        //     this.isAuthenticated = isAuthenticated();
+        //     if(!this.isAuthenticated){
+        //         this.$router.push('/login')
+        //     } else {
+        //         this.token = localStorage.getItem('token');
+        //         setAuthorizationHeader(this.token);
+        //     }
 
-            this.getAllHospitals();
-        },
+        //     this.getAllHospitals();
+        // },
         // computed: {
         //     filteredHospitals() {
         //         if (!this.selectedAddress) {
@@ -108,9 +113,18 @@
 
 <style scoped>
 
+    .main-container{
+        display: flex;
+    }
+
+    .content-container{
+        display: inline-flex;
+        /* padding-left: 50px;     */
+    }
+
     .address{
         font-family: Georgia, 'Times New Roman', Times, serif;
-        font-size: 24px;
+        font-size: 20px;
     }
   
     .heading{
@@ -122,15 +136,14 @@
 
     .filter{
         padding: 5px;
-        margin-left: 35px;
+        margin-left: 60px;
         font-family: 'Times New Roman', Times, serif;
         text-align: center;
-
     }
 
-    .addressinput{
+    .address-input{
         padding: 5px;
-        width: 10%;
+        width: 30%;
         height: 2vh;
         border: 3px solid #ccc;
         /* border-radius: 10px; */
@@ -149,7 +162,6 @@
     }
 
     .details{
-        /* background-color: #6b7578; */
         padding: 10px;
         border: 5px solid #ccc;
         border-radius: 4px ;
@@ -168,4 +180,5 @@
     p {
         margin: 5px 0;
     }
+
 </style>
