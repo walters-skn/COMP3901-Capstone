@@ -2,7 +2,7 @@
   <div class="header"> 
     <SubscriberNavbar/>
     <h2 class="name"> <strong> WELCOME TO DIABOT</strong>  </h2>
-    <h4 > Discover the services Diabot has on offer in the list below </h4>
+    <h4 > Discover the services Diabot has to offer in the list below </h4>
   </div>
 
   <div class="page-container">
