@@ -15,13 +15,22 @@ def get_patient():
     patient_data = []
     
     try:
-        cursor.execute("SELECT patient_id, first_name, last_name FROM patients")
+        cursor.execute("SELECT p.patient_id, p.first_name, p.last_name, s.phone, m.nutri_lvl, md.medication_name, md.commencement_date, md.termination_date, c.cname, r.appt_date, r.remind_type FROM patients p")
 
-        for patient_id, first_name, last_name in cursor:
+        for p.patient_id, p.first_name, p.last_name, s.phone, m.nutri_lvl, md.medication_name, md.commencement_date, md.termination_date, c.cname, r.appt_date, r.remind_type in cursor:
             patients = {}
-            patients['patient_id'] = patient_id
-            patients['first_name'] = first_name
-            patients['last_name'] = last_name
+            patients['Patient ID'] = p.patient_id
+            patients['First Name'] = p.first_name
+            patients['Last Name'] = p.last_name
+            patients['Patient Contact Number'] = s.phone
+            patients['Nutritional Level'] = m.nutri_lvl
+            patients['Medication Name'] = md.medication_name
+            patients['Commencement Date'] = md.commencement_date
+            patients['Termination Date'] = md.termination_date 
+            patients['Clinic Name'] = c.cname 
+            patients['Appointment Date'] = r.appt_date  
+            patients['Reminder Type'] = r.remind_type
+
             patients_data.append(patients)
 
         return jsonify({'patients': patients_data}), 200
