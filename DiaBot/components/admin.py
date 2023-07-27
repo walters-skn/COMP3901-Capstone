@@ -16,13 +16,12 @@ def get_patient():
     
     try:
         user_id = get_jwt_identity()
-        cursor.execute("SELECT email, upassword FROM users WHERE user_id = %s AND is_admin=1 LIMIT 1", (user_id, ))
+        identity_data = {'user_id': user_id}
 
-        admin = cursor.fetchone()
+        if identity_data.get('is_admin', False):
+            return jsonify({'error': 'Unauthorized access'}), 401
 
-        if admin is not None:
-
-
+        else:
             cursor.execute("""
             SELECT
                 p.patient_id AS 'Patient ID', 
@@ -61,9 +60,7 @@ def get_patient():
                 profiles.append(profile)
 
             return jsonify({'profiles': profiles}), 200
-        
-        else:
-            return jsonify({'error': 'Unauthorized access'}), 401
+            
     
     except Exception as e:
         return jsonify({'error': str(e)}), 400
