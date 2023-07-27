@@ -1,92 +1,100 @@
 <template>
 
-  <SubscriberNavbar/>
-
-  <div class="notification">
-
-    <label class="reminder_label"><strong>Select Reminder</strong></label>
-    <select v-model="selectedReminder" class="reminder">
-      <option disabled value=""> Please select one</option>
-      <option value="medication">Medication</option>
-      <option value="appointment">Appointment</option>
-    </select>
-
-    <div class="option-section">
-
-      <div v-if="selectedReminder === 'medication'">
-        <label for="medication" class="label"> <strong> Medication Reminder</strong></label>
-
-        <form v-on:submit.prevent="saveData" class="meds">
-          <div v-for="(med,index) in medications" :key="index" class="medication-container"> 
-            <label>Medication Name:</label>
-            <input type="text" v-model="med.medicationName" class="input">
-
-            <label>Commencement Date:</label>
-            <input type="date" v-model="med.comDate" class="input">
-
-            <label>Termination Date:</label>
-            <input type="date" v-model="med.termDate" class="input">
-
-            <label>Frequency:</label>
-            <select v-model="med.frequency" class="input">
-              <option value="daily">Daily</option>
-              <option value="once_a_day"> Once(1) A Day</option>
-              <option value="twice_a_day"> Twice(2) A Day</option>
-              <option value="before_every_meals"> Before Every Meal</option>
-              <option value="after_every_meal">After Every Meal</option>
-              <option value="every_other_day"> Every Other Day</option>
-            </select>
-
-            <label> Quantity(eg.500mg):</label>
-            <input type="text" v-model="med.quantityMeds" class="input">
-          </div>
-          
-          <button @click="addMedication" class="btn"> + </button>
-          <button class="submit"> Submit </button>
-        </form>
-
-      </div>
-    </div>
-      
-    <div class="option-section">
-
-      <div v-if="selectedReminder === 'appointment'">
-        <label for="appointment" class="label"><strong> Appointment Reminder</strong></label>
-
-        <form v-on:submit.prevent="saveData" class="apt">
-          <div v-for="(apt,index) in appointments" :key="index" class="appointment-container">  
-            <label>Location:</label>
-            <input type="text" v-model="apt.location" class="input">
-
-            <label>Date:</label>
-            <input type="date" v-model="apt.appointmentDate" class="input">
-
-            <label>Time:</label>
-            <input type="time" v-model="apt.appointmentTime" class="input">
-          </div>
-
-          <button @click="addAppointment" class="btn">+</button>
-          <button class="submit"> Submit </button>
-        </form>
-
-      </div>
-    </div>
+  <div class="main-container">
+      <SubscriberNavbar/>
   </div>
+    
+  <div class="content-container">
+    <SideMenu/> 
 
+    <div class="notification">
+
+      <label class="reminder_label"><strong> Reminders</strong></label>
+      <select v-model="selectedReminder" class="reminder">
+        <option disabled value=""> Please select one</option>
+        <option value="medication">Medication</option>
+        <option value="appointment">Appointment</option>
+      </select>
+
+      <div class="option-section">
+
+        <div v-if="selectedReminder === 'medication'">
+          <label for="medication" class="label"> <strong> Medication Reminder</strong></label>
+
+          <form v-on:submit.prevent="saveData" class="meds">
+            <div v-for="(med,index) in medications" :key="index" class="medication-container"> 
+              <label>Medication Name:</label>
+              <input type="text" v-model="med.medicationName" class="input" >
+
+              <label>Commencement Date:</label>
+              <input type="date" v-model="med.comDate" class="input" >
+
+              <label>Termination Date:</label>
+              <input type="date" v-model="med.termDate" class="input">
+
+              <label>Frequency:</label>
+              <select v-model="med.frequency" class="input">
+                <option value="daily">Daily</option>
+                <option value="once_a_day"> Once(1) A Day</option>
+                <option value="twice_a_day"> Twice(2) A Day</option>
+                <option value="before_every_meals"> Before Every Meal</option>
+                <option value="after_every_meal">After Every Meal</option>
+                <option value="every_other_day"> Every Other Day</option>
+              </select>
+
+              <label> Quantity(eg.500mg):</label>
+              <input type="text" v-model="med.quantityMeds" class="input">
+            </div>
+            
+            <button @click="addMedication" class="btn"> + </button>
+            <button class="submit"> Submit </button>
+          </form>
+
+        </div>
+      </div>
+      
+      <div class="option-section">
+
+        <div v-if="selectedReminder === 'appointment'">
+          <label for="appointment" class="label"><strong> Appointment Reminder</strong></label>
+          <form v-on:submit.prevent="saveData" class="apt">
+            <div v-for="(apt,index) in appointments" :key="index" class="appointment-container">  
+              <label>Location:</label>
+              <input type="text" v-model="apt.location" class="input">
+
+              <label>Date:</label>
+              <input type="date" v-model="apt.appointmentDate" class="input">
+
+              <label>Time:</label>
+              <input type="time" v-model="apt.appointmentTime" class="input">
+            </div>
+
+            <button @click="addAppointment" class="btn">+</button>
+            <button class="submit"> Submit </button>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 
 </template>
 
 <script>
 
 import SubscriberNavbar from './SubscriberNavbar.vue'
+import SideMenu from './SideMenu.vue';
 import axios from 'axios';
 import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
 export default {
   components:{
     SubscriberNavbar,
+    SideMenu,
   },
- data(){
+  data(){
     return{
       token: null,
       isAuthenticated: false,
@@ -140,22 +148,31 @@ export default {
         console.log('Error', error);
       });
     },
-    created() {
-      this.isAuthenticated = isAuthenticated();
-      if(!this.isAuthenticated){
-          this.$router.push('/login')
-      } else {
-          this.token = localStorage.getItem('token');
-          setAuthorizationHeader(this.token);
-      }
-    }
   },
+  created() {
+    this.isAuthenticated = isAuthenticated();
+    if(!this.isAuthenticated){
+        this.$router.push('/login')
+    } else {
+        this.token = localStorage.getItem('token');
+        setAuthorizationHeader(this.token);
+    }
+  }
 };
 
 </script>
 
     
 <style scoped>
+
+  .main-container{
+    display: flex;
+  }
+
+
+  .content-container{
+    display: inline-flex;
+  }
 
   .label{
     font-family: 'Times New Roman', Times, serif;
@@ -222,7 +239,7 @@ export default {
     margin-top: 10px ;
     padding: 8px 16px;
     font-size: 16px;
-    width: 20%;
+    width: 50%;
     cursor: pointer;
   }
 
@@ -237,8 +254,8 @@ export default {
     cursor: pointer;
     margin-top: 10px ;
     padding: 8px 16px;
-    font-size: 16px;
-    width: 10%;
+    font-size: 14px;
+    width: 20%;
   }
 
   .btn:hover{

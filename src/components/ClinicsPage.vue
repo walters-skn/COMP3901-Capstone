@@ -1,20 +1,25 @@
 
 <template>
-    <div>
-        <SubscriberNavbar/>
 
-        <h1 class="heading"> <strong> <b> List of Nearby Clinics and Hospitals</b></strong></h1>
+    <div class="main-container">
+        <SubscriberNavbar/>
+    </div>
+    
+    <div class="content-container">
+        <SideMenu/>
 
         <div class="filter">
-            <label for="address-input" class="address"> <strong> Enter Health Care Facilities By Parish</strong></label>
-            <input id="address-input" v-model="selectedAddress" class="addressinput" placeholder="Enter your Parish">
+            <h1 class="heading"> <strong> <b> List of Health Care Facilities</b></strong></h1>
+            <label for="address-input" class="address">  Enter Health Care Facilities You Wish To Locate By Parish </label>
+            <input id="address-input" v-model="selectedParish" class="address-input" placeholder="Enter your Parish">
         </div>
 
         <br>
 
         <div class="hospital-list-container">
             <div class="hospital-list">
-                <div v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
+                <div v-if="filteredHospitals.length === 0" class="no-results-message">No results found.</div>
+                <div v-else v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
                     <div class="details">
                         <h3 class="name" >{{ hospital.name }}</h3>
                         <p><strong>Type:</strong> {{ hospital.type }}</p>
@@ -26,10 +31,10 @@
         </div>
                 
     </div>
-  </template>
+</template>
   
 <script>
-
+    import SideMenu from './SideMenu.vue'
     import SubscriberNavbar from './SubscriberNavbar.vue'
     import axios from 'axios'
     import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
@@ -37,6 +42,7 @@
     export default {
         components:{
             SubscriberNavbar,
+            SideMenu,
         },
         data() {
             return {
@@ -46,8 +52,6 @@
                 hospitals: [],
                 parishes: [],
                 selectedParish: '',
-                selectedAddress: '',
-                filteredHospitals: [],
             };
         },
         methods: {
@@ -57,19 +61,22 @@
                         this.hospitals = response.data.clinics;
                         this.filterByParish();
                     }).catch((error) => {
-                        console.log('getAllHospitals- error:', error);
+                        console.log('getAllHospitals Error: ', error);
                     })
             },
             filterByParish() {
-            this.filteredHospitals = this.selectedParish
-                ? this.hospitals.filter((hospital) => hospital.parish === this.selectedParish)
-                : this.hospitals;
+                this.filteredHospitals = this.hospitals.filter((hospital) => {
+                    if (!this.selectedParish) {
+                        return true;
+                    } else {
+                        const selectedParishLower = this.selectedParish.toLowerCase();
+                        const hospitalParishLower = hospital.parish.toLowerCase();
+                        return hospitalParishLower.includes(selectedParishLower);
+                    }
+                })
             }
         },
         created() {
-            // this.getAllHospitals();
-            // this.filterByParish();
-
             this.isAuthenticated = isAuthenticated();
             if(!this.isAuthenticated){
                 this.$router.push('/login')
@@ -77,28 +84,22 @@
                 this.token = localStorage.getItem('token');
                 setAuthorizationHeader(this.token);
             }
-
+        },
+        computed: {
+            filteredHospitals() {
+                return this.hospitals.filter((hospital) => {
+                    if (!this.selectedParish) {
+                        return true;
+                    } else {
+                        return hospital.parish === this.selectedParish;
+                    }
+                })
+            },
+        },
+        mounted() {
             this.getAllHospitals();
         },
-        // computed: {
-        //     filteredHospitals() {
-        //         if (!this.selectedAddress) {
-        //             return this.hospitals;
-        //         } else {
-        //             const selectedAddressLower = this.selectedAddress.toLowerCase();
-        //             return this.hospitals.filter((hospital) =>
-        //                 hospital.address.toLowerCase().includes(selectedAddressLower)
-        //             );
-        //         }
-        //     },
-        // },
-        mounted() {
-            this.parishes = Array.from(new Set(this.hospitals.map((hospital) => hospital.parish)));
-        },
         watch: {
-            selectedAddress() {
-                this.filterByParish();
-            },
             selectedParish() {
                 this.filterByParish();
             }
@@ -108,9 +109,18 @@
 
 <style scoped>
 
+    .main-container{
+        display: flex;
+    }
+
+    .content-container{
+        display: inline-flex;
+        /* padding-left: 50px;     */
+    }
+
     .address{
         font-family: Georgia, 'Times New Roman', Times, serif;
-        font-size: 24px;
+        font-size: 20px;
     }
   
     .heading{
@@ -122,15 +132,14 @@
 
     .filter{
         padding: 5px;
-        margin-left: 35px;
+        margin-left: 60px;
         font-family: 'Times New Roman', Times, serif;
         text-align: center;
-
     }
 
-    .addressinput{
+    .address-input{
         padding: 5px;
-        width: 10%;
+        width: 30%;
         height: 2vh;
         border: 3px solid #ccc;
         /* border-radius: 10px; */
@@ -149,7 +158,6 @@
     }
 
     .details{
-        /* background-color: #6b7578; */
         padding: 10px;
         border: 5px solid #ccc;
         border-radius: 4px ;
@@ -168,4 +176,5 @@
     p {
         margin: 5px 0;
     }
+
 </style>

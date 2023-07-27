@@ -10,7 +10,6 @@
         Diabot is an innovative solution to address the complexities of diabetes management. Diabetes is a chronic condition that affects millions of individuals worldwide and is characterised by elevated blood sugar levels and insufficient insulin synthesis.
         <br>
         <br>
-
         With a personalised approach to diabetes management, Diabot offers recommendations and guidance that are based on patient information, medical history, and preferences. By taking into account unique traits and needs, this personalised approach improves the efficiency of diabetes management.
       </p>
     </div>
@@ -39,9 +38,9 @@
         <div class="button-container">
           <router-link to="/diabot" class="btn"> Diabot</router-link>
         </div>
-    </div>
-
-    <div class="image-container">
+      </div>
+      
+      <div class="image-container">
         <img :src="imagePath" alt="risk" class="img">
       </div>
 
@@ -95,7 +94,6 @@ export default {
     justify-content: flex-end;
     flex-direction: column;
     width: 100%;
-    /* padding: 20px; */
   }
 
   .label{
@@ -104,10 +102,10 @@ export default {
   }
 
   .diabot-content{
-    text-align: justify;
+    text-align: center;
     font-size: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    padding: 0 10% ;
+    padding: 0 5% ;
   }
 
   .diabot {
@@ -118,17 +116,14 @@ export default {
 
   .guidelines_container{
     background-color: #5CA2B1;
-    width: 100%;
-    padding: 0;
+    width: 200%;
+    padding-top: 0px;
     text-align: center;
   }
 
   .guidelines_container ul{
     list-style: none;
     padding: 0;
-    /* display: flex;
-    margin-right: 10px;
-    justify-content: center; */
   }
 
   .guidelines_container ul li{
@@ -158,6 +153,7 @@ export default {
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
     font-size: 22px;
+    text-decoration: none;
   }
 
   .btn:hover{

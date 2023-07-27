@@ -11,7 +11,11 @@ import NutritionalScanner from '@/components/NutritionalScanner.vue';
 import SubscriberNavbar from '@/components/SubscriberNavbar.vue';
 import ClinicsPage from '@/components/ClinicsPage.vue';
 import NotificationPage from '@/components/NotificationPage.vue';
-import MealPage from '@/components/MealPage.vue';
+import MealPlan from '@/components/MealPlan.vue';
+import MedicalData from './components/MedicalData.vue';
+import SideMenu from './components/SideMenu.vue';
+import MedicalHisory from './components/MedicalHistory.vue';
+import AdminPage from './components/AdminPage.vue';
 
 const routes = [
     { path: '/', component: HomePage },
@@ -25,7 +29,11 @@ const routes = [
     { path: '/snavbar', component: SubscriberNavbar},
     { path: '/clinics', component: ClinicsPage},
     { path: '/notifications', component: NotificationPage},
-    { path: '/meal', component: MealPage},
+    { path: '/meal', component: MealPlan},
+    { path: '/medical', component: MedicalData},
+    { path: '/menu', component: SideMenu},
+    { path: '/history', component: MedicalHisory},
+    { path: '/admin', component: AdminPage},
 ]
 
 const router = createRouter({

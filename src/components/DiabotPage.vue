@@ -186,8 +186,8 @@ export default {
   }
 
   .chat-sidebar {
-    width: 22%;
-    /* height: vh; */
+    width: 220px;
+    height: 86vh;
     /* min-height: 84.5vh; */
     padding: 2px;
     border-left: 1px solid #ccc;

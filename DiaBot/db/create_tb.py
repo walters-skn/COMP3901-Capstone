@@ -98,6 +98,13 @@ TABLES['recommendations'] = (
 	"    `risk_meals` VARCHAR(255)"
     ")ENGINE=InnoDB"
 )
+TABLES['recommendations'] = (
+    "CREATE TABLE `recommendations` ("
+    "    `recommend_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
+	"    `risk_category` VARCHAR(120),"
+	"    `risk_meals` VARCHAR(255)"
+    ")ENGINE=InnoDB"
+)
 TABLES['meals'] = (
     "CREATE TABLE `meals` ("
     "  `meal_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
@@ -119,15 +126,6 @@ TABLES['diabetes_questions'] = (
     "   `is_answered` INT NOT NULL DEFAULT 0"
     ") ENGINE=InnoDB"
 )
-TABLES['profiles'] = (
-    "CREATE TABLE `profiles` ("
-    "    `profile_id` INT PRIMARY KEY,"
-    "    `patient_id` INT,"
-    "    FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
-    ")ENGINE=InnoDB"
-)
-
-
 
 
 def create_database(cursor):
