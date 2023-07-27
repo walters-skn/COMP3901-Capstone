@@ -1,6 +1,7 @@
 
 <template>
     <h2> User List Admin View</h2>
+    <router-link to="/login" v-on:click="logoutAdmin">Logout</router-link>
     <table>
         <thead>
             <tr>
@@ -65,15 +66,30 @@ export default{
     },
     methods: {
         getProfile(){
-            axios.get('http://localhost:5000/profile')
+            axios.get('http://localhost:5000/profile', {
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                },
+            })
             .then((response) => {
                 this.profiles = response.data.profiles;
-                console.log('getProfile response:', this.profiles);
+                // console.log('getProfile response:', this.profiles);
             })
             .catch((error) => {
+                if (error.response && error.response.status === 401) {
+                // Unauthorized access, redirect to login page or show an error message
+                this.$router.push('/login');
+                } else {
                 console.log('getProfile error:', error);
+                }
             });
-        }
+        },
+        logoutAdmin() {
+            // remove token from local storage
+            localStorage.removeItem('token');
+            // redirect to login page
+            this.$router.push('/login');
+        },
     },
     created(){
         this.isAuthenticated = isAuthenticated();

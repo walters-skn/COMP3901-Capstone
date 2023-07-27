@@ -68,9 +68,14 @@ export default {
         email: this.email,
         password: this.password
       }).then((response) => {
+        console.log('handleLogin response: ', response)
         this.token = response.data.access_token
         localStorage.setItem('token', this.token)
-        this.$router.push('/subscriber')
+        if (response.data.is_admin === 1) {
+          this.$router.push('/admin')
+        } else {
+          this.$router.push('/subscriber')
+        }
       }).catch(error => {
         console.log(error)
         this.errorMessage = 'You have entered an incorrect email address or password'

@@ -47,11 +47,18 @@ def login():
     try:
         cnx = mysql.connector.connect(**db_config)
         cursor = cnx.cursor()
-        cursor.execute("SELECT * FROM users WHERE email = %s AND upassword = %s", (email, password))
+        cursor.execute("SELECT user_id, is_admin FROM users WHERE email = %s AND upassword = %s", (email, password))
         user = cursor.fetchone()
         if user:
-            access_token = create_access_token(identity=user[0])
-            return jsonify(access_token=access_token)
+            user_id, is_admin = user
+
+            token_data = {
+                'user_id': user_id,
+                'is_admin': is_admin == 1
+            }
+
+            access_token = create_access_token(identity=token_data)
+            return jsonify(access_token=access_token, is_admin=is_admin)
         else:
             return jsonify({"error": "Invalid username or password"}), 401
     except Exception as e:
