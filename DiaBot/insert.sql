@@ -28,6 +28,14 @@ INSERT INTO contacts (patient_id, phone) VALUES (1, '1876-233-8765');
 INSERT INTO contacts (patient_id, phone) VALUES (2, '1876-675-0089');
 INSERT INTO contacts (patient_id, phone) VALUES (3, '1876-142-8523');
 
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Low to moderate risk', 'Scrambled eggs with spinach and tomatoes.');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Low to moderate risk', 'Whole-grain toast.');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Low to moderate risk', 'A side of fresh fruit like berries or a small apple');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('High risk', 'Grilled salmon seasoned with herbs and lemon.');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('High risk', 'Steamed broccoli and cauliflower');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Very high risk', 'Cherry tomatoes, cucumbers and radishes.');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Very high risk', 'Grilled chicken with a generous portion of mixed salad greens.');
+
 INSERT INTO meals (patient_id, meal_type, meal_cont, nutri_lvl, meal_date, meal_time) VALUES (2, 'breakfast', '2 slice wheat bread with eggs', 2, '2023-07-25', '07:30:00');
 INSERT INTO meals (patient_id, meal_type, meal_cont, nutri_lvl, meal_date, meal_time) VALUES (2, 'dinner', '3 spoon rice with baked chicken and broccoli', 3,  '2023-07-26', '06:00:00');
 
@@ -42,12 +50,3 @@ INSERT INTO diabetes_questions (question) VALUES ('Are you taking any form of me
 INSERT INTO diabetes_questions (question) VALUES ('Is your glucose level above 130mg/dL?');
 INSERT INTO diabetes_questions (question) VALUES ('Is there a history of diabetes in your family?');
 
-INSERT INTO profiles (profile_id, patient_id) VALUES ();
-
-INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Low to moderate risk', 'Scrambled eggs with spinach and tomatoes.');
-INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Low to moderate risk', 'Whole-grain toast.');
-INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Low to moderate risk', 'A side of fresh fruit like berries or a small apple');
-INSERT INTO recommendations (risk_category, risk_meals) VALUES ('High risk', 'Grilled salmon seasoned with herbs and lemon.');
-INSERT INTO recommendations (risk_category, risk_meals) VALUES ('High risk', 'Steamed broccoli and cauliflower');
-INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Very high risk', 'Cherry tomatoes, cucumbers and radishes.');
-INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Very high risk', 'Grilled chicken with a generous portion of mixed salad greens.');
