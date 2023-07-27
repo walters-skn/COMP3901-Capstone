@@ -13,21 +13,6 @@
       <div class="collapse">
         <router-link to="/login" class="nav-link" v-on:click="logoutPatient"> <strong> Logout </strong></router-link>
       </div>
-
-      <!-- <div class="collapse">
-        <ul class="navbar_nav">
-          <li class="nav-item" @click="toggleDropdown">
-            <span class="nav-link nav-link-hamburger"> &#9776; </span>
-            
-            <ul class="dropdown-menu" v-if="showDropdown">
-              <li class="nav-item" @mouseenter="showDropdown =true" @mouseleave="showDropdown = false">
-                <router-link to="/login" class="nav-link" v-on:click="logoutPatient"> <strong> Logout </strong></router-link>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>  -->
-       
     </nav> 
 
   </div>

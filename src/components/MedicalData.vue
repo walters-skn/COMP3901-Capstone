@@ -21,7 +21,7 @@
 <script>
     import SideMenu from './SideMenu.vue'
     import SubscriberNavbar from './SubscriberNavbar.vue'
-    // import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
+    import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
     export default {
         components:{
@@ -34,19 +34,15 @@
                 isAuthenticated: false,
             };
         },
-        methods: {
-        // created() {
-        //     // this.getAllHospitals();
-        //     // this.filterByParish();
-
-        //     this.isAuthenticated = isAuthenticated();
-        //     if(!this.isAuthenticated){
-        //         this.$router.push('/login')
-        //     } else {
-        //         this.token = localStorage.getItem('token');
-        //         setAuthorizationHeader(this.token);
-        //     }
-        }, 
+        created() {
+            this.isAuthenticated = isAuthenticated();
+            if(!this.isAuthenticated){
+                this.$router.push('/login')
+            } else {
+                this.token = localStorage.getItem('token');
+                setAuthorizationHeader(this.token);
+            }
+        }
     }
 </script>
 

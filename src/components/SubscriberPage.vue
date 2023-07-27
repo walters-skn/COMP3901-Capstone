@@ -105,7 +105,7 @@
 
 <script>
   import SubscriberNavbar from './SubscriberNavbar.vue'
-  // import { isAuthenticated, setAuthorizationHeader } from '@/authUtils'
+  import { isAuthenticated, setAuthorizationHeader } from '@/authUtils'
 
   import ImagePath from '@/assets/img/chat.png'
   import ImagePath1 from '@/assets/img/profile.png'
@@ -132,16 +132,16 @@
     components:{
       SubscriberNavbar,
     }
-    // ,
-    // created() {
-    //   this.isAuthenticated = isAuthenticated();
-    //   if(!this.isAuthenticated){
-    //     this.$router.push('/login')
-    //   } else {
-    //     this.token = localStorage.getItem('token');
-    //     setAuthorizationHeader(this.token);
-    //   }
-    // }
+    ,
+    created() {
+      this.isAuthenticated = isAuthenticated();
+      if(!this.isAuthenticated){
+        this.$router.push('/login')
+      } else {
+        this.token = localStorage.getItem('token');
+        setAuthorizationHeader(this.token);
+      }
+    }
   }
 
 </script>

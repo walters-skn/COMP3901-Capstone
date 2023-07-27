@@ -148,16 +148,16 @@ export default {
         console.log('Error', error);
       });
     },
-    created() {
-      this.isAuthenticated = isAuthenticated();
-      if(!this.isAuthenticated){
-          this.$router.push('/login')
-      } else {
-          this.token = localStorage.getItem('token');
-          setAuthorizationHeader(this.token);
-      }
-    }
   },
+  created() {
+    this.isAuthenticated = isAuthenticated();
+    if(!this.isAuthenticated){
+        this.$router.push('/login')
+    } else {
+        this.token = localStorage.getItem('token');
+        setAuthorizationHeader(this.token);
+    }
+  }
 };
 
 </script>

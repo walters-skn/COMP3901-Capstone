@@ -50,7 +50,7 @@
 import SubscriberNavbar from './SubscriberNavbar.vue'
 import SideMenu from './SideMenu.vue'
 import axios from 'axios'
-// import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
+import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
 
 export default {
@@ -83,16 +83,16 @@ export default {
             });
         },
     }
-    // ,
-    // created() {
-    //     this.isAuthenticated = isAuthenticated();
-    //     if(!this.isAuthenticated){
-    //         this.$router.push('/login')
-    //     } else {
-    //         this.token = localStorage.getItem('token');
-    //         setAuthorizationHeader(this.token);
-    //     }
-    // }
+    ,
+    created() {
+        this.isAuthenticated = isAuthenticated();
+        if(!this.isAuthenticated){
+            this.$router.push('/login')
+        } else {
+            this.token = localStorage.getItem('token');
+            setAuthorizationHeader(this.token);
+        }
+    }
 };
 
 </script>
