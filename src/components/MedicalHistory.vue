@@ -7,27 +7,14 @@
     
     <div class="content-container">
         <SideMenu/>
-    <!-- </div> -->
-        <div class="filter">
-            <h1 class="heading"> <strong> <b> List of Health Care Facilities</b></strong></h1>
-            <label for="address-input" class="address">  Enter Health Care Facilities You Wish To Locate By Parish </label>
-            <input id="address-input" v-model="selectedAddress" class="address-input" placeholder="Enter your Parish">
+
+        <div class="container">
+            <h1 class="heading"> Medical History</h1>
+            <p >  What is to go on this page? </p>
         </div>
 
         <br>
 
-        <div class="hospital-list-container">
-            <div class="hospital-list">
-                <div v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
-                    <div class="details">
-                        <h3 class="name" >{{ hospital.name }}</h3>
-                        <p><strong>Type:</strong> {{ hospital.type }}</p>
-                        <p><strong>Address:</strong> {{ hospital.address }}</p>
-                        <p><strong>Parish:</strong> {{ hospital.parish }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
                 
     </div>
   </template>
@@ -35,7 +22,6 @@
 <script>
     import SideMenu from './SideMenu.vue'
     import SubscriberNavbar from './SubscriberNavbar.vue'
-    import axios from 'axios'
     // import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
     export default {
@@ -43,35 +29,8 @@
             SubscriberNavbar,
             SideMenu,
         },
-        data() {
-            return {
-                token: null,
-                isAuthenticated: false,
-
-                hospitals: [],
-                parishes: [],
-                selectedParish: '',
-                selectedAddress: '',
-                filteredHospitals: [],
-            };
-        },
+        
         methods: {
-            getAllHospitals() {
-                axios.get('http://localhost:5000/clinic')
-                    .then((response) => {
-                        this.hospitals = response.data.clinics;
-                        this.filterByParish();
-                    }).catch((error) => {
-                        console.log('getAllHospitals- error:', error);
-                    })
-            },
-            filterByParish() {
-            this.filteredHospitals = this.selectedParish
-                ? this.hospitals.filter((hospital) => hospital.parish === this.selectedParish)
-                : this.hospitals;
-            }
-        }
-        ,
         // created() {
         //     // this.getAllHospitals();
         //     // this.filterByParish();
@@ -86,30 +45,8 @@
 
         //     this.getAllHospitals();
         // },
-        // computed: {
-        //     filteredHospitals() {
-        //         if (!this.selectedAddress) {
-        //             return this.hospitals;
-        //         } else {
-        //             const selectedAddressLower = this.selectedAddress.toLowerCase();
-        //             return this.hospitals.filter((hospital) =>
-        //                 hospital.address.toLowerCase().includes(selectedAddressLower)
-        //             );
-        //         }
-        //     },
-        // },
-        mounted() {
-            this.parishes = Array.from(new Set(this.hospitals.map((hospital) => hospital.parish)));
-        },
-        watch: {
-            selectedAddress() {
-                this.filterByParish();
-            },
-            selectedParish() {
-                this.filterByParish();
-            }
-        }
     }
+}
 </script>
 
 <style scoped>
@@ -135,12 +72,6 @@
         font-size: 40px;
     }
 
-    .filter{
-        padding: 5px;
-        margin-left: 60px;
-        font-family: 'Times New Roman', Times, serif;
-        text-align: center;
-    }
 
     .address-input{
         padding: 5px;
@@ -149,31 +80,6 @@
         border: 3px solid #ccc;
         /* border-radius: 10px; */
     }
-
-    .hospital-list-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-
-    .hospital-list{
-        width: 80%;
-        max-width: 800px;
-    }
-
-    .details{
-        /* background-color: #6b7578; */
-        padding: 10px;
-        border: 5px solid #ccc;
-        border-radius: 4px ;
-        color: black;
-        width: 50%;
-    }
-    
-    .hospital {
-        margin-bottom: 20px;
-    }
     
     h3 {
         font-size: 20px;
@@ -181,5 +87,8 @@
     
     p {
         margin: 5px 0;
+        color: red;
+        font-weight: bold;
     }
+
 </style>

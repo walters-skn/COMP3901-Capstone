@@ -8,9 +8,6 @@
             <div class="container">
                 <img :src="imagePath" alt="profile" class="img">
                 <h3 class="title"> Diabot Chat</h3>
-                    <!-- <div class="title">
-                        <strong> <b> Diabot Chat </b> </strong>
-                    </div> -->
             </div>
         </router-link>
 
@@ -39,7 +36,7 @@
         </router-link>
 
         <!-- View Meal History -->
-        <router-link @click="toggleDropdown('/history')" :class="{ 'links': true, 'active': selectedLink === '/history' }" to="/history">
+        <router-link @click="toggleDropdown('/meal')" :class="{ 'links': true, 'active': selectedLink === '/meal' }" to="/meal">
             <div class="container">
                 <img :src="imagePath4" alt="profile" class="img">
                 <h3 class="title"> Meal History </h3>
@@ -103,11 +100,12 @@
 
     .title{
         font-size:18px;
+        margin: 0;
     }
 
   .img{
-    width: 30px;
-    height: 28px;
+    width: 35px;
+    height: 30px;
     padding-right: 12px;
   }
 
@@ -123,6 +121,7 @@
 
   .container{
     height: 40px;
+    align-items: center;
     display: flex;
     margin-bottom: 10px;
     padding-left: 5px;

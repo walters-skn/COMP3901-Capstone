@@ -14,7 +14,7 @@ import NotificationPage from '@/components/NotificationPage.vue';
 import MealPlan from '@/components/MealPlan.vue';
 import MedicalData from './components/MedicalData.vue';
 import SideMenu from './components/SideMenu.vue';
-import MedicalHistory from '@/components/MedicalHistory.vue';
+import MedicalHisory from './components/MedicalHistory.vue';
 
 const routes = [
     { path: '/', component: HomePage },
@@ -31,7 +31,7 @@ const routes = [
     { path: '/meal', component: MealPlan},
     { path: '/medical', component: MedicalData},
     { path: '/menu', component: SideMenu},
-    { path: '/history', component: MedicalHistory.vue},
+    { path: '/history', component: MedicalHisory},
 ]
 
 const router = createRouter({

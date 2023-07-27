@@ -2,6 +2,7 @@
   <div class="header"> 
     <SubscriberNavbar/>
     <h2 class="name"> <strong> WELCOME TO DIABOT</strong>  </h2>
+    <h4 > Discover the services Diabot has on offer in the list below </h4>
   </div>
 
   <div class="page-container">
@@ -63,7 +64,7 @@
       <div class="links">
         <div class="container" >
           <img :src="imagePath4" alt="profile" class="img">
-          <router-link link to="/subscriber" class="container-link">
+          <router-link link to="/history" class="container-link">
           <div class="title">
             <strong> <b> Meal History </b> </strong> 
           </div>
@@ -162,8 +163,8 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: #5CA2B1;
     font-size: 50px;
-    margin-top: 2px;
-    padding-top: 8px ;
+    margin-top: 10px;
+    padding-top: 20px ;
   }
 
   .img{ 
@@ -182,6 +183,7 @@
     padding: 20px;
     border-radius: 10px ;
     background-color: #5ca2b1;
+    text-align: center;
   }
 
   .title{

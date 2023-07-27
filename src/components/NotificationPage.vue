@@ -9,7 +9,7 @@
 
     <div class="notification">
 
-      <label class="reminder_label"><strong>Select Reminder</strong></label>
+      <label class="reminder_label"><strong> Reminders</strong></label>
       <select v-model="selectedReminder" class="reminder">
         <option disabled value=""> Please select one</option>
         <option value="medication">Medication</option>
@@ -24,10 +24,10 @@
           <form v-on:submit.prevent="saveData" class="meds">
             <div v-for="(med,index) in medications" :key="index" class="medication-container"> 
               <label>Medication Name:</label>
-              <input type="text" v-model="med.medicationName" class="input">
+              <input type="text" v-model="med.medicationName" class="input" >
 
               <label>Commencement Date:</label>
-              <input type="date" v-model="med.comDate" class="input">
+              <input type="date" v-model="med.comDate" class="input" >
 
               <label>Termination Date:</label>
               <input type="date" v-model="med.termDate" class="input">
@@ -239,7 +239,7 @@ export default {
     margin-top: 10px ;
     padding: 8px 16px;
     font-size: 16px;
-    width: 20%;
+    width: 50%;
     cursor: pointer;
   }
 
@@ -254,8 +254,8 @@ export default {
     cursor: pointer;
     margin-top: 10px ;
     padding: 8px 16px;
-    font-size: 16px;
-    width: 10%;
+    font-size: 14px;
+    width: 20%;
   }
 
   .btn:hover{
