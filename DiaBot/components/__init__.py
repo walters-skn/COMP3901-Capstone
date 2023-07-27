@@ -4,6 +4,7 @@ from .predict import predict_bp
 from .clinic import clinic_bp
 from .notification import notification_bp
 from .meal import meal_bp
+from .admin import admin_bp
 
 def create_app():
     app = Flask(__name__)
@@ -13,5 +14,6 @@ def create_app():
     app.register_blueprint(clinic_bp)
     app.register_blueprint(notification_bp)
     app.register_blueprint(meal_bp)
+    app.register_blueprint(admin_bp)
 
     return app

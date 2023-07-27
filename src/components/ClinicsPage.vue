@@ -11,14 +11,15 @@
         <div class="filter">
             <h1 class="heading"> <strong> <b> List of Health Care Facilities</b></strong></h1>
             <label for="address-input" class="address">  Enter Health Care Facilities You Wish To Locate By Parish </label>
-            <input id="address-input" v-model="selectedAddress" class="address-input" placeholder="Enter your Parish">
+            <input id="address-input" v-model="selectedParish" class="address-input" placeholder="Enter your Parish">
         </div>
 
         <br>
 
         <div class="hospital-list-container">
             <div class="hospital-list">
-                <div v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
+                <div v-if="filteredHospitals.length === 0" class="no-results-message">No results found.</div>
+                <div v-else v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
                     <div class="details">
                         <h3 class="name" >{{ hospital.name }}</h3>
                         <p><strong>Type:</strong> {{ hospital.type }}</p>
@@ -30,13 +31,13 @@
         </div>
                 
     </div>
-  </template>
+</template>
   
 <script>
     import SideMenu from './SideMenu.vue'
     import SubscriberNavbar from './SubscriberNavbar.vue'
     import axios from 'axios'
-    // import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
+    import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
     export default {
         components:{
@@ -51,8 +52,6 @@
                 hospitals: [],
                 parishes: [],
                 selectedParish: '',
-                selectedAddress: '',
-                filteredHospitals: [],
             };
         },
         methods: {
@@ -62,48 +61,45 @@
                         this.hospitals = response.data.clinics;
                         this.filterByParish();
                     }).catch((error) => {
-                        console.log('getAllHospitals- error:', error);
+                        console.log('getAllHospitals Error: ', error);
                     })
             },
             filterByParish() {
-            this.filteredHospitals = this.selectedParish
-                ? this.hospitals.filter((hospital) => hospital.parish === this.selectedParish)
-                : this.hospitals;
+                this.filteredHospitals = this.hospitals.filter((hospital) => {
+                    if (!this.selectedParish) {
+                        return true;
+                    } else {
+                        const selectedParishLower = this.selectedParish.toLowerCase();
+                        const hospitalParishLower = hospital.parish.toLowerCase();
+                        return hospitalParishLower.includes(selectedParishLower);
+                    }
+                })
             }
         },
-        // created() {
-        //     // this.getAllHospitals();
-        //     // this.filterByParish();
-
-        //     this.isAuthenticated = isAuthenticated();
-        //     if(!this.isAuthenticated){
-        //         this.$router.push('/login')
-        //     } else {
-        //         this.token = localStorage.getItem('token');
-        //         setAuthorizationHeader(this.token);
-        //     }
-
-        //     this.getAllHospitals();
-        // },
-        // computed: {
-        //     filteredHospitals() {
-        //         if (!this.selectedAddress) {
-        //             return this.hospitals;
-        //         } else {
-        //             const selectedAddressLower = this.selectedAddress.toLowerCase();
-        //             return this.hospitals.filter((hospital) =>
-        //                 hospital.address.toLowerCase().includes(selectedAddressLower)
-        //             );
-        //         }
-        //     },
-        // },
+        created() {
+            this.isAuthenticated = isAuthenticated();
+            if(!this.isAuthenticated){
+                this.$router.push('/login')
+            } else {
+                this.token = localStorage.getItem('token');
+                setAuthorizationHeader(this.token);
+            }
+        },
+        computed: {
+            filteredHospitals() {
+                return this.hospitals.filter((hospital) => {
+                    if (!this.selectedParish) {
+                        return true;
+                    } else {
+                        return hospital.parish === this.selectedParish;
+                    }
+                })
+            },
+        },
         mounted() {
-            this.parishes = Array.from(new Set(this.hospitals.map((hospital) => hospital.parish)));
+            this.getAllHospitals();
         },
         watch: {
-            selectedAddress() {
-                this.filterByParish();
-            },
             selectedParish() {
                 this.filterByParish();
             }
