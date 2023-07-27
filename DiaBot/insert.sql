@@ -49,3 +49,24 @@ INSERT INTO diabetes_questions (question) VALUES ('How many times per day do you
 INSERT INTO diabetes_questions (question) VALUES ('Are you taking any form of medication for high blood pressure?');
 INSERT INTO diabetes_questions (question) VALUES ('Is your glucose level above 130mg/dL?');
 INSERT INTO diabetes_questions (question) VALUES ('Is there a history of diabetes in your family?');
+
+
+-- FOR ADMIN ONLY
+-- SELECT
+-- 	p.patient_id AS 'Patient ID', 
+--     p.first_name AS 'First Name', 
+--     p.last_name AS 'Last Name', 
+--     s.phone AS 'Patient Contact Number', 
+--     m.nutri_lvl AS 'Nutritional Level', 
+--     md.medication_name AS 'Medication Name', 
+--     md.commencement_date AS 'Commencement Date', 
+--     md.termination_date AS 'Termination Date',
+--     c.cname AS 'Clinic Name', 
+--     r.appt_date AS 'Appointment Date', 
+--     r.remind_type AS 'Reminider Type'
+-- FROM patients p
+-- LEFT JOIN contacts s ON s.patient_id = p.patient_id
+-- LEFT JOIN meals m ON m.patient_id = s.patient_id
+-- LEFT JOIN medications md ON md.patient_id = m.patient_id
+-- LEFT JOIN clinics c ON c.patient_id = md.patient_id
+-- LEFT JOIN reminders r ON r.patient_id = c.patient_id

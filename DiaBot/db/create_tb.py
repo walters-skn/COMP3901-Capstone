@@ -121,7 +121,6 @@ TABLES['diabetes_questions'] = (
 )
 
 
-
 def create_database(cursor):
     try:
         cursor.execute(
