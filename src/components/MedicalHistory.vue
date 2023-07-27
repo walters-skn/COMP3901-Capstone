@@ -13,9 +13,6 @@
             <p >  What is to go on this page? </p>
         </div>
 
-        <br>
-
-                
     </div>
   </template>
   
@@ -57,7 +54,6 @@
 
     .content-container{
         display: inline-flex;
-        /* padding-left: 50px;     */
     }
 
     .address{

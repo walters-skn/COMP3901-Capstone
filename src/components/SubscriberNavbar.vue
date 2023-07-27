@@ -35,7 +35,7 @@
 </template>
   
 <script>
-  import ImagePath from '@/assets/img/home.png'
+  import ImagePath from '@/assets/img/logo.png'
 
   export default {
     name: 'SubscriberNavbar',
