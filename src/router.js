@@ -14,7 +14,7 @@ import NotificationPage from '@/components/NotificationPage.vue';
 import MealPlan from '@/components/MealPlan.vue';
 import MedicalData from './components/MedicalData.vue';
 import SideMenu from './components/SideMenu.vue';
-import MedicalHisory from './components/MedicalHistory.vue';
+import MealHisory from './components/MealHistory.vue';
 import AdminPage from './components/AdminPage.vue';
 
 const routes = [
@@ -32,7 +32,7 @@ const routes = [
     { path: '/meal', component: MealPlan},
     { path: '/medical', component: MedicalData},
     { path: '/menu', component: SideMenu},
-    { path: '/history', component: MedicalHisory},
+    { path: '/history', component: MealHisory},
     { path: '/admin', component: AdminPage},
 ]
 

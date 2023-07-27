@@ -9,7 +9,7 @@
         <SideMenu/>
 
         <div class="container">
-            <h1 class="heading"> Medical History</h1>
+            <h1 class="heading"> Meal History</h1>
             <p >  What is to go on this page? </p>
         </div>
 
