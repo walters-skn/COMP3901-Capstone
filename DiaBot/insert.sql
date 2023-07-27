@@ -36,6 +36,14 @@ INSERT INTO recommendations (risk_category, risk_meals) VALUES ('High risk', 'St
 INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Very high risk', 'Cherry tomatoes, cucumbers and radishes.');
 INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Very high risk', 'Grilled chicken with a generous portion of mixed salad greens.');
 
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Low to moderate risk', 'Scrambled eggs with spinach and tomatoes.');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Low to moderate risk', 'Whole-grain toast.');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Low to moderate risk', 'A side of fresh fruit like berries or a small apple');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('High risk', 'Grilled salmon seasoned with herbs and lemon.');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('High risk', 'Steamed broccoli and cauliflower');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Very high risk', 'Cherry tomatoes, cucumbers and radishes.');
+INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Very high risk', 'Grilled chicken with a generous portion of mixed salad greens.');
+
 INSERT INTO meals (patient_id, meal_type, meal_cont, nutri_lvl, meal_date, meal_time) VALUES (2, 'breakfast', '2 slice wheat bread with eggs', 2, '2023-07-25', '07:30:00');
 INSERT INTO meals (patient_id, meal_type, meal_cont, nutri_lvl, meal_date, meal_time) VALUES (1, 'dinner', '3 spoon rice with baked chicken and broccoli', 3,  '2023-07-26', '06:00:00');
 
@@ -50,23 +58,3 @@ INSERT INTO diabetes_questions (question) VALUES ('Are you taking any form of me
 INSERT INTO diabetes_questions (question) VALUES ('Is your glucose level above 130mg/dL?');
 INSERT INTO diabetes_questions (question) VALUES ('Is there a history of diabetes in your family?');
 
-
--- FOR ADMIN ONLY
--- SELECT
--- 	p.patient_id AS 'Patient ID', 
---     p.first_name AS 'First Name', 
---     p.last_name AS 'Last Name', 
---     s.phone AS 'Patient Contact Number', 
---     m.nutri_lvl AS 'Nutritional Level', 
---     md.medication_name AS 'Medication Name', 
---     md.commencement_date AS 'Commencement Date', 
---     md.termination_date AS 'Termination Date',
---     c.cname AS 'Clinic Name', 
---     r.appt_date AS 'Appointment Date', 
---     r.remind_type AS 'Reminider Type'
--- FROM patients p
--- LEFT JOIN contacts s ON s.patient_id = p.patient_id
--- LEFT JOIN meals m ON m.patient_id = s.patient_id
--- LEFT JOIN medications md ON md.patient_id = m.patient_id
--- LEFT JOIN clinics c ON c.patient_id = md.patient_id
--- LEFT JOIN reminders r ON r.patient_id = c.patient_id

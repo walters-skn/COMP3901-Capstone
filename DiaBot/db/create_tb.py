@@ -98,6 +98,13 @@ TABLES['recommendations'] = (
 	"    `risk_meals` VARCHAR(255)"
     ")ENGINE=InnoDB"
 )
+TABLES['recommendations'] = (
+    "CREATE TABLE `recommendations` ("
+    "    `recommend_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
+	"    `risk_category` VARCHAR(120),"
+	"    `risk_meals` VARCHAR(255)"
+    ")ENGINE=InnoDB"
+)
 TABLES['meals'] = (
     "CREATE TABLE `meals` ("
     "  `meal_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"

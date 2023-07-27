@@ -11,38 +11,39 @@
         <div class="filter">
             <h1 class="heading"> <strong> <b> User Medical Records</b></strong></h1>
 
-            <table> 
-                <thead>
-                    <tr>
-                        <th> Symptom ID</th>
-                        <th> Gender</th>
-                        <th> Weight</th>
-                        <th> Age</th>
-                        <th> Waist Circumference</th>
-                        <th> Is Physically Active</th>
-                        <th> Fruit Veggie Intake</th>
-                        <th> Has High Bp Medication</th>
-                        <th> Has Hyperglycemia History</th>
-                        <th> Has Family History</th>
-                    </tr>
-                </thead>
-                <tbody> 
-                    <tr v-for="symptom in symptoms" :key="symptom">
-                        <td> {{ symptom.symptom_id}}</td>
-                        <td> {{ symptom.gender}}</td>
-                        <td> {{ symptom.weight}}</td>
-                        <td> {{ symptom.height}}</td>
-                        <td> {{ symptom.age}}</td>
-                        <td> {{ symptom.waist_circumference}}</td>
-                        <td> {{ symptom.is_physically_active}}</td>
-                        <td> {{ symptom.fruit_veggie_intake}}</td>
-                        <td> {{ symptom.has_high_bp_medication}}</td>
-                        <td> {{ symptom.has_hyperglycemia_history}}</td>
-                        <td> {{ symptom.has_family_history}}</td>
-                    </tr>
-                </tbody>
-            </table>
-
+            <div class="table-container"> 
+                <table> 
+                    <thead>
+                        <tr>
+                            <th> Symptom ID</th>
+                            <th> Gender</th>
+                            <th> Weight</th>
+                            <th> Age</th>
+                            <th> Waist Size</th>
+                            <th> Physically Active</th>
+                            <th> Fruit/Veggie Intake</th>
+                            <th> Has High Bp Medication</th>
+                            <th> History of Hyperglycemia </th>
+                            <th> Family Medical History</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <tr v-for="symptom in symptoms" :key="symptom">
+                            <td> {{ symptom.symptom_id}}</td>
+                            <td> {{ symptom.gender}}</td>
+                            <td> {{ symptom.weight}}</td>
+                            <td> {{ symptom.height}}</td>
+                            <td> {{ symptom.age}}</td>
+                            <td> {{ symptom.waist_circumference}}</td>
+                            <td> {{ symptom.is_physically_active}}</td>
+                            <td> {{ symptom.fruit_veggie_intake}}</td>
+                            <td> {{ symptom.has_high_bp_medication}}</td>
+                            <td> {{ symptom.has_hyperglycemia_history}}</td>
+                            <td> {{ symptom.has_family_history}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </div>
@@ -126,21 +127,35 @@
         margin-left: 60px;
         font-family: 'Times New Roman', Times, serif;
         text-align: center;
-
         display:flex;
         flex-direction: column;
         align-items: center;
-        /* justify-content: center; */
     }
     
-    h3 {
-        font-size: 20px;
+    .table-container{
+        overflow-x: auto;
     }
-    
-    p {
-        font-family: 'Times New Roman', Times, serif;
-        font-weight: bold;
-        color:red;
-        margin: 5px 0;
+
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        border: 3px solid #ccc;
+        margin-top: 10px;
     }
+
+    th,
+    td{
+        padding: 8px 12px;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+    }
+
+    th{
+        background-color: #5CA2B1;
+    }
+
+    tbody tr:nth-child(even){
+        background-color: #f2f2f2;
+    }
+
 </style>

@@ -10,12 +10,12 @@
                 <th> Last Name</th>
                 <th> Patient Contact Number</th>
                 <th> Nutritional Level</th>
+                <th> Reminder Type</th>
                 <th> Medication Name</th>
-                <th> Commencement Date</th>
-                <th> Termindation Date</th>
+                <th> Start Date</th>
+                <th> End Date</th>
                 <th> Clinic Name</th>
                 <th> Appointment Date</th>
-                <th> Reminder Type</th>
                 
             </tr>
         </thead>
@@ -28,12 +28,12 @@
                 <td> {{ profile.last_name }}</td>
                 <td> {{ profile.phone }}</td>
                 <td> {{ profile.nutri_lvl }}</td>
+                <td> {{ profile.remind_type }}</td>
                 <td> {{ profile.medication_name}}</td>
                 <td> {{ profile.commencement_date }}</td>
                 <td> {{ profile.termination_date  }}</td>
                 <td> {{ profile.cname }}</td>
                 <td> {{ profile.appt_date }}</td>
-                <td> {{ profile.remind_type }}</td>
             </tr>
         </tbody>
     </table>
@@ -106,5 +106,33 @@ export default{
 </script>
 
 <style scoped>
+
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        border: 3px solid #ccc;
+        margin-top: 10px;
+    }
+
+    th,
+    td{
+        padding: 8px 12px;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+    }
+
+    th{
+        background-color: #5CA2B1;
+    }
+
+    tbody tr:nth-child(even){
+        background-color: #f2f2f2;
+    }
+
+    h2{
+        margin-bottom: 20px;
+        text-align: center;
+        padding: 10px;
+    }
 
 </style>
