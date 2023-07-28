@@ -23,7 +23,7 @@
               </h2>
             </div>
             <div class="chat-input">
-              <input class="input" type="text" ref="answer" v-model="response">
+              <input class="input" type="text" ref="answer" v-model="response" required>
               <button v-on:click="answerQuestion" class="btn">Submit </button>
             </div>
           </section>

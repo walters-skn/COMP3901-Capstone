@@ -1,10 +1,34 @@
+from components.connect import db_config
+from cryptography.fernet import Fernet
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-
+from functools import wraps
 import mysql.connector
-from db.connect import db_config
 
 predict_bp = Blueprint('predict', __name__)
+
+encryption_key = Fernet.generate_key()
+fernet = Fernet(encryption_key)
+
+def encrypt_data(fernet, data):
+    encrypted_data = fernet.encrypt(data.encode())
+    return encrypted_data
+
+def decrypt_data(fernet, encrypted_data):
+    decrypted_data = fernet.decrypt(encrypted_data).decode()
+    return decrypted_data
+
+def conditional_jwt_required(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        # Check if the Authorization header is present
+        authorization_header = request.headers.get('Authorization')
+        if authorization_header:
+            return jwt_required(func)(*args, **kwargs)
+        else:
+            return func(*args, **kwargs)
+    return wrapper
+
 
 @predict_bp.route('/symptoms', methods=['GET'])
 @jwt_required()
@@ -51,7 +75,7 @@ def get_symptoms():
 
 
 @predict_bp.route('/questions', methods=['GET'])
-# @jwt_required()
+@conditional_jwt_required
 def send_questions_to_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
@@ -77,14 +101,17 @@ def send_questions_to_client():
 
 
 @predict_bp.route('/answers', methods=['POST'])
-# @jwt_required()
+@conditional_jwt_required
 def receive_symptoms_from_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
 
     try:
         answers = request.json.get('responses')
-        print("Response from client: ", answers)
+        # print("Response from client: ", answers)
+
+        # Encrypt sensitive data before storing it in the database
+        encrypted_answers = encrypt_data(fernet, str(answers))
 
         # for answer in answers:
         gender = answers[0]
@@ -123,51 +150,51 @@ def receive_symptoms_from_client():
         cursor.execute("SELECT user_id FROM users WHERE user_id = %s LIMIT 1", (patient_id, ))
 
         user = cursor.fetchone()
-        if user is not None:
+    
 
-            cursor.execute(""" 
-                INSERT INTO symptoms 
-                    (patient_id, gender, weight, height, age, waist_circumference, is_physically_active, fruit_veggie_intake, has_high_bp_medication, has_hyperglycemia_history, has_family_history)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, (
-                patient_id, gender, weight, height, age, waist_circumference, 
-                is_physically_active, fruit_veggie_intake, has_high_bp_medication, 
-                has_hyperglycemia_history, has_family_history
-            ))
+        cursor.execute(""" 
+            INSERT INTO symptoms 
+                (patient_id, gender, weight, height, age, waist_circumference, is_physically_active, fruit_veggie_intake, has_high_bp_medication, has_hyperglycemia_history, has_family_history)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (
+            patient_id, gender, weight, height, age, waist_circumference, 
+            is_physically_active, fruit_veggie_intake, has_high_bp_medication, 
+            has_hyperglycemia_history, has_family_history
+        ))
+        cnx.commit()
+
+        cursor.execute("SELECT * FROM symptoms ORDER BY symptom_id DESC LIMIT 1")
+        patient_symptoms = cursor.fetchone()
+        print("Patient symptoms: ", patient_symptoms)
+
+        if patient_symptoms is not None:
+            risk_score = calculate_risk_score(
+                patient_symptoms[2], patient_symptoms[3], patient_symptoms[4], 
+                patient_symptoms[5], patient_symptoms[6], patient_symptoms[7], patient_symptoms[8], 
+                patient_symptoms[9], patient_symptoms[10], patient_symptoms[11]
+            )
+            risk_category = determine_risk_category(risk_score)
+            chance_of_diabetes = determine_chance_of_diabetes(risk_score)
+            screening_recommendation = determine_screening_recommendation(risk_category)
+
+            cursor.execute("UPDATE diabetes_questions SET is_answered = 0 WHERE is_answered = 1")
             cnx.commit()
 
-            cursor.execute("SELECT * FROM symptoms ORDER BY symptom_id DESC LIMIT 1")
-            patient_symptoms = cursor.fetchone()
-            print("Patient symptoms: ", patient_symptoms)
-
-            if patient_symptoms is not None:
-                risk_score = calculate_risk_score(
-                    patient_symptoms[2], patient_symptoms[3], patient_symptoms[4], 
-                    patient_symptoms[5], patient_symptoms[6], patient_symptoms[7], patient_symptoms[8], 
-                    patient_symptoms[9], patient_symptoms[10], patient_symptoms[11]
-                )
-                risk_category = determine_risk_category(risk_score)
-                chance_of_diabetes = determine_chance_of_diabetes(risk_score)
-                screening_recommendation = determine_screening_recommendation(risk_category)
-
-                cursor.execute("UPDATE diabetes_questions SET is_answered = 0 WHERE is_answered = 1")
-                cnx.commit()
-
-                return jsonify({
-                    'risk_score': f'{risk_score:.2f}%',  # Format risk score as a percentage with two decimal places
-                    'risk_category': risk_category,
-                    'chance_of_diabetes': chance_of_diabetes,
-                    'screening_recommendation': screening_recommendation
-                }), 200
-            else:
-                return jsonify({'error': 'Symptoms not received'}), 400
+            return jsonify({
+                'risk_score': f'{risk_score:.2f}%',  # Format risk score as a percentage with two decimal places
+                'risk_category': risk_category,
+                'chance_of_diabetes': chance_of_diabetes,
+                'screening_recommendation': screening_recommendation
+            }), 200
+        
+        else:
+            return jsonify({'error': 'Symptoms not received'}), 400
 
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
     cursor.close()
     cnx.close()
-
 
 
 def calculate_risk_score(gender, weight, height, age, waist_circumference, is_physically_active,
@@ -217,6 +244,7 @@ def calculate_risk_score(gender, weight, height, age, waist_circumference, is_ph
     
     return percentage_score
 
+
 def determine_risk_category(risk_score):
     if risk_score <= 14:
         return 'Low to moderate risk'
@@ -224,6 +252,7 @@ def determine_risk_category(risk_score):
         return 'High risk'
     else:
         return 'Very high risk'
+
 
 def determine_chance_of_diabetes(risk_score):
     if risk_score <= 14:
@@ -233,9 +262,12 @@ def determine_chance_of_diabetes(risk_score):
     else:
         return '50%'
 
+
 def determine_screening_recommendation(risk_category):
     if risk_category == 'Low to moderate risk':
         return 'Recommend screening every 3-5 years with Health Professional.'
     elif risk_category == 'High risk' or risk_category == 'Very high risk':
         return 'You are at high risk of developing diabetes. Please see health professional.'
-   
+
+
+

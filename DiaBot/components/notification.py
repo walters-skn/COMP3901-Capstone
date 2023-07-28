@@ -1,12 +1,10 @@
+from components.connect import db_config
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-
 import mysql.connector
-from db.connect import db_config
 
 # Download the helper library from https://www.twilio.com/docs/python/install
 import os
-# import datetime
 from dotenv import load_dotenv
 from twilio.rest import Client
 
@@ -104,11 +102,13 @@ def add_notification():
 
 
 def send_appointment_reminder(customer_phone_number, appt_date, appt_time):
-    load_dotenv('../.env.local')
+    # Load environment variables from the .env.local file in the parent directory
+    env_file_path = os.path.join(os.path.dirname(__file__), '..', '.env.local')
+    load_dotenv(env_file_path)
 
-    account_sid = os.environ['TWILIO_ACCOUNT_SID']
-    auth_token = os.environ['TWILIO_AUTH_TOKEN']
-    twilio_number = os.environ['TWILIO_NUMBER']
+    account_sid = os.getenv('TWILIO_ACCOUNT_SID')
+    auth_token = os.getenv('TWILIO_AUTH_TOKEN')
+    twilio_number = os.getenv('TWILIO_NUMBER')
     
     client = Client(account_sid, auth_token)
 
@@ -117,5 +117,5 @@ def send_appointment_reminder(customer_phone_number, appt_date, appt_time):
         from_=twilio_number,
         to=customer_phone_number
     )
-
+    
     return message

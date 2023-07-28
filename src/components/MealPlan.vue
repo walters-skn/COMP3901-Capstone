@@ -13,10 +13,10 @@
 
             <label class="risk" ><strong>Select Risk Category</strong></label>
             <select v-model="selectedReminder" class="risk-category">
-            <option disabled value=""> Please select one</option>
-            <option value="medication"> Low to Moderate </option>
-            <option value="appointment"> High Risk </option>
-            <option value="appointment"> Very High Risk </option>
+                <option value="" selected> Please select one</option>
+                <option value="medication"> Low to Moderate </option>
+                <option value="appointment"> High Risk </option>
+                <option value="appointment"> Very High Risk </option>
             </select>
 
             

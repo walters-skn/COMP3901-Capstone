@@ -1,7 +1,6 @@
-import mysql.connector
+from components.connect import db_config
 from mysql.connector import errorcode
-
-from connect import db_config
+import mysql.connector
 
 DB_NAME = 'diabot'
 
@@ -105,7 +104,8 @@ TABLES['meals'] = (
     "  `recommend_id` INT,"
     "  `meal_type` VARCHAR(255),"
     "  `meal_cont` VARCHAR(255) NOT NULL,"
-    "  `nutri_lvl` INT NOT NULL,"
+    "  `meal_pic` VARCHAR(255),"
+    "  `nutri_lvl` INT,"
     "  `meal_date` DATE,"
     "  `meal_time` TIME,"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id),"
