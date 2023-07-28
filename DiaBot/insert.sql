@@ -20,8 +20,8 @@ INSERT INTO clinics (patient_id, cname, ctype, caddress, parish) VALUES (3, 'Tri
 INSERT INTO clinics (patient_id, cname, ctype, caddress, parish) VALUES (NULL, 'Sekhmet Medical Center', 'Private', 'Shop 14, Bogue City Center, Bogue Rd, Montego Bay', 'St. James');
 INSERT INTO clinics (patient_id, cname, ctype, caddress, parish) VALUES (NULL, 'Cornwall Regional Hospital', 'Public', 'Montego Bay, St James', 'St. James');
 
-INSERT INTO reminders(patient_id, clinic_id, medication_id, appt_date, appt_time, remind_type, remind_desc)VALUES(1, 1, NULL, '21-07-23', NULL, 'appointment', 'patient has appointment at 6am');
-INSERT INTO reminders(patient_id, clinic_id, medication_id, appt_date, appt_time, remind_type, remind_desc)VALUES(2, 3, 2, NULL, NULL, 'medication', 'patient has meds to take at 2pm');
+INSERT INTO reminders (patient_id, clinic_id, medication_id, appt_date, appt_time, remind_type, remind_desc) VALUES (1, 1, NULL, '21-07-23', NULL, 'appointment', 'patient has appointment at 6am');
+INSERT INTO reminders (patient_id, clinic_id, medication_id, appt_date, appt_time, remind_type, remind_desc) VALUES (2, 3, 2, NULL, NULL, 'medication', 'patient has meds to take at 2pm');
 
 
 INSERT INTO contacts (patient_id, phone) VALUES (1, '1876-233-8765');
@@ -47,14 +47,14 @@ INSERT INTO recommendations (risk_category, risk_meals) VALUES ('Very high risk'
 INSERT INTO meals (patient_id, meal_type, meal_cont, nutri_lvl, meal_date, meal_time) VALUES (2, 'breakfast', '2 slice wheat bread with eggs', 2, '2023-07-25', '07:30:00');
 INSERT INTO meals (patient_id, meal_type, meal_cont, nutri_lvl, meal_date, meal_time) VALUES (1, 'dinner', '3 spoon rice with baked chicken and broccoli', 3,  '2023-07-26', '06:00:00');
 
-INSERT INTO diabetes_questions (question) VALUES ('What is your gender?');
-INSERT INTO diabetes_questions (question) VALUES ('What is your height(meters)?');
-INSERT INTO diabetes_questions (question) VALUES ('What is your weight(kg)?');
-INSERT INTO diabetes_questions (question) VALUES ('What is your age?');
-INSERT INTO diabetes_questions (question) VALUES ('What is your waist circumference(cm)?');
-INSERT INTO diabetes_questions (question) VALUES ('Are you physically active?');
-INSERT INTO diabetes_questions (question) VALUES ('How many times per day do you eat fruits or vegetables?');
-INSERT INTO diabetes_questions (question) VALUES ('Are you taking any form of medication for high blood pressure?');
-INSERT INTO diabetes_questions (question) VALUES ('Is your glucose level above 130mg/dL?');
-INSERT INTO diabetes_questions (question) VALUES ('Is there a history of diabetes in your family?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your gender (male/female)?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your height (meters)?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your weight (kg)?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your age (years?');
+INSERT INTO diabetes_questions (question) VALUES ('What is your waist circumference (cm)?');
+INSERT INTO diabetes_questions (question) VALUES ('Are you physically active (yes/no)?');
+INSERT INTO diabetes_questions (question) VALUES ('How many times per day do you eat fruits or vegetables (1,2,3)?');
+INSERT INTO diabetes_questions (question) VALUES ('Are you taking any form of medication for high blood pressure (yes/no)?');
+INSERT INTO diabetes_questions (question) VALUES ('Is your glucose level above 130mg/dL (yes/no)?');
+INSERT INTO diabetes_questions (question) VALUES ('Is there a history of diabetes in your family (yes/no)?');
 

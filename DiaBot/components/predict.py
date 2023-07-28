@@ -51,7 +51,7 @@ def get_symptoms():
 
 
 @predict_bp.route('/questions', methods=['GET'])
-@jwt_required()
+# @jwt_required()
 def send_questions_to_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
@@ -77,7 +77,7 @@ def send_questions_to_client():
 
 
 @predict_bp.route('/answers', methods=['POST'])
-@jwt_required()
+# @jwt_required()
 def receive_symptoms_from_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
@@ -188,7 +188,7 @@ def calculate_risk_score(gender, weight, height, age, waist_circumference, is_ph
     if gender == 'male':
         if waist_circumference >= 94:
             risk_score += 4
-    else:
+    elif gender == 'female':
         if waist_circumference >= 80:
             risk_score += 4
     

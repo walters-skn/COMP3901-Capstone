@@ -3,7 +3,7 @@
   <div class="nav_container">
 
     <nav class="navbar">
-      <router-link to="/subscriber" class="nav-link">
+      <router-link to="/" class="nav-link">
         <div class="inline">
           <img :src="imagePath" alt="home-logo" class="home">
           <span class="brand-name"> <strong> DIABOT </strong></span>

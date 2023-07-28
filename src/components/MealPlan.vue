@@ -33,6 +33,11 @@
                     <input type="text" v-model="mealCont" class="input">
                 </div>
 
+                <div class="form-group"> 
+                    <label>Upload Image Photo: </label>
+                    <input type="file" class="input">
+                </div>
+
                 <!-- <div class="form-group">        
                     <label>Nutritional Level: </label>
                     <input type="text" v-model="nutriLvl" class="input">

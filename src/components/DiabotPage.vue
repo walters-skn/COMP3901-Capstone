@@ -122,9 +122,6 @@ export default {
     subscribeMe() {
       this.$router.push('/register')
     },
-    // subscribeMeNot() {
-    //   // 
-    // }
   }
 };
 </script>
