@@ -12,18 +12,16 @@
             <h1 class="heading"> <strong> Diabetes Management Diet</strong></h1>
 
             <label class="risk" ><strong>Select Risk Category</strong></label>
-            <select v-model="selectedReminder" class="risk-category">
-                <option value="" selected> Please select one</option>
-                <option value="medication"> Low to Moderate </option>
-                <option value="appointment"> High Risk </option>
-                <option value="appointment"> Very High Risk </option>
+            <select v-for="category in categories" :key="category"  v-model="selectedCategory" class="risk-category">
+                <option value=""> Please select one</option>
+                <option value="medication">{{ category.risk_category }}</option>
             </select>
 
-            <div>
+            <!-- <div v-if="selectedCategory">
                 <ul>
-                    <li>{{ risk_meal }}</li>
+                    <li v-for="meal in risk_meal" :key="meal"> {{ risk_meal }}</li>
                 </ul>
-            </div>
+            </div> -->
 
             
             <form v-on:submit.prevent="saveData" class="meals-container">
@@ -73,10 +71,9 @@ export default {
         return {
             token: null,
             isAuthenticated: false,
-
+            selectedCategory: false,
             categories: [],
             risk_meals: [],
-
             mealType: '',
             mealCont: '',
             nutriLvl: ''
@@ -103,7 +100,15 @@ export default {
             }).catch((error) => {
                 console.log('getCategory Error: ', error)
             });
-        }
+        },
+        // getMeal(){
+        //     axios.get('http://localhost:5000/meals')
+        //     .then((response) => {
+        //         this.risk_meal = response.data.meals;
+        //     }).catch((error) =>{
+        //         console.log('getMeal Error', error)
+        //     });
+        // },
     }
     ,
     created() {

@@ -2,7 +2,6 @@ from components.connect import db_config
 from cryptography.fernet import Fernet
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-from functools import wraps
 import mysql.connector
 
 predict_bp = Blueprint('predict', __name__)
@@ -18,16 +17,6 @@ def decrypt_data(fernet, encrypted_data):
     decrypted_data = fernet.decrypt(encrypted_data).decode()
     return decrypted_data
 
-def conditional_jwt_required(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        # Check if the Authorization header is present
-        authorization_header = request.headers.get('Authorization')
-        if authorization_header:
-            return jwt_required(func)(*args, **kwargs)
-        else:
-            return func(*args, **kwargs)
-    return wrapper
 
 
 @predict_bp.route('/symptoms', methods=['GET'])
@@ -75,7 +64,7 @@ def get_symptoms():
 
 
 @predict_bp.route('/questions', methods=['GET'])
-@conditional_jwt_required
+@jwt_required()
 def send_questions_to_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
@@ -101,7 +90,7 @@ def send_questions_to_client():
 
 
 @predict_bp.route('/answers', methods=['POST'])
-@conditional_jwt_required
+@jwt_required()
 def receive_symptoms_from_client():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
@@ -146,36 +135,44 @@ def receive_symptoms_from_client():
         else:
             has_family_history = False
 
-        patient_id = get_jwt_identity()
-        cursor.execute("SELECT user_id FROM users WHERE user_id = %s LIMIT 1", (patient_id, ))
+        user_id = int(get_jwt_identity())
+        cursor.execute("SELECT user_id FROM users WHERE user_id = %s LIMIT 1", (user_id, ))
 
         user = cursor.fetchone()
-    
-
+        
         cursor.execute(""" 
             INSERT INTO symptoms 
                 (patient_id, gender, weight, height, age, waist_circumference, is_physically_active, fruit_veggie_intake, has_high_bp_medication, has_hyperglycemia_history, has_family_history)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """, (
-            patient_id, gender, weight, height, age, waist_circumference, 
+            user_id, gender, weight, height, age, waist_circumference, 
             is_physically_active, fruit_veggie_intake, has_high_bp_medication, 
             has_hyperglycemia_history, has_family_history
         ))
         cnx.commit()
 
-        cursor.execute("SELECT * FROM symptoms ORDER BY symptom_id DESC LIMIT 1")
-        patient_symptoms = cursor.fetchone()
-        print("Patient symptoms: ", patient_symptoms)
+        cursor.execute("SELECT symptom_id FROM symptoms ORDER BY symptom_id DESC LIMIT 1")
+        patient_symptom = cursor.fetchone()
+        # print("Patient symptom: ", patient_symptom)
 
-        if patient_symptoms is not None:
+        if patient_symptom is not None:
             risk_score = calculate_risk_score(
-                patient_symptoms[2], patient_symptoms[3], patient_symptoms[4], 
-                patient_symptoms[5], patient_symptoms[6], patient_symptoms[7], patient_symptoms[8], 
-                patient_symptoms[9], patient_symptoms[10], patient_symptoms[11]
+                patient_symptom[2], patient_symptom[3], patient_symptom[4], 
+                patient_symptom[5], patient_symptom[6], patient_symptom[7], patient_symptom[8], 
+                patient_symptom[9], patient_symptom[10], patient_symptom[11]
             )
             risk_category = determine_risk_category(risk_score)
             chance_of_diabetes = determine_chance_of_diabetes(risk_score)
             screening_recommendation = determine_screening_recommendation(risk_category)
+            
+            # insert risk score into database
+            cursor.execute("""
+                UPDATE symptoms
+                SET risk_score = %s, risk_category = %s, chance_of_diabetes = %s, screening_recommendation = %s
+                WHERE symptom_id = %s
+            """, (risk_score, risk_category, chance_of_diabetes, screening_recommendation, patient_symptom[0]))
+            cnx.commit()
+            
 
             cursor.execute("UPDATE diabetes_questions SET is_answered = 0 WHERE is_answered = 1")
             cnx.commit()
