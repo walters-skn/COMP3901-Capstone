@@ -4,39 +4,46 @@
     <div class="main-container">
         <NavBar/>
     </div>
+    
+    <div class="content-container">
+        <SideMenu/>
 
-    <h2> Meal History</h2>
-    <router-link to="/login" v-on:click="logoutAdmin">Logout</router-link>
-    <table>
-        <thead>
-            <tr>
-                <th> Meal ID</th>
-                <th> Patient ID</th>
-                <th> Recommended ID</th>
-                <th> Meal Type</th>
-                <th> Meal Content</th>
-                <th> Picture of Meal</th>
-                <th> Nutritional LEvel</th>
-                <th> Meal Date</th>
-                <th> Meal Time</th>
-                
-            </tr>
-        </thead>
+        <div class="filter">
+            <h1 class="heading"> <strong> <b> User Medical Records</b></strong></h1>
 
-        <tbody>
-            <tr v-for="meal in meals" :key="meal">
-                <td> {{ meal.meal_id }}</td>
-                <td> {{ meal.patient_id}}</td>
-                <td> {{ meal.recommend_id }}</td>
-                <td> {{ meal.meal_type }}</td>
-                <td> {{ meal.meal_cont }}</td>
-                <td> {{ meal.meal_pic }}</td>
-                <td> {{ meal.nutri_lvl}}</td>
-                <td> {{ meal.meal_date }}</td>
-                <td> {{ meal.meal_time  }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="table-container"> 
+                <table> 
+                    <thead>
+                        <tr>
+                            <th> Meal ID</th>
+                            <th> Patient ID</th>
+                            <th> Recommended ID</th>
+                            <th> Meal Type</th>
+                            <th> Meal Content</th>
+                            <th> Picture of Meal</th>
+                            <th> Nutritional LEvel</th>
+                            <th> Meal Date</th>
+                            <th> Meal Time</th>
+                            
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+                        <tr v-for="meal in meals" :key="meal">
+                            <td> {{ meal.meal_id }}</td>
+                            <td> {{ meal.patient_id}}</td>
+                            <td> {{ meal.recommend_id }}</td>
+                            <td> {{ meal.meal_type }}</td>
+                            <td> {{ meal.meal_cont }}</td>
+                            <td> {{ meal.meal_pic }}</td>
+                            <td> {{ meal.nutri_lvl}}</td>
+                            <td> {{ meal.meal_date }}</td>
+                            <td> {{ meal.meal_time  }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 </template>
 
 <script>
@@ -112,6 +119,34 @@ export default{
 
 <style scoped>
 
+    .main-container{
+        display: flex;
+    }
+
+    .content-container{
+        display: inline-flex;
+    }
+  
+    .heading{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: #4890a0;
+        font-size: 40px;
+    }
+
+    .filter{
+        padding: 5px;
+        margin-left: 60px;
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .table-container{
+        overflow-x: auto;
+    }
+
     table{
         width: 100%;
         border-collapse: collapse;
@@ -132,12 +167,6 @@ export default{
 
     tbody tr:nth-child(even){
         background-color: #f2f2f2;
-    }
-
-    h2{
-        margin-bottom: 20px;
-        text-align: center;
-        padding: 10px;
     }
 
 </style>
