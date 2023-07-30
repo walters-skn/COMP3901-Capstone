@@ -12,20 +12,20 @@
             <div class="filter">
                 <h1 class="heading"> <strong> <b> List of Health Care Facilities</b></strong></h1>
                 <label for="address-input" class="address">  Enter Health Care Facilities You Wish To Locate By Parish </label>
-                <input id="address-input" v-model="selectedParish" v-on:input="filterHospital" class="address-input" placeholder="Enter your Parish">
+                <input id="address-input" v-model="selectedParish" v-on:input="filterClinic" class="address-input" placeholder="Enter your Parish">
             </div>
 
             <br>
 
             <div class="hospital-list-container">
                 <div class="hospital-list">
-                    <div v-if="filteredHospitals.length === 0" class="no-results-message">No results found.</div>
-                    <div v-else v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
+                    <div v-if="filteredClinics.length === 0" class="no-results-message">No results found.</div>
+                    <div v-else v-for="clinic in filteredClinics" :key="clinic.name" class="hospital">
                         <div class="details">
-                            <h3 class="name" >{{ hospital.name }}</h3>
-                            <p><strong>Type:</strong> {{ hospital.type }}</p>
-                            <p><strong>Address:</strong> {{ hospital.address }}</p>
-                            <p><strong>Parish:</strong> {{ hospital.parish }}</p>
+                            <h3 class="name" >{{ clinic.name }}</h3>
+                            <p><strong>Type:</strong> {{ clinic.type }}</p>
+                            <p><strong>Address:</strong> {{ clinic.address }}</p>
+                            <p><strong>Parish:</strong> {{ clinic.parish }}</p>
                         </div>
                     </div>
                 </div>
@@ -51,37 +51,36 @@
                 token: null,
 
                 selectedParish: '',
-                hospitals: []
+                clinics: []
             };
         },
         methods: {
-            getAllHospitals() {
+            getAllClinics() {
                 axios.get('http://localhost:5000/clinic')
                     .then((response) => {
-                        this.hospitals = response.data.clinics;
-                        this.filterByParish();
+                        this.clinics = response.data.clinics;
+                        this.filteredClinics = this.clinics;
                     }).catch((error) => {
-                        console.log('getAllHospitals Error: ', error);
+                        console.log('getAllClinics Error: ', error);
                     })
             },
-            filterHospital() {
-                // this.filterByParish();
+            filterClinic() {
                 this.filteredClinics = this.clinics.filter(clinic => clinic.parish.toLowerCase().includes(this.selectedParish.toLowerCase()));
-            }
+            },
         },
         computed: {
-            filteredHospitals() {
-                return this.hospitals.filter((hospital) => {
-                    return hospital.parish.toLowerCase().includes(this.selectedParish.toLowerCase());
+            filteredClinics() {
+                return this.clinics.filter((clinic) => {
+                    return clinic.parish.toLowerCase().includes(this.selectedParish.toLowerCase());
                 });
             }
         },
         mounted() {
-            this.getAllHospitals();
+            this.getAllClinics();
         },
         created() {
             isAuthenticated();
-            if(isAuthenticated){
+            if(!isAuthenticated){
                 this.$router.push('/login')
             } else {
                 this.token = localStorage.getItem('token');
