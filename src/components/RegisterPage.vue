@@ -41,6 +41,11 @@
                         <input type="text" class="form-control" placeholder="Address 2"  v-model="address2"/>
                     </div>
 
+                    <div class="form-group">
+                        <label for="phone">Contact Number</label>
+                        <input type="text" class="form-control" placeholder="+18764443333" v-model="phone" required/>
+                    </div>
+
                     <div class="submit-group">
                         <button class="btn btn-primary btn-block">Sign Up</button>
                     </div> 
@@ -74,7 +79,8 @@
             email: '',
             password: '',
             address1: '',
-            address2: ''
+            address2: '',
+            phone: '',
         };
     },
     methods: {
@@ -85,7 +91,8 @@
                 email: this.email,
                 password: this.password,
                 address1: this.address1,
-                address2: this.address2
+                address2: this.address2,
+                phone: this.phone,
             }).then(() => {
                 this.$router.push('/login')
             }).catch((error) => {

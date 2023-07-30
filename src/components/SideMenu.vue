@@ -64,7 +64,7 @@
     import ImagePath5 from '@/assets/img/notify.png'
 
     export default {
-      name: 'SubscriberNavbar',
+      name: 'SideMenu',
       data() {
         return {
             selectedLink: null,

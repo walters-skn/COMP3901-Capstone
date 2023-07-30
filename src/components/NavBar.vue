@@ -13,11 +13,15 @@
       <div class="collapse">
         <ul class="navbar_nav">
 
-          <li class="nav-item">
+          <li class="nav-item" v-if="!loggedIn">
             <router-link to="/register" class="nav-link"> <strong> Sign Up </strong></router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="!loggedIn">
             <router-link to="/login" class="nav-link"> <strong> Login </strong></router-link>
+          </li>
+
+          <li class="nav-item" v-if="loggedIn">
+            <a class="nav-link" v-on:click="logoutPatient"> <strong> Logout </strong></a>
           </li>
 
         </ul>
@@ -30,13 +34,26 @@
   
 <script>
   import ImagePath from '@/assets/img/logo.png'
+  import { isAuthenticated } from '@/authUtils';
   
   export default {
     name: 'NavBar',
     data() {
       return {
+        loggedIn: false,
         imagePath: ImagePath,
       };
+    },
+    methods: {
+      logoutPatient() {
+        // remove token from local storage
+        localStorage.removeItem('token');
+        // redirect to login page
+        this.$router.push('/login');
+      },
+    },
+    created() {
+      this.loggedIn = isAuthenticated();
     },
   };
 

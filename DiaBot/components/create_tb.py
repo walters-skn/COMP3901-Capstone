@@ -53,6 +53,10 @@ TABLES['symptoms'] = (
     "  `has_high_bp_medication` BOOLEAN,"
     "  `has_hyperglycemia_history` BOOLEAN,"
     "  `has_family_history` BOOLEAN,"
+    "  `risk_score` INT,"
+    "  `risk_category` VARCHAR(120),"
+    "  `chance_of_diabetes` FLOAT,"
+    "  `screening_recommendation` VARCHAR(255),"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"
 )
@@ -154,6 +158,8 @@ for table_name in TABLES:
             print(err.msg)
     else:
         print("OK")
+
+
 
 
 cursor.close()
