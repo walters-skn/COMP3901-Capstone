@@ -2,7 +2,7 @@
 <template>
 
     <div class="main-container">
-        <SubscriberNavbar/>
+        <NavBar/>
     </div>
     
     <div class="content-container">
@@ -20,6 +20,7 @@
                             <th> Weight</th>
                             <th> Age</th>
                             <th> Waist Size</th>
+                            <th> Waist Circumference</th>
                             <th> Physically Active</th>
                             <th> Fruit/Veggie Intake</th>
                             <th> Has High Bp Medication</th>
@@ -51,13 +52,13 @@
   
 <script>
     import SideMenu from './SideMenu.vue'
-    import SubscriberNavbar from './SubscriberNavbar.vue'
+    import NavBar from './NavBar.vue'
     import axios from 'axios';
     import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
     export default {
         components:{
-            SubscriberNavbar,
+            NavBar,
             SideMenu,
         },
         data() {

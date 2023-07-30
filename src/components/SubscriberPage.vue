@@ -1,6 +1,6 @@
 <template> 
   <div class="header"> 
-    <SubscriberNavbar/>
+    <NavBar/>
     <h2 class="name"> <strong> WELCOME TO DIABOT</strong>  </h2>
     <h4 > Discover the services Diabot has to offer in the list below </h4>
   </div>
@@ -104,15 +104,15 @@
 </template>
 
 <script>
-  import SubscriberNavbar from './SubscriberNavbar.vue'
-  import { isAuthenticated, setAuthorizationHeader } from '@/authUtils'
+import { isAuthenticated, setAuthorizationHeader } from '@/authUtils'
 
-  import ImagePath from '@/assets/img/chat.png'
-  import ImagePath1 from '@/assets/img/profile.png'
-  import ImagePath2 from '@/assets/img/location.png'
-  import ImagePath3 from '@/assets/img/meal.png'
-  import ImagePath4 from '@/assets/img/scan.png'
-  import ImagePath5 from '@/assets/img/notify.png'
+import ImagePath from '@/assets/img/chat.png'
+import ImagePath1 from '@/assets/img/profile.png'
+import ImagePath2 from '@/assets/img/location.png'
+import ImagePath3 from '@/assets/img/meal.png'
+import ImagePath4 from '@/assets/img/scan.png'
+import ImagePath5 from '@/assets/img/notify.png'
+import NavBar from './NavBar.vue'
   
   export default {
     data(){
@@ -130,8 +130,8 @@
     },
     name:"subscriberPage",
     components:{
-      SubscriberNavbar,
-    }
+    NavBar
+}
     ,
     created() {
       this.isAuthenticated = isAuthenticated();

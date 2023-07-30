@@ -8,7 +8,6 @@ import DiabotPage from '@/components/DiabotPage.vue'
 import NavBar from '@/components/NavBar.vue';
 import SubscriberPage from '@/components/SubscriberPage.vue';
 import NutritionalScanner from '@/components/NutritionalScanner.vue';
-import SubscriberNavbar from '@/components/SubscriberNavbar.vue';
 import ClinicsPage from '@/components/ClinicsPage.vue';
 import NotificationPage from '@/components/NotificationPage.vue';
 import MealPlan from '@/components/MealPlan.vue';
@@ -26,7 +25,6 @@ const routes = [
     { path: '/navbar', component: NavBar},
     { path: '/subscriber', component: SubscriberPage},
     { path: '/scanner', component: NutritionalScanner},
-    { path: '/snavbar', component: SubscriberNavbar},
     { path: '/clinics', component: ClinicsPage},
     { path: '/notifications', component: NotificationPage},
     { path: '/meal', component: MealPlan},

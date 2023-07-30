@@ -2,7 +2,6 @@
 node_modules
 /dist
 
-
 # local env files
 .env.local
 .env.*.local
@@ -27,8 +26,8 @@ pnpm-debug.log*
 __pycache__/
 
 # virtualenv
-venv/
-.venv/
+*/venv/
+*/.venv/
 
 node_modules
 node_modules
