@@ -1,6 +1,11 @@
 
 <template>
-    <h2> User List Admin View</h2>
+
+    <div class="main-container">
+        <NavBar/>
+    </div>
+
+    <h2> Meal History</h2>
     <router-link to="/login" v-on:click="logoutAdmin">Logout</router-link>
     <table>
         <thead>
@@ -37,9 +42,16 @@
 <script>
 
 import axios from 'axios';
+import SideMenu from './SideMenu.vue'
+import NavBar from './NavBar.vue'
+
 import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
 export default{
+    components:{
+        NavBar,
+        SideMenu,
+    },
     data(){
         return{
             token: null,
@@ -66,7 +78,7 @@ export default{
             })
             .then((response) => {
                 this.meals = response.data.meals;
-                // console.log('getProfile response:', this.profiles);
+                // console.log('getMeal response:', this.meals);
             })
             .catch((error) => {
                 if (error.response && error.response.status === 401) {
