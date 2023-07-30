@@ -46,9 +46,8 @@
                 </table>
             </div>
         </div>
-
     </div>
-  </template>
+</template>
   
 <script>
     import SideMenu from './SideMenu.vue'
