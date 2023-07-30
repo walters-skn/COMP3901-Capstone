@@ -1,4 +1,4 @@
-from components.connect import db_config
+from connect import db_config
 from mysql.connector import errorcode
 import mysql.connector
 
