@@ -74,8 +74,8 @@ export default {
             token: null,
             isAuthenticated: false,
 
-            risk_category: '',
-            risk_meal: '',
+            categories: [],
+            risk_meals: [],
 
             mealType: '',
             mealCont: '',
@@ -99,8 +99,7 @@ export default {
         getCategory(){
             axios.get('http://localhost:5000/meal')
             .then((response) =>{
-                this.risk_category = response.data.risk_category
-                this.risk_meal = response.data.risk_meal
+                this.categories = response.data.categories
             }).catch((error) => {
                 console.log('getCategory Error: ', error)
             });
@@ -115,6 +114,9 @@ export default {
             this.token = localStorage.getItem('token');
             setAuthorizationHeader(this.token);
         }
+
+        this.saveData();
+        this.getCategory();
     }
 };
 
