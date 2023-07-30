@@ -1,3 +1,4 @@
+
 from components.connect import db_config
 from dotenv import load_dotenv
 from flask import Blueprint, request, jsonify
