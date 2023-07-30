@@ -34,8 +34,8 @@
                     <label>Meal Type</label>
                     <select v-model="selectType" class="risk-category">
                         <option value="">Select a type</option>
-                        <option v-for="type in mealTypes" :key="type" :value="type">
-                            {{ type }}
+                        <option v-for="(value, key) in mealTypes" :key="key" :value="key">
+                            {{ value }}
                         </option>
                     </select>
                 </div>
@@ -100,17 +100,24 @@ export default {
     },
     methods: {
         saveMeal() {
-            axios.post('http://localhost:5000/meal', {
-                selectType: this.selectType,
-                mealCont: this.mealCont,
-                // nutriLvl: this.nutriLvl,
-                selectedFile: this.selectedFile
+            // Create a FormData object to send the data as a multipart/form-data request
+            const formData = new FormData();
+            formData.append('mealType', this.selectType);
+            formData.append('mealCont', this.mealCont);
+            // formData.append('nutriLvl', this.nutriLvl);
+            formData.append('selectedFile', this.selectedFile);
+
+            // Use axios to send the POST request with the FormData
+            axios.post('http://localhost:5000/meal', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             })
             .then((response) => {
-                console.log('saveMeal response: ', response)
+                console.log('saveMeal response: ', response);
             })
             .catch((error) => {
-                console.log('saveMeal Error: ', error)
+                console.log('saveMeal Error: ', error);
             });
         },
         showRiskMeals() {

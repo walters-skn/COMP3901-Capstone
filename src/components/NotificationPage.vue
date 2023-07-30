@@ -176,7 +176,7 @@ export default {
   },
   created() {
     isAuthenticated();
-    if(isAuthenticated){
+    if(!isAuthenticated){
         this.$router.push('/login')
     } else {
         this.token = localStorage.getItem('token');
