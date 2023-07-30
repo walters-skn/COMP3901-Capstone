@@ -2,7 +2,7 @@
 <template>
 
     <div class="main-container">
-        <SubscriberNavbar/>
+        <NavBar/>
     </div>
     
     <div class="content-container">
@@ -18,12 +18,12 @@
   
 <script>
     import SideMenu from './SideMenu.vue'
-    import SubscriberNavbar from './SubscriberNavbar.vue'
+    import NavBar from './NavBar.vue'
     import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
     export default {
         components:{
-            SubscriberNavbar,
+            NavBar,
             SideMenu,
         },
         created() {

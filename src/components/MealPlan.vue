@@ -19,6 +19,12 @@
                 <option value="appointment"> Very High Risk </option>
             </select>
 
+            <div>
+                <ul>
+                    <li>{{ risk_meal }}</li>
+                </ul>
+            </div>
+
             
             <form v-on:submit.prevent="saveData" class="meals-container">
                 <h2 class="details"> Enter your meal details below:</h2>
@@ -68,6 +74,9 @@ export default {
             token: null,
             isAuthenticated: false,
 
+            risk_category: '',
+            risk_meal: '',
+
             mealType: '',
             mealCont: '',
             nutriLvl: ''
@@ -87,6 +96,15 @@ export default {
                 console.log('saveData Error: ', error)
             });
         },
+        getCategory(){
+            axios.get('http://localhost:5000/meal')
+            .then((response) =>{
+                this.risk_category = response.data.risk_category
+                this.risk_meal = response.data.risk_meal
+            }).catch((error) => {
+                console.log('getCategory Error: ', error)
+            });
+        }
     }
     ,
     created() {

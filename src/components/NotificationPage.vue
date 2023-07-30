@@ -1,7 +1,7 @@
 <template>
 
   <div class="main-container">
-      <SubscriberNavbar/>
+      <NavBar/>
   </div>
     
   <div class="content-container">
@@ -21,7 +21,7 @@
         <div v-if="selectedReminder === 'medication'">
           <label for="medication" class="label"> <strong> Medication Reminder</strong></label>
 
-          <form v-on:submit.prevent="saveData" class="meds">
+          <div class="meds">
             <div v-for="(med,index) in medications" :key="index" class="medication-container"> 
               <label>Medication Name:</label>
               <input type="text" v-model="med.medicationName" class="input" >
@@ -46,9 +46,9 @@
               <input type="text" v-model="med.quantityMeds" class="input">
             </div>
             
-            <button @click="addMedication" class="btn"> + </button>
-            <button class="submit"> Submit </button>
-          </form>
+            <button v-on:click="addMedication" class="btn"> + </button>
+            <button v-on:click="saveData" class="submit"> Submit </button>
+          </div>
 
         </div>
       </div>
@@ -57,7 +57,7 @@
 
         <div v-if="selectedReminder === 'appointment'">
           <label for="appointment" class="label"><strong> Appointment Reminder</strong></label>
-          <form v-on:submit.prevent="saveData" class="apt">
+          <div  class="apt">
             <div v-for="(apt,index) in appointments" :key="index" class="appointment-container">  
               <label>Location:</label>
               <input type="text" v-model="apt.location" class="input">
@@ -67,11 +67,14 @@
 
               <label>Time:</label>
               <input type="time" v-model="apt.appointmentTime" class="input">
+
+              <label for="reminderDesc">Description</label>
+              <textarea id="reminderDesc" name="reminderDesc" rows="4" cols="50" class="input"></textarea>
             </div>
 
-            <button @click="addAppointment" class="btn">+</button>
-            <button class="submit"> Submit </button>
-          </form>
+            <button v-on:click="addAppointment" class="btn">+</button>
+            <button v-on:click="saveData" class="submit"> Submit </button>
+          </div>
 
         </div>
       </div>
@@ -84,14 +87,14 @@
 
 <script>
 
-import SubscriberNavbar from './SubscriberNavbar.vue'
+import NavBar from './NavBar.vue'
 import SideMenu from './SideMenu.vue';
 import axios from 'axios';
 import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
 export default {
   components:{
-    SubscriberNavbar,
+    NavBar,
     SideMenu,
   },
   data(){
@@ -110,43 +113,50 @@ export default {
       location: '',
       appointmentDate: '',
       appointmentTime: '',
+      reminderDesc: '',
     }
   },
   methods:{
-    addMedication(){
+    addMedication() {
       this.medications.push({
-        medicationName: '',
-        comDate: '',
-        termDate: '',
-        frequency: '',
-        quantityMeds:'',
+        medicationName: this.medicationName,
+        comDate: this.comDate,
+        termDate: this.termDate,
+        frequency: this.frequency,
+        quantityMeds: this.quantityMeds,
       });
+
+      console.log('Medications: ', this.medications);
+
+      // Clear the form fields after successfully adding a medication
+      this.medicationName = '';
+      this.comDate = '';
+      this.termDate = '';
+      this.frequency = '';
+      this.quantityMeds = '';
     },
-    addAppointment(){
+    addAppointment() {
+
       this.appointments.push({
-        location: '',
-        appointmentDate: '',
-        appointmentTime: '',
+        location: this.location,
+        appointmentDate: this.appointmentDate,
+        appointmentTime: this.appointmentTime,
+        selectedReminder: this.selectedReminder,
+        reminderDesc: this.reminderDesc,
       });
+
+      console.log('Appointments: ', this.appointments);
+
+      // Clear the form fields after successfully adding an appointment
+      this.location = '';
+      this.appointmentDate = '';
+      this.appointmentTime = '';
     },
     saveData(){
       axios.post('http://localhost:5000/notification', {
-        remind_type: this.selectedReminder,
-        medication_name: this.medicationName,
-        commencement_date: this.comDate,
-        termination_date: this.termDate,
-        frequency: this.frequency,
-        quantity: this.quantityMeds,
-        cname: this.location,
-        appt_date: this.appointmentDate,
-        appt_time: this.appointmentTime,
+        // wait until the form is filled
+
       })
-      .then((response) => {
-        console.log('Data successfully stored', response);
-      })
-      .catch((error) => {
-        console.log('Error', error);
-      });
     },
   },
   created() {
