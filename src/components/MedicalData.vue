@@ -20,6 +20,7 @@
                             <th> Weight</th>
                             <th> Age</th>
                             <th> Waist Size</th>
+                            <th> Waist Circumference</th>
                             <th> Physically Active</th>
                             <th> Fruit/Veggie Intake</th>
                             <th> Has High Bp Medication</th>
@@ -45,9 +46,8 @@
                 </table>
             </div>
         </div>
-
     </div>
-  </template>
+</template>
   
 <script>
     import SideMenu from './SideMenu.vue'

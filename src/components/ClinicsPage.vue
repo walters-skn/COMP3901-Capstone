@@ -8,23 +8,25 @@
     <div class="content-container">
         <SideMenu/>
 
-        <div class="filter">
-            <h1 class="heading"> <strong> <b> List of Health Care Facilities</b></strong></h1>
-            <label for="address-input" class="address">  Enter Health Care Facilities You Wish To Locate By Parish </label>
-            <input id="address-input" v-model="selectedParish" class="address-input" placeholder="Enter your Parish">
-        </div>
+        <div class="clinic">
+            <div class="filter">
+                <h1 class="heading"> <strong> <b> List of Health Care Facilities</b></strong></h1>
+                <label for="address-input" class="address">  Enter Health Care Facilities You Wish To Locate By Parish </label>
+                <input id="address-input" v-model="selectedParish" v-on:input="filterClinic" class="address-input" placeholder="Enter your Parish">
+            </div>
 
-        <br>
+            <br>
 
-        <div class="hospital-list-container">
-            <div class="hospital-list">
-                <div v-if="filteredHospitals.length === 0" class="no-results-message">No results found.</div>
-                <div v-else v-for="hospital in filteredHospitals" :key="hospital.name" class="hospital">
-                    <div class="details">
-                        <h3 class="name" >{{ hospital.name }}</h3>
-                        <p><strong>Type:</strong> {{ hospital.type }}</p>
-                        <p><strong>Address:</strong> {{ hospital.address }}</p>
-                        <p><strong>Parish:</strong> {{ hospital.parish }}</p>
+            <div class="hospital-list-container">
+                <div class="hospital-list">
+                    <div v-if="filteredClinics.length === 0" class="no-results-message">No results found.</div>
+                    <div v-else v-for="clinic in filteredClinics" :key="clinic.name" class="hospital">
+                        <div class="details">
+                            <h3 class="name" >{{ clinic.name }}</h3>
+                            <p><strong>Type:</strong> {{ clinic.type }}</p>
+                            <p><strong>Address:</strong> {{ clinic.address }}</p>
+                            <p><strong>Parish:</strong> {{ clinic.parish }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,61 +49,42 @@
         data() {
             return {
                 token: null,
-                isAuthenticated: false,
 
-                hospitals: [],
-                parishes: [],
                 selectedParish: '',
+                clinics: []
             };
         },
         methods: {
-            getAllHospitals() {
+            getAllClinics() {
                 axios.get('http://localhost:5000/clinic')
                     .then((response) => {
-                        this.hospitals = response.data.clinics;
-                        this.filterByParish();
+                        this.clinics = response.data.clinics;
+                        this.filteredClinics = this.clinics;
                     }).catch((error) => {
-                        console.log('getAllHospitals Error: ', error);
+                        console.log('getAllClinics Error: ', error);
                     })
             },
-            filterByParish() {
-                this.filteredHospitals = this.hospitals.filter((hospital) => {
-                    if (!this.selectedParish) {
-                        return true;
-                    } else {
-                        const selectedParishLower = this.selectedParish.toLowerCase();
-                        const hospitalParishLower = hospital.parish.toLowerCase();
-                        return hospitalParishLower.includes(selectedParishLower);
-                    }
-                })
+            filterClinic() {
+                this.filteredClinics = this.clinics.filter(clinic => clinic.parish.toLowerCase().includes(this.selectedParish.toLowerCase()));
+            },
+        },
+        computed: {
+            filteredClinics() {
+                return this.clinics.filter((clinic) => {
+                    return clinic.parish.toLowerCase().includes(this.selectedParish.toLowerCase());
+                });
             }
         },
+        mounted() {
+            this.getAllClinics();
+        },
         created() {
-            this.isAuthenticated = isAuthenticated();
-            if(!this.isAuthenticated){
+            isAuthenticated();
+            if(!isAuthenticated){
                 this.$router.push('/login')
             } else {
                 this.token = localStorage.getItem('token');
                 setAuthorizationHeader(this.token);
-            }
-        },
-        computed: {
-            filteredHospitals() {
-                return this.hospitals.filter((hospital) => {
-                    if (!this.selectedParish) {
-                        return true;
-                    } else {
-                        return hospital.parish === this.selectedParish;
-                    }
-                })
-            },
-        },
-        mounted() {
-            this.getAllHospitals();
-        },
-        watch: {
-            selectedParish() {
-                this.filterByParish();
             }
         }
     }
@@ -116,6 +99,10 @@
     .content-container{
         display: inline-flex;
         /* padding-left: 50px;     */
+    }
+
+    .clinic {
+        width: 80vw;
     }
 
     .address{
@@ -153,8 +140,11 @@
     }
 
     .hospital-list{
-        width: 80%;
-        max-width: 800px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        /* width: 80%;
+        max-width: 800px; */
     }
 
     .details{
@@ -168,6 +158,16 @@
     .hospital {
         margin-bottom: 20px;
     }
+
+    /* .hospital {
+        margin: 10px;
+        border: 1px solid #ccc;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+        box-sizing: border-box;
+    } */
     
     h3 {
         font-size: 20px;

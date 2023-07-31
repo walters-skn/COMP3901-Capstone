@@ -3,7 +3,14 @@
   <div class="nav_container">
 
     <nav class="navbar">
-      <router-link to="/" class="nav-link">
+      <router-link to="/" class="nav-link" v-if="!loggedIn">
+        <div class="inline">
+          <img :src="imagePath" alt="home-logo" class="home">
+          <span class="brand-name"> <strong> DIABOT </strong></span>
+        </div>
+      </router-link>
+
+      <router-link to="/subscriber" class="nav-link" v-if="loggedIn">
         <div class="inline">
           <img :src="imagePath" alt="home-logo" class="home">
           <span class="brand-name"> <strong> DIABOT </strong></span>

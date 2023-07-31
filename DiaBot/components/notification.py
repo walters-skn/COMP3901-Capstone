@@ -1,18 +1,18 @@
+
 from components.connect import db_config
+from dotenv import load_dotenv
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-import mysql.connector
-
-# Download the helper library from https://www.twilio.com/docs/python/install
-import os
-from dotenv import load_dotenv
 from twilio.rest import Client
+import mysql.connector
+import os
+# Download the helper library from https://www.twilio.com/docs/python/install
 
 notification_bp = Blueprint('notification', __name__)
 
-@notification_bp.route('/notification', methods=['POST'])
+@notification_bp.route('/medication', methods=['POST'])
 @jwt_required()
-def add_notification():
+def add_medication():
     cnx = mysql.connector.connect(**db_config)
     cursor = cnx.cursor()
 
@@ -40,25 +40,31 @@ def add_notification():
         """, (patient_id, medication_name, commence_date, terminate_date, frequency, quantity_mg))
         cnx.commit()
 
-        # Fetch the newly inserted medication_id
-        cursor.execute("SELECT LAST_INSERT_ID()")
-        medication_id_row = cursor.fetchone()
-        if medication_id_row is not None:
-            medication_id = medication_id_row[0]
-        else:
-            return jsonify({'error': 'Medication not found'}), 400
+        return jsonify({'message': 'Medication added successfully!'}), 201
 
-        # Clinics Table
-        clinic_name = request.json.get('clinicName')
+        # close the connection
+        cursor.close()
+        cnx.close()
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
+notification_bp.route('/reminder', methods=['POST'])
+@jwt_required()
+def add_appointment():
+    cnx = mysql.connector.connect(**db_config)
+    cursor = cnx.cursor()
+
+    try:
         # Reminder Table
+        clinic_name = request.json.get('location')
         appt_date = request.json.get('appointmentDate')
         appt_time = request.json.get('appointmentTime')
-        remind_type = request.json.get('reminderType')
+        remind_type = request.json.get('selectedReminder')
         remind_desc = request.json.get('reminderDesc')
 
         # use the clinicName to get the clinic_id from the clinics table
-        cursor.execute("SELECT clinic_id FROM clinics WHERE cname = %s LIMIT 1", (clinic_name,))
+        cursor.execute("SELECT clinic_id FROM clinics WHERE caddress LIKE %s LIMIT 1", ('%' + location + '%',))
         clinic_row = cursor.fetchone()
         if clinic_row is not None:
             clinic_id = clinic_row[0]
@@ -113,9 +119,9 @@ def send_appointment_reminder(customer_phone_number, appt_date, appt_time):
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(
-        body="Hi, this is a reminder for your appointment at [Date & Time].",
+        to=customer_phone_number,
         from_=twilio_number,
-        to=customer_phone_number
+        body=f"Hi, this is a reminder for your appointment at [{appt_date} & {appt_time}]."
     )
     
     return message

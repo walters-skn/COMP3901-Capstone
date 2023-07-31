@@ -12,26 +12,32 @@
             <h1 class="heading"> <strong> Diabetes Management Diet</strong></h1>
 
             <label class="risk" ><strong>Select Risk Category</strong></label>
-            <select v-model="selectedReminder" class="risk-category">
-                <option value="" selected> Please select one</option>
-                <option value="medication"> Low to Moderate </option>
-                <option value="appointment"> High Risk </option>
-                <option value="appointment"> Very High Risk </option>
+            <select v-model="selectedRiskCategory" v-on:change="showRiskMeals" class="risk-category">
+                <option value="">Select a category</option>
+                <option v-for="riskCategory in riskCategories" :key="riskCategory" :value="riskCategory">
+                    {{ riskCategory }}
+                </option>
             </select>
 
-            <div>
-                <ul>
-                    <li>{{ risk_meal }}</li>
+            <div v-if="selectedRiskCategory">
+                <h2>Risk Meals</h2>
+                <ul class="risk-meals">
+                    <li v-for="riskMeal in displayRiskMeals" :key="riskMeal">{{ riskMeal }}</li>
                 </ul>
             </div>
 
             
-            <form v-on:submit.prevent="saveData" class="meals-container">
-                <h2 class="details"> Enter your meal details below:</h2>
-            
+            <form v-on:submit.prevent="saveMeal" class="meals-container">
+                <h2 class="details">Enter your meal details below: </h2>
+
                 <div class="form-group">
-                    <label>Meal Type: </label>
-                    <input type="text" v-model="mealType" class="input">
+                    <label>Meal Type</label>
+                    <select v-model="selectType" class="risk-category">
+                        <option value="">Select a type</option>
+                        <option v-for="type in mealTypes" :key="type" :value="type">
+                            {{ type }}
+                        </option>
+                    </select>
                 </div>
 
                 <div class="form-group"> 
@@ -41,7 +47,7 @@
 
                 <div class="form-group"> 
                     <label>Upload Image Photo: </label>
-                    <input type="file" class="input">
+                    <input type="file" v-on:change="handleFileChange" class="input">
                 </div>
 
                 <!-- <div class="form-group">        
@@ -71,52 +77,72 @@ export default {
     },
     data() {
         return {
+
             token: null,
-            isAuthenticated: false,
 
-            categories: [],
-            risk_meals: [],
+            riskCategories: [],
+            riskMealsByCategory:{},
+            selectedRiskCategory: '',
+            displayRiskMeals: [],
 
-            mealType: '',
+            mealTypes: {
+                breakfast: 'Breakfast',
+                lunch: 'Lunch',
+                dinner: 'Dinner'
+            },
+            selectType: '',
+
             mealCont: '',
-            nutriLvl: ''
+            // nutriLvl: '',
+
+            selectedFile: null
         }
     },
     methods: {
-        saveData() {
+        saveMeal() {
             axios.post('http://localhost:5000/meal', {
-                mealType: this.mealType,
+                selectType: this.selectType,
                 mealCont: this.mealCont,
-                nutriLvl: this.nutriLvl
+                // nutriLvl: this.nutriLvl,
+                selectedFile: this.selectedFile
             })
             .then((response) => {
-                console.log('saveData response: ', response)
+                console.log('saveMeal response: ', response)
             })
             .catch((error) => {
-                console.log('saveData Error: ', error)
+                console.log('saveMeal Error: ', error)
             });
         },
-        getCategory(){
-            axios.get('http://localhost:5000/meal')
-            .then((response) =>{
-                this.categories = response.data.categories
-            }).catch((error) => {
-                console.log('getCategory Error: ', error)
-            });
+        showRiskMeals() {
+            this.displayRiskMeals = this.riskMealsByCategory[this.selectedRiskCategory] || [];
+        },
+        handleFileChange(event) {
+            this.selectedFile = event.target.files[0]
         }
     }
     ,
     created() {
-        this.isAuthenticated = isAuthenticated();
-        if(!this.isAuthenticated){
+        isAuthenticated();
+        if(!isAuthenticated){
             this.$router.push('/login')
         } else {
             this.token = localStorage.getItem('token');
             setAuthorizationHeader(this.token);
         }
 
-        this.saveData();
-        this.getCategory();
+        axios.get('http://localhost:5000/meal')
+            .then((response) => {
+                this.riskCategories = Array.from(new Set(response.data.categories.map((meal) => meal.risk_category)));
+                this.riskMealsByCategory = response.data.categories.reduce((acc, meal) => {
+                    if(!acc[meal.risk_category]) {
+                        acc[meal.risk_category] = [];
+                    }
+                    acc[meal.risk_category].push(meal.risk_meal);
+                    return acc;
+                }, {});
+            }).catch((error) => {
+                console.log('getRiskMeals Error: ', error);
+            });
     }
 };
 
@@ -137,6 +163,10 @@ export default {
         color: #33717f;
         font-family: 'Times New Roman', Times, serif;
         font-size: 25px;
+    }
+
+    .risk-meals{
+        list-style-type: none;
     }
 
     .main-container{

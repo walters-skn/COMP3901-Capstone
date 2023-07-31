@@ -55,7 +55,7 @@ TABLES['symptoms'] = (
     "  `has_family_history` BOOLEAN,"
     "  `risk_score` INT,"
     "  `risk_category` VARCHAR(120),"
-    "  `chance_of_diabetes` FLOAT,"
+    "  `chance_of_diabetes` VARCHAR(25),"
     "  `screening_recommendation` VARCHAR(255),"
     "  FOREIGN KEY(patient_id) REFERENCES `patients`(patient_id)"
     ") ENGINE=InnoDB"

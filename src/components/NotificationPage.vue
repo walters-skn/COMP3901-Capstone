@@ -1,3 +1,4 @@
+
 <template>
 
   <div class="main-container">
@@ -47,7 +48,9 @@
             </div>
             
             <button v-on:click="addMedication" class="btn"> + </button>
-            <button v-on:click="saveData" class="submit"> Submit </button>
+            <!-- <button v-on:click="saveData" class="submit"> Submit </button> -->
+            <button v-on:click="addMedication" class="submit"> Submit </button>
+
           </div>
 
         </div>
@@ -73,7 +76,7 @@
             </div>
 
             <button v-on:click="addAppointment" class="btn">+</button>
-            <button v-on:click="saveData" class="submit"> Submit </button>
+            <button v-on:click="submitForm" class="submit"> Submit </button>
           </div>
 
         </div>
@@ -118,13 +121,21 @@ export default {
   },
   methods:{
     addMedication() {
-      this.medications.push({
+      // this.medications.push({
+      //   medicationName: this.medicationName,
+      //   comDate: this.comDate,
+      //   termDate: this.termDate,
+      //   frequency: this.frequency,
+      //   quantityMeds: this.quantityMeds,
+      // });
+
+      axios.post('http://localhost:5000/medication', {
         medicationName: this.medicationName,
         comDate: this.comDate,
         termDate: this.termDate,
         frequency: this.frequency,
         quantityMeds: this.quantityMeds,
-      });
+      })
 
       console.log('Medications: ', this.medications);
 
@@ -137,13 +148,21 @@ export default {
     },
     addAppointment() {
 
-      this.appointments.push({
+      // this.appointments.push({
+      //   location: this.location,
+      //   appointmentDate: this.appointmentDate,
+      //   appointmentTime: this.appointmentTime,
+      //   selectedReminder: this.selectedReminder,
+      //   reminderDesc: this.reminderDesc,
+      // });
+
+      axios.post('http://localhost:5000/reminder', {
         location: this.location,
         appointmentDate: this.appointmentDate,
         appointmentTime: this.appointmentTime,
         selectedReminder: this.selectedReminder,
         reminderDesc: this.reminderDesc,
-      });
+      })
 
       console.log('Appointments: ', this.appointments);
 
@@ -151,17 +170,13 @@ export default {
       this.location = '';
       this.appointmentDate = '';
       this.appointmentTime = '';
-    },
-    saveData(){
-      axios.post('http://localhost:5000/notification', {
-        // wait until the form is filled
-
-      })
+      this.selectedReminder = '';
+      this.reminderDesc = '';
     },
   },
   created() {
-    this.isAuthenticated = isAuthenticated();
-    if(!this.isAuthenticated){
+    isAuthenticated();
+    if(isAuthenticated){
         this.$router.push('/login')
     } else {
         this.token = localStorage.getItem('token');
