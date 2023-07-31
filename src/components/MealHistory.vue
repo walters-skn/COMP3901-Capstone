@@ -15,13 +15,10 @@
                 <table> 
                     <thead>
                         <tr>
-                            <th> Meal ID</th>
                             <th> Patient ID</th>
-                            <th> Recommended ID</th>
                             <th> Meal Type</th>
                             <th> Meal Content</th>
-                            <th> Picture of Meal</th>
-                            <th> Nutritional LEvel</th>
+                            <th> Nutritional Level</th>
                             <th> Meal Date</th>
                             <th> Meal Time</th>
                             
@@ -30,12 +27,9 @@
         
                     <tbody>
                         <tr v-for="meal in meals" :key="meal">
-                            <td> {{ meal.meal_id }}</td>
                             <td> {{ meal.patient_id}}</td>
-                            <td> {{ meal.recommend_id }}</td>
                             <td> {{ meal.meal_type }}</td>
                             <td> {{ meal.meal_cont }}</td>
-                            <td> {{ meal.meal_pic }}</td>
                             <td> {{ meal.nutri_lvl}}</td>
                             <td> {{ meal.meal_date }}</td>
                             <td> {{ meal.meal_time  }}</td>
@@ -66,36 +60,29 @@ export default{
             isAuthenticated: false,
 
             meals: [],
-            meal_id: '',
             patient_id: '',
-            recommend_id: '',
             meal_type: '',
             meal_cont: '',
-            meal_pic: '',
             nutri_lvl: '',
             meal_date: '',
             meal_time: '',
         };
     },
     methods: {
-        getMeal(){
-            axios.get('http://localhost:5000/meal', {
-                headers: {
-                    Authorization: `Bearer ${this.token}`,
-                },
-            })
-            .then((response) => {
-                this.meals = response.data.meals;
-                // console.log('getMeal response:', this.meals);
-            })
-            .catch((error) => {
-                if (error.response && error.response.status === 401) {
-                // Unauthorized access, redirect to login page or show an error message
-                this.$router.push('/login');
-                } else {
-                console.log('getProfile error:', error);
-                }
-            });
+        getMeal() {
+            axios.get('http://localhost:5000/history')
+                .then((response) => {
+                    this.meals = response.data.meals;
+                    console.log('getMeal response:', response);
+                })
+                .catch((error) => {
+                    if (error.response && error.response.status === 401) {
+                    // Unauthorized access, redirect to login page or show an error message
+                    this.$router.push('/login');
+                    } else {
+                    console.log('getProfile error:', error);
+                    }
+                });
         },
         logoutAdmin() {
             // remove token from local storage
@@ -112,8 +99,8 @@ export default{
             this.token = localStorage.getItem('token');
             setAuthorizationHeader(this.token);
         }
-        
-        this.getProfile();
+
+        this.getMeal();
     }
 }
 </script>
