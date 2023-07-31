@@ -252,8 +252,8 @@ def calculate_risk_score(gender, weight, height, age, waist_circumference, is_ph
     if has_family_history:
         risk_score += 3
     
-    total_questions = 10  # Total number of questions contributing to the risk score
-    percentage_score = (total_questions / risk_score) * 100
+    # calculate the risk score as a percentage
+    percentage_score = (risk_score / 24) * 100
     
     return percentage_score
 

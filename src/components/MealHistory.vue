@@ -9,7 +9,7 @@
         <SideMenu/>
 
         <div class="filter">
-            <h1 class="heading"> <strong> <b> User Medical Records</b></strong></h1>
+            <h1 class="heading"> <strong> <b> User Meal Records</b></strong></h1>
 
             <div class="table-container"> 
                 <table> 

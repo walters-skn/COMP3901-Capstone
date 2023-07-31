@@ -62,16 +62,13 @@ def login():
         cursor.execute("SELECT email, upassword, is_admin FROM users WHERE email = %s LIMIT 1", (email, ))
         user = cursor.fetchone()
         if user is not None:
-            email, is_admin = user[0], user[2]
-            token_data = {
-                'email': email
-            }
+            is_admin = user[2]
             if is_admin == 1:
-                access_token = create_access_token(identity=token_data)
-                return jsonify({'access_token': access_token, 'is_admin': is_admin}), 200
+                access_token = create_access_token(identity=user[0])
+                return jsonify({'access_token': access_token, 'is_admin': 1}), 200
+            
             elif is_admin == 0 and bcrypt.checkpw(password.encode('utf-8'), user[1].encode('utf-8')):
-                
-                access_token = create_access_token(identity=token_data)
+                access_token = create_access_token(identity=user[0])
                 return jsonify({'access_token': access_token}), 200
             else:
                 return jsonify({'error': 'Invalid credentials'}), 400

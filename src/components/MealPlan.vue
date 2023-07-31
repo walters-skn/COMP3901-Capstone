@@ -47,7 +47,7 @@
 
                 <div class="form-group"> 
                     <label>Upload Image Photo: </label>
-                    <input type="file" v-on:change="handleFileChange" class="input">
+                    <input type="file" ref="selectedFile" v-on:change="handleFileChange" enctype="multipart/form-data" class="input">
                 </div>
 
                 <!-- <div class="form-group">        
@@ -79,7 +79,7 @@ export default {
         return {
 
             token: null,
-
+            
             riskCategories: [],
             riskMealsByCategory:{},
             selectedRiskCategory: '',
@@ -100,25 +100,37 @@ export default {
     },
     methods: {
         saveMeal() {
-            // Create a FormData object to send the data as a multipart/form-data request
-            const formData = new FormData();
-            formData.append('mealType', this.selectType);
-            formData.append('mealCont', this.mealCont);
-            // formData.append('nutriLvl', this.nutriLvl);
-            formData.append('selectedFile', this.selectedFile);
+            axios.post('http://localhost:5000/meal', {
+                meal_type: this.selectType,
+                meal_content: this.mealCont,
+                // nutritional_level: this.nutriLvl,
+                
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+                
+            }).then((response) => {
+                console.log('saveMeal response: ', response);
+                this.selectType = '';
+                this.mealCont = '';
+                // this.nutriLvl = '';
+            }).catch((error) => {
+                console.log('saveMeal Error: ', error);
+            })
 
-            // Use axios to send the POST request with the FormData
-            axios.post('http://localhost:5000/meal', formData, {
+            axios.post('http://localhost:5000/meal', {
+                selectedFile: this.$refs.selectedFile.files[0],
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
+                
+            }).then((response) => {
+                console.log('saveMeal response file: ', response);
+                // this.nutriLvl = '';
+            }).catch((error) => {
+                console.log('saveMeal Error file: ', error);
             })
-            .then((response) => {
-                console.log('saveMeal response: ', response);
-            })
-            .catch((error) => {
-                console.log('saveMeal Error: ', error);
-            });
+
         },
         showRiskMeals() {
             this.displayRiskMeals = this.riskMealsByCategory[this.selectedRiskCategory] || [];

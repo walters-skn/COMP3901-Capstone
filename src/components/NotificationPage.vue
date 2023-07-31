@@ -22,19 +22,19 @@
         <div v-if="selectedReminder === 'medication'">
           <label for="medication" class="label"> <strong> Medication Reminder</strong></label>
 
-          <div class="meds">
-            <div v-for="(med,index) in medications" :key="index" class="medication-container"> 
+          <form v-on:submit.prevent="submitForm" class="meds">
+            <div class="medication-container"> 
               <label>Medication Name:</label>
-              <input type="text" v-model="med.medicationName" class="input" >
+              <input type="text" v-model="medicationName" class="input" >
 
               <label>Commencement Date:</label>
-              <input type="date" v-model="med.comDate" class="input" >
+              <input type="date" v-model="comDate" class="input" >
 
               <label>Termination Date:</label>
-              <input type="date" v-model="med.termDate" class="input">
+              <input type="date" v-model="termDate" class="input">
 
               <label>Frequency:</label>
-              <select v-model="med.frequency" class="input">
+              <select v-model="frequency" class="input">
                 <option value="daily">Daily</option>
                 <option value="once_a_day"> Once(1) A Day</option>
                 <option value="twice_a_day"> Twice(2) A Day</option>
@@ -44,14 +44,13 @@
               </select>
 
               <label> Quantity(eg.500mg):</label>
-              <input type="text" v-model="med.quantityMeds" class="input">
+              <input type="text" v-model="quantityMeds" class="input">
             </div>
             
             <button v-on:click="addMedication" class="btn"> + </button>
-            <!-- <button v-on:click="saveData" class="submit"> Submit </button> -->
-            <button v-on:click="addMedication" class="submit"> Submit </button>
+            <button class="submit"> Submit </button>
 
-          </div>
+          </form>
 
         </div>
       </div>
@@ -60,24 +59,24 @@
 
         <div v-if="selectedReminder === 'appointment'">
           <label for="appointment" class="label"><strong> Appointment Reminder</strong></label>
-          <div  class="apt">
-            <div v-for="(apt,index) in appointments" :key="index" class="appointment-container">  
+          <form v-on:submit.prevent="submitForm"  class="apt">
+            <div class="appointment-container">  
               <label>Location:</label>
-              <input type="text" v-model="apt.location" class="input">
+              <input type="text" v-model="location" class="input">
 
               <label>Date:</label>
-              <input type="date" v-model="apt.appointmentDate" class="input">
+              <input type="date" v-model="appointmentDate" class="input">
 
               <label>Time:</label>
-              <input type="time" v-model="apt.appointmentTime" class="input">
+              <input type="time" v-model="appointmentTime" class="input">
 
-              <label for="reminderDesc">Description</label>
-              <textarea id="reminderDesc" name="reminderDesc" rows="4" cols="50" class="input"></textarea>
+              <label>Description</label>
+              <textarea rows="4" cols="50" class="input" v-model="reminderDesc"></textarea>
             </div>
 
             <button v-on:click="addAppointment" class="btn">+</button>
-            <button v-on:click="submitForm" class="submit"> Submit </button>
-          </div>
+            <button class="submit"> Submit </button>
+          </form>
 
         </div>
       </div>
@@ -96,6 +95,7 @@ import axios from 'axios';
 import { isAuthenticated, setAuthorizationHeader } from '@/authUtils';
 
 export default {
+  name: 'ReminderForm',
   components:{
     NavBar,
     SideMenu,
@@ -121,58 +121,51 @@ export default {
   },
   methods:{
     addMedication() {
-      // this.medications.push({
-      //   medicationName: this.medicationName,
-      //   comDate: this.comDate,
-      //   termDate: this.termDate,
-      //   frequency: this.frequency,
-      //   quantityMeds: this.quantityMeds,
-      // });
-
-      axios.post('http://localhost:5000/medication', {
-        medicationName: this.medicationName,
-        comDate: this.comDate,
-        termDate: this.termDate,
-        frequency: this.frequency,
-        quantityMeds: this.quantityMeds,
-      })
-
-      console.log('Medications: ', this.medications);
-
-      // Clear the form fields after successfully adding a medication
-      this.medicationName = '';
-      this.comDate = '';
-      this.termDate = '';
-      this.frequency = '';
-      this.quantityMeds = '';
+      this.medications = {
+        medicationName: '',
+        comDate: '',
+        termDate: '',
+        frequency: '',
+        quantityMeds: '',
+      }
     },
     addAppointment() {
-
-      // this.appointments.push({
-      //   location: this.location,
-      //   appointmentDate: this.appointmentDate,
-      //   appointmentTime: this.appointmentTime,
-      //   selectedReminder: this.selectedReminder,
-      //   reminderDesc: this.reminderDesc,
-      // });
-
-      axios.post('http://localhost:5000/reminder', {
-        location: this.location,
-        appointmentDate: this.appointmentDate,
-        appointmentTime: this.appointmentTime,
-        selectedReminder: this.selectedReminder,
-        reminderDesc: this.reminderDesc,
-      })
-
-      console.log('Appointments: ', this.appointments);
-
-      // Clear the form fields after successfully adding an appointment
-      this.location = '';
-      this.appointmentDate = '';
-      this.appointmentTime = '';
-      this.selectedReminder = '';
-      this.reminderDesc = '';
+      this.appointments = {
+        location: '',
+        appointmentDate: '',
+        appointmentTime: '',
+        reminderDesc: '',
+      }
     },
+    submitForm() {
+      if (this.selectedReminder === 'medication') {
+        axios.post('http://localhost:5000/medication', {
+          medicationName: this.medicationName,
+          comDate: this.comDate,
+          termDate: this.termDate,
+          frequency: this.frequency,
+          quantityMeds: this.quantityMeds,
+        }).then((response) => {
+          console.log("addMwdication response: ", response);
+        }).catch((error) => {
+          console.log("addMedication error: ", error);
+        }) 
+      } 
+      else if (this.selectedReminder === 'appointment') {
+        
+        axios.post('http://localhost:5000/reminder', {
+          location: this.location,
+          appointmentDate: this.appointmentDate,
+          appointmentTime: this.appointmentTime,
+          selectedReminder: this.selectedReminder,
+          reminderDesc: this.reminderDesc,
+        }).then((response)  => {
+          console.log("addAppointment response: ", response);
+        }).catch((error) => {
+          console.log("addAppointment error: ", error);
+        })
+      }
+    }
   },
   created() {
     isAuthenticated();
