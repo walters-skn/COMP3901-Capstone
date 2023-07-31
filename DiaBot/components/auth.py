@@ -59,18 +59,26 @@ def login():
     try:
         cnx = mysql.connector.connect(**db_config)
         cursor = cnx.cursor()
-        cursor.execute("SELECT email, upassword FROM users WHERE email = %s", (email, ))
+        cursor.execute("SELECT email, upassword, is_admin FROM users WHERE email = %s LIMIT 1", (email, ))
         user = cursor.fetchone()
         if user is not None:
-            if bcrypt.checkpw(password.encode('utf-8'), user[1].encode('utf-8')):
-                access_token = create_access_token(identity=user[0])
-                return jsonify(access_token=access_token), 200
+            email, is_admin = user[0], user[2]
+            token_data = {
+                'email': email
+            }
+            if is_admin == 1:
+                access_token = create_access_token(identity=token_data)
+                return jsonify({'access_token': access_token, 'is_admin': is_admin}), 200
+            elif is_admin == 0 and bcrypt.checkpw(password.encode('utf-8'), user[1].encode('utf-8')):
+                
+                access_token = create_access_token(identity=token_data)
+                return jsonify({'access_token': access_token}), 200
             else:
                 return jsonify({'error': 'Invalid credentials'}), 400
         else:
-            return jsonify({'error': 'Invalid credentials'}), 400
+            return jsonify({'error': 'User not found'}), 400
+   
     except Exception as e:
         return jsonify({'error': str(e)}), 400
-
 
 
