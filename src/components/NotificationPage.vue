@@ -22,7 +22,7 @@
         <div v-if="selectedReminder === 'medication'">
           <label for="medication" class="label"> <strong> Medication Reminder</strong></label>
 
-          <form v-on:submit.prevent="submitForm" class="meds">
+          <form v-on:submit.prevent="submitForm1" class="meds">
             <div class="medication-container"> 
               <label>Medication Name:</label>
               <input type="text" v-model="medicationName" class="input" >
@@ -44,7 +44,7 @@
               </select>
 
               <label> Quantity(eg.500mg):</label>
-              <input type="text" v-model="quantityMeds" class="input">
+              <input type="number" v-model="quantityMeds" class="input">
             </div>
             
             <button v-on:click="addMedication" class="btn"> + </button>
@@ -59,7 +59,7 @@
 
         <div v-if="selectedReminder === 'appointment'">
           <label for="appointment" class="label"><strong> Appointment Reminder</strong></label>
-          <form v-on:submit.prevent="submitForm"  class="apt">
+          <form v-on:submit.prevent="submitForm2"  class="apt">
             <div class="appointment-container">  
               <label>Location:</label>
               <input type="text" v-model="location" class="input">
@@ -137,7 +137,7 @@ export default {
         reminderDesc: '',
       }
     },
-    submitForm() {
+    submitForm1() {
       if (this.selectedReminder === 'medication') {
         axios.post('http://localhost:5000/medication', {
           medicationName: this.medicationName,
@@ -151,7 +151,9 @@ export default {
           console.log("addMedication error: ", error);
         }) 
       } 
-      else if (this.selectedReminder === 'appointment') {
+    },
+    submitForm2() {
+      if (this.selectedReminder === 'appointment') {
         
         axios.post('http://localhost:5000/reminder', {
           location: this.location,
